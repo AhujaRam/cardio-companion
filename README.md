@@ -26,3 +26,12 @@ Direct links use the hash, for example `index.html#ecg-mob1`, `#meds-anticoag` o
 - All clinical content is pending faculty review. For learning only, not for clinical decisions.
 
 Not an official University of Ottawa or University of Ottawa Heart Institute resource. The colour palette follows ottawaheart.ca for visual consistency.
+
+## Review log
+
+| Date | Review | Status |
+|---|---|---|
+| 2026-11-23 | Two independent automated reviews (content, simulation, accessibility) | Findings verified and applied |
+| 2026-11-23 | Medical-content review handover (priorities 1–3) | Applied, with ECG Manual values kept and qualified where they differ from general clinical references |
+| Pending | Comparison of simulated waveforms with reference 12-lead ECGs | Not yet done. Einthoven relationships (II = I + III; aVR + aVL + aVF = 0) verified numerically |
+| Pending | Cardiology faculty review of final text and illustrations, with reviewer name, version and sign-off | Not yet done |

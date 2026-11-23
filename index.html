@@ -308,6 +308,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       <div class="card lead-bar">
         <div class="lead-row"><span class="lead-lbl">Lead</span><div class="seg lead-seg" id="leadSeg" role="group" aria-label="Choose ECG lead"></div></div>
         <p class="lead-cap" id="leadCaption"></p>
+        <p class="small muted" style="margin:6px 0 0">The 12 leads and the vector arrow come from a simplified teaching model, not real recordings or a clinically validated simulator. Shapes are textbook-typical; compare with real tracings in class.</p>
       </div>
       <div class="viz">
         <div class="card heart-card">
@@ -627,7 +628,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
           <li><b>Rate</b><span>Count-off method: 300, 150, 100, 75, 60, 50 per large box between R waves. Normal 60–100 bpm.</span></li>
           <li><b>Rhythm</b><span>Regular or irregular? Is there a P before every QRS and a QRS after every P? Normal sinus rhythm has both.</span></li>
           <li><b>Axis</b><span>Normal −30° to +90°. Quick check: switch to leads I and aVF. Both mostly positive: normal. Lead I positive but aVF negative: check lead II; if II is positive (or equiphasic) the axis is still normal (0° to −30°), if II is negative it is left axis deviation.</span></li>
-          <li><b>Alphabet</b><span>P · PR 120–200 ms · Q · QRS &lt; 100 ms · ST · T · QT (QTc 300–440/450 ms)</span></li>
+          <li><b>Alphabet</b><span>P · PR 120–200 ms · Q · QRS &lt; 100 ms (100–119 ms borderline; 120 ms or more is wide) · ST · T · QT (QTc 300–440/450 ms in the ECG Manual; in practice the main concern is a long QTc, above about 450 ms in men and 460 ms in women, and a very short QTc, under about 340 ms, is also abnormal)</span></li>
         </ol>
       </div>
 
@@ -738,7 +739,7 @@ function seeded(seed){return()=>{seed=(seed*1664525+1013904223)%4294967296;retur
 const RHYTHMS={
   nsr:{name:"Normal sinus rhythm",group:"Start here",reg:true,
     build(){return Object.assign(sinusSeq(0.8,[0.16]),{atria:"sinus"});},
-    meas:[["Rate","75 bpm (normal 60–100)"],["Rhythm","Regular, sinus"],["Axis","About +35°: QRS positive in leads I and aVF (normal −30° to +90°)"],["P wave","Upright in lead II, one before every QRS"],["PR interval","160 ms (normal 120–200 ms)"],["QRS duration","90 ms (normal < 100 ms)"],["QT / QTc","QT 367 ms, QTc ≈ 410 ms (normal QTc 300–440/450 ms)"]],
+    meas:[["Rate","75 bpm (normal 60–100)"],["Rhythm","Regular, sinus"],["Axis","About +35°: QRS positive in leads I and aVF (normal −30° to +90°)"],["P wave","Upright in lead II, one before every QRS"],["PR interval","160 ms (normal 120–200 ms)"],["QRS duration","90 ms (normal < 100 ms)"],["QT / QTc","QT 367 ms, QTc ≈ 410 ms (normal; ECG Manual range 300–440/450 ms, upper limits about 450 ms men / 460 ms women)"]],
     keys:["Rate 60–100 bpm and regular","Upright P wave in lead II before every QRS (the impulse starts at the SA node)","Every P is followed by a QRS, with a constant PR interval of 120–200 ms","Normal QRS duration (< 100 ms)"],
     mech:"The SA node is the fastest natural pacemaker, so it sets the rate. Its impulse spreads through the atria, is delayed in the AV node, then races down the His–Purkinje system so both ventricles depolarize almost together.",
     pearl:"Learn this one first. Every other rhythm is a change to one step of this sequence: where the impulse starts, how fast it fires, or where it gets blocked."},
@@ -747,7 +748,7 @@ const RHYTHMS={
     meas:[["Rate","48 bpm (< 60)"],["Rhythm","Regular"],["P waves","Normal, one before every QRS"],["PR interval","160 ms"],["QRS","90 ms"]],
     keys:["Looks exactly like normal sinus rhythm, only slower (< 60 bpm)","Normal P before every QRS, constant normal PR","Longer gap between T wave and next P wave (long TP segment)"],
     mech:"The SA node fires more slowly than usual: higher vagal tone, drugs that slow the SA node, or disease of the node itself.",
-    pearl:"Common and often normal (athletes, sleep). Other causes: beta blockers, non-dihydropyridine calcium channel blockers, hypothyroidism, inferior MI, sick sinus syndrome. Treat only if symptomatic or unstable (atropine is first-line)."},
+    pearl:"Common and often normal (athletes, sleep). Other causes: beta blockers, non-dihydropyridine calcium channel blockers, hypothyroidism, inferior MI, sick sinus syndrome. Treat only if the slow rate causes symptoms or hemodynamic compromise; atropine is then the first-line drug."},
   tachy:{name:"Sinus tachycardia",group:"Sinus rhythms",manual:"1.4",reg:true,
     build(){return Object.assign(sinusSeq(0.5,[0.14]),{atria:"sinus"});},
     meas:[["Rate","120 bpm (> 100)"],["Rhythm","Regular"],["P waves","Normal, one before every QRS"],["PR interval","140 ms"],["QRS","90 ms"]],
@@ -764,14 +765,14 @@ const RHYTHMS={
     build(){return Object.assign(sinusSeq(0.75,[0.16,0.26,0.32,null],{drop:"av"}),{atria:"sinus"});},
     meas:[["Atrial rate","80 bpm, regular P–P"],["Ventricular rate","Lower than atrial rate, irregular"],["P waves","Normal; every 4th P not conducted (4:3)"],["PR interval","160 → 260 → 320 ms, then dropped"],["QRS","90 ms"]],
     keys:["PR gets progressively longer until one P wave is not followed by a QRS","The PR after the dropped beat is the shortest","Group beating; R–R intervals shorten before the pause"],
-    mech:"The AV node becomes progressively fatigued: each impulse takes longer to get through until one fails completely. The pause lets the node recover and the cycle restarts.",
+    mech:"Decremental conduction in the AV node: each successive impulse arrives when the node has had less time to recover, so it conducts more slowly (longer PR) until one fails completely. The pause lets the node recover and the cycle restarts. (\"Fatigue\" is a common shorthand for this.)",
     pearl:"The block is usually in the AV node itself, so it is often benign (high vagal tone, inferior MI, AV-nodal blocking drugs) and rarely progresses to complete heart block."},
   mob2:{name:"Second-degree AV block, Mobitz II",short:"Mobitz II",group:"AV blocks",
     build(){return Object.assign(sinusSeq(0.75,[0.18,0.18,0.18,null],{drop:"his"}),{atria:"sinus"});},
     meas:[["Atrial rate","80 bpm, regular P–P"],["Ventricular rate","Lower than atrial rate"],["P waves","Normal; every 4th P not conducted (4:3)"],["PR interval","180 ms, constant in conducted beats"],["QRS","90 ms here (often wide in practice)"]],
     keys:["PR interval stays constant","Then a P wave suddenly fails to conduct, with no warning PR prolongation","The pause equals two P–P intervals"],
     mech:"The block is usually below the AV node, in the bundle of His or bundle branches. Those tissues tend to conduct all-or-none, so the PR does not lengthen before a beat drops.",
-    pearl:"More dangerous than Mobitz I: it can progress suddenly to complete heart block. It is frequently associated with a wide QRS (bundle branch disease) and is generally an indication for a pacemaker."},
+    pearl:"More dangerous than Mobitz I: it can progress suddenly to complete heart block. It is frequently associated with a wide QRS (bundle branch disease) and a permanent pacemaker is recommended for acquired Mobitz II that is not due to a reversible cause, even if the patient has no symptoms."},
   avb3:{name:"Third-degree (complete) AV block",short:"Third-degree AV block",group:"AV blocks",reg:true,
     build(){
       const A=[],V=[];
@@ -814,7 +815,7 @@ const RHYTHMS={
     keys:["Sawtooth flutter waves, best seen in II, III and aVF","Atrial rate about 300/min","Fixed ratio of F waves to QRS (2:1 is most common, giving a ventricular rate near 150)"],
     mech:"A single large re-entry circuit spins around the right atrium (typical flutter uses the cavotricuspid isthmus, near the tricuspid annulus). The AV node cannot conduct every impulse, so only every 2nd, 3rd or 4th one reaches the ventricles.",
     pearl:"A regular narrow-complex tachycardia at about 150 bpm should make you think of flutter with 2:1 block. Stroke risk is managed like AF; ablation of the cavotricuspid isthmus is very effective."},
-  svt:{name:"SVT (AV nodal re-entry, AVNRT)",short:"SVT (AVNRT)",group:"Supraventricular tachycardias",manual:"4.1",manualNote:"(a regular narrow-complex tachycardia; the case does not say which SVT mechanism)",reg:true,
+  svt:{name:"AVNRT (AV nodal re-entry, the most common SVT)",short:"AVNRT (a type of SVT)",group:"Supraventricular tachycardias",manual:"4.1",manualNote:"(a regular narrow-complex tachycardia; the case does not say which SVT mechanism)",reg:true,
     build(){
       const A=[],V=[];
       for(let q=0.15;q<D+0.6;q+=1/3){V.push(mkV(q,0.09,"normal",1/3)); A.push({p0:q+0.005,dur:0.08,kind:"retro",conducted:false,hidden:true});}
@@ -822,7 +823,7 @@ const RHYTHMS={
     },
     meas:[["Rate","180 bpm"],["Rhythm","Regular"],["P waves","Not visible (hidden in or just after the QRS)"],["PR interval","Not measurable"],["QRS","90 ms (normal < 100 ms)"]],
     keys:["Regular narrow-complex tachycardia, usually 150–250 bpm","No visible P waves before the QRS","Abrupt onset and offset"],
-    mech:"Two pathways in and around the AV node (slow and fast) form a re-entry loop. Each loop sends an impulse down to the ventricles and back up to the atria at almost the same moment, so the P wave hides inside the QRS.",
+    mech:"Two pathways in and around the AV node (slow and fast) form a re-entry loop. Each loop sends an impulse down to the ventricles and back up to the atria at almost the same moment, so the P wave hides inside the QRS. SVT is the umbrella term for narrow-complex tachycardias arising at or above the AV node; AVNRT is its most common re-entrant form, alongside AVRT (accessory pathway) and atrial tachycardia.",
     pearl:"Vagal manoeuvres (such as the modified Valsalva) first, then adenosine, which briefly blocks the AV node and breaks the circuit."},
   pvc:{name:"Premature ventricular complex (PVC)",short:"PVC",group:"Ventricular",manual:"2.1",
     build(){
@@ -839,7 +840,7 @@ const RHYTHMS={
       V.sort((a,b)=>a.q0-b.q0); return {A,V,atria:"sinus"};
     },
     meas:[["Underlying rhythm","Sinus, 75 bpm"],["PVC timing","Early (coupling interval 480 ms)"],["PVC QRS","160 ms, wide and bizarre"],["P before PVC","None"],["After the PVC","Full compensatory pause (2 × R–R)"]],
-    keys:["An early, wide, bizarre QRS (well beyond the normal < 100 ms) with no P wave in front of it","ST segment and T wave point opposite to the main QRS deflection","Usually followed by a full compensatory pause"],
+    keys:["An early, wide, bizarre QRS (well beyond the normal < 100 ms) with no P wave in front of it","ST segment and T wave point opposite to the main QRS deflection","Usually followed by a full compensatory pause (not always: some PVCs reset the sinus node, and interpolated PVCs have no pause)"],
     mech:"An irritable focus in the ventricular muscle fires before the next sinus beat. The impulse spreads slowly from cell to cell instead of through the Purkinje system, so the QRS is wide. The next sinus P arrives while the ventricles are refractory and is not conducted.",
     pearl:"Isolated PVCs are common and often benign in a normal heart. Frequent PVCs warrant a look at electrolytes, ischemia and structural heart disease."},
   vt:{name:"Ventricular tachycardia (monomorphic)",short:"Ventricular tachycardia",group:"Ventricular",manual:"4.4",reg:true,
@@ -1405,7 +1406,7 @@ const LECTURES=[
    ["Cross-bridge cycling",["Myosin head binds actin (cross-bridge)","The head flexes: the power stroke","ATP binds the myosin head, which detaches from actin","ATP is split, releasing energy that returns the head to its starting position"]],
    ["Calcium controls shortening",["At rest (low Ca²⁺) the binding sites on actin are blocked","Contraction: Ca²⁺ rises and binds troponin C → binding sites exposed → cross-bridge cycling → thin filaments slide over thick filaments → sarcomere shortens","Relaxation: Ca²⁺ falls → sites blocked again → cycling stops → sarcomere relaxes"]],
    ["Excitation–contraction coupling: from electrical signal to squeeze",["Setting: cells are joined end to end at intercalated discs, which pass on both force and current (via gap junctions). Inside a resting cell Ca²⁺ is about 10,000 times lower than outside (about 0.1 µM vs 1 mM)","Trigger: the action potential travels down the T tubules and opens L-type Ca²⁺ channels, letting a small amount of Ca²⁺ in","Amplify: this trigger Ca²⁺ opens ryanodine receptors on the SR, which release their store (calcium-induced calcium release), so cytosolic Ca²⁺ rises about 100-fold","Contract: Ca²⁺ binds troponin C, the actin sites are uncovered, and ATP-powered cross-bridge cycling shortens the sarcomeres","Recover: most Ca²⁺ is pumped back into the SR by SERCA (an ATP-using pump that phospholamban holds back); about 20% leaves the cell through the sarcolemmal Ca²⁺ pump and the Na⁺/Ca²⁺ exchanger","As Ca²⁺ falls the muscle relaxes, which is why relaxation also needs energy"]],
-   ["Adrenergic stimulation (beating faster and harder)",["Exercise or emotional stress → sympathetic nerves release norepinephrine; the adrenal medulla releases epinephrine","β1 receptor → G protein → adenylyl cyclase → cAMP → protein kinase A (PKA)","PKA phosphorylates the L-type Ca²⁺ channel: more Ca²⁺ influx, higher cytosolic Ca²⁺, stronger contraction","PKA phosphorylates myosin light chain: more myosin ATPase activity (as taught in this lecture; textbooks also stress troponin I, whose phosphorylation speeds relaxation)","PKA phosphorylates phospholamban: SERCA works harder, the SR stores more Ca²⁺, so more is available for release next beat"]],
+   ["Adrenergic stimulation (beating faster and harder)",["Exercise or emotional stress → sympathetic nerves release norepinephrine; the adrenal medulla releases epinephrine","β1 receptor → G protein → adenylyl cyclase → cAMP → protein kinase A (PKA)","PKA phosphorylates the L-type Ca²⁺ channel: more Ca²⁺ influx, higher cytosolic Ca²⁺, stronger contraction","PKA also phosphorylates contractile proteins. The lecture lists myosin light chain (more myosin ATPase activity); standard references emphasize troponin I (faster Ca²⁺ release from troponin, so faster relaxation) and cardiac myosin-binding protein C","PKA phosphorylates phospholamban: SERCA works harder, the SR stores more Ca²⁺, so more is available for release next beat"]],
    ["ATP",["ATP hydrolysis supplies the energy for both contraction and relaxation","Contraction: myosin ATPase","Relaxation: SERCA on the SR and the Ca²⁺ ATPase on the sarcolemma","Other processes such as ion transport"]],
   ],
   table:{title:"How cardiac and skeletal muscle cells differ",cols:["","Heart muscle","Skeletal muscle"],rows:[
@@ -1414,7 +1415,7 @@ const LECTURES=[
    ["SR size","Smaller","Larger"],
    ["Mitochondria","More (continuous work)","Fewer"],
    ["Cell-to-cell electrical links","Gap junctions spread the signal","Each fibre is separate"],
-   ["What starts contraction","Its own pacemaker (SA node)","A motor nerve"]]},
+   ["What starts contraction","Impulses from specialized pacemaker cells in the SA node, spread to the contractile myocytes by the conduction system (contractile cells do not start their own beats)","A motor nerve"]]},
   read:[["Klabunde RE, Cardiovascular Physiology Concepts (2nd ed.)","Chapter 3: Cellular Structure and Function"],["Opie LH, Heart Physiology: From Cell to Circulation (4th ed.)","Source of the lecture's images"],["cvphysiology.com","Free companion website recommended in lecture"]],
   rel:[["meds-bb","Beta blockers (block β1)"],["meds-ndhp","Verapamil/diltiazem (block L-type Ca²⁺ channels)"],["meds-digoxin","Digoxin (Na⁺/K⁺-ATPase)"]]},
  {id:"ventricular",title:"Ventricular function",
@@ -1425,12 +1426,12 @@ const LECTURES=[
   sections:[
    ["Preload",["The initial stretch of the myocytes before contraction; it sets sarcomere length","End-diastolic volume (EDV, about 120 mL) is used as the index of preload","Filling happens in three phases: rapid filling, slow filling, then atrial contraction"]],
    ["Determinants of EDV",["Venous pressure and venous return (set by blood volume and venous compliance)","Strength of atrial contraction","Duration of diastole, i.e. filling time (set by heart rate)","Ventricular compliance (volume increase per unit pressure increase)"]],
-   ["Frank–Starling mechanism",["More stretch → thinner cell → thick and thin filaments pushed closer → more myosin–actin interaction sites can be activated → more force","So increased venous return (e.g. exercise) → higher preload → stronger contraction → larger stroke volume"]],
+   ["Frank–Starling mechanism",["More stretch → thinner cell → thick and thin filaments pushed closer → more myosin–actin interaction sites can be activated → more force","So increased venous return (e.g. exercise) → higher preload → stronger contraction → larger stroke volume","This works at a given contractile (inotropic) state: it moves along one Frank–Starling curve. A change in contractility is different: it shifts the whole curve up or down"]],
    ["Afterload",["The load the heart must contract against to eject blood","For the LV, aortic pressure is the major component; for the individual myocyte it is ventricular wall stress","Higher afterload reduces the velocity of fibre shortening and the stroke volume (force–velocity relationship)","Lowering afterload increases stroke volume in heart failure patients"]],
-   ["Contractility (inotropy)",["The intrinsic strength of contraction, set by the number of myosin–actin interactions; independent of preload and afterload","Cellular levers: more Ca²⁺ influx, more SR Ca²⁺ release, greater troponin C affinity for Ca²⁺","Adrenergic stimulation: β1 → cAMP → PKA → more Ca²⁺ influx, more myosin ATPase activity, phospholamban phosphorylation (more SR Ca²⁺)","Heart rate (Bowditch effect): faster rate → more Ca²⁺ influx per unit time → more SR Ca²⁺ loading","Drugs: inhibiting the Na⁺/K⁺-ATPase (digoxin) raises cytosolic Na⁺, slows Ca²⁺ export by the Na⁺/Ca²⁺ exchanger, and raises cytosolic Ca²⁺","Contractility is decreased in heart failure","Clinically, ejection fraction (EF = SV ÷ EDV) is often used as an index of contractility"]],
+   ["Contractility (inotropy)",["The intrinsic strength of contraction, set by the number of myosin–actin interactions; independent of preload and afterload","Cellular levers: more Ca²⁺ influx, more SR Ca²⁺ release, greater troponin C affinity for Ca²⁺","Adrenergic stimulation: β1 → cAMP → PKA → more Ca²⁺ influx, more myosin ATPase activity, phospholamban phosphorylation (more SR Ca²⁺)","Heart rate (Bowditch effect): faster rate → more Ca²⁺ influx per unit time → more SR Ca²⁺ loading","Drugs: inhibiting the Na⁺/K⁺-ATPase (digoxin) raises cytosolic Na⁺, slows Ca²⁺ export by the Na⁺/Ca²⁺ exchanger, and raises cytosolic Ca²⁺","Contractility is decreased in heart failure","Clinically, ejection fraction (EF = SV ÷ EDV) is often used as an index of contractility. EF measures overall systolic pump performance and changes with preload and afterload, so it is not a pure measure of intrinsic contractility"]],
    ["The pressure–volume loop",["a. Ventricular filling: volume rises along the end-diastolic pressure–volume relationship (EDPVR), the passive filling curve","b. Isovolumic contraction: valves closed, pressure rises rapidly at constant volume","c. Ejection: volume falls; the end of ejection sits on the end-systolic pressure–volume relationship (ESPVR)","d. Isovolumic relaxation: valves closed, pressure falls rapidly","Width of the loop = stroke volume (EDV − ESV)"]],
    ["How the loop changes",["↑ Preload: higher EDV → stronger contraction → larger SV (Frank–Starling)","↑ Afterload: higher pressure needed to open the aortic valve → smaller SV, larger ESV","↑ Contractility (e.g. norepinephrine): steeper ESPVR, faster ejection, smaller ESV, larger SV"]],
-   ["Compliance",["Compliance = ΔVolume ÷ ΔPressure, the reciprocal of the filling curve's slope","Non-linear: compliance falls at high volumes","Determined by wall thickness (hypertrophy), tissue properties (e.g. scar) and relaxation (incomplete in diastolic heart failure)","Lower compliance → less filling at a given pressure → lower preload → lower stroke volume and cardiac output"]],
+   ["Compliance",["Compliance = ΔVolume ÷ ΔPressure, the reciprocal of the filling curve's slope","Non-linear: compliance falls at high volumes","Determined by wall thickness (hypertrophy), tissue properties (e.g. scar) and relaxation (incomplete in diastolic heart failure)","Lower compliance (a stiffer ventricle) → a higher filling pressure is needed for the same volume, so filling is impaired. If end-diastolic volume falls, stroke volume and cardiac output fall, and the high filling pressure backs up into the lungs (congestion)"]],
   ],
   read:[["Klabunde RE, Cardiovascular Physiology Concepts (2nd ed.)","Source cited in lecture"],["Opie LH, Heart Physiology: From Cell to Circulation (4th ed.)","Source cited in lecture"],["cvphysiology.com","Free companion website cited in lecture"]],
   rel:[["meds-digoxin","Digoxin (↑ contractility)"],["meds-bb","Beta blockers (block β1)"],["meds-nitrates","Nitrates (↓ preload)"],["meds-hydralazine","Hydralazine (↓ afterload)"]]},
@@ -1474,7 +1475,7 @@ function buildLectures(){
       ${chev}
     </button>
     <div class="lec-body">
-      <p style="margin-top:16px">Each case in the manual is worked through the same way: <b>Rate</b> (count-off method) → <b>Rhythm</b> → <b>Axis</b> (−30° to +90°) → <b>Alphabet</b>: P, PR (120–200 ms), Q, QRS (&lt; 100 ms), ST, T, QT (QTc 300–440/450 ms).</p>
+      <p style="margin-top:16px">Each case in the manual is worked through the same way: <b>Rate</b> (count-off method) → <b>Rhythm</b> → <b>Axis</b> (−30° to +90°) → <b>Alphabet</b>: P, PR (120–200 ms), Q, QRS (&lt; 100 ms), ST, T, QT (QTc 300–440/450 ms per the manual; upper limits are usually quoted as about 450 ms in men and 460 ms in women, and a very short QTc, under about 340 ms, is also abnormal).</p>
       ${ECG_SESSIONS.map(([s,obj,links])=>`<h3 style="margin:16px 0 4px">${s}</h3><ul>${obj.map(x=>`<li>${x}</li>`).join("")}</ul><div class="related" style="margin-top:6px">${links.map(([h,l])=>`<a href="#${h}">${l} →</a>`).join("")}</div>`).join("")}
       <p class="small muted" style="margin-top:14px">Sessions 2 and 3 focus on 12-lead findings (axis, atrial enlargement, LVH/RVH, ST changes, Q waves). The ECG Learner currently covers rhythms; 12-lead modules are pending.</p>
     </div>
@@ -1500,8 +1501,8 @@ const MEDS=[
   moa:"Block β-adrenergic receptors. β1 blockade lowers heart rate (SA node), contractility and AV nodal conduction, and reduces renin release.",
   ind:"Angina, after MI, HFrEF (bisoprolol, carvedilol, metoprolol succinate), rate control in AF and flutter, selected patients with hypertension.",
   se:"Bradycardia, AV block, fatigue, bronchospasm (especially non-selective agents), may mask symptoms of hypoglycemia, cold extremities, erectile dysfunction.",
-  ci:"Symptomatic bradycardia or high-grade AV block without a pacemaker, cardiogenic shock or acutely decompensated HF, severe asthma (non-selective agents).",
-  pearl:"In HFrEF, start low and titrate slowly once the patient is euvolemic."},
+  ci:"Symptomatic bradycardia or high-grade AV block without a pacemaker, cardiogenic shock or decompensated HF with hypoperfusion (do not start then), severe asthma (non-selective agents).",
+  pearl:"In HFrEF, start low and uptitrate slowly once the patient is stable and euvolemic. Patients already on a beta blocker usually continue it during a decompensation unless there is shock or marked hypoperfusion (the dose may be reduced)."},
  {id:"ndhp",group:["arr","angina","bp"],name:"Non-dihydropyridine calcium channel blockers",tag:"Vaughan Williams class IV",
   ex:"Verapamil, diltiazem",
   moa:"Block L-type calcium channels in the heart, especially the SA and AV nodes: slower heart rate, slower AV conduction, reduced contractility.",
@@ -1511,17 +1512,17 @@ const MEDS=[
   pearl:"Verapamil and diltiazem inhibit CYP3A4, so watch for drug interactions."},
  {id:"antiarr",group:["arr"],name:"Antiarrhythmics: sodium and potassium channel blockers",tag:"Vaughan Williams classes I and III",
   ex:"Ia: procainamide · Ib: lidocaine, mexiletine · Ic: flecainide, propafenone · III: amiodarone, sotalol, dronedarone",
-  moa:"Class I blocks Na⁺ channels, slowing phase 0 and conduction (Ia: moderate, also prolongs repolarization; Ib: weak, acts mainly on ischemic tissue; Ic: strong, widens the QRS). Class III blocks K⁺ channels, prolonging repolarization and the QT interval.",
+  moa:"Class I blocks Na⁺ channels, slowing phase 0 and conduction (Ia: moderate, also prolongs repolarization; Ib: weak, acts mainly on ischemic tissue; Ic: strong, widens the QRS). Class III blocks K⁺ channels, prolonging repolarization and the QT interval. Amiodarone is multichannel: besides K⁺ block it blocks Na⁺ and Ca²⁺ channels and β receptors (effects of classes I–IV).",
   ind:"Ia: procainamide for pre-excited AF (WPW) or stable wide-complex tachycardia · Ib: ventricular arrhythmias · Ic: rhythm control of AF in structurally normal hearts · III: AF rhythm control, ventricular arrhythmias (amiodarone also in cardiac arrest).",
   se:"All can be proarrhythmic. QT prolongation and torsades de pointes (Ia, III). Lidocaine: CNS toxicity. Flecainide: can turn AF into flutter with 1:1 conduction. Amiodarone: thyroid dysfunction, pulmonary fibrosis, liver injury, corneal deposits, photosensitivity, bradycardia.",
-  ci:"Class Ic: structural heart disease, coronary artery disease or prior MI. QT-prolonging agents: long QT. Dronedarone: permanent AF, severe or recently decompensated HF.",
-  pearl:"Give flecainide or propafenone with an AV-nodal blocker. Amiodarone raises warfarin and digoxin levels."},
+  ci:"Class Ic: structural heart disease, coronary artery disease or prior MI. QT-prolonging agents: long QT. Dronedarone: permanent AF, severe or recently decompensated HF. Pre-excited AF (WPW): do not give IV amiodarone.",
+  pearl:"Pre-excited AF (AF with an accessory pathway, WPW) is managed differently from ordinary AF: IV amiodarone and AV-nodal blockers (adenosine, digoxin, verapamil/diltiazem, beta blockers) can speed conduction down the pathway and cause ventricular fibrillation. Unstable: synchronized cardioversion; stable: procainamide (or ibutilide) or elective cardioversion. Also: give flecainide or propafenone with an AV-nodal blocker in ordinary AF/flutter; amiodarone raises warfarin and digoxin levels."},
  {id:"adenosine",group:["arr"],name:"Adenosine",tag:"Unclassified antiarrhythmic",
   ex:"Adenosine (rapid IV push followed by a saline flush)",
   moa:"Activates A1 receptors in the AV node, increasing K⁺ efflux and causing a brief, high-grade AV block. Half-life is under 10 seconds.",
   ind:"Termination of AV-node-dependent SVT (AVNRT, orthodromic AVRT); diagnostic aid to reveal flutter waves.",
   se:"Flushing, chest discomfort, dyspnea, a sense of impending doom, transient pause or asystole.",
-  ci:"Second- or third-degree AV block or sick sinus without a pacemaker, pre-excited AF (WPW), caution in severe asthma or bronchospasm.",
+  ci:"Second- or third-degree AV block or sick sinus without a pacemaker, pre-excited AF (WPW), irregular or polymorphic wide-complex tachycardia; caution in severe asthma or bronchospasm. Use it for regular narrow-complex (or regular, monomorphic wide-complex) tachycardias.",
   pearl:"Warn the patient before giving it. Dipyridamole potentiates it; caffeine and theophylline blunt it."},
  {id:"digoxin",group:["arr","hf"],name:"Digoxin",tag:"Cardiac glycoside",
   ex:"Digoxin",
@@ -1529,7 +1530,7 @@ const MEDS=[
   ind:"Rate control in AF (especially with HF or hypotension), symptomatic HFrEF despite optimal therapy.",
   se:"Narrow therapeutic window. Toxicity: nausea, vomiting, confusion, visual changes (yellow-green tint), arrhythmias (PVCs, atrial tachycardia with block, bidirectional VT), hyperkalemia in acute overdose.",
   ci:"Second- or third-degree AV block without a pacemaker, pre-excited AF (WPW), ventricular fibrillation.",
-  pearl:"Hypokalemia and renal dysfunction increase toxicity. Antidote: digoxin immune Fab. \"Scooped\" ST segments are digoxin effect, not toxicity."},
+  pearl:"Cleared by the kidneys: lower doses in kidney disease and in older adults, and monitor levels. Amiodarone, dronedarone, verapamil and some macrolides (e.g. clarithromycin) raise digoxin levels. Hypokalemia increases toxicity. Antidote: digoxin immune Fab. \"Scooped\" ST segments are digoxin effect, not toxicity."},
  {id:"acei",group:["hf","bp"],name:"ACE inhibitors",tag:"RAAS blockade",
   ex:"Ramipril, perindopril, enalapril, lisinopril",
   moa:"Block angiotensin-converting enzyme → less angiotensin II and aldosterone (vasodilation, less sodium retention). Also reduce bradykinin breakdown.",
@@ -1556,14 +1557,14 @@ const MEDS=[
   moa:"Block aldosterone receptors in the collecting duct (less Na⁺ reabsorption, less K⁺ loss) and reduce aldosterone-driven fibrosis.",
   ind:"HFrEF, LV dysfunction after MI, resistant hypertension, primary aldosteronism.",
   se:"Hyperkalemia, rise in creatinine, gynecomastia and menstrual changes (spironolactone, not eplerenone).",
-  ci:"Hyperkalemia (K⁺ above about 5.0 mmol/L), severe renal impairment.",
+  ci:"In HFrEF, start only if eGFR is above 30 mL/min/1.73 m² and K⁺ is below 5.0 mmol/L. Recheck K⁺ and creatinine within the first week, again at about 4 weeks, then periodically; reduce or hold if K⁺ rises above 5.5 mmol/L.",
   pearl:"Hyperkalemia risk is highest when combined with ACE inhibitors or ARBs in older patients with CKD."},
  {id:"sglt2",group:["hf"],name:"SGLT2 inhibitors",tag:"HFrEF foundation",
   ex:"Dapagliflozin, empagliflozin",
   moa:"Block sodium–glucose cotransporter 2 in the proximal tubule → glucosuria and natriuresis; cardiac and renal benefits go beyond glucose lowering.",
   ind:"HFrEF (and HF with higher EF), type 2 diabetes, CKD.",
-  se:"Genital fungal infections, volume depletion, euglycemic diabetic ketoacidosis, urinary tract infection.",
-  ci:"Type 1 diabetes. Hold during acute illness, prolonged fasting or before surgery (\"sick day\" rules).",
+  se:"Genital fungal infections, volume depletion, urinary tract infection, and euglycemic diabetic ketoacidosis: ketoacidosis with near-normal glucose, so it is easily missed. Risk rises with acute illness, fasting, surgery, low carbohydrate intake or insulin dose reduction.",
+  ci:"Not indicated in type 1 diabetes (higher DKA risk). Hold during acute illness or fasting (\"sick day\" rules) and before elective surgery, timed to the drug: per product labelling, at least 3 days before for canagliflozin, dapagliflozin and empagliflozin, and 4 days for ertugliflozin.",
   pearl:"Benefit in HF is seen in patients with and without diabetes."},
  {id:"loop",group:["hf","bp"],name:"Loop diuretics",tag:"Diuretic",
   ex:"Furosemide, bumetanide, torsemide; ethacrynic acid (non-sulfonamide)",
@@ -1596,7 +1597,7 @@ const MEDS=[
  {id:"antiplatelet",group:["thromb","angina"],name:"Antiplatelets",tag:"Antithrombotic",
   ex:"ASA; P2Y12 inhibitors: clopidogrel, prasugrel, ticagrelor",
   moa:"ASA irreversibly inhibits COX-1 → less thromboxane A2. P2Y12 inhibitors block ADP-mediated platelet activation (clopidogrel and prasugrel irreversibly; ticagrelor reversibly).",
-  ind:"ACS, after PCI with stenting (dual antiplatelet therapy), secondary prevention of coronary, cerebrovascular and peripheral arterial disease.",
+  ind:"ACS, after PCI with stenting (dual antiplatelet therapy for a limited period, commonly 6–12 months and individualized to bleeding and ischemic risk, then usually a single antiplatelet), secondary prevention of coronary, cerebrovascular and peripheral arterial disease.",
   se:"Bleeding, GI ulceration (ASA), dyspnea and bradyarrhythmias (ticagrelor).",
   ci:"Active bleeding. Prasugrel: prior stroke or TIA. Ticagrelor: prior intracranial hemorrhage.",
   pearl:"Clopidogrel is a prodrug activated by CYP2C19; poor metabolizers get less effect."},
@@ -1617,7 +1618,7 @@ const MEDS=[
  {id:"ivabradine",group:["hf"],name:"Ivabradine",tag:"Heart rate lowering",
   ex:"Ivabradine",
   moa:"Blocks the funny current (If) in the SA node, slowing phase 4 depolarization and heart rate without affecting contractility.",
-  ind:"HFrEF in sinus rhythm with a resting heart rate that stays elevated despite a maximally tolerated beta blocker.",
+  ind:"Symptomatic HFrEF with LVEF ≤ 35%, in sinus rhythm, with a resting heart rate ≥ 70 bpm despite a maximally tolerated beta blocker (Canadian guidance also considers a recent HF hospitalization).",
   se:"Bradycardia, luminous visual phenomena (phosphenes), atrial fibrillation.",
   ci:"Atrial fibrillation or any non-sinus rhythm (it acts only on the SA node), acute decompensated HF, hypotension, severe bradycardia, pregnancy.",
   pearl:"A clean link to physiology: it targets phase 4 of the nodal action potential."},
