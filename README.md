@@ -8,6 +8,10 @@ A visual cardiology learning site for first-year medical students at uOttawa. It
 - **Lecture Companion**: Myocardial Contraction and Ventricular Function (Dr. Wenbin Liang, January 7, 2026), plus the objectives of ECG sessions 1–4 from the ECG Manual. Each lecture has a preview, follow-along notes, objectives, readings and links to related drugs. Remaining lectures are pending.
 - **Medications**: drug classes with mechanism, indications, side effects and contraindications, with search and side-by-side comparison of up to three classes.
 
+## Live site
+
+https://ahujaram.github.io/cardio-companion/ (served by GitHub Pages from the `main` branch).
+
 ## Running it
 
 The whole site is one self-contained file, `index.html`, with no build step or dependencies. Open it in a browser, or serve the folder with any static host (for example GitHub Pages).
