@@ -148,6 +148,7 @@ table.cmp-table{width:100%;border-collapse:collapse;background:#fff;border-radiu
 .lead-seg{flex-wrap:wrap;border-radius:12px}.lead-seg button{min-width:44px;min-height:36px}
 .lead-cap{margin:10px 0 0;font-size:14.5px}
 .lead-now{margin-top:12px;padding:10px 12px;background:var(--soft);border-radius:10px;font-size:14px;min-height:44px}
+.swipe-hint{display:none;margin:0 0 6px}@media(max-width:700px){.swipe-hint{display:block}}@media(hover:none){.kbd-hint{display:none!important}}
 .heart-tools{display:flex;gap:16px;flex-wrap:wrap;padding:2px 8px 4px}
 @media(max-width:600px){#heart #labels text,#heart #anatLabels text{font-size:14px}}
 .heart-note{font-size:12.5px;color:var(--muted);margin:6px 8px 4px;line-height:1.45}
@@ -270,7 +271,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     </div>
     <div class="card feature">
       <h3><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="4" fill="none" stroke="#B40838" stroke-width="2"/><path d="M12 8v8" stroke="#B40838" stroke-width="2"/></svg></span>Medications</h3>
-      <p>Every drug class in one place, with mechanism, indications, side effects and contraindications. Compare classes side by side.</p>
+      <p>The drug classes covered in the block, with mechanism, indications, side effects and contraindications. Compare classes side by side.</p>
       <a href="#meds">Open the drug reference →</a>
     </div>
   </div>
@@ -310,7 +311,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       </div>
       <div class="viz">
         <div class="card heart-card">
-          <svg id="heart" viewBox="-60 -10 540 486" role="img" aria-labelledby="heartTitle heartDesc">
+          <svg id="heart" viewBox="-60 -10 540 506" role="img" aria-labelledby="heartTitle heartDesc">
             <title id="heartTitle">Anatomical cutaway of the heart with the conduction system</title>
             <desc id="heartDesc">Frontal four-chamber section viewed from the front, so the patient's right side is on the viewer's left. Thin-walled right and left atria sit above the right and left ventricles; the left ventricular wall and septum are about three times thicker than the right ventricular wall. Tricuspid and mitral valves with chordae and papillary muscles, the moderator band, superior and inferior venae cavae, aorta, pulmonary trunk and pulmonary veins are shown. Coloured overlays show electrical activation only, synchronized with the ECG strip.</desc>
             <defs>
@@ -326,7 +327,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
               <filter id="hv-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="6"/></filter>
               <clipPath id="clipA"><circle id="clipAc" cx="104" cy="114" r="0"/></clipPath>
-              <clipPath id="clipV"><circle id="clipVc" cx="212" cy="300" r="0"/></clipPath>
+              <clipPath id="clipV"><circle id="clipVc" cx="224" cy="330" r="0"/><circle id="clipVc2" r="0"/><circle id="clipVc3" r="0"/><circle id="clipVc4" r="0"/><circle id="clipVc5" r="0"/><circle id="clipVc6" r="0"/></clipPath>
               <!-- tissue masks: activation paints myocardium only, never cavities or background -->
               <path id="hv-raOut" d="M198,238 L92,240 C70,228 58,198 60,168 C52,152 46,128 56,112 C64,99 82,98 96,106 L140,106 C154,108 166,116 176,128 C190,144 198,170 199,206 Z"/>
               <path id="hv-laOut" d="M199,236 L340,234 C354,216 360,188 356,160 C360,148 368,132 360,118 C352,106 336,106 324,112 C304,104 270,104 250,108 C228,112 210,124 204,142 C199,162 198,200 199,236 Z"/>
@@ -499,14 +500,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <defs>
               <radialGradient id="ax-cav" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#7E2B40"/><stop offset="1" stop-color="#4A1526"/></radialGradient>
               <linearGradient id="ax-muscle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E08A88"/><stop offset=".5" stop-color="#C55F68"/><stop offset="1" stop-color="#93364B"/></linearGradient>
-              <clipPath id="ax-clip"><circle id="ax-clipC" cx="212" cy="262" r="0"/></clipPath>
-              <path id="ax-rvOut" d="M250,202 C212,182 160,184 128,208 C102,228 98,266 116,296 C130,318 160,324 190,312 L200,296 C200,260 214,224 250,202 Z"/>
-              <path id="ax-rvCav" d="M244,204 C210,192 166,194 138,214 C116,232 112,264 128,290 C140,308 164,312 186,302 L196,290 C196,258 210,226 244,204 Z"/>
-              <ellipse id="ax-lvOut" cx="262" cy="268" rx="78" ry="68"/>
-              <ellipse id="ax-lvCav" cx="268" cy="272" rx="44" ry="38"/>
+              <clipPath id="ax-clip"><circle id="ax-clipC" r="0"/><circle id="ax-clipC2" r="0"/><circle id="ax-clipC3" r="0"/><circle id="ax-clipC4" r="0"/><circle id="ax-clipC5" r="0"/></clipPath>
+              <path id="ax-rvOut" d="M340,240 C320,206 274,186 226,188 C176,190 132,212 116,250 C104,280 116,308 142,318 C164,326 188,318 202,302 C204,270 246,240 340,240 Z"/>
+              <path id="ax-rvCav" d="M326,234 C306,208 268,197 226,199 C182,201 145,220 130,254 C120,280 130,301 149,308 C168,314 186,307 195,294 C198,266 238,238 326,234 Z"/>
+              <ellipse id="ax-lvOut" cx="276" cy="288" rx="76" ry="66"/>
+              <ellipse id="ax-lvCav" cx="282" cy="292" rx="42" ry="36"/>
               <mask id="ax-mV" maskUnits="userSpaceOnUse" x="-60" y="-10" width="540" height="486">
                 <use href="#ax-rvOut" fill="#fff"/><use href="#ax-rvCav" fill="#000"/><use href="#ax-lvOut" fill="#fff"/><use href="#ax-lvCav" fill="#000"/>
-                <circle cx="300" cy="252" r="9" fill="#fff"/><circle cx="276" cy="301" r="9" fill="#fff"/>
+                <circle cx="318" cy="276" r="8" fill="#fff"/><circle cx="290" cy="322" r="8" fill="#fff"/>
               </mask>
               <marker id="ax-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#1E2328"/></marker>
             </defs>
@@ -517,44 +518,44 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <path d="M372,172 C398,222 402,302 372,360 C342,398 292,402 278,386 C322,352 346,312 348,264 C350,222 338,192 320,172 C336,160 358,158 372,172 Z"/>
             </g>
             <rect x="184" y="84" width="32" height="15" rx="6" fill="#E9DCCB" stroke="#C9B49C"/>
-            <circle cx="200" cy="384" r="25" fill="#E9DCCB" stroke="#C9B49C" stroke-width="1.5"/>
-            <path d="M192,407 L200,414 L208,407" fill="#E9DCCB" stroke="#C9B49C"/>
-            <circle cx="250" cy="362" r="14" fill="#C9606B" stroke="#8A2C40" stroke-width="1.5"/>
-            <circle cx="216" cy="350" r="6" fill="#E3C3B8" stroke="#BF9D90"/>
-            <ellipse cx="232" cy="262" rx="146" ry="104" fill="none" stroke="#C9A99C" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <circle cx="200" cy="391" r="20" fill="#E9DCCB" stroke="#C9B49C" stroke-width="1.5"/>
+            <path d="M193,409 L200,415 L207,409" fill="#E9DCCB" stroke="#C9B49C"/>
+            <circle cx="264" cy="379" r="13" fill="#C9606B" stroke="#8A2C40" stroke-width="1.5"/>
+            <circle cx="228" cy="372" r="6" fill="#E3C3B8" stroke="#BF9D90"/>
+            <ellipse cx="236" cy="268" rx="150" ry="102" fill="none" stroke="#C9A99C" stroke-width="1.2" stroke-dasharray="3 3"/>
             <!-- ventricles -->
             <use href="#ax-rvOut" fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="1.8"/>
             <use href="#ax-rvCav" fill="url(#ax-cav)"/>
             <use href="#ax-lvOut" fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="2"/>
             <use href="#ax-lvCav" fill="url(#ax-cav)" stroke="#F0B3A8" stroke-width="1"/>
-            <path d="M244,204 C210,192 166,194 138,214 C116,232 112,264 128,290 C140,308 164,312 186,302" fill="none" stroke="#F0B3A8" stroke-width="1"/>
-            <g fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="1"><circle cx="300" cy="252" r="9"/><circle cx="276" cy="301" r="9"/></g>
+            <path d="M326,234 C306,208 268,197 226,199 C182,201 145,220 130,254 C120,280 130,301 149,308 C168,314 186,307 195,294" fill="none" stroke="#F0B3A8" stroke-width="1"/>
+            <g fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="1"><circle cx="318" cy="276" r="8"/><circle cx="290" cy="322" r="8"/></g>
             <!-- electrical overlays -->
             <g opacity=".88" mask="url(#ax-mV)">
-              <g clip-path="url(#ax-clip)"><rect id="ax-vRed" x="90" y="170" width="260" height="180" fill="#FF9A2E" opacity="0"/></g>
-              <rect id="ax-vBlue" x="90" y="170" width="260" height="180" fill="#13C6D8" opacity="0"/>
+              <g clip-path="url(#ax-clip)"><rect id="ax-vRed" x="90" y="170" width="280" height="200" fill="#FF9A2E" opacity="0"/></g>
+              <rect id="ax-vBlue" x="90" y="170" width="280" height="200" fill="#13C6D8" opacity="0"/>
               <g id="ax-wl" fill="#FFB347"></g>
             </g>
             <!-- conduction -->
             <g fill="none" stroke-linecap="round">
-              <path id="ax-pk" d="M240,210 C208,200 168,202 142,220 C124,236 120,262 132,286 C144,302 164,306 182,298 M268,236 C296,236 310,254 310,272 C310,292 292,308 268,308 C246,308 228,292 228,272" stroke="#EADBC6" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <path id="ax-pk" d="M320,236 C302,212 266,203 226,205 C186,207 150,225 136,256 C128,278 136,296 152,302 M282,259 A39,33 0 1,1 281.9,259" stroke="#EADBC6" stroke-width="1.6" stroke-dasharray="5 4"/>
             </g>
-            <circle id="ax-rbb" cx="199" cy="262" r="5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1"/>
-            <circle id="ax-lbb" cx="226" cy="268" r="5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1"/>
-            <circle id="ax-focus" cx="320" cy="292" r="6" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1" opacity="0"/>
+            <circle id="ax-rbb" cx="219" cy="247" r="5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1"/>
+            <circle id="ax-lbb" cx="251" cy="265" r="5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1"/>
+            <circle id="ax-focus" cx="330" cy="316" r="6" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1" opacity="0"/>
             <!-- labels -->
             <g font-family="Arial, sans-serif" pointer-events="none">
-              <g font-size="15" font-weight="700" fill="#F8DCD3"><text x="146" y="258">RV</text><text x="256" y="278">LV</text></g>
+              <g font-size="15" font-weight="700" fill="#F8DCD3"><text x="146" y="268">RV</text><text x="268" y="299">LV</text></g>
               <g font-size="11.5" fill="#7A8791">
                 <text x="200" y="118" text-anchor="middle">Sternum</text><text x="200" y="440" text-anchor="middle">Spine</text>
-                <text x="270" y="386">Aorta</text><text x="40" y="300">Right lung</text><text x="330" y="372" text-anchor="middle">Left lung</text>
+                <text x="282" y="398">Aorta</text><text x="40" y="300">Right lung</text><text x="330" y="372" text-anchor="middle">Left lung</text>
               </g>
               <g font-size="12" font-weight="700" fill="#5E6A73">
                 <text x="200" y="40" text-anchor="middle">ANTERIOR</text><text x="200" y="466" text-anchor="middle">POSTERIOR</text>
                 <text x="-56" y="248">Patient's</text><text x="-56" y="262">right</text>
                 <text x="476" y="248" text-anchor="end">Patient's</text><text x="476" y="262" text-anchor="end">left</text>
               </g>
-              <path d="M150,344 L198,290" stroke="#5E6A73" stroke-width="1" fill="none"/><text x="98" y="356" font-size="12" font-weight="700" fill="#333A40">Septum</text>
+              <path d="M150,346 L226,256" stroke="#5E6A73" stroke-width="1" fill="none"/><text x="98" y="358" font-size="12" font-weight="700" fill="#333A40">Septum</text>
             </g>
             <g id="ax-electrodes" font-family="Arial, sans-serif" font-size="12" font-weight="700"></g>
             <g id="ax-lead" pointer-events="none">
@@ -580,7 +581,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <label class="toggle" id="anatToggleWrap"><input type="checkbox" id="anatToggle"> Anatomy labels</label>
           </div>
           <p class="heart-note" id="noteAxial" style="display:none">Horizontal slice at the level of the ventricles, viewed from the feet like a CT scan: anterior at the top, patient's left on your right. The atria (and the SA and AV nodes) lie above this slice, so only ventricular activity is shown. Colours show electrical activity only. Teaching illustration, not to scale.</p>
-          <p class="heart-note" id="noteFrontal">Colours show <b>electrical</b> activity only, not blood flow or squeezing (mechanical contraction follows a few tens of milliseconds later). Vessel colours follow the textbook convention: blue for deoxygenated, red for oxygenated blood. Teaching illustration, not to scale; wavefronts are simplified.</p>
+          <p class="heart-note" id="noteFrontal">Colours show <b>electrical</b> activity only, not blood flow or squeezing (mechanical contraction follows a few tens of milliseconds later). Vessel colours follow the textbook convention: blue for deoxygenated, red for oxygenated blood. Teaching illustration, not to scale; wavefronts are simplified. The heart is drawn upright for clarity; in the chest its long axis points down and to the left, so the electrical arrow during the QRS points toward the lower left side of the drawing rather than straight at the apex.</p>
         </div>
 
         <div class="card now" aria-live="polite">
@@ -598,18 +599,19 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
           <h3 id="stripTitle">Normal sinus rhythm</h3>
           <span class="small muted" id="stripMeta">Lead II · 25 mm/s · 10 mm/mV · 6-second strip · small box = 40 ms / 0.1 mV</span>
         </div>
+        <p class="small muted swipe-hint">Swipe the strip sideways to see all 6 seconds.</p>
         <div class="strip-scroll"><canvas id="ecg" aria-label="ECG rhythm strip. Click to freeze the animation at that moment."></canvas></div>
         <div class="controls">
           <button class="ctl play" id="playBtn" type="button">❚❚ Pause</button>
           <button class="ctl" id="backBtn" type="button" title="Step back 20 ms (←)">◀ 20 ms</button>
           <button class="ctl" id="fwdBtn" type="button" title="Step forward 20 ms (→)">20 ms ▶</button>
-          <div class="seg" role="group" aria-label="Playback speed">
+          <div class="seg" id="speedSeg" role="group" aria-label="Playback speed">
             <button type="button" data-speed="0.1">0.1×</button>
             <button type="button" data-speed="0.25" class="on">¼×</button>
             <button type="button" data-speed="0.5">½×</button>
             <button type="button" data-speed="1">Real time</button>
           </div>
-                    <span class="small muted" style="margin-left:auto"><kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
+                    <span class="small muted kbd-hint" style="margin-left:auto"><kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
         </div>
         <div class="chiprow" id="waveChips"><span class="lbl">Jump to:</span></div>
       </div>
@@ -620,7 +622,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
         <ol class="steps">
           <li><b>Rate</b><span>Count-off method: 300, 150, 100, 75, 60, 50 per large box between R waves. Normal 60–100 bpm.</span></li>
           <li><b>Rhythm</b><span>Regular or irregular? Is there a P before every QRS and a QRS after every P? Normal sinus rhythm has both.</span></li>
-          <li><b>Axis</b><span>Normal −30° to +90°. Needs the limb leads of a 12-lead ECG, so it can't be judged from this single lead.</span></li>
+          <li><b>Axis</b><span>Normal −30° to +90°. Quick check: switch to leads I and aVF. If the QRS is mostly positive in both, the axis is normal.</span></li>
           <li><b>Alphabet</b><span>P · PR 120–200 ms · Q · QRS &lt; 100 ms · ST · T · QT (QTc 300–440/450 ms)</span></li>
         </ol>
       </div>
@@ -678,6 +680,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
    ROUTING
    ========================================================= */
 const PAGES=["home","ecg","lectures","meds"];
+let lastPage=null;
 function route(){
   let h=(location.hash||"#home").slice(1);
   let sub=null;
@@ -686,9 +689,11 @@ function route(){
   document.querySelectorAll("section.page").forEach(s=>s.classList.toggle("active",s.id==="page-"+h));
   document.querySelectorAll("nav.tabs a").forEach(a=>a.classList.toggle("active",a.dataset.page===h));
   if(h==="ecg"){ if(sub && RHYTHMS[sub]) selectRhythm(sub); resizeCanvas(); }
-  if(h==="meds" && sub){ setMedGroup("all"); const el=document.getElementById("med-"+sub); if(el){setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),50); el.style.outline="3px solid rgba(180,8,56,.4)"; setTimeout(()=>el.style.outline="",2200);} }
-  if(h==="lectures" && sub){ const el=document.getElementById("lec-"+sub); if(el){el.classList.add("open"); setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),50);} }
-  if(!sub) window.scrollTo(0,0);
+  const changed=h!==lastPage; lastPage=h;
+  if(h==="meds" && sub){ medQuery=""; $("medSearch").value=""; setMedGroup("all"); const el=document.getElementById("med-"+sub); if(el){setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),50); el.style.outline="3px solid rgba(180,8,56,.4)"; setTimeout(()=>el.style.outline="",2200);} }
+  if(h==="lectures" && sub){ const el=document.getElementById("lec-"+sub); if(el){el.classList.add("open"); const hd=el.querySelector(".lec-head"); if(hd) hd.setAttribute("aria-expanded","true"); setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),50);} }
+  const subFound=sub && ((h==="meds"&&document.getElementById("med-"+sub))||(h==="lectures"&&document.getElementById("lec-"+sub)));
+  if(!subFound && (changed || !sub || h==="ecg")) window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
 
@@ -728,7 +733,7 @@ function seeded(seed){return()=>{seed=(seed*1664525+1013904223)%4294967296;retur
 const RHYTHMS={
   nsr:{name:"Normal sinus rhythm",group:"Start here",reg:true,
     build(){return Object.assign(sinusSeq(0.8,[0.16]),{atria:"sinus"});},
-    meas:[["Rate","75 bpm (normal 60–100)"],["Rhythm","Regular, sinus"],["Axis","Needs a 12-lead ECG (normal −30° to +90°)"],["P wave","Upright in lead II, one before every QRS"],["PR interval","160 ms (normal 120–200 ms)"],["QRS duration","90 ms (normal < 100 ms)"],["QT / QTc","QT 367 ms, QTc ≈ 410 ms (normal QTc 300–440/450 ms)"]],
+    meas:[["Rate","75 bpm (normal 60–100)"],["Rhythm","Regular, sinus"],["Axis","About +35°: QRS positive in leads I and aVF (normal −30° to +90°)"],["P wave","Upright in lead II, one before every QRS"],["PR interval","160 ms (normal 120–200 ms)"],["QRS duration","90 ms (normal < 100 ms)"],["QT / QTc","QT 367 ms, QTc ≈ 410 ms (normal QTc 300–440/450 ms)"]],
     keys:["Rate 60–100 bpm and regular","Upright P wave in lead II before every QRS (the impulse starts at the SA node)","Every P is followed by a QRS, with a constant PR interval of 120–200 ms","Normal QRS duration (< 100 ms)"],
     mech:"The SA node is the fastest natural pacemaker, so it sets the rate. Its impulse spreads through the atria, is delayed in the AV node, then races down the His–Purkinje system so both ventricles depolarize almost together.",
     pearl:"Learn this one first. Every other rhythm is a change to one step of this sequence: where the impulse starts, how fast it fires, or where it gets blocked."},
@@ -770,10 +775,10 @@ const RHYTHMS={
       return {A,V,atria:"sinus",persistBlock:"av"};
     },
     meas:[["Atrial rate","80 bpm, regular P–P"],["Ventricular rate","45 bpm, regular R–R (junctional escape)"],["P waves","Normal, but unrelated to the QRS complexes"],["PR interval","Varies: no relationship (AV dissociation)"],["QRS","90 ms (narrow escape from the AV junction)"]],
-    keys:["P waves march through at their own regular rate","QRS complexes march at their own slower regular rate","No consistent PR interval: some P waves fall on QRS or T waves"],
+    keys:["P waves march through at their own regular rate","QRS complexes march at their own slower regular rate","No consistent PR interval: some P waves fall on QRS or T waves","Some P–QRS pairs will look \"conducted\" by coincidence: march out the P waves with calipers or paper to prove they are independent"],
     mech:"No atrial impulses reach the ventricles. A backup pacemaker below the block takes over: a junctional escape (narrow QRS, 40–60 bpm) or a ventricular escape (wide QRS, 20–40 bpm).",
     pearl:"Atria and ventricles beat independently (AV dissociation). Usually needs a permanent pacemaker; temporary pacing if unstable."},
-  af:{name:"Atrial fibrillation",group:"Supraventricular tachy",manual:"4.3",
+  af:{name:"Atrial fibrillation",group:"Supraventricular tachycardias",manual:"4.3",
     build(){
       const r=seeded(7); const V=[]; let q=0.25, prev=0.7;
       while(q<D+0.6){const rr=0.42+r()*0.62; V.push(mkV(q,0.09,"normal",prev)); prev=rr; q+=rr;}
@@ -783,7 +788,7 @@ const RHYTHMS={
     keys:["Irregularly irregular R–R intervals with no repeating pattern","No P waves","Fine or coarse wavy baseline (fibrillatory waves)"],
     mech:"Many chaotic wavelets circulate in the atria, often triggered from the pulmonary veins. The atria quiver instead of contracting. The AV node lets impulses through at random, so the ventricular rhythm is irregular.",
     pearl:"The most common sustained arrhythmia. Key issues: stroke prevention (Canadian guidelines use the CHADS-65 approach to decide on anticoagulation) and rate or rhythm control."},
-  afl:{name:"Atrial flutter (2:1)",short:"Atrial flutter (2:1)",manual:"4.2",reg:true,group:"Supraventricular tachy",
+  afl:{name:"Atrial flutter (2:1)",short:"Atrial flutter (2:1)",manual:"4.2",reg:true,group:"Supraventricular tachycardias",
     build(){
       const f0=0.05, V=[];
       for(let k=0;;k++){const q=f0+0.4*k+0.26; if(q>D+0.6)break; V.push(mkV(q,0.09,"normal",0.4,{fl:true}));}
@@ -793,7 +798,7 @@ const RHYTHMS={
     keys:["Regular narrow-complex tachycardia at about 150 bpm","Sawtooth flutter waves, best seen in II, III and aVF; at 2:1 every second F wave hides in the QRS or T wave","Atrial rate about 300/min"],
     mech:"A single large re-entry circuit spins around the right atrium (typical flutter uses the cavotricuspid isthmus, near the tricuspid annulus). The AV node cannot conduct every impulse, so only every 2nd, 3rd or 4th one reaches the ventricles.",
     pearl:"2:1 is the most common conduction ratio, and the flutter waves are easy to miss. Adenosine briefly blocks the AV node: the QRS complexes pause and the flutter waves are unmasked, but the flutter itself continues. Compare with the 4:1 version, where the sawtooth is easier to see."},
-  afl4:{name:"Atrial flutter (4:1)",short:"Atrial flutter (4:1)",group:"Supraventricular tachy",
+  afl4:{name:"Atrial flutter (4:1)",short:"Atrial flutter (4:1)",group:"Supraventricular tachycardias",
     reg:true,
     build(){
       const f0=0.05, V=[];
@@ -804,7 +809,7 @@ const RHYTHMS={
     keys:["Sawtooth flutter waves, best seen in II, III and aVF","Atrial rate about 300/min","Fixed ratio of F waves to QRS (2:1 is most common, giving a ventricular rate near 150)"],
     mech:"A single large re-entry circuit spins around the right atrium (typical flutter uses the cavotricuspid isthmus, near the tricuspid annulus). The AV node cannot conduct every impulse, so only every 2nd, 3rd or 4th one reaches the ventricles.",
     pearl:"A regular narrow-complex tachycardia at about 150 bpm should make you think of flutter with 2:1 block. Stroke risk is managed like AF; ablation of the cavotricuspid isthmus is very effective."},
-  svt:{name:"SVT (AV nodal re-entry, AVNRT)",short:"SVT (AVNRT)",group:"Supraventricular tachy",manual:"4.1",reg:true,
+  svt:{name:"SVT (AV nodal re-entry, AVNRT)",short:"SVT (AVNRT)",group:"Supraventricular tachycardias",manual:"4.1",manualNote:"(a regular narrow-complex tachycardia; the case does not say which SVT mechanism)",reg:true,
     build(){
       const A=[],V=[];
       for(let q=0.15;q<D+0.6;q+=0.333){V.push(mkV(q,0.09,"normal",0.333)); A.push({p0:q+0.005,dur:0.08,kind:"retro",conducted:false,hidden:true});}
@@ -850,7 +855,7 @@ const RHYTHMS={
     mech:"Countless disorganized wavelets in the ventricular muscle. No coordinated depolarization means no contraction and no cardiac output.",
     pearl:"Cardiac arrest. Immediate high-quality CPR and defibrillation. Always check the patient and the leads: artifact can mimic VF."},
 };
-const GROUP_ORDER=["Start here","Sinus rhythms","AV blocks","Supraventricular tachy","Ventricular"];
+const GROUP_ORDER=["Start here","Sinus rhythms","AV blocks","Supraventricular tachycardias","Ventricular"];
 
 /* ---- waveform synthesis: simplified 3-D dipole model projected onto 12 leads ----
    Axes: x = patient's left, y = inferior, z = anterior. Each wave component is a
@@ -889,7 +894,7 @@ function synth3(R){
       const sT=t<v.Tpeak?v.sR:v.sF;
       if(v.kind==="ventricular"){
         const k=v.w/0.16;
-        add(i,DIR.vMain,g(t,v.q0+0.055*k,0.025*k,1.5)+g(t,v.q0+0.12*k,0.02,-0.4)+g(t,v.Tpeak,sT,-0.45));
+        add(i,DIR.vMain,g(t,v.q0+0.055*k,0.025*k,1.9)+g(t,v.q0+0.12*k,0.02,-0.4)+g(t,v.Tpeak,sT,-0.45));
       }else{
         const k=v.w/0.09;
         add(i,DIR.q,g(t,v.q0+0.012*k,0.006,0.15));
@@ -908,11 +913,24 @@ function project(V3,name){
   return y;
 }
 
+/* ---- ventricular activation order ----
+   Normal beats: septum (left → right) first, then apex, then free walls, with the
+   posterobasal LV and basal septum last. Each entry: [cx, cy, final radius, start, duration]
+   as fractions of the QRS. Ectopic beats spread from their focus. Simplified, not cellular. */
+const SEQ_F=[[224,330,75,0,0.3],[238,428,115,0.15,0.4],[118,320,75,0.35,0.35],[350,330,80,0.35,0.4],[318,258,60,0.7,0.3],[196,256,55,0.72,0.28]];
+const SEQ_A=[[250,264,60,0,0.3],[282,292,84,0.15,0.5,38],[175,250,90,0.3,0.4,30],[300,215,50,0.35,0.35],[338,320,45,0.7,0.3]];
+const E01=x=>Math.max(0,Math.min(1,x));
+function seqCircles(s,SEQ,focus){
+  if(s.vk==null) return SEQ.map(c=>[c[0],c[1],0]);
+  if(s.vk>=1) return SEQ.map((c,i)=>[c[0],c[1],i===0?600:0]);
+  if(!s.vNormal) return SEQ.map((c,i)=>i===0?[focus[0],focus[1],s.vR]:[c[0],c[1],0]);
+  return SEQ.map(c=>{const r0=c[5]||0; return [c[0],c[1],r0+(c[2]-r0)*E01((s.vk-c[3])/c[4])];});
+}
 /* ---- heart state at time t ---- */
 const clamp01=x=>Math.max(0,Math.min(1,x));
 const inR=(t,a,b)=>t>=a&&t<=b;
 function heartState(t,R){
-  const s={aRed:0,aBlue:0,aR:0,aC:SA,vRed:0,vBlue:0,vR:0,vC:SEPT,sa:0,av:0,his:0,bb:0,pk:0,focus:0,block:null,dot:null,loop:null,wl:null,flash:0};
+  const s={aRed:0,aBlue:0,aR:0,aC:SA,vRed:0,vBlue:0,vR:0,vC:SEPT,vk:null,vNormal:true,sa:0,av:0,his:0,bb:0,pk:0,focus:0,block:null,dot:null,loop:null,wl:null,flash:0};
   // atria
   if(R.atria==="sinus"||R.atria==="retro"){
     let e=null; for(const a of R.A) if(a.p0<=t) e=a;
@@ -962,12 +980,12 @@ function heartState(t,R){
     const dt=t-v.q0;
     const vent=v.kind==="ventricular";
     s.vC=vent?FOCUS:SEPT;
-    if(dt<v.w){s.vRed=0.85; s.vR=10+(vent?340:260)*dt/v.w;}
-    else if(t<v.Tstart){s.vRed=0.55;s.vR=500;}
-    else if(t<v.Tend){const k=(t-v.Tstart)/(v.Tend-v.Tstart); s.vRed=0.55*Math.pow(1-k,3); s.vR=500; s.vBlue=0.85*Math.min(1,k*1.6);}
+    if(dt<v.w){s.vRed=0.85; s.vk=dt/v.w; s.vNormal=!vent; s.vR=vent?10+340*dt/v.w:0;}
+    else if(t<v.Tstart){s.vRed=0.55;s.vR=500;s.vk=1;}
+    else if(t<v.Tend){const k=(t-v.Tstart)/(v.Tend-v.Tstart); s.vRed=0.55*Math.pow(1-k,3); s.vR=500; s.vk=1; s.vBlue=0.85*Math.min(1,k*1.6);}
     else if(t<v.Tend+0.12){s.vBlue=0.85*(1-(t-v.Tend)/0.12);}
   }
-  if(R.vf){s.vRed=0.25+0.1*Math.sin(t*41)*Math.sin(t*17); s.vR=500; s.wl="v";}
+  if(R.vf){s.vRed=0.25+0.1*Math.sin(t*41)*Math.sin(t*17); s.vR=500; s.vk=1; s.wl="v";}
   return s;
 }
 
@@ -1008,6 +1026,7 @@ function describe(t,R){
       if(a.conducted) items.push(TXT.P);
       else items.push(["P wave not conducted", a.complete?BLOCKTXT.complete:BLOCKTXT[a.blockAt]]);
     }else if(a.conducted && inR(t,a.p0+a.dur,a.q0)) items.push(TXT.PR);
+    else if(!a.conducted && (a.blockAt==="av"||a.blockAt==="his") && !a.complete && inR(t,a.p0+a.dur,a.p0+0.5)) items.push(["Dropped beat: no QRS follows this P wave", BLOCKTXT[a.blockAt]+" The ✕ on the heart marks where conduction failed."]);
   }
   if(R.atria==="flutter") items.push(TXT.FL);
   if(R.atria==="af") items.push(TXT.AF);
@@ -1079,7 +1098,7 @@ function selectRhythm(k){
     rateTxt=`<b>Count-off method (ECG Manual):</b> start at an R wave on a heavy line and count off 300, 150, 100, 75, 60, 50 for each large box to the next R wave. Here the R waves are ${bx} large boxes apart, so the rate is about 300 ÷ ${bx} ≈ ${Math.round(300/boxes)} bpm.`;
     if(k==="avb3") rateTxt+=" (This is the ventricular rate; count the P waves separately for the atrial rate.)";
   } else rateTxt=`<b>Irregular rhythm:</b> the count-off method needs a regular rhythm. Count the QRS complexes in 6 seconds and multiply by 10: ${n} × 10 ≈ ${n*10} bpm.`;
-  if(r.manual) rateTxt+=`<br><span class="pill" style="margin-top:8px">Practice: ECG Manual case ${r.manual}</span>`;
+  if(r.manual) rateTxt+=`<br><span class="pill" style="margin-top:8px">Practice: ECG Manual case ${r.manual}</span>`+(r.manualNote?` <span class="small muted">${r.manualNote}</span>`:"");
   $("sixSec").innerHTML=rateTxt;
   // chips
   const row=$("waveChips"); row.querySelectorAll("button").forEach(b=>b.remove());
@@ -1178,7 +1197,7 @@ function updateHeartInner(){
   const s=heartState(t,R);
   $("clipAc").setAttribute("cx",s.aC[0]); $("clipAc").setAttribute("cy",s.aC[1]); $("clipAc").setAttribute("r",s.aR);
   $("atriaRed").setAttribute("opacity",s.aRed.toFixed(3)); $("atriaBlue").setAttribute("opacity",s.aBlue.toFixed(3));
-  $("clipVc").setAttribute("cx",s.vC[0]); $("clipVc").setAttribute("cy",s.vC[1]); $("clipVc").setAttribute("r",s.vR);
+  seqCircles(s,SEQ_F,FOCUS).forEach((c,i)=>{const e=$(i?"clipVc"+(i+1):"clipVc"); e.setAttribute("cx",c[0]); e.setAttribute("cy",c[1]); e.setAttribute("r",c[2].toFixed(1));});
   $("ventRed").setAttribute("opacity",s.vRed.toFixed(3)); $("ventBlue").setAttribute("opacity",s.vBlue.toFixed(3));
   setGlow("cs-sa",s.sa>0,IDLE_N,true);
   setGlow("cs-av",s.av>0,IDLE_N,true); $("cs-av").setAttribute("opacity",s.av>0?Math.max(0.6,s.av):1);
@@ -1223,8 +1242,8 @@ function setPlaying(p){playing=p; $("playBtn").textContent=p?"❚❚ Pause":"▶
 $("playBtn").addEventListener("click",()=>setPlaying(!playing));
 $("backBtn").addEventListener("click",()=>{setPlaying(false);t=Math.max(0,t-0.02);frame();});
 $("fwdBtn").addEventListener("click",()=>{setPlaying(false);t=Math.min(D-0.001,t+0.02);frame();});
-document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{
-  speed=parseFloat(b.dataset.speed); document.querySelectorAll(".seg button").forEach(x=>x.classList.toggle("on",x===b)); frame();
+document.querySelectorAll("#speedSeg button").forEach(b=>b.addEventListener("click",()=>{
+  speed=parseFloat(b.dataset.speed); document.querySelectorAll("#speedSeg button").forEach(x=>x.classList.toggle("on",x===b)); frame();
 }));
 $("lblToggle").addEventListener("change",e=>$("labels").setAttribute("opacity",e.target.checked?1:0));
 $("anatToggle").addEventListener("change",e=>$("anatLabels").setAttribute("opacity",e.target.checked?1:0));
@@ -1234,7 +1253,7 @@ canvas.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{
   if(!$("page-ecg").classList.contains("active")) return;
-  if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName)) return;
+  if(["INPUT","TEXTAREA","SELECT","BUTTON","A"].includes(document.activeElement.tagName)) return;
   if(e.code==="Space"){e.preventDefault();setPlaying(!playing);}
   if(e.code==="ArrowLeft"){e.preventDefault();setPlaying(false);t=Math.max(0,t-0.02);frame();}
   if(e.code==="ArrowRight"){e.preventDefault();setPlaying(false);t=Math.min(D-0.001,t+0.02);frame();}
@@ -1251,7 +1270,7 @@ const LEAD_INFO={
   III:["left leg","+120°","inferior wall","inferior"],
   aVR:["right shoulder","−150°","cavities (it looks in from the right shoulder)",null],
   aVL:["left shoulder","−30°","high lateral wall","lateral"],
-  aVF:["feet","+90°","inferior wall","inferior"],
+  aVF:["left leg (foot)","+90°","inferior wall","inferior"],
   V1:["4th intercostal space, right of the sternum",null,"septum","septal"],
   V2:["4th intercostal space, left of the sternum",null,"septum","septal"],
   V3:["between V2 and V4",null,"anterior wall","anterior"],
@@ -1260,8 +1279,8 @@ const LEAD_INFO={
   V6:["midaxillary line, level with V4",null,"lateral wall","lateral"],
 };
 const TERR_F={inferior:"M120,376 C150,410 200,450 244,460 C262,460 282,452 298,442",lateral:"M346,240 C362,264 368,302 362,338 C358,358 352,374 344,388"};
-const TERR_A={septal:"M236,206 C214,222 202,250 201,292",anterior:"M252,198 C278,192 306,202 326,222",lateral:"M338,232 C348,256 348,284 336,308"};
-const FC=[215,282], AC=[234,258], VK=70;
+const TERR_A={septal:"M204,300 C210,272 228,250 262,236",anterior:"M240,184 C284,182 322,202 344,236",lateral:"M356,264 C364,294 358,324 340,344"};
+const FC=[215,282], AC=[254,270], VK=70;
 const SVGNS="http://www.w3.org/2000/svg";
 function setLine(id,x1,y1,x2,y2){const e=$(id); e.setAttribute("x1",x1.toFixed(1)); e.setAttribute("y1",y1.toFixed(1)); e.setAttribute("x2",x2.toFixed(1)); e.setAttribute("y2",y2.toFixed(1));}
 function eyeMarkup(lbl){return `<path d="M-15,0 C-8,-10 8,-10 15,0 C8,10 -8,10 -15,0 Z" fill="#fff" stroke="#1E2328" stroke-width="1.6"/><circle r="5" fill="#B40838"/><circle r="2" fill="#1E2328"/><text y="-15" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E2328" paint-order="stroke" stroke="#FBF8F3" stroke-width="4">${lbl}</text>`;}
@@ -1302,7 +1321,7 @@ function setLead(n){
     setLine("ax-axis",AC[0]-(ex-AC[0])*0.55,AC[1]-(ey-AC[1])*0.55,ex,ey);
     $("ax-territory").setAttribute("d",TERR_A[info[3]]||"");
   }else{
-    const a=LEADS.find(l=>l[0]===n)[1]*Math.PI/180, ux=Math.cos(a), uy=Math.sin(a), r=185;
+    const a=LEADS.find(l=>l[0]===n)[1]*Math.PI/180, ux=Math.cos(a), uy=Math.sin(a), r=uy>0.4?205:185;
     setLine("lo-axis",FC[0]-ux*r,FC[1]-uy*r,FC[0]+ux*(r-18),FC[1]+uy*(r-18));
     $("lo-eye").setAttribute("transform",`translate(${(FC[0]+ux*r).toFixed(1)} ${(FC[1]+uy*r).toFixed(1)})`);
     $("lo-eye").innerHTML=eyeMarkup(n+" +");
@@ -1349,8 +1368,7 @@ function updateLeadView(){
 }
 function updateAxial(s){
   if(!isChest(lead)) return;
-  const vent=s.vC===FOCUS, c=vent?[320,292]:[212,262];
-  $("ax-clipC").setAttribute("cx",c[0]); $("ax-clipC").setAttribute("cy",c[1]); $("ax-clipC").setAttribute("r",s.vR);
+  seqCircles(s,SEQ_A,[330,316]).forEach((c,i)=>{const e=$(i?"ax-clipC"+(i+1):"ax-clipC"); e.setAttribute("cx",c[0]); e.setAttribute("cy",c[1]); e.setAttribute("r",c[2].toFixed(1));});
   $("ax-vRed").setAttribute("opacity",s.vRed.toFixed(3)); $("ax-vBlue").setAttribute("opacity",s.vBlue.toFixed(3));
   const glow=(id,on,idle)=>{const e=$(id); e.setAttribute(e.tagName==="circle"?"fill":"stroke",on?ACT:idle); on?e.setAttribute("filter","url(#glow)"):e.removeAttribute("filter");};
   glow("ax-rbb",s.bb>0,IDLE_N); glow("ax-lbb",s.bb>0,IDLE_N); glow("ax-pk",s.pk>0,"#EADBC6");
@@ -1359,7 +1377,7 @@ function updateAxial(s){
   if(s.wl==="v"){
     if(!wl.children.length){for(let i=0;i<8;i++){const ci=document.createElementNS(SVGNS,"circle");ci.setAttribute("r",22);wl.appendChild(ci);}}
     for(let i=0;i<wl.children.length;i++){const ci=wl.children[i];
-      ci.setAttribute("cx",(232+110*Math.sin(t*(3.9+i*0.6)+i*1.9)).toFixed(1)); ci.setAttribute("cy",(262+70*Math.sin(t*(4.7+i*0.5)+i*2.7)).toFixed(1));
+      ci.setAttribute("cx",(240+110*Math.sin(t*(3.9+i*0.6)+i*1.9)).toFixed(1)); ci.setAttribute("cy",(268+75*Math.sin(t*(4.7+i*0.5)+i*2.7)).toFixed(1));
       ci.setAttribute("opacity",(0.25+0.35*Math.abs(Math.sin(t*(6+i)+i))).toFixed(2));}
   } else if(wl.children.length) wl.innerHTML="";
 }
@@ -1411,7 +1429,7 @@ const LECTURES=[
 const ECG_SESSIONS=[
  ["Session 1",["Apply a logical approach to the interpretation of ECGs","Calculate rate by means of the count-off method","Recall the definition of normal sinus rhythm","Calculate the QRS axis on an ECG","State the normal values for the 3 intervals on ECG: PR, QRS and QT"],[["ecg-nsr","Normal sinus rhythm"]]],
  ["Session 2",["Apply a logical approach to the interpretation of the ECG","List 3 conditions that can account for a wide-complex QRS","State the criteria for right atrial and left atrial enlargement","Apply criteria for left ventricular hypertrophy (Sokolow-Lyon) and list several conditions that can cause LVH","Identify right ventricular hypertrophy on a 12-lead ECG"],[["ecg-pvc","PVC (case 2.1)"]]],
- ["Session 3",["Apply a logical approach to the interpretation of the ECG","Identify and interpret ST segment depression on ECG","Identify and interpret ST segment elevation on ECG","Identify and interpret Q waves on ECG","Recognize the ECG manifestations of reperfusion after STEMI"],[["ecg-vf","Ventricular fibrillation"]]],
+ ["Session 3",["Apply a logical approach to the interpretation of the ECG","Identify and interpret ST segment depression on ECG","Identify and interpret ST segment elevation on ECG","Identify and interpret Q waves on ECG","Recognize the ECG manifestations of reperfusion after STEMI"],[["ecg-vt","Rapid VT (case 3.4, after an inferior STEMI)"],["ecg-vf","Ventricular fibrillation"]]],
  ["Session 4",["Apply a logical approach to the interpretation of the ECG","Define sinus tachycardia","Distinguish between sinus node and AV node causes of bradycardia","Distinguish between the several types of AV block","Demonstrate a logical approach to the ECG interpretation of tachycardia","Recognize atrial flutter and atrial fibrillation","List factors that distinguish ventricular tachycardia (VT) from supraventricular tachycardia (SVT) with aberrancy"],[["ecg-tachy","Sinus tachycardia"],["ecg-brady","Sinus bradycardia"],["ecg-avb1","AV blocks"],["ecg-svt","SVT (case 4.1)"],["ecg-afl","Flutter (case 4.2)"],["ecg-af","AF (case 4.3)"],["ecg-vt","VT (case 4.4)"]]],
 ];
 function buildLectures(){
@@ -1426,10 +1444,10 @@ function buildLectures(){
     </button>
     <div class="lec-body">
       <div class="subtabs" role="tablist">
-        <button type="button" class="on" data-p="pre">Preview (before lecture)</button>
-        <button type="button" data-p="fol">Follow along (during)</button>
-        <button type="button" data-p="obj">Objectives</button>
-        <button type="button" data-p="read">Readings</button>
+        <button type="button" role="tab" aria-selected="true" class="on" data-p="pre">Preview (before lecture)</button>
+        <button type="button" role="tab" aria-selected="false" data-p="fol">Follow along (during)</button>
+        <button type="button" role="tab" aria-selected="false" data-p="obj">Objectives</button>
+        <button type="button" role="tab" aria-selected="false" data-p="read">Readings</button>
       </div>
       <div class="lec-panel on" data-p="pre"><p>${L.preview}</p>${L.hy.map(h=>`<div class="hy"><b>High-yield:</b> ${h}</div>`).join("")}</div>
       <div class="lec-panel" data-p="fol">${L.sections.map(([h,items])=>`<h3 style="margin:16px 0 4px">${h}</h3><ul>${items.map(x=>`<li>${x}</li>`).join("")}</ul>`).join("")}
@@ -1457,7 +1475,7 @@ function buildLectures(){
     const head=el.querySelector(".lec-head");
     head.addEventListener("click",()=>{el.classList.toggle("open");head.setAttribute("aria-expanded",el.classList.contains("open"));});
     el.querySelectorAll(".subtabs button").forEach(b=>b.addEventListener("click",()=>{
-      el.querySelectorAll(".subtabs button").forEach(x=>x.classList.toggle("on",x===b));
+      el.querySelectorAll(".subtabs button").forEach(x=>{x.classList.toggle("on",x===b); x.setAttribute("aria-selected",x===b);});
       el.querySelectorAll(".lec-panel").forEach(p=>p.classList.toggle("on",p.dataset.p===b.dataset.p));
     }));
   });
@@ -1520,7 +1538,7 @@ const MEDS=[
  {id:"arni",group:["hf"],name:"ARNI (angiotensin receptor–neprilysin inhibitor)",tag:"HFrEF foundation",
   ex:"Sacubitril/valsartan",
   moa:"Sacubitril inhibits neprilysin, raising natriuretic peptides (vasodilation, natriuresis); valsartan blocks the AT1 receptor.",
-  ind:"HFrEF; recommended in Canadian guidance in place of an ACE inhibitor or ARB.",
+  ind:"HFrEF; recommended in Canadian (CCS/CHFS) guidance in place of an ACE inhibitor or ARB, and can be considered first-line, including in patients hospitalized with heart failure.",
   se:"Hypotension, hyperkalemia, rise in creatinine, angioedema.",
   ci:"Within 36 hours of the last ACE inhibitor dose, history of angioedema, pregnancy.",
   pearl:"BNP rises on sacubitril (neprilysin breaks it down); NT-proBNP remains useful for monitoring."},
@@ -1582,7 +1600,7 @@ const MEDS=[
   pearl:"Monitoring and reversal: heparin (aPTT, protamine), warfarin (INR, vitamin K plus prothrombin complex concentrate), dabigatran (idarucizumab), Xa inhibitors (andexanet alfa or prothrombin complex concentrate, depending on availability)."},
  {id:"statins",group:["lipid"],name:"Statins",tag:"Lipid-lowering",
   ex:"Atorvastatin, rosuvastatin, simvastatin, pravastatin",
-  moa:"Inhibit HMG-CoA reductase, the rate-limiting step of hepatic cholesterol synthesis → more hepatic LDL receptors → lower LDL-C.",
+  moa:"Inhibit HMG-CoA reductase, the rate-limiting enzyme of hepatic cholesterol synthesis → more hepatic LDL receptors → lower LDL-C.",
   ind:"Secondary prevention of atherosclerotic disease, primary prevention in high-risk patients, very high LDL-C, diabetes in appropriate patients.",
   se:"Muscle aches, myopathy, rarely rhabdomyolysis, raised liver enzymes, small increase in diabetes risk.",
   ci:"Pregnancy and breastfeeding, active liver disease.",
@@ -1608,7 +1626,7 @@ function buildMedChips(){
   $("medChips").innerHTML=MED_GROUPS.map(([k,l])=>`<button type="button" class="chip${k===medGroup?" on":""}" data-g="${k}">${l}</button>`).join("");
   $("medChips").querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>setMedGroup(b.dataset.g)));
 }
-function setMedGroup(g){medGroup=g; buildMedChips(); renderMeds();}
+function setMedGroup(g){medGroup=g; buildMedChips(); renderMeds(); updateCmpBar();}
 function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function renderMeds(){
   const q=medQuery.trim().toLowerCase();
