@@ -271,7 +271,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     </div>
     <div class="card feature">
       <h3><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="4" fill="none" stroke="#B40838" stroke-width="2"/><path d="M12 8v8" stroke="#B40838" stroke-width="2"/></svg></span>Medications</h3>
-      <p>The drug classes covered in the block, with mechanism, indications, side effects and contraindications. Compare classes side by side.</p>
+      <p>The main cardiovascular drug classes, with mechanism, indications, side effects and contraindications. Compare classes side by side.</p>
       <a href="#meds">Open the drug reference →</a>
     </div>
   </div>
@@ -351,6 +351,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <mask id="hv-mAll" maskUnits="userSpaceOnUse" x="-60" y="-10" width="540" height="486">
                 <rect x="-60" y="-10" width="540" height="486" fill="#000"/>
                 <g fill="#fff"><use href="#hv-raOut"/><use href="#hv-laOut"/><use href="#hv-vOut"/></g>
+                <g fill="#000"><use href="#hv-raCav"/><use href="#hv-laCav"/><use href="#hv-rvCav"/><use href="#hv-lvCav"/></g>
+                <g fill="#fff"><use href="#hv-papRV"/><use href="#hv-papLV1"/><use href="#hv-papLV2"/><use href="#hv-mod"/></g>
               </mask>
               <marker id="hv-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#1E2328"/></marker>
             </defs>
@@ -462,7 +464,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <ellipse id="cs-sa" cx="104" cy="114" rx="8" ry="5.5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1.2"/>
             <ellipse id="cs-av" cx="192" cy="226" rx="7.5" ry="5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1.2"/>
             <circle id="cs-focus" cx="347" cy="272" r="6.5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1.2" opacity="0"/>
-            <ellipse id="loopFl" cx="138" cy="196" rx="40" ry="24" fill="none" stroke="#FFD95A" stroke-width="1.8" stroke-dasharray="4 4" opacity="0"/>
+            <ellipse id="loopFl" cx="142" cy="214" rx="44" ry="15" fill="none" stroke="#FFD95A" stroke-width="1.8" stroke-dasharray="4 4" opacity="0"/>
             <circle id="loopAv" cx="192" cy="226" r="15" fill="none" stroke="#FFD95A" stroke-width="1.8" stroke-dasharray="3 3" opacity="0"/>
             <circle id="dot" r="6" fill="#FFE27A" stroke="#7A4B00" stroke-width="1" filter="url(#glow)" opacity="0"/>
             <g id="blockMark" opacity="0" stroke-linecap="round"><path d="M-9,-9 L9,9 M9,-9 L-9,9" stroke="#1E2328" stroke-width="7"/><path d="M-9,-9 L9,9 M9,-9 L-9,9" stroke="#FFFFFF" stroke-width="3.5"/></g>
@@ -471,7 +473,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <g id="leadOverlay" pointer-events="none">
               <path id="lo-territory" fill="none" stroke="#1E2328" stroke-width="3.5" stroke-dasharray="7 5" stroke-linecap="round"/>
               <line id="lo-axis" stroke="#1E2328" stroke-width="1.3" stroke-dasharray="5 5" opacity=".7"/>
-              <text id="lo-neg" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#1E2328" text-anchor="middle">−</text>
+              <text id="lo-neg" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#1E2328" text-anchor="middle" paint-order="stroke" stroke="#FBF8F3" stroke-width="5">−</text>
               <line id="lo-proj" stroke="#B40838" stroke-width="8" stroke-linecap="round" opacity=".9"/>
               <line id="lo-vecHalo" stroke="#fff" stroke-width="6.5" stroke-linecap="round"/>
               <line id="lo-vec" stroke="#1E2328" stroke-width="3" stroke-linecap="round" marker-end="url(#hv-arrow)"/>
@@ -501,8 +503,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <radialGradient id="ax-cav" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#7E2B40"/><stop offset="1" stop-color="#4A1526"/></radialGradient>
               <linearGradient id="ax-muscle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E08A88"/><stop offset=".5" stop-color="#C55F68"/><stop offset="1" stop-color="#93364B"/></linearGradient>
               <clipPath id="ax-clip"><circle id="ax-clipC" r="0"/><circle id="ax-clipC2" r="0"/><circle id="ax-clipC3" r="0"/><circle id="ax-clipC4" r="0"/><circle id="ax-clipC5" r="0"/></clipPath>
-              <path id="ax-rvOut" d="M340,240 C320,206 274,186 226,188 C176,190 132,212 116,250 C104,280 116,308 142,318 C164,326 188,318 202,302 C204,270 246,240 340,240 Z"/>
-              <path id="ax-rvCav" d="M326,234 C306,208 268,197 226,199 C182,201 145,220 130,254 C120,280 130,301 149,308 C168,314 186,307 195,294 C198,266 238,238 326,234 Z"/>
+              <path id="ax-rvOut" d="M306,212 C288,195 260,187 226,188 C176,190 132,212 116,250 C104,280 116,308 142,318 C164,326 188,318 202,302 C204,270 244,230 306,212 Z"/>
+              <path id="ax-rvCav" d="M294,212 C278,201 254,197 226,199 C182,201 145,220 130,254 C120,280 130,301 149,308 C168,314 186,307 195,294 C198,266 238,232 294,212 Z"/>
               <ellipse id="ax-lvOut" cx="276" cy="288" rx="76" ry="66"/>
               <ellipse id="ax-lvCav" cx="282" cy="292" rx="42" ry="36"/>
               <mask id="ax-mV" maskUnits="userSpaceOnUse" x="-60" y="-10" width="540" height="486">
@@ -522,13 +524,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <path d="M193,409 L200,415 L207,409" fill="#E9DCCB" stroke="#C9B49C"/>
             <circle cx="264" cy="379" r="13" fill="#C9606B" stroke="#8A2C40" stroke-width="1.5"/>
             <circle cx="228" cy="372" r="6" fill="#E3C3B8" stroke="#BF9D90"/>
-            <ellipse cx="236" cy="268" rx="150" ry="102" fill="none" stroke="#C9A99C" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <ellipse cx="236" cy="240" rx="150" ry="102" fill="none" stroke="#C9A99C" stroke-width="1.2" stroke-dasharray="3 3"/>
+            <g id="ax-heart" transform="translate(0,-28)">
             <!-- ventricles -->
             <use href="#ax-rvOut" fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="1.8"/>
             <use href="#ax-rvCav" fill="url(#ax-cav)"/>
             <use href="#ax-lvOut" fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="2"/>
             <use href="#ax-lvCav" fill="url(#ax-cav)" stroke="#F0B3A8" stroke-width="1"/>
-            <path d="M326,234 C306,208 268,197 226,199 C182,201 145,220 130,254 C120,280 130,301 149,308 C168,314 186,307 195,294" fill="none" stroke="#F0B3A8" stroke-width="1"/>
+            <path d="M294,212 C278,201 254,197 226,199 C182,201 145,220 130,254 C120,280 130,301 149,308 C168,314 186,307 195,294" fill="none" stroke="#F0B3A8" stroke-width="1"/>
             <g fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="1"><circle cx="318" cy="276" r="8"/><circle cx="290" cy="322" r="8"/></g>
             <!-- electrical overlays -->
             <g opacity=".88" mask="url(#ax-mV)">
@@ -538,14 +541,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             </g>
             <!-- conduction -->
             <g fill="none" stroke-linecap="round">
-              <path id="ax-pk" d="M320,236 C302,212 266,203 226,205 C186,207 150,225 136,256 C128,278 136,296 152,302 M282,259 A39,33 0 1,1 281.9,259" stroke="#EADBC6" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <path id="ax-pk" d="M288,214 C274,206 252,203 226,205 C186,207 150,225 136,256 C128,278 136,296 152,302 M282,259 A39,33 0 1,1 281.9,259" stroke="#EADBC6" stroke-width="1.6" stroke-dasharray="5 4"/>
             </g>
             <circle id="ax-rbb" cx="219" cy="247" r="5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1"/>
             <circle id="ax-lbb" cx="251" cy="265" r="5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1"/>
             <circle id="ax-focus" cx="330" cy="316" r="6" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1" opacity="0"/>
+            </g>
             <!-- labels -->
             <g font-family="Arial, sans-serif" pointer-events="none">
-              <g font-size="15" font-weight="700" fill="#F8DCD3"><text x="146" y="268">RV</text><text x="268" y="299">LV</text></g>
+              <g font-size="15" font-weight="700" fill="#F8DCD3"><text x="146" y="240">RV</text><text x="268" y="271">LV</text></g>
               <g font-size="11.5" fill="#7A8791">
                 <text x="200" y="118" text-anchor="middle">Sternum</text><text x="200" y="440" text-anchor="middle">Spine</text>
                 <text x="282" y="398">Aorta</text><text x="40" y="300">Right lung</text><text x="330" y="372" text-anchor="middle">Left lung</text>
@@ -555,7 +559,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
                 <text x="-56" y="248">Patient's</text><text x="-56" y="262">right</text>
                 <text x="476" y="248" text-anchor="end">Patient's</text><text x="476" y="262" text-anchor="end">left</text>
               </g>
-              <path d="M150,346 L226,256" stroke="#5E6A73" stroke-width="1" fill="none"/><text x="98" y="358" font-size="12" font-weight="700" fill="#333A40">Septum</text>
+              <path d="M150,346 L226,228" stroke="#5E6A73" stroke-width="1" fill="none"/><text x="98" y="358" font-size="12" font-weight="700" fill="#333A40">Septum</text>
             </g>
             <g id="ax-electrodes" font-family="Arial, sans-serif" font-size="12" font-weight="700"></g>
             <g id="ax-lead" pointer-events="none">
@@ -584,10 +588,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
           <p class="heart-note" id="noteFrontal">Colours show <b>electrical</b> activity only, not blood flow or squeezing (mechanical contraction follows a few tens of milliseconds later). Vessel colours follow the textbook convention: blue for deoxygenated, red for oxygenated blood. Teaching illustration, not to scale; wavefronts are simplified. The heart is drawn upright for clarity; in the chest its long axis points down and to the left, so the electrical arrow during the QRS points toward the lower left side of the drawing rather than straight at the apex.</p>
         </div>
 
-        <div class="card now" aria-live="polite">
+        <div class="card now">
           <span class="now-label">What's happening now</span>
-          <div class="now-title" id="nowTitle">—</div>
-          <div class="now-text" id="nowText"></div>
+          <div aria-live="polite" aria-atomic="true"><div class="now-title" id="nowTitle">—</div>
+          <div class="now-text" id="nowText"></div></div>
           <div class="now-extra" id="nowExtra"></div>
           <div class="lead-now" id="leadNow"></div>
           <div class="time-readout" id="timeReadout"></div>
@@ -622,7 +626,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
         <ol class="steps">
           <li><b>Rate</b><span>Count-off method: 300, 150, 100, 75, 60, 50 per large box between R waves. Normal 60–100 bpm.</span></li>
           <li><b>Rhythm</b><span>Regular or irregular? Is there a P before every QRS and a QRS after every P? Normal sinus rhythm has both.</span></li>
-          <li><b>Axis</b><span>Normal −30° to +90°. Quick check: switch to leads I and aVF. If the QRS is mostly positive in both, the axis is normal.</span></li>
+          <li><b>Axis</b><span>Normal −30° to +90°. Quick check: switch to leads I and aVF. Both mostly positive: normal. Lead I positive but aVF negative: check lead II; if II is positive (or equiphasic) the axis is still normal (0° to −30°), if II is negative it is left axis deviation.</span></li>
           <li><b>Alphabet</b><span>P · PR 120–200 ms · Q · QRS &lt; 100 ms · ST · T · QT (QTc 300–440/450 ms)</span></li>
         </ol>
       </div>
@@ -656,7 +660,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <!-- MEDS -->
 <section class="page" id="page-meds">
   <h1>Medications</h1>
-  <p class="lede">Drug classes covered in the cardiology block, built for quick reference. Tick "Compare" on up to three classes to see them side by side.</p>
+  <p class="lede">Drug classes relevant to the cardiology block, built for quick reference (the final list will be confirmed with faculty). Tick "Compare" on up to three classes to see them side by side.</p>
   <div class="notice">Educational summary for first-year learning. Not a prescribing reference: always check the product monograph and current Canadian guidelines.</div>
   <div class="med-tools">
     <input class="search" id="medSearch" type="search" placeholder="Search a drug or class (e.g. amiodarone, cough, hyperkalemia)" aria-label="Search medications">
@@ -682,6 +686,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 const PAGES=["home","ecg","lectures","meds"];
 let lastPage=null;
 function route(){
+  if(location.hash==="#content"){ const m=document.getElementById("content"); m.setAttribute("tabindex","-1"); m.focus(); return; }
   let h=(location.hash||"#home").slice(1);
   let sub=null;
   const ix=h.indexOf("-"); if(ix>0){sub=h.slice(ix+1);h=h.slice(0,ix);}
@@ -737,13 +742,13 @@ const RHYTHMS={
     keys:["Rate 60–100 bpm and regular","Upright P wave in lead II before every QRS (the impulse starts at the SA node)","Every P is followed by a QRS, with a constant PR interval of 120–200 ms","Normal QRS duration (< 100 ms)"],
     mech:"The SA node is the fastest natural pacemaker, so it sets the rate. Its impulse spreads through the atria, is delayed in the AV node, then races down the His–Purkinje system so both ventricles depolarize almost together.",
     pearl:"Learn this one first. Every other rhythm is a change to one step of this sequence: where the impulse starts, how fast it fires, or where it gets blocked."},
-  brady:{name:"Sinus bradycardia",group:"Sinus rhythms",reg:true,
+  brady:{name:"Sinus bradycardia",group:"Sinus rhythms",manual:"1.5",reg:true,
     build(){return Object.assign(sinusSeq(1.25,[0.16]),{atria:"sinus"});},
     meas:[["Rate","48 bpm (< 60)"],["Rhythm","Regular"],["P waves","Normal, one before every QRS"],["PR interval","160 ms"],["QRS","90 ms"]],
     keys:["Looks exactly like normal sinus rhythm, only slower (< 60 bpm)","Normal P before every QRS, constant normal PR","Longer gap between T wave and next P wave (long TP segment)"],
     mech:"The SA node fires more slowly than usual: higher vagal tone, drugs that slow the SA node, or disease of the node itself.",
     pearl:"Common and often normal (athletes, sleep). Other causes: beta blockers, non-dihydropyridine calcium channel blockers, hypothyroidism, inferior MI, sick sinus syndrome. Treat only if symptomatic or unstable (atropine is first-line)."},
-  tachy:{name:"Sinus tachycardia",group:"Sinus rhythms",reg:true,
+  tachy:{name:"Sinus tachycardia",group:"Sinus rhythms",manual:"1.4",reg:true,
     build(){return Object.assign(sinusSeq(0.5,[0.14]),{atria:"sinus"});},
     meas:[["Rate","120 bpm (> 100)"],["Rhythm","Regular"],["P waves","Normal, one before every QRS"],["PR interval","140 ms"],["QRS","90 ms"]],
     keys:["Sinus P waves at > 100 bpm","Gradual onset and offset (not abrupt like re-entrant SVT)","Short TP segment: the next P comes soon after the T wave"],
@@ -771,7 +776,7 @@ const RHYTHMS={
     build(){
       const A=[],V=[];
       for(let p=0.2;p<D+0.6;p+=0.75) A.push({p0:p,dur:0.1,kind:"sinus",conducted:false,blockAt:"av",complete:true});
-      for(let q=0.55;q<D+0.6;q+=1.333) V.push(mkV(q,0.09,"junctional",1.333));
+      for(let q=0.55;q<D+0.6;q+=4/3) V.push(mkV(q,0.09,"junctional",4/3));
       return {A,V,atria:"sinus",persistBlock:"av"};
     },
     meas:[["Atrial rate","80 bpm, regular P–P"],["Ventricular rate","45 bpm, regular R–R (junctional escape)"],["P waves","Normal, but unrelated to the QRS complexes"],["PR interval","Varies: no relationship (AV dissociation)"],["QRS","90 ms (narrow escape from the AV junction)"]],
@@ -812,7 +817,7 @@ const RHYTHMS={
   svt:{name:"SVT (AV nodal re-entry, AVNRT)",short:"SVT (AVNRT)",group:"Supraventricular tachycardias",manual:"4.1",manualNote:"(a regular narrow-complex tachycardia; the case does not say which SVT mechanism)",reg:true,
     build(){
       const A=[],V=[];
-      for(let q=0.15;q<D+0.6;q+=0.333){V.push(mkV(q,0.09,"normal",0.333)); A.push({p0:q+0.005,dur:0.08,kind:"retro",conducted:false,hidden:true});}
+      for(let q=0.15;q<D+0.6;q+=1/3){V.push(mkV(q,0.09,"normal",1/3)); A.push({p0:q+0.005,dur:0.08,kind:"retro",conducted:false,hidden:true});}
       return {A,V,atria:"retro",reentry:"av"};
     },
     meas:[["Rate","180 bpm"],["Rhythm","Regular"],["P waves","Not visible (hidden in or just after the QRS)"],["PR interval","Not measurable"],["QRS","90 ms (normal < 100 ms)"]],
@@ -878,6 +883,10 @@ const LEADS=[["I",0],["II",60],["III",120],["aVR",-150],["aVL",-30],["aVF",90],[
 const PRECORDIAL_GAIN=1.5;
 const isChest=n=>n[0]==="V";
 function leadAxis(name){const a=LEADS.find(l=>l[0]===name)[1]*Math.PI/180; return isChest(name)?[Math.cos(a),0,Math.sin(a)]:[Math.cos(a),Math.sin(a),0];}
+// VF: many components with random frequency (3-9 Hz), phase and frequency jitter, so the
+// deflections vary in shape, size and spacing with no regular pattern.
+const VFC=(()=>{const r=seeded(11);const mk=()=>Array.from({length:10},()=>({f:3+r()*6,ph:r()*6.283,a:0.4+r()*0.6,mf:0.2+r()*0.8,mp:r()*6.283,jf:0.3+r()*1.2}));return [mk(),mk()];})();
+function vfVal(set,t){let v=0;for(const c of set) v+=c.a*(0.6+0.4*Math.sin(2*Math.PI*c.mf*t+c.mp))*Math.sin(2*Math.PI*c.f*t+c.ph+1.5*Math.sin(2*Math.PI*c.jf*t+c.ph)); return v;}
 function synth3(R){
   const N=Math.round(D*FS)+1, X3=new Float32Array(N), Y3=new Float32Array(N), Z3=new Float32Array(N);
   const add=(i,d,v)=>{X3[i]+=d[0]*v;Y3[i]+=d[1]*v;Z3[i]+=d[2]*v;};
@@ -885,9 +894,8 @@ function synth3(R){
     const t=i/FS;
     if(R.atria==="flutter"){const ph=(((t-R.f0)/0.2)%1+1)%1; add(i,DIR.fl, ph<0.75 ? 0.15-0.3*(ph/0.75) : -0.15+0.3*((ph-0.75)/0.25));}
     if(R.atria==="af"){add(i,DIR.af,0.035*Math.sin(2*Math.PI*5.7*t)+0.03*Math.sin(2*Math.PI*7.3*t+1.1)+0.02*Math.sin(2*Math.PI*9.4*t+2.3));}
-    if(R.vf){const amp=0.32+0.14*Math.sin(2*Math.PI*0.35*t)+0.1*Math.sin(2*Math.PI*0.9*t+1);
-      add(i,DIR.vf1,amp*Math.sin(2*Math.PI*4.8*t+1.2*Math.sin(2*Math.PI*0.6*t)));
-      add(i,DIR.vf2,0.6*amp*Math.sin(2*Math.PI*3.9*t+0.8+Math.sin(2*Math.PI*0.45*t)));}
+    if(R.vf){const env=0.75+0.25*Math.sin(2*Math.PI*0.3*t+0.7);
+      add(i,DIR.vf1,0.3*env*vfVal(VFC[0],t)); add(i,DIR.vf2,0.22*env*vfVal(VFC[1],t));}
     for(const a of R.A) if(a.kind==="sinus"){ if(Math.abs(t-a.p0-0.05)<0.12){ add(i,DIR.pRA,g(t,a.p0+0.04,0.016,0.11)); add(i,DIR.pLA,g(t,a.p0+0.06,0.016,0.11)); } }
     for(const v of R.V){
       const dt=t-v.q0; if(dt<-0.05||dt>0.75) continue;
@@ -938,18 +946,18 @@ function heartState(t,R){
       const dt=t-e.p0, c=e.kind==="retro"?AVN:SA, dur=e.dur;
       if(dt<dur){s.aRed=0.85;s.aR=14+270*dt/dur;s.aC=c;}
       else if(dt<dur+0.1){s.aRed=0.5;s.aR=420;s.aC=c;}
-      else if(dt<dur+0.22){const k=(dt-dur-0.1)/0.12;s.aRed=0.5*Math.pow(1-k,3);s.aR=420;s.aC=c;s.aBlue=0.85*Math.sin(Math.PI*k);}
+      else if(dt<dur+0.22){const k=(dt-dur-0.1)/0.12;s.aRed=0.5*Math.pow(1-k,3);s.aR=420;s.aC=c;s.aBlue=Math.sin(Math.PI*k);}
     }
   }
   if(R.atria==="sinus"){for(const a of R.A){if(inR(t,a.p0-0.025,a.p0+0.03))s.sa=1;}}
   if(R.atria==="flutter"){
     const ph=(((t-R.f0)/0.2)%1+1)%1;
     s.aRed=0.28+0.14*Math.sin(2*Math.PI*ph); s.aR=420; s.loop="fl";
-    const ang=-2*Math.PI*ph; s.dot=[138+40*Math.sin(ang),196-24*Math.cos(ang)];
+    const ang=-2*Math.PI*ph; s.dot=[142+44*Math.sin(ang),214-15*Math.cos(ang)];
   }
   if(R.atria==="af"){s.aRed=0.2+0.08*Math.sin(t*37)*Math.sin(t*23); s.aR=420; s.wl="a";}
   if(R.reentry==="av"){
-    s.loop="av"; const v0=R.V[0].q0; const ph=(((t-v0+0.06)/0.333)%1+1)%1; const ang=2*Math.PI*ph;
+    s.loop="av"; const v0=R.V[0].q0; const ph=(((t-v0+0.06)*3)%1+1)%1; const ang=2*Math.PI*ph;
     s.dot=[192+15*Math.sin(ang),226+15*Math.cos(ang)]; s.av=0.55;
   }
   // AV node / block for atrial events
@@ -982,8 +990,8 @@ function heartState(t,R){
     s.vC=vent?FOCUS:SEPT;
     if(dt<v.w){s.vRed=0.85; s.vk=dt/v.w; s.vNormal=!vent; s.vR=vent?10+340*dt/v.w:0;}
     else if(t<v.Tstart){s.vRed=0.55;s.vR=500;s.vk=1;}
-    else if(t<v.Tend){const k=(t-v.Tstart)/(v.Tend-v.Tstart); s.vRed=0.55*Math.pow(1-k,3); s.vR=500; s.vk=1; s.vBlue=0.85*Math.min(1,k*1.6);}
-    else if(t<v.Tend+0.12){s.vBlue=0.85*(1-(t-v.Tend)/0.12);}
+    else if(t<v.Tend){const k=(t-v.Tstart)/(v.Tend-v.Tstart); s.vRed=0.55*Math.pow(1-k,3); s.vR=500; s.vk=1; s.vBlue=Math.min(1,k*1.6);}
+    else if(t<v.Tend+0.12){s.vBlue=1-(t-v.Tend)/0.12;}
   }
   if(R.vf){s.vRed=0.25+0.1*Math.sin(t*41)*Math.sin(t*17); s.vR=500; s.vk=1; s.wl="v";}
   return s;
@@ -993,9 +1001,9 @@ function heartState(t,R){
 const TXT={
   P:["P wave: atrial depolarization","The SA node fires and the impulse spreads across the right atrium, then the left atrium (via Bachmann's bundle). The atria contract just after this."],
   PR:["PR segment: AV node delay","The impulse is slowed in the AV node, giving the ventricles time to fill as the atria contract (the \"atrial kick\"). It then passes quickly through the bundle of His and bundle branches. The line is flat because these structures are too small to register on the surface ECG."],
-  QRS:["QRS complex: ventricular depolarization","The septum depolarizes first (left to right), then the impulse spreads through the Purkinje fibres to the apex and the ventricular walls, finishing at the base. Atrial repolarization also happens now, hidden by the much larger QRS."],
+  QRS:["QRS complex: ventricular depolarization","The septum depolarizes first (left to right), then the impulse spreads through the Purkinje fibres to the apex and the ventricular walls, finishing at the base. Atrial repolarization happens around this time (late in the PR segment or during the QRS) and is hidden by the much larger QRS."],
   ST:["ST segment: ventricles fully depolarized","Every ventricular cell is in its plateau (phase 2), at roughly the same voltage, so no current flows and the line is flat. The ventricles are contracting."],
-  T:["T wave: ventricular repolarization","The ventricles repolarize (phase 3). Repolarization runs roughly from epicardium to endocardium, the reverse direction of depolarization, so the T wave points the same way as the QRS in most leads."],
+  T:["T wave: ventricular repolarization","The ventricles repolarize (phase 3). Repolarization runs roughly from epicardium to endocardium, the reverse direction of depolarization, so the T wave points the same way as the QRS in most leads. (The animation shows repolarization as a single wash for simplicity.)"],
   TP:["TP segment: electrical diastole","The heart is electrically at rest and the ventricles are filling. This flat stretch is the baseline used to judge ST elevation or depression."],
   vQRS:["Wide QRS from a ventricular focus","The impulse starts in the ventricular muscle and spreads slowly from cell to cell instead of through the fast Purkinje system, so depolarization takes longer and the QRS is wide (well beyond the normal < 100 ms). No P wave comes before it."],
   vT:["Discordant ST–T: abnormal repolarization","Because depolarization took an abnormal path, repolarization does too. The ST segment and T wave point opposite to the main QRS deflection."],
@@ -1003,7 +1011,7 @@ const TXT={
   FL:["Flutter waves: re-entry in the right atrium","A single circuit spins around the right atrium about 300 times a minute, producing the sawtooth baseline. The AV node cannot keep up, so only some impulses reach the ventricles (every 2nd at 2:1, every 4th at 4:1)."],
   AF:["Fibrillatory baseline: chaotic atria","Many wavelets circulate at random in the atria, so there is no organized atrial depolarization and no P wave. The AV node passes impulses through irregularly."],
   SVT:["AV nodal re-entry","A loop through the slow and fast pathways in the AV node fires the ventricles (narrow QRS) and the atria backwards at almost the same time. The retrograde P wave is hidden in the QRS."],
-  VF:["Ventricular fibrillation","Chaotic wavelets in the ventricles. No organized depolarization, no contraction and no cardiac output. This is cardiac arrest: start CPR and defibrillate."],
+  VF:["Ventricular fibrillation","Chaotic wavelets in the ventricles. No organized depolarization, no contraction and no cardiac output. This is cardiac arrest: start CPR and defibrillate. (Atrial activity is not shown.)"],
 };
 const BLOCKTXT={
   av:"This P wave is not followed by a QRS: the impulse dies in the AV node.",
@@ -1076,7 +1084,7 @@ function buildNav(){
     for(const [k,r] of Object.entries(RHYTHMS)){
       if(r.group!==gname) continue;
       const b=document.createElement("button"); b.type="button"; b.textContent=r.short||r.name; b.dataset.k=k;
-      b.addEventListener("click",()=>{ if(location.hash!=="#ecg-"+k) history.replaceState(null,"","#ecg-"+k); selectRhythm(k); });
+      b.setAttribute("aria-pressed","false"); b.addEventListener("click",()=>{ if(location.hash!=="#ecg-"+k) history.replaceState(null,"","#ecg-"+k); selectRhythm(k); });
       grp.appendChild(b);
     }
     nav.appendChild(grp);
@@ -1084,7 +1092,7 @@ function buildNav(){
 }
 function selectRhythm(k){
   cur=k; const r=RHYTHMS[k]; R=r.build(); V3D=synth3(R); SIG=project(V3D,lead); t=0; hl=null;
-  document.querySelectorAll("#rhythmNav button").forEach(b=>b.classList.toggle("on",b.dataset.k===k));
+  document.querySelectorAll("#rhythmNav button").forEach(b=>{b.classList.toggle("on",b.dataset.k===k); b.setAttribute("aria-pressed",b.dataset.k===k);});
   $("stripTitle").textContent=r.name+" · lead "+lead;
   $("measTable").innerHTML=r.meas.map(([a,b])=>`<tr><th>${a}</th><td>${b}</td></tr>`).join("");
   $("keyList").innerHTML=r.keys.map(x=>`<li>${x}</li>`).join("");
@@ -1094,7 +1102,7 @@ function selectRhythm(k){
   let rateTxt;
   if(R.vf) rateTxt="No QRS complexes to count: there is no measurable rate.";
   else if(r.reg){
-    const vs=R.V.filter(v=>v.q0>=0&&v.q0<D); const rr=vs[1].q0-vs[0].q0; const boxes=rr/0.2; const bx=Math.abs(boxes*10-Math.round(boxes*10))<0.05?boxes.toFixed(1):boxes.toFixed(2);
+    const vs=R.V.filter(v=>v.q0>=0&&v.q0<D); const rr=vs[1].q0-vs[0].q0; const boxes=rr/0.2; const b2=Math.round(boxes*100)/100; const bx=Math.abs(b2*10-Math.round(b2*10))<0.001?b2.toFixed(1):b2.toFixed(2);
     rateTxt=`<b>Count-off method (ECG Manual):</b> start at an R wave on a heavy line and count off 300, 150, 100, 75, 60, 50 for each large box to the next R wave. Here the R waves are ${bx} large boxes apart, so the rate is about 300 ÷ ${bx} ≈ ${Math.round(300/boxes)} bpm.`;
     if(k==="avb3") rateTxt+=" (This is the ventricular rate; count the P waves separately for the atrial rate.)";
   } else rateTxt=`<b>Irregular rhythm:</b> the count-off method needs a regular rhythm. Count the QRS complexes in 6 seconds and multiply by 10: ${n} × 10 ≈ ${n*10} bpm.`;
@@ -1109,7 +1117,7 @@ function selectRhythm(k){
     b.addEventListener("click",()=>{
       const same=hl&&hl.k===iv.k; row.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
       if(same){hl=null;return;}
-      hl=iv; b.classList.add("on"); t=iv.k==="RR"?iv.a:(iv.a+iv.b)/2; setPlaying(false);
+      hl=iv; b.classList.add("on"); t=iv.k==="RR"?iv.a:iv.k==="PR"?(iv.a+0.1+iv.b)/2:(iv.a+iv.b)/2; setPlaying(false);
     });
     row.appendChild(b);
   }
@@ -1191,7 +1199,7 @@ let heartBroken=false;
 function updateHeart(){
   updateNarration();
   if(heartBroken) return;
-  try{ updateHeartInner(); const hs=heartState(t,R); updateAxial(hs); updateLeadView(); }catch(err){ heartBroken=true; console.warn("Heart animation disabled:",err); const n=document.querySelector(".heart-note"); if(n) n.insertAdjacentHTML("afterbegin","<b>The heart animation could not load; the ECG strip and explanations still work.</b> "); }
+  try{ updateHeartInner(); const hs=heartState(t,R); updateAxial(hs); updateLeadView(); }catch(err){ heartBroken=true; console.warn("Heart animation disabled:",err); const n=$("noteFrontal"); if(n) n.insertAdjacentHTML("afterbegin","<b>The heart animation could not load; the ECG strip and explanations still work.</b> "); }
 }
 function updateHeartInner(){
   const s=heartState(t,R);
@@ -1253,6 +1261,7 @@ canvas.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{
   if(!$("page-ecg").classList.contains("active")) return;
+  if(e.altKey||e.ctrlKey||e.metaKey) return;
   if(["INPUT","TEXTAREA","SELECT","BUTTON","A"].includes(document.activeElement.tagName)) return;
   if(e.code==="Space"){e.preventDefault();setPlaying(!playing);}
   if(e.code==="ArrowLeft"){e.preventDefault();setPlaying(false);t=Math.max(0,t-0.02);frame();}
@@ -1268,8 +1277,8 @@ const LEAD_INFO={
   I:["left arm","0°","high lateral wall","lateral"],
   II:["left leg","+60°","inferior wall","inferior"],
   III:["left leg","+120°","inferior wall","inferior"],
-  aVR:["right shoulder","−150°","cavities (it looks in from the right shoulder)",null],
-  aVL:["left shoulder","−30°","high lateral wall","lateral"],
+  aVR:["right arm","−150°","cavities (it looks in from the right shoulder)",null],
+  aVL:["left arm","−30°","high lateral wall","lateral"],
   aVF:["left leg (foot)","+90°","inferior wall","inferior"],
   V1:["4th intercostal space, right of the sternum",null,"septum","septal"],
   V2:["4th intercostal space, left of the sternum",null,"septum","septal"],
@@ -1279,8 +1288,8 @@ const LEAD_INFO={
   V6:["midaxillary line, level with V4",null,"lateral wall","lateral"],
 };
 const TERR_F={inferior:"M120,376 C150,410 200,450 244,460 C262,460 282,452 298,442",lateral:"M346,240 C362,264 368,302 362,338 C358,358 352,374 344,388"};
-const TERR_A={septal:"M204,300 C210,272 228,250 262,236",anterior:"M240,184 C284,182 322,202 344,236",lateral:"M356,264 C364,294 358,324 340,344"};
-const FC=[215,282], AC=[254,270], VK=70;
+const TERR_A={septal:"M204,272 C210,244 228,222 262,208",anterior:"M300,192 C324,196 344,214 356,240",lateral:"M358,238 C366,266 360,296 342,316"};
+const FC=[215,282], AC=[254,242], VK=70;
 const SVGNS="http://www.w3.org/2000/svg";
 function setLine(id,x1,y1,x2,y2){const e=$(id); e.setAttribute("x1",x1.toFixed(1)); e.setAttribute("y1",y1.toFixed(1)); e.setAttribute("x2",x2.toFixed(1)); e.setAttribute("y2",y2.toFixed(1));}
 function eyeMarkup(lbl){return `<path d="M-15,0 C-8,-10 8,-10 15,0 C8,10 -8,10 -15,0 Z" fill="#fff" stroke="#1E2328" stroke-width="1.6"/><circle r="5" fill="#B40838"/><circle r="2" fill="#1E2328"/><text y="-15" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E2328" paint-order="stroke" stroke="#FBF8F3" stroke-width="4">${lbl}</text>`;}
@@ -1303,7 +1312,7 @@ function buildLeadUI(){
 }
 function setLead(n){
   lead=n;
-  document.querySelectorAll("#leadSeg button").forEach(b=>b.classList.toggle("on",b.dataset.lead===n));
+  document.querySelectorAll("#leadSeg button").forEach(b=>{b.classList.toggle("on",b.dataset.lead===n); b.setAttribute("aria-pressed",b.dataset.lead===n);});
   const chest=isChest(n);
   $("heart").style.display=chest?"none":"block"; $("heartAxial").style.display=chest?"block":"none";
   $("noteFrontal").style.display=chest?"none":"block"; $("noteAxial").style.display=chest?"block":"none";
@@ -1321,7 +1330,7 @@ function setLead(n){
     setLine("ax-axis",AC[0]-(ex-AC[0])*0.55,AC[1]-(ey-AC[1])*0.55,ex,ey);
     $("ax-territory").setAttribute("d",TERR_A[info[3]]||"");
   }else{
-    const a=LEADS.find(l=>l[0]===n)[1]*Math.PI/180, ux=Math.cos(a), uy=Math.sin(a), r=uy>0.4?205:185;
+    const a=LEADS.find(l=>l[0]===n)[1]*Math.PI/180, ux=Math.cos(a), uy=Math.sin(a), r=uy>0.4?205:225;
     setLine("lo-axis",FC[0]-ux*r,FC[1]-uy*r,FC[0]+ux*(r-18),FC[1]+uy*(r-18));
     $("lo-eye").setAttribute("transform",`translate(${(FC[0]+ux*r).toFixed(1)} ${(FC[1]+uy*r).toFixed(1)})`);
     $("lo-eye").innerHTML=eyeMarkup(n+" +");
@@ -1395,18 +1404,18 @@ const LECTURES=[
    ["The sarcomere",["The contractile unit: the segment between two neighbouring Z-lines (about 1.6–2.2 µm), containing thick filaments, thin filaments and titin","Thick filament: about 300 myosin molecules. Each has heavy chains (a head containing myosin ATPase, and a tail) and light chains that regulate the ATPase","Thin filament: two strands of actin (the binding sites for myosin), tropomyosin (covers those sites at rest) and the troponin complex","Troponin T attaches to tropomyosin, troponin C binds Ca²⁺, troponin I is inhibitory"]],
    ["Cross-bridge cycling",["Myosin head binds actin (cross-bridge)","The head flexes: the power stroke","ATP binds the myosin head, which detaches from actin","ATP is split, releasing energy that returns the head to its starting position"]],
    ["Calcium controls shortening",["At rest (low Ca²⁺) the binding sites on actin are blocked","Contraction: Ca²⁺ rises and binds troponin C → binding sites exposed → cross-bridge cycling → thin filaments slide over thick filaments → sarcomere shortens","Relaxation: Ca²⁺ falls → sites blocked again → cycling stops → sarcomere relaxes"]],
-   ["Excitation–contraction coupling, step by step",["Intercalated discs link neighbouring cells: they transmit force and couple cells electrically through gap junctions","At rest, extracellular Ca²⁺ is about 1 mM while cytosolic Ca²⁺ is about 0.1 µM","Step 1: the action potential opens L-type Ca²⁺ channels and Ca²⁺ flows in","Step 2: calcium-induced calcium release (CICR): that Ca²⁺ opens ryanodine receptors on the SR, raising cytosolic Ca²⁺ about 100-fold","Step 3: Ca²⁺ binds troponin C, exposing the binding sites on actin","Step 4: myosin binds actin and cross-bridge cycling shortens the sarcomere (ATP is hydrolyzed)","Step 5: SERCA pumps Ca²⁺ back into the SR (uses ATP; inhibited by phospholamban)","Step 6: about 20% of the Ca²⁺ leaves the cell via the sarcolemmal Ca²⁺ pump and the Na⁺/Ca²⁺ exchanger","Falling Ca²⁺ produces relaxation, an energy-requiring process"]],
-   ["Adrenergic stimulation (beating faster and harder)",["Exercise or emotional stress → sympathetic nerves release norepinephrine; the adrenal medulla releases epinephrine","β1 receptor → G protein → adenylyl cyclase → cAMP → protein kinase A (PKA)","PKA phosphorylates the L-type Ca²⁺ channel: more Ca²⁺ influx, higher cytosolic Ca²⁺, stronger contraction","PKA phosphorylates myosin light chain: more myosin ATPase activity","PKA phosphorylates phospholamban: SERCA works harder, the SR stores more Ca²⁺, so more is available for release next beat"]],
+   ["Excitation–contraction coupling: from electrical signal to squeeze",["Setting: cells are joined end to end at intercalated discs, which pass on both force and current (via gap junctions). Inside a resting cell Ca²⁺ is about 10,000 times lower than outside (about 0.1 µM vs 1 mM)","Trigger: the action potential travels down the T tubules and opens L-type Ca²⁺ channels, letting a small amount of Ca²⁺ in","Amplify: this trigger Ca²⁺ opens ryanodine receptors on the SR, which release their store (calcium-induced calcium release), so cytosolic Ca²⁺ rises about 100-fold","Contract: Ca²⁺ binds troponin C, the actin sites are uncovered, and ATP-powered cross-bridge cycling shortens the sarcomeres","Recover: most Ca²⁺ is pumped back into the SR by SERCA (an ATP-using pump that phospholamban holds back); about 20% leaves the cell through the sarcolemmal Ca²⁺ pump and the Na⁺/Ca²⁺ exchanger","As Ca²⁺ falls the muscle relaxes, which is why relaxation also needs energy"]],
+   ["Adrenergic stimulation (beating faster and harder)",["Exercise or emotional stress → sympathetic nerves release norepinephrine; the adrenal medulla releases epinephrine","β1 receptor → G protein → adenylyl cyclase → cAMP → protein kinase A (PKA)","PKA phosphorylates the L-type Ca²⁺ channel: more Ca²⁺ influx, higher cytosolic Ca²⁺, stronger contraction","PKA phosphorylates myosin light chain: more myosin ATPase activity (as taught in this lecture; textbooks also stress troponin I, whose phosphorylation speeds relaxation)","PKA phosphorylates phospholamban: SERCA works harder, the SR stores more Ca²⁺, so more is available for release next beat"]],
    ["ATP",["ATP hydrolysis supplies the energy for both contraction and relaxation","Contraction: myosin ATPase","Relaxation: SERCA on the SR and the Ca²⁺ ATPase on the sarcolemma","Other processes such as ion transport"]],
   ],
-  table:{title:"Cardiac vs skeletal myocytes",cols:["","Cardiac","Skeletal"],rows:[
-   ["Striated, T tubules, action potentials","Yes","Yes"],
-   ["Sarcoplasmic reticulum","Well developed","More developed"],
-   ["Needs extracellular Ca²⁺ to contract?","Yes (Ca²⁺ influx)","No (Ca²⁺ released from SR)"],
-   ["Mitochondria","More abundant","Fewer"],
-   ["Electrically connected by gap junctions?","Yes","No"],
-   ["Contraction controlled by","Pacemaker cells in the SA node","Nerve stimulation"]]},
-  read:[["Klabunde RE, Cardiovascular Physiology Concepts (2nd ed.)","Chapter 3: Cellular Structure and Function"],["Opie LH, Heart Physiology: From Cell to Circulation (4th ed.)","Recommended in lecture"],["cvphysiology.com","Free companion website recommended in lecture"]],
+  table:{title:"How cardiac and skeletal muscle cells differ",cols:["","Heart muscle","Skeletal muscle"],rows:[
+   ["Shared features","Striped (sarcomeres), T tubules, fires action potentials","Same"],
+   ["Calcium source for contraction","Depends on Ca²⁺ entering from outside to trigger SR release","SR release alone is enough"],
+   ["SR size","Smaller","Larger"],
+   ["Mitochondria","More (continuous work)","Fewer"],
+   ["Cell-to-cell electrical links","Gap junctions spread the signal","Each fibre is separate"],
+   ["What starts contraction","Its own pacemaker (SA node)","A motor nerve"]]},
+  read:[["Klabunde RE, Cardiovascular Physiology Concepts (2nd ed.)","Chapter 3: Cellular Structure and Function"],["Opie LH, Heart Physiology: From Cell to Circulation (4th ed.)","Source of the lecture's images"],["cvphysiology.com","Free companion website recommended in lecture"]],
   rel:[["meds-bb","Beta blockers (block β1)"],["meds-ndhp","Verapamil/diltiazem (block L-type Ca²⁺ channels)"],["meds-digoxin","Digoxin (Na⁺/K⁺-ATPase)"]]},
  {id:"ventricular",title:"Ventricular function",
   who:"Dr. Wenbin Liang · January 7, 2026, 11:30",
@@ -1427,10 +1436,10 @@ const LECTURES=[
   rel:[["meds-digoxin","Digoxin (↑ contractility)"],["meds-bb","Beta blockers (block β1)"],["meds-nitrates","Nitrates (↓ preload)"],["meds-hydralazine","Hydralazine (↓ afterload)"]]},
 ];
 const ECG_SESSIONS=[
- ["Session 1",["Apply a logical approach to the interpretation of ECGs","Calculate rate by means of the count-off method","Recall the definition of normal sinus rhythm","Calculate the QRS axis on an ECG","State the normal values for the 3 intervals on ECG: PR, QRS and QT"],[["ecg-nsr","Normal sinus rhythm"]]],
+ ["Session 1",["Apply a logical approach to the interpretation of ECGs","Calculate rate by means of the count-off method","Recall the definition of normal sinus rhythm","Calculate the QRS axis on an ECG","State the normal values for the 3 intervals on ECG: PR, QRS and QT"],[["ecg-nsr","Normal sinus rhythm"],["ecg-tachy","Sinus tachycardia (case 1.4)"],["ecg-brady","Sinus bradycardia (case 1.5)"]]],
  ["Session 2",["Apply a logical approach to the interpretation of the ECG","List 3 conditions that can account for a wide-complex QRS","State the criteria for right atrial and left atrial enlargement","Apply criteria for left ventricular hypertrophy (Sokolow-Lyon) and list several conditions that can cause LVH","Identify right ventricular hypertrophy on a 12-lead ECG"],[["ecg-pvc","PVC (case 2.1)"]]],
- ["Session 3",["Apply a logical approach to the interpretation of the ECG","Identify and interpret ST segment depression on ECG","Identify and interpret ST segment elevation on ECG","Identify and interpret Q waves on ECG","Recognize the ECG manifestations of reperfusion after STEMI"],[["ecg-vt","Rapid VT (case 3.4, after an inferior STEMI)"],["ecg-vf","Ventricular fibrillation"]]],
- ["Session 4",["Apply a logical approach to the interpretation of the ECG","Define sinus tachycardia","Distinguish between sinus node and AV node causes of bradycardia","Distinguish between the several types of AV block","Demonstrate a logical approach to the ECG interpretation of tachycardia","Recognize atrial flutter and atrial fibrillation","List factors that distinguish ventricular tachycardia (VT) from supraventricular tachycardia (SVT) with aberrancy"],[["ecg-tachy","Sinus tachycardia"],["ecg-brady","Sinus bradycardia"],["ecg-avb1","AV blocks"],["ecg-svt","SVT (case 4.1)"],["ecg-afl","Flutter (case 4.2)"],["ecg-af","AF (case 4.3)"],["ecg-vt","VT (case 4.4)"]]],
+ ["Session 3",["Apply a logical approach to the interpretation of the ECG","Identify and interpret ST segment depression on ECG","Identify and interpret ST segment elevation on ECG","Identify and interpret Q waves on ECG","Recognize the ECG manifestations of reperfusion after STEMI"],[["ecg-vt","Very rapid VT degenerating toward VF (case 3.4, after an inferior STEMI)"],["ecg-vf","Ventricular fibrillation"]]],
+ ["Session 4",["Apply a logical approach to the interpretation of the ECG","Define sinus tachycardia","Distinguish between sinus node and AV node causes of bradycardia","Distinguish between the several types of AV block","Demonstrate a logical approach to the ECG interpretation of tachycardia","Recognize atrial flutter and atrial fibrillation","List factors that distinguish ventricular tachycardia (VT) from supraventricular tachycardia (SVT) with aberrancy"],[["ecg-tachy","Sinus tachycardia"],["ecg-brady","Sinus bradycardia"],["ecg-avb1","First-degree AV block"],["ecg-mob1","Mobitz I"],["ecg-mob2","Mobitz II"],["ecg-avb3","Third-degree AV block"],["ecg-svt","SVT (case 4.1)"],["ecg-afl","Flutter (case 4.2)"],["ecg-af","AF (case 4.3)"],["ecg-vt","VT (case 4.4)"]]],
 ];
 function buildLectures(){
   const list=$("lecList");
@@ -1503,7 +1512,7 @@ const MEDS=[
  {id:"antiarr",group:["arr"],name:"Antiarrhythmics: sodium and potassium channel blockers",tag:"Vaughan Williams classes I and III",
   ex:"Ia: procainamide · Ib: lidocaine, mexiletine · Ic: flecainide, propafenone · III: amiodarone, sotalol, dronedarone",
   moa:"Class I blocks Na⁺ channels, slowing phase 0 and conduction (Ia: moderate, also prolongs repolarization; Ib: weak, acts mainly on ischemic tissue; Ic: strong, widens the QRS). Class III blocks K⁺ channels, prolonging repolarization and the QT interval.",
-  ind:"Ia: procainamide for pre-excited AF or stable wide-complex tachycardia · Ib: ventricular arrhythmias · Ic: rhythm control of AF in structurally normal hearts · III: AF rhythm control, ventricular arrhythmias (amiodarone also in cardiac arrest).",
+  ind:"Ia: procainamide for pre-excited AF (WPW) or stable wide-complex tachycardia · Ib: ventricular arrhythmias · Ic: rhythm control of AF in structurally normal hearts · III: AF rhythm control, ventricular arrhythmias (amiodarone also in cardiac arrest).",
   se:"All can be proarrhythmic. QT prolongation and torsades de pointes (Ia, III). Lidocaine: CNS toxicity. Flecainide: can turn AF into flutter with 1:1 conduction. Amiodarone: thyroid dysfunction, pulmonary fibrosis, liver injury, corneal deposits, photosensitivity, bradycardia.",
   ci:"Class Ic: structural heart disease, coronary artery disease or prior MI. QT-prolonging agents: long QT. Dronedarone: permanent AF, severe or recently decompensated HF.",
   pearl:"Give flecainide or propafenone with an AV-nodal blocker. Amiodarone raises warfarin and digoxin levels."},
@@ -1512,7 +1521,7 @@ const MEDS=[
   moa:"Activates A1 receptors in the AV node, increasing K⁺ efflux and causing a brief, high-grade AV block. Half-life is under 10 seconds.",
   ind:"Termination of AV-node-dependent SVT (AVNRT, orthodromic AVRT); diagnostic aid to reveal flutter waves.",
   se:"Flushing, chest discomfort, dyspnea, a sense of impending doom, transient pause or asystole.",
-  ci:"Second- or third-degree AV block or sick sinus without a pacemaker, pre-excited AF, caution in severe asthma or bronchospasm.",
+  ci:"Second- or third-degree AV block or sick sinus without a pacemaker, pre-excited AF (WPW), caution in severe asthma or bronchospasm.",
   pearl:"Warn the patient before giving it. Dipyridamole potentiates it; caffeine and theophylline blunt it."},
  {id:"digoxin",group:["arr","hf"],name:"Digoxin",tag:"Cardiac glycoside",
   ex:"Digoxin",
@@ -1645,6 +1654,7 @@ function renderMeds(){
     else compareSet.delete(cb.dataset.id);
     updateCmpBar();
   }));
+  updateCmpBar();
 }
 function updateCmpBar(){
   $("cmpBar").classList.toggle("show",compareSet.size>0);
@@ -1669,6 +1679,7 @@ $("cmpClear").addEventListener("click",()=>{compareSet.clear();renderMeds();upda
    ========================================================= */
 buildNav(); buildLectures(); buildMedChips(); renderMeds();
 if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches){playing=false;}
+if(window.innerWidth<600){$("lblToggle").checked=false; $("labels").setAttribute("opacity",0);}
 buildLeadUI(); resizeCanvas(); selectRhythm("nsr"); setLead("II"); setPlaying(playing);
 route();
 requestAnimationFrame(loop);
