@@ -1,4 +1,4 @@
-# Cardio Visual Companion
+# Cardio Companion
 
 A visual cardiology learning site for first-year medical students at uOttawa. It supports the cardiology lectures and never replaces them. Students can use it before lecture to preview the material or during lecture to follow along.
 
