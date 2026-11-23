@@ -139,9 +139,12 @@ table.cmp-table{width:100%;border-collapse:collapse;background:#fff;border-radiu
 .rhythm-nav button:hover{background:var(--soft)}
 .rhythm-nav button.on{background:var(--crimson);color:#fff;font-weight:700}
 @media(max-width:980px){.rhythm-nav .grp{display:flex;flex-wrap:wrap;gap:6px}.rhythm-nav button{width:auto;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13.5px}}
-.viz{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:20px}
+.viz{display:grid;grid-template-columns:minmax(300px,540px) minmax(0,1fr);gap:20px}
 @media(max-width:760px){.viz{grid-template-columns:1fr}}
-.heart-card{padding:12px}
+.heart-card{padding:12px;background:radial-gradient(ellipse at 50% 42%,#FFFDF9 0%,#FBF8F3 70%,#F5F0E8 100%)}
+.heart-tools{display:flex;gap:16px;flex-wrap:wrap;padding:2px 8px 4px}
+@media(max-width:600px){#heart #labels text,#heart #anatLabels text{font-size:14px}}
+.heart-note{font-size:12.5px;color:var(--muted);margin:6px 8px 4px;line-height:1.45}
 .heart-card svg{width:100%;height:auto;display:block}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);padding:4px 8px 4px}
 .legend span{display:inline-flex;align-items:center;gap:6px}
@@ -297,90 +300,187 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <div>
       <div class="viz">
         <div class="card heart-card">
-          <svg id="heart" viewBox="0 0 420 470" role="img" aria-label="Animated heart showing the conduction system and chambers">
+          <svg id="heart" viewBox="-60 -10 540 486" role="img" aria-labelledby="heartTitle heartDesc">
+            <title id="heartTitle">Anatomical cutaway of the heart with the conduction system</title>
+            <desc id="heartDesc">Frontal four-chamber section viewed from the front, so the patient's right side is on the viewer's left. Thin-walled right and left atria sit above the right and left ventricles; the left ventricular wall and septum are about three times thicker than the right ventricular wall. Tricuspid and mitral valves with chordae and papillary muscles, the moderator band, superior and inferior venae cavae, aorta, pulmonary trunk and pulmonary veins are shown. Coloured overlays show electrical activation only, synchronized with the ECG strip.</desc>
             <defs>
-              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <clipPath id="clipA"><circle id="clipAc" cx="118" cy="112" r="0"/></clipPath>
+              <linearGradient id="hv-muscle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E08A88"/><stop offset=".45" stop-color="#C55F68"/><stop offset="1" stop-color="#93364B"/></linearGradient>
+              <linearGradient id="hv-atrium" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9A3A0"/><stop offset="1" stop-color="#B9566A"/></linearGradient>
+              <radialGradient id="hv-cavity" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#7E2B40"/><stop offset=".7" stop-color="#5E1C30"/><stop offset="1" stop-color="#4A1526"/></radialGradient>
+              <linearGradient id="hv-blue" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3F6F8F"/><stop offset=".35" stop-color="#7FA9C4"/><stop offset=".6" stop-color="#5D8BAA"/><stop offset="1" stop-color="#2F5873"/></linearGradient>
+              <linearGradient id="hv-blueV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F5873"/><stop offset=".4" stop-color="#7FA9C4"/><stop offset=".65" stop-color="#5D8BAA"/><stop offset="1" stop-color="#2F5873"/></linearGradient>
+              <linearGradient id="hv-red" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9E3548"/><stop offset=".38" stop-color="#E58C8C"/><stop offset=".62" stop-color="#C9606B"/><stop offset="1" stop-color="#8A2C40"/></linearGradient>
+              <linearGradient id="hv-redV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A2C40"/><stop offset=".4" stop-color="#E58C8C"/><stop offset=".65" stop-color="#C9606B"/><stop offset="1" stop-color="#8A2C40"/></linearGradient>
+              <linearGradient id="hv-leaflet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBE9DE"/><stop offset="1" stop-color="#E8C2B4"/></linearGradient>
+              <radialGradient id="hv-shade" cx=".35" cy=".3" r=".85"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#3A0F1C" stop-opacity=".35"/></radialGradient>
+              <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="hv-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="6"/></filter>
+              <clipPath id="clipA"><circle id="clipAc" cx="104" cy="114" r="0"/></clipPath>
               <clipPath id="clipV"><circle id="clipVc" cx="212" cy="300" r="0"/></clipPath>
+              <!-- tissue masks: activation paints myocardium only, never cavities or background -->
+              <path id="hv-raOut" d="M198,238 L92,240 C70,228 58,198 60,168 C52,152 46,128 56,112 C64,99 82,98 96,106 L140,106 C154,108 166,116 176,128 C190,144 198,170 199,206 Z"/>
+              <path id="hv-laOut" d="M199,236 L340,234 C354,216 360,188 356,160 C360,148 368,132 360,118 C352,106 336,106 324,112 C304,104 270,104 250,108 C228,112 210,124 204,142 C199,162 198,200 199,236 Z"/>
+              <path id="hv-raCav" d="M190,229 L102,231 C84,220 74,196 75,170 C68,156 64,136 72,124 C79,115 90,116 100,122 L136,120 C148,122 158,130 166,140 C178,155 188,180 190,229 Z"/>
+              <path id="hv-laCav" d="M209,226 L332,224 C343,208 347,186 344,162 C349,152 353,138 347,128 C341,120 332,121 324,126 C304,118 272,117 254,121 C234,125 219,136 214,152 C209,172 208,200 209,226 Z"/>
+              <path id="hv-vOut" d="M92,243 L344,238 C362,264 368,302 362,338 C354,384 324,426 280,448 C264,456 252,460 244,460 C226,458 198,446 170,422 C132,390 102,346 90,302 C84,278 84,258 92,243 Z"/>
+              <path id="hv-rvCav" d="M104,252 L190,252 C185,282 185,314 191,346 C197,378 208,404 220,428 C198,420 174,402 154,380 C126,350 106,316 99,290 C96,274 97,260 104,252 Z"/>
+              <path id="hv-lvCav" d="M219,251 L322,247 C334,272 338,304 332,334 C324,370 302,402 272,424 C259,433 249,437 243,432 C232,410 223,376 218,340 C214,306 214,278 219,251 Z"/>
+              <path id="hv-papRV" d="M100,322 C114,314 136,318 142,330 C142,342 124,348 104,344 Z"/>
+              <path id="hv-papLV1" d="M334,326 C318,318 300,318 293,330 C292,342 310,350 333,350 Z"/>
+              <path id="hv-papLV2" d="M220,350 C234,344 252,348 256,360 C254,372 236,374 222,370 Z"/>
+              <path id="hv-mod" d="M190,326 C176,328 160,330 140,328 L140,338 C160,340 176,339 191,337 Z"/>
+              <mask id="hv-mA" maskUnits="userSpaceOnUse" x="-60" y="-10" width="540" height="486">
+                <use href="#hv-raOut" fill="#fff"/><use href="#hv-laOut" fill="#fff"/>
+                <use href="#hv-raCav" fill="#000"/><use href="#hv-laCav" fill="#000"/>
+              </mask>
+              <mask id="hv-mV" maskUnits="userSpaceOnUse" x="-60" y="-10" width="540" height="486">
+                <use href="#hv-vOut" fill="#fff"/><use href="#hv-rvCav" fill="#000"/><use href="#hv-lvCav" fill="#000"/>
+                <use href="#hv-papRV" fill="#fff"/><use href="#hv-papLV1" fill="#fff"/><use href="#hv-papLV2" fill="#fff"/><use href="#hv-mod" fill="#fff"/>
+              </mask>
+              <mask id="hv-mAll" maskUnits="userSpaceOnUse" x="-60" y="-10" width="540" height="486">
+                <rect x="-60" y="-10" width="540" height="486" fill="#000"/>
+                <g fill="#fff"><use href="#hv-raOut"/><use href="#hv-laOut"/><use href="#hv-vOut"/></g>
+              </mask>
             </defs>
-            <!-- vessels -->
-            <g fill="#E8EDF1" stroke="#C3CCD3" stroke-width="1.5">
-              <path d="M98,16 h38 v96 h-38 z"/>
-              <path d="M212,120 C212,60 222,28 258,26 C292,24 308,50 308,84 L286,84 C286,62 276,48 258,48 C240,48 234,70 234,120 Z"/>
-              <path d="M335,128 h34 v12 h-34z M338,164 h34 v12 h-34z"/>
+
+            <!-- ===== ANATOMICAL BASEMAP ===== -->
+            <g id="anatomy">
+              <!-- vessels behind the cut plane (their roots are hidden behind the heart: outflow tracts lie outside this section) -->
+              <g stroke-linejoin="round">
+                <path d="M300,40 C318,48 328,66 326,92 L326,120 L302,120 L302,96 C304,78 300,66 290,60 Z" fill="#8A2C40" opacity=".9"/>
+                <path d="M244,92 C220,88 196,88 150,96 L150,116 C196,108 222,108 246,112 Z" fill="url(#hv-blueV)" stroke="#2F5873" stroke-width="1.5"/>
+                <path d="M62,232 L94,232 L98,334 L66,334 Z" fill="url(#hv-blue)" stroke="#2F5873" stroke-width="1.5"/>
+                <ellipse cx="82" cy="334" rx="16" ry="5" fill="#26465C"/>
+                <path d="M356,136 C372,132 388,130 410,130 L410,148 C390,148 374,150 357,154 Z M356,176 C374,174 392,176 412,180 L410,198 C390,194 374,192 354,194 Z" fill="url(#hv-redV)" stroke="#8A2C40" stroke-width="1.5"/>
+                <ellipse cx="410" cy="139" rx="4" ry="9" fill="#6B2033"/><ellipse cx="411" cy="189" rx="4" ry="9" fill="#6B2033"/>
+                <!-- ascending aorta and arch -->
+                <path d="M168,128 C164,96 164,64 172,44 C184,16 212,2 246,2 C282,2 308,18 318,44 C324,60 324,78 320,96 L296,96 C300,80 300,66 294,56 C286,40 268,28 248,28 C228,28 210,38 200,56 C194,72 196,102 202,128 Z" fill="url(#hv-red)" stroke="#7E2638" stroke-width="2"/>
+                <g stroke-linecap="round"><path d="M206,14 L198,-8 M246,3 L248,-9 M280,8 L294,-8" stroke="#7E2638" stroke-width="15"/><path d="M206,14 L198,-8 M246,3 L248,-9 M280,8 L294,-8" stroke="#D97B80" stroke-width="10"/></g>
+                <!-- pulmonary trunk, bifurcating under the arch -->
+                <path d="M212,130 C210,112 212,96 220,84 C228,74 242,70 256,72 C278,74 300,72 330,64 L338,84 C312,92 290,94 268,94 C262,100 260,114 262,130 Z" fill="url(#hv-blueV)" stroke="#2F5873" stroke-width="2"/>
+                <ellipse cx="335" cy="74" rx="5" ry="10" fill="#26465C" transform="rotate(-16 335 74)"/>
+              </g>
+
+              <!-- epicardial surface shadow -->
+              <g filter="url(#hv-soft)" opacity=".35"><use href="#hv-vOut" fill="#5A1A2A" transform="translate(5 7)"/><use href="#hv-laOut" fill="#5A1A2A" transform="translate(4 5)"/></g>
+
+              <!-- myocardium (cut surface) -->
+              <use href="#hv-raOut" fill="url(#hv-atrium)" stroke="#7E2B40" stroke-width="2"/>
+              <use href="#hv-laOut" fill="url(#hv-atrium)" stroke="#7E2B40" stroke-width="2"/>
+              <use href="#hv-vOut" fill="url(#hv-muscle)" stroke="#7E2B40" stroke-width="2.5"/>
+              <use href="#hv-vOut" fill="url(#hv-shade)"/>
+              
+              
+              <!-- muscle fibre texture on the cut surface -->
+              <g fill="none" stroke="#F7C7BC" stroke-opacity=".22" stroke-width="1.4" stroke-linecap="round">
+                <path d="M96,268 C100,300 112,334 132,366 M92,290 C100,326 120,362 150,394 M108,370 C130,400 164,428 204,450 M344,262 C352,300 348,340 330,374 M354,286 C356,326 344,364 318,398 M334,388 C312,414 286,434 258,450 M196,262 C200,300 204,340 214,380 M206,270 C210,320 216,360 228,404"/>
+                <path d="M66,150 C68,180 76,206 92,224 M346,150 C348,180 344,204 334,222 M200,150 C201,180 201,206 200,226" stroke-opacity=".18"/>
+              </g>
+              <!-- cavities (endocardial surfaces) -->
+              <use href="#hv-raCav" fill="url(#hv-cavity)" stroke="#F0B3A8" stroke-width="1.2"/>
+              <use href="#hv-laCav" fill="url(#hv-cavity)" stroke="#F0B3A8" stroke-width="1.2"/>
+              <use href="#hv-rvCav" fill="url(#hv-cavity)" stroke="#F0B3A8" stroke-width="1.2"/>
+              <use href="#hv-lvCav" fill="url(#hv-cavity)" stroke="#F0B3A8" stroke-width="1.2"/>
+              <!-- inner details: pectinate muscles, fossa ovalis, venous ostia, trabeculae -->
+              <g fill="none" stroke="#B9566A" stroke-width="2.4" stroke-linecap="round" opacity=".85">
+                <path d="M74,134 C80,140 84,146 86,154 M72,150 C78,156 81,162 82,170 M78,176 C84,182 86,190 88,198"/>
+                <path d="M106,276 C114,282 118,290 120,298 M112,362 C122,366 130,374 134,382 M170,402 C176,396 184,394 192,396 M236,402 C244,396 252,396 260,400 M318,286 C312,292 310,300 310,308"/>
+              </g>
+              <ellipse cx="203" cy="172" rx="3.2" ry="13" fill="#F3C1B5" opacity=".75"/>
+              <ellipse cx="176" cy="219" rx="5" ry="3.5" fill="#3A0F1C"/>
+              <ellipse cx="96" cy="226" rx="9" ry="4" fill="#3A0F1C" opacity=".8"/>
+              <ellipse cx="117" cy="122" rx="14" ry="3.5" fill="#3A0F1C" opacity=".8"/>
+              <ellipse cx="341" cy="146" rx="3" ry="7" fill="#3A0F1C" opacity=".8"/><ellipse cx="340" cy="186" rx="3" ry="7" fill="#3A0F1C" opacity=".8"/>
+              <!-- papillary muscles and moderator band (myocardium) -->
+              <g fill="url(#hv-muscle)" stroke="#7E2B40" stroke-width="1.2">
+                <use href="#hv-papRV"/><use href="#hv-papLV1"/><use href="#hv-papLV2"/><use href="#hv-mod"/>
+              </g>
+              
             </g>
-            <!-- atrial myocardium -->
-            <g id="atriaBase" fill="#EBD3D8" stroke="#BFA5AB" stroke-width="1.5">
-              <path id="raOut" d="M70,118 C52,160 60,214 108,226 L182,226 C194,190 192,142 168,116 C142,96 96,96 70,118 Z"/>
-              <path id="laOut" d="M230,116 C214,146 214,190 224,218 L322,218 C350,200 356,146 332,116 C304,96 258,96 230,116 Z"/>
-              <path d="M186,132 h40 v88 h-40 z" stroke="none"/>
+
+            <!-- ===== ELECTROPHYSIOLOGY OVERLAYS (electrical state only, not blood or motion) ===== -->
+            <g id="epOverlays" opacity=".88">
+              <g mask="url(#hv-mA)">
+                <g clip-path="url(#clipA)"><rect id="atriaRed" x="40" y="90" width="340" height="160" fill="#FF9A2E" opacity="0"/></g>
+                <rect id="atriaBlue" x="40" y="90" width="340" height="160" fill="#13C6D8" opacity="0"/>
+              </g>
+              <g mask="url(#hv-mV)">
+                <g clip-path="url(#clipV)"><rect id="ventRed" x="70" y="230" width="310" height="240" fill="#FF9A2E" opacity="0"/></g>
+                <rect id="ventBlue" x="70" y="230" width="310" height="240" fill="#13C6D8" opacity="0"/>
+              </g>
+              <g id="wavelets" fill="#FFB347" mask="url(#hv-mAll)"></g>
             </g>
-            <g clip-path="url(#clipA)">
-              <g id="atriaRed" fill="#B40838" opacity="0">
-                <path d="M70,118 C52,160 60,214 108,226 L182,226 C194,190 192,142 168,116 C142,96 96,96 70,118 Z"/>
-                <path d="M230,116 C214,146 214,190 224,218 L322,218 C350,200 356,146 332,116 C304,96 258,96 230,116 Z"/>
-                <path d="M186,132 h40 v88 h-40 z"/>
+
+
+            <!-- foreground anatomy: non-myocardial structures drawn above the activation layer -->
+            <g id="anatomyFront">
+              <!-- superior vena cava entering the right atrium -->
+              <path d="M98,-6 C97,30 97,70 96,110 L140,110 C139,70 138,30 138,-6 Z" fill="url(#hv-blue)" stroke="#2F5873" stroke-width="2"/>
+              <ellipse cx="118" cy="-6" rx="20" ry="5" fill="#26465C"/>
+              <!-- atrioventricular groove fat with right coronary and circumflex arteries -->
+              <path d="M80,236 C86,231 96,232 101,238 C97,245 87,247 80,243 Z M341,233 C348,229 357,231 361,236 C357,243 348,244 342,240 Z" fill="#EFCF86" stroke="#C9A24E" stroke-width=".8"/>
+              <circle cx="90" cy="239" r="3.2" fill="#B5364A" stroke="#7E2638" stroke-width=".8"/><circle cx="351" cy="236.5" r="3.2" fill="#B5364A" stroke="#7E2638" stroke-width=".8"/>
+              <!-- fibrous skeleton: tricuspid and mitral annuli -->
+              <path d="M98,240 L192,240 M206,236 L336,234" stroke="#F4E2D6" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="199" cy="238" r="5" fill="#F4E2D6"/>
+              <!-- chordae tendineae -->
+              <g stroke="#F6E4DA" stroke-width="1" opacity=".9">
+                <path d="M126,276 L120,322 M134,278 L128,321 M168,274 L136,326 M176,272 L178,330"/>
+                <path d="M238,276 L236,348 M246,274 L242,347 M300,270 L310,322 M310,268 L318,322 M226,274 L230,350"/>
+              </g>
+              <!-- AV valve leaflets (open, diastolic position) -->
+              <g fill="url(#hv-leaflet)" stroke="#C99484" stroke-width=".9" stroke-linejoin="round">
+                <path d="M102,241 C106,250 114,262 124,276 C126,279 130,281 131,277 C130,266 131,253 136,242 Z"/>
+                <path d="M190,241 C186,252 181,262 175,272 C173,276 169,276 168,272 C167,262 167,251 170,242 Z"/>
+                <path d="M209,237 C216,250 228,264 240,276 C243,279 248,280 248,275 C246,262 246,249 249,238 Z"/>
+                <path d="M334,235 C329,246 321,257 312,268 C310,271 305,271 305,267 C304,256 305,245 308,236 Z"/>
               </g>
             </g>
-            <g id="atriaBlue" fill="#2E6E99" opacity="0">
-              <path d="M70,118 C52,160 60,214 108,226 L182,226 C194,190 192,142 168,116 C142,96 96,96 70,118 Z"/>
-              <path d="M230,116 C214,146 214,190 224,218 L322,218 C350,200 356,146 332,116 C304,96 258,96 230,116 Z"/>
-              <path d="M186,132 h40 v88 h-40 z"/>
-            </g>
-            <g fill="#FFFFFF" stroke="#D9C4C9" stroke-width="1">
-              <path d="M84,128 C72,162 78,202 112,212 L170,212 C178,186 176,148 158,128 C138,112 102,112 84,128 Z"/>
-              <path d="M242,126 C230,152 230,186 238,204 L314,204 C336,190 340,150 322,128 C300,112 262,112 242,126 Z"/>
-            </g>
-            <!-- fibrous skeleton -->
-            <rect x="58" y="229" width="290" height="8" rx="3" fill="#C9D1D8"/>
-            <!-- ventricular myocardium -->
-            <path id="ventBase" d="M100,240 L332,240 C352,290 340,360 296,405 C268,432 238,448 214,452 C186,446 140,410 116,360 C98,320 92,270 100,240 Z" fill="#EBD3D8" stroke="#BFA5AB" stroke-width="1.5"/>
-            <g clip-path="url(#clipV)">
-              <path id="ventRed" d="M100,240 L332,240 C352,290 340,360 296,405 C268,432 238,448 214,452 C186,446 140,410 116,360 C98,320 92,270 100,240 Z" fill="#B40838" opacity="0"/>
-            </g>
-            <path id="ventBlue" d="M100,240 L332,240 C352,290 340,360 296,405 C268,432 238,448 214,452 C186,446 140,410 116,360 C98,320 92,270 100,240 Z" fill="#2E6E99" opacity="0"/>
-            <g fill="#FFFFFF" stroke="#D9C4C9" stroke-width="1">
-              <path d="M118,252 L192,252 L198,392 C170,380 140,345 128,310 C120,288 116,268 118,252 Z"/>
-              <path d="M234,252 L312,252 C322,292 314,340 286,375 C268,398 250,412 238,418 Z"/>
-            </g>
-            <!-- chaos wavelets -->
-            <g id="wavelets" fill="#B40838"></g>
-            <!-- conduction system -->
+            <!-- ===== CONDUCTION SYSTEM ===== -->
             <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path id="cs-intern" d="M118,112 C150,140 172,172 190,222 M118,112 C108,160 140,200 190,222 M124,108 C170,96 232,100 272,118" stroke="#A9B3BB" stroke-width="2" stroke-dasharray="4 4"/>
-              <path id="cs-his" d="M193,230 L206,262" stroke="#7E8A94" stroke-width="4"/>
-              <path id="cs-bb" d="M206,262 C200,300 199,340 202,380 M206,262 C216,292 224,322 228,352 M214,282 C240,300 262,322 284,346" stroke="#7E8A94" stroke-width="3.2"/>
-              <path id="cs-pk" d="M202,380 C182,402 142,372 122,322 C110,292 108,266 112,250 M228,352 C234,402 272,402 300,362 C324,326 330,288 322,250" stroke="#9AA5AE" stroke-width="2.2"/>
-            </g>
-            <ellipse id="cs-sa" cx="118" cy="112" rx="10" ry="7" fill="#7E8A94"/>
-            <ellipse id="cs-av" cx="192" cy="226" rx="9" ry="6" fill="#7E8A94"/>
-            <circle id="cs-focus" cx="331" cy="300" r="7" fill="#7E8A94" opacity="0"/>
-            <path id="loopFl" d="M128,147 a36,30 0 1,0 0.01,0" fill="none" stroke="#B40838" stroke-width="1.5" stroke-dasharray="3 4" opacity="0"/>
-            <circle id="loopAv" cx="192" cy="226" r="15" fill="none" stroke="#B40838" stroke-width="1.5" stroke-dasharray="3 3" opacity="0"/>
-            <circle id="dot" r="6" fill="#B40838" filter="url(#glow)" opacity="0"/>
-            <g id="blockMark" opacity="0" stroke="#B40838" stroke-width="4" stroke-linecap="round">
-              <path d="M-9,-9 L9,9 M9,-9 L-9,9"/>
-            </g>
-            <!-- labels -->
-            <g id="labels" font-family="Arial" font-size="12" fill="#333A40">
-              <text x="140" y="60" font-weight="700">SA node</text><path d="M138,64 L122,104" stroke="#5E6A73" stroke-width="1"/>
-              <text x="8" y="252" font-weight="700">AV node</text><path d="M56,248 L182,228" stroke="#5E6A73" stroke-width="1"/>
-              <text x="262" y="268" font-weight="700" id="lbl-his">Bundle of His</text><path d="M260,264 L204,250" stroke="#5E6A73" stroke-width="1"/>
-              <text x="10" y="425">Right bundle branch</text><path d="M86,414 L198,350" stroke="#5E6A73" stroke-width="1"/>
-              <text x="300" y="440">Left bundle branch</text><path d="M330,428 L240,330" stroke="#5E6A73" stroke-width="1"/>
-              <text x="322" y="400" font-size="11" fill="#5E6A73">Purkinje</text><text x="322" y="412" font-size="11" fill="#5E6A73">fibres</text><path d="M320,398 L306,384" stroke="#5E6A73" stroke-width="1"/>
-              <text x="372" y="138" font-size="11" fill="#5E6A73">pulm.</text><text x="372" y="150" font-size="11" fill="#5E6A73">veins</text>
-              <g font-size="15" font-weight="700" fill="#8B97A1">
-                <text x="96" y="196">RA</text><text x="270" y="170">LA</text><text x="146" y="320">RV</text><text x="262" y="298">LV</text>
+              <g stroke="#3A0F1C" stroke-opacity=".45" stroke-width="5.5">
+                <path d="M193,230 L206,262"/>
+                <path d="M206,262 C200,284 196,306 191,331 C176,333 160,334 141,333 M206,262 C213,280 217,300 218,322 M213,280 C244,294 278,310 300,331 M218,306 C222,330 230,348 238,358"/>
               </g>
+              <path id="cs-intern" d="M104,114 C140,140 166,180 190,224 M104,114 C96,160 140,206 190,224 M108,110 C160,98 230,104 300,122" stroke="#F3E6D2" stroke-width="2" stroke-dasharray="3 5" opacity=".9"/>
+              <path id="cs-his" d="M193,230 L206,262" stroke="#F3E6D2" stroke-width="3.6"/>
+              <path id="cs-bb" d="M206,262 C200,284 196,306 191,331 C176,333 160,334 141,333 M206,262 C213,280 217,300 218,322 M213,280 C244,294 278,310 300,331 M218,306 C222,330 230,348 238,358" stroke="#F3E6D2" stroke-width="2.8"/>
+              <path id="cs-pk" d="M141,333 C120,326 108,300 106,270 M141,333 C150,370 178,402 214,424 M300,331 C318,312 328,284 326,256 M300,331 C298,372 278,404 250,426 M238,358 C238,390 241,412 246,428 M191,331 C192,360 200,390 214,418" stroke="#EADBC6" stroke-width="1.6"/>
+            </g>
+            <ellipse id="cs-sa" cx="104" cy="114" rx="8" ry="5.5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1.2"/>
+            <ellipse id="cs-av" cx="192" cy="226" rx="7.5" ry="5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1.2"/>
+            <circle id="cs-focus" cx="345" cy="300" r="6.5" fill="#F3E6D2" stroke="#3A0F1C" stroke-width="1.2" opacity="0"/>
+            <ellipse id="loopFl" cx="138" cy="196" rx="40" ry="24" fill="none" stroke="#FFD95A" stroke-width="1.8" stroke-dasharray="4 4" opacity="0"/>
+            <circle id="loopAv" cx="192" cy="226" r="15" fill="none" stroke="#FFD95A" stroke-width="1.8" stroke-dasharray="3 3" opacity="0"/>
+            <circle id="dot" r="6" fill="#FFE27A" stroke="#7A4B00" stroke-width="1" filter="url(#glow)" opacity="0"/>
+            <g id="blockMark" opacity="0" stroke-linecap="round"><path d="M-9,-9 L9,9 M9,-9 L-9,9" stroke="#1E2328" stroke-width="7"/><path d="M-9,-9 L9,9 M9,-9 L-9,9" stroke="#FFFFFF" stroke-width="3.5"/></g>
+
+            <!-- ===== LABELS ===== -->
+            <g id="chamberLabels" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#F8DCD3" fill-opacity=".9" pointer-events="none">
+              <text x="98" y="180">RA</text><text x="262" y="174">LA</text><text x="128" y="300">RV</text><text x="262" y="300">LV</text>
+            </g>
+            <g id="labels" font-family="Arial, sans-serif" font-size="12.5" fill="#333A40" pointer-events="none">
+              <g fill="none" stroke="#5E6A73" stroke-width="1"><path d="M2,76 L60,76 L98,110"/><path d="M2,206 L150,206 L185,224"/><path d="M381,258 L330,258 L208,252"/><path d="M24,401 L120,401 L170,334"/><path d="M399,330 L370,330 L220,312"/><path d="M34,440 L150,440 L200,410"/></g>
+              <g font-weight="700"><text x="-56" y="80">SA node</text><text x="-56" y="210">AV node</text><text x="476" y="262" text-anchor="end">Bundle of His</text><text x="-56" y="396">Right bundle</text><text x="-56" y="410">branch</text><text x="476" y="326" text-anchor="end">Left bundle</text><text x="476" y="340" text-anchor="end">branch</text></g>
+              <text x="-56" y="444">Purkinje fibres</text>
+            </g>
+            <g id="anatLabels" font-family="Arial, sans-serif" font-size="12" fill="#5E6A73" pointer-events="none" opacity="0">
+              <g fill="none" stroke="#8B97A1" stroke-width=".9" stroke-dasharray="2 2"><path d="M-28,26 L96,26"/><path d="M-28,290 L64,290"/><path d="M30,262 L112,250"/><path d="M34,352 L104,334 L150,334"/><path d="M440,30 L320,40"/><path d="M376,82 L332,76"/><path d="M379,112 L398,130"/><path d="M405,206 L206,172"/><path d="M409,282 L308,256"/><path d="M379,376 L320,340"/><path d="M343,420 L222,384"/></g>
+              <text x="-56" y="30">SVC</text><text x="-56" y="294">IVC</text><text x="-56" y="266">Tricuspid valve</text><text x="-56" y="356">Moderator band</text>
+              <g text-anchor="end"><text x="476" y="34">Aorta</text><text x="476" y="86">Pulmonary artery</text><text x="476" y="116">Pulmonary veins</text><text x="476" y="210">Fossa ovalis</text><text x="476" y="286">Mitral valve</text><text x="476" y="380">Papillary muscle</text><text x="476" y="424">Interventricular septum</text></g>
             </g>
           </svg>
           <div class="legend">
-            <span><i class="sw" style="background:#B40838"></i>Depolarizing</span>
-            <span><i class="sw" style="background:#B40838;opacity:.5"></i>Depolarized (plateau)</span>
-            <span><i class="sw" style="background:#2E6E99;opacity:.7"></i>Repolarizing</span>
-            <span><i class="sw" style="background:#B40838;border-radius:50%"></i>Conduction tissue active</span>
+            <span><i class="sw" style="background:#FF9A2E"></i>Depolarizing</span>
+            <span><i class="sw" style="background:#FF9A2E;opacity:.5"></i>Depolarized (plateau)</span>
+            <span><i class="sw" style="background:#13C6D8"></i>Repolarizing</span>
+            <span><i class="sw" style="background:#FFF06A;border:1px solid #C9A400;border-radius:50%"></i>Conduction tissue firing</span>
           </div>
+          <div class="heart-tools">
+            <label class="toggle"><input type="checkbox" id="lblToggle" checked> Conduction labels</label>
+            <label class="toggle"><input type="checkbox" id="anatToggle"> Anatomy labels</label>
+          </div>
+          <p class="heart-note">Colours show <b>electrical</b> activity only, not blood flow or squeezing (mechanical contraction follows a few tens of milliseconds later). Vessel colours follow the textbook convention: blue for deoxygenated, red for oxygenated blood. Teaching illustration, not to scale; wavefronts are simplified.</p>
         </div>
 
         <div class="card now" aria-live="polite">
@@ -408,8 +508,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <button type="button" data-speed="0.5">½×</button>
             <button type="button" data-speed="1">Real time</button>
           </div>
-          <label class="toggle"><input type="checkbox" id="lblToggle" checked> Heart labels</label>
-          <span class="small muted" style="margin-left:auto"><kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
+                    <span class="small muted" style="margin-left:auto"><kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
         </div>
         <div class="chiprow" id="waveChips"><span class="lbl">Jump to:</span></div>
       </div>
@@ -496,7 +595,7 @@ window.addEventListener("hashchange",route);
    ECG MODEL
    ========================================================= */
 const D=6, FS=500;
-const SA=[118,112], AVN=[192,226], SEPT=[212,300], FOCUS=[331,300];
+const SA=[104,114], AVN=[192,226], SEPT=[212,300], FOCUS=[345,300];
 
 function qtFor(rr){return Math.min(0.46,Math.max(0.26,0.41*Math.sqrt(rr)));}
 function mkV(q0,w,kind,rr,extra){
@@ -693,14 +792,14 @@ function heartState(t,R){
       const dt=t-e.p0, c=e.kind==="retro"?AVN:SA, dur=e.dur;
       if(dt<dur){s.aRed=0.85;s.aR=14+270*dt/dur;s.aC=c;}
       else if(dt<dur+0.1){s.aRed=0.5;s.aR=420;s.aC=c;}
-      else if(dt<dur+0.22){const k=(dt-dur-0.1)/0.12;s.aRed=0.5*Math.pow(1-k,3);s.aR=420;s.aC=c;s.aBlue=0.5*Math.sin(Math.PI*k);}
+      else if(dt<dur+0.22){const k=(dt-dur-0.1)/0.12;s.aRed=0.5*Math.pow(1-k,3);s.aR=420;s.aC=c;s.aBlue=0.85*Math.sin(Math.PI*k);}
     }
   }
   if(R.atria==="sinus"){for(const a of R.A){if(inR(t,a.p0-0.025,a.p0+0.03))s.sa=1;}}
   if(R.atria==="flutter"){
     const ph=(((t-R.f0)/0.2)%1+1)%1;
     s.aRed=0.28+0.14*Math.sin(2*Math.PI*ph); s.aR=420; s.loop="fl";
-    const ang=-2*Math.PI*ph; s.dot=[128+36*Math.sin(ang),177-30*Math.cos(ang)];
+    const ang=-2*Math.PI*ph; s.dot=[138+40*Math.sin(ang),196-24*Math.cos(ang)];
   }
   if(R.atria==="af"){s.aRed=0.2+0.08*Math.sin(t*37)*Math.sin(t*23); s.aR=420; s.wl="a";}
   if(R.reentry==="av"){
@@ -737,8 +836,8 @@ function heartState(t,R){
     s.vC=vent?FOCUS:SEPT;
     if(dt<v.w){s.vRed=0.85; s.vR=10+(vent?340:260)*dt/v.w;}
     else if(t<v.Tstart){s.vRed=0.55;s.vR=500;}
-    else if(t<v.Tend){const k=(t-v.Tstart)/(v.Tend-v.Tstart); s.vRed=0.55*Math.pow(1-k,3); s.vR=500; s.vBlue=0.5*Math.min(1,k*1.6);}
-    else if(t<v.Tend+0.12){s.vBlue=0.5*(1-(t-v.Tend)/0.12);}
+    else if(t<v.Tend){const k=(t-v.Tstart)/(v.Tend-v.Tstart); s.vRed=0.55*Math.pow(1-k,3); s.vR=500; s.vBlue=0.85*Math.min(1,k*1.6);}
+    else if(t<v.Tend+0.12){s.vBlue=0.85*(1-(t-v.Tend)/0.12);}
   }
   if(R.vf){s.vRed=0.25+0.1*Math.sin(t*41)*Math.sin(t*17); s.vR=500; s.wl="v";}
   return s;
@@ -872,7 +971,7 @@ function selectRhythm(k){
   $("loopAv").setAttribute("opacity",R.reentry==="av"?0.6:0);
   $("cs-focus").setAttribute("opacity",R.V.some(v=>v.kind==="ventricular")?1:0);
   const wl=$("wavelets"); wl.innerHTML="";
-  if(R.atria==="af"||R.vf){for(let i=0;i<8;i++){const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("r",9);wl.appendChild(c);}}
+  if(R.atria==="af"||R.vf){for(let i=0;i<8;i++){const c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("r",22);wl.appendChild(c);}}
   drawBg(); frame(true);
 }
 
@@ -926,7 +1025,7 @@ function frame(force){
 }
 function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 
-const ACT="#B40838", IDLE_N="#7E8A94";
+const ACT="#FFF06A", IDLE_N="#F3E6D2";
 let lastMain="";
 function setGlow(el,on,idleStroke,isFill){
   const e=$(el);
@@ -934,7 +1033,13 @@ function setGlow(el,on,idleStroke,isFill){
   else{e.setAttribute("stroke",on?ACT:idleStroke);}
   if(on) e.setAttribute("filter","url(#glow)"); else e.removeAttribute("filter");
 }
+let heartBroken=false;
 function updateHeart(){
+  updateNarration();
+  if(heartBroken) return;
+  try{ updateHeartInner(); }catch(err){ heartBroken=true; console.warn("Heart animation disabled:",err); const n=document.querySelector(".heart-note"); if(n) n.insertAdjacentHTML("afterbegin","<b>The heart animation could not load; the ECG strip and explanations still work.</b> "); }
+}
+function updateHeartInner(){
   const s=heartState(t,R);
   $("clipAc").setAttribute("cx",s.aC[0]); $("clipAc").setAttribute("cy",s.aC[1]); $("clipAc").setAttribute("r",s.aR);
   $("atriaRed").setAttribute("opacity",s.aRed.toFixed(3)); $("atriaBlue").setAttribute("opacity",s.aBlue.toFixed(3));
@@ -942,8 +1047,8 @@ function updateHeart(){
   $("ventRed").setAttribute("opacity",s.vRed.toFixed(3)); $("ventBlue").setAttribute("opacity",s.vBlue.toFixed(3));
   setGlow("cs-sa",s.sa>0,IDLE_N,true);
   setGlow("cs-av",s.av>0,IDLE_N,true); $("cs-av").setAttribute("opacity",s.av>0?Math.max(0.6,s.av):1);
-  setGlow("cs-his",s.his>0,IDLE_N); setGlow("cs-bb",s.bb>0,IDLE_N); setGlow("cs-pk",s.pk>0,"#9AA5AE");
-  setGlow("cs-intern",s.aRed>0.8&&R.atria==="sinus",'#A9B3BB');
+  setGlow("cs-his",s.his>0,IDLE_N); setGlow("cs-bb",s.bb>0,IDLE_N); setGlow("cs-pk",s.pk>0,"#EADBC6");
+  setGlow("cs-intern",s.aRed>0.8&&R.atria==="sinus",IDLE_N);
   const f=$("cs-focus"); f.setAttribute("fill",s.focus?ACT:IDLE_N); s.focus?f.setAttribute("filter","url(#glow)"):f.removeAttribute("filter");
   const dot=$("dot"); if(s.dot){dot.setAttribute("cx",s.dot[0]);dot.setAttribute("cy",s.dot[1]);dot.setAttribute("opacity",1);} else dot.setAttribute("opacity",0);
   const bm=$("blockMark");
@@ -952,12 +1057,14 @@ function updateHeart(){
     const cs=$("wavelets").children;
     for(let i=0;i<cs.length;i++){
       let x,y;
-      if(s.wl==="a"){const left=i%2===0; x=(left?125:285)+(left?38:42)*Math.sin(t*(5.3+i*0.9)+i*2.1); y=168+36*Math.sin(t*(4.1+i*0.7)+i*1.3);}
-      else {x=210+95*Math.sin(t*(3.9+i*0.6)+i*1.9); y=320+70*Math.sin(t*(4.7+i*0.5)+i*2.7); if(x<120)x=120; if(x>320)x=320;}
+      if(s.wl==="a"){const left=i%2===0; x=(left?130:278)+(left?52:62)*Math.sin(t*(5.3+i*0.9)+i*2.1); y=172+52*Math.sin(t*(4.1+i*0.7)+i*1.3);}
+      else {x=220+125*Math.sin(t*(3.9+i*0.6)+i*1.9); y=340+95*Math.sin(t*(4.7+i*0.5)+i*2.7);}
       cs[i].setAttribute("cx",x.toFixed(1)); cs[i].setAttribute("cy",y.toFixed(1));
       cs[i].setAttribute("opacity",(0.25+0.35*Math.abs(Math.sin(t*(6+i)+i))).toFixed(2));
     }
   }
+}
+function updateNarration(){
   const d=describe(t,R);
   const key=d.main[0]+"|"+d.extra.map(e=>e[0]).join("|");
   if(key!==lastMain){
@@ -985,6 +1092,7 @@ document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",(
   speed=parseFloat(b.dataset.speed); document.querySelectorAll(".seg button").forEach(x=>x.classList.toggle("on",x===b)); frame();
 }));
 $("lblToggle").addEventListener("change",e=>$("labels").setAttribute("opacity",e.target.checked?1:0));
+$("anatToggle").addEventListener("change",e=>$("anatLabels").setAttribute("opacity",e.target.checked?1:0));
 canvas.addEventListener("click",e=>{
   const r=canvas.getBoundingClientRect(); t=Math.max(0,Math.min(D-0.001,(e.clientX-r.left)/r.width*D));
   setPlaying(false);
