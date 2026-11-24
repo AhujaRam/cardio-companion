@@ -34,5 +34,6 @@ Not an official University of Ottawa or University of Ottawa Heart Institute res
 | 2026-11-23 | Two independent automated reviews (content, simulation, accessibility) | Findings verified and applied |
 | 2026-11-23 | Medical-content review handover (priorities 1–3) | Applied, with ECG Manual values kept and qualified where they differ from general clinical references |
 | 2026-11-24 | Drug pages: Canadian guideline indications and landmark trials added; guideline versions checked against CCS, Hypertension Canada and Heart & Stroke sources | Pending faculty review (trial figures are simplified) |
+| 2026-11-24 | Full code and content review: every rhythm in every lead, deep links, search and compare, mobile widths (320–1440 px), no-JavaScript and reduced-motion modes; guideline statements, trial figures and links checked against sources | Fixes applied: amlodipine algorithm step, vasospastic angina wording, guideline tags for mexiletine and sotalol, CAEP link, V3 caption, keyboard shortcuts, screen-reader states, search leaving drug pages open |
 | Pending | Comparison of simulated waveforms with reference 12-lead ECGs | Not yet done. Einthoven relationships (II = I + III; aVR + aVL + aVF = 0) verified numerically |
 | Pending | Cardiology faculty review of final text and illustrations, with reviewer name, version and sign-off | Not yet done |

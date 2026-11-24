@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cardio Companion</title>
+<meta name="description" content="Student-made visual study aid for the uOttawa first-year cardiology block: an interactive ECG learner with an animated heart, lecture companion pages and a Canadian cardiovascular drug reference.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='13' fill='%23B40838'/%3E%3Cpath d='M3 14h4l2-5 3 10 3-14 2.5 9H23' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 *{min-width:0}
 :root{color-scheme:light;
@@ -240,8 +242,11 @@ footer{background:var(--white);border-top:1px solid var(--line);padding:24px 20p
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 @media(max-width:600px){h1{font-size:28px}main{padding:20px 14px 50px}.card{padding:18px}}
-@media (prefers-reduced-motion: reduce){.hero-line{animation:none!important}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){.hero-line{animation:none!important;stroke-dashoffset:0!important}html{scroll-behavior:auto}}
+@media(max-width:700px){.med,.lec,.cmp-table-wrap{scroll-margin-top:12px}}
 </style>
+<noscript><style>#page-home{display:block}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
@@ -267,6 +272,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 </div></header>
 
 <main id="content" class="wrap">
+<noscript><div class="notice">Please turn on JavaScript: the ECG Learner, Lecture Companion and Medications pages need it.</div></noscript>
 
 <!-- HOME -->
 <section class="page" id="page-home">
@@ -288,12 +294,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
         </defs>
         <rect width="520" height="220" fill="#FFF7F8"/><rect width="520" height="220" fill="url(#hg)"/>
         <path class="hero-line" d="M0 140 H40 q12 -16 24 0 H92 l5 6 l9 -96 l9 110 l6 -20 H160 q22 -34 44 0 H260 q12 -16 24 0 H312 l5 6 l9 -96 l9 110 l6 -20 H380 q22 -34 44 0 H520"
-          fill="none" stroke="#B40838" stroke-width="3" stroke-linejoin="round" stroke-dasharray="1200" stroke-dashoffset="1200" style="animation:draw 3.2s linear infinite"/>
+          fill="none" stroke="#B40838" stroke-width="3" stroke-linejoin="round" stroke-dasharray="1200" stroke-dashoffset="1200" style="animation:draw 3.2s linear 3 forwards"/>
         <g font-family="Arial" font-size="13" font-weight="700" fill="#333A40">
           <text x="38" y="118">P</text><text x="100" y="40">QRS</text><text x="172" y="96">T</text>
         </g>
       </svg>
-      <style>@keyframes draw{to{stroke-dashoffset:0}}</style>
       <p class="small muted" style="margin:10px 4px 0">P = atria depolarize · QRS = ventricles depolarize · T = ventricles repolarize</p>
     </div>
   </div>
@@ -358,16 +363,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
           <span class="small muted" id="stripMeta">Lead II · 25 mm/s · 10 mm/mV · 6-second strip · small box = 40 ms / 0.1 mV</span>
         </div>
         <p class="small muted swipe-hint">The strip follows the cursor. Scroll or swipe it sideways to see the rest of the 6 seconds.</p>
-        <div class="strip-scroll"><canvas id="ecg" aria-label="ECG rhythm strip. Click to freeze the animation at that moment."></canvas></div>
+        <div class="strip-scroll"><canvas id="ecg" role="img" aria-label="ECG rhythm strip. Click to freeze the animation at that moment; the Jump to buttons and the step buttons do the same from the keyboard."></canvas></div>
         <div class="controls">
           <button class="ctl play" id="playBtn" type="button">❚❚ Pause</button>
           <button class="ctl" id="backBtn" type="button" title="Step back 20 ms (←)">◀ 20 ms</button>
           <button class="ctl" id="fwdBtn" type="button" title="Step forward 20 ms (→)">20 ms ▶</button>
           <div class="seg" id="speedSeg" role="group" aria-label="Playback speed">
-            <button type="button" data-speed="0.1">0.1×</button>
-            <button type="button" data-speed="0.25" class="on">¼×</button>
-            <button type="button" data-speed="0.5">½×</button>
-            <button type="button" data-speed="1">Real time</button>
+            <button type="button" data-speed="0.1" aria-pressed="false">0.1×</button>
+            <button type="button" data-speed="0.25" class="on" aria-pressed="true">¼×</button>
+            <button type="button" data-speed="0.5" aria-pressed="false">½×</button>
+            <button type="button" data-speed="1" aria-pressed="false">Real time</button>
           </div>
                     <span class="small muted kbd-hint" style="margin-left:auto"><kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
         </div>
@@ -583,7 +588,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <path d="M28,170 C14,224 18,300 54,358 C84,400 138,404 166,384 C150,336 122,304 112,256 C106,214 116,184 136,162 C104,144 56,140 28,170 Z"/>
               <path d="M372,172 C398,222 402,302 372,360 C342,398 292,402 278,386 C322,352 346,312 348,264 C350,222 338,192 320,172 C336,160 358,158 372,172 Z"/>
             </g>
-            <rect x="184" y="84" width="32" height="15" rx="6" fill="#E9DCCB" stroke="#C9B49C"/>
+            <rect x="186" y="84" width="28" height="15" rx="6" fill="#E9DCCB" stroke="#C9B49C"/>
             <circle cx="200" cy="391" r="20" fill="#E9DCCB" stroke="#C9B49C" stroke-width="1.5"/>
             <path d="M193,409 L200,415 L207,409" fill="#E9DCCB" stroke="#C9B49C"/>
             <circle cx="264" cy="379" r="13" fill="#C9606B" stroke="#8A2C40" stroke-width="1.5"/>
@@ -614,7 +619,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <!-- labels -->
             <g font-family="Arial, sans-serif" pointer-events="none">
               <g font-size="15" font-weight="700" fill="#F8DCD3"><text x="146" y="240">RV</text><text x="268" y="271">LV</text></g>
-              <g font-size="11.5" fill="#7A8791">
+              <g font-size="11.5" fill="#5E6A73">
                 <text x="200" y="118" text-anchor="middle">Sternum</text><text x="200" y="440" text-anchor="middle">Spine</text>
                 <text x="282" y="398">Aorta</text><text x="40" y="300">Right lung</text><text x="330" y="372" text-anchor="middle">Left lung</text>
               </g>
@@ -655,7 +660,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       </div>
       <div class="card now now-below">
           <span class="now-label">What's happening now</span>
-          <div aria-live="polite" aria-atomic="true"><div class="now-title" id="nowTitle">—</div>
+          <div id="nowLive" aria-live="polite" aria-atomic="true"><div class="now-title" id="nowTitle">—</div>
           <div class="now-text" id="nowText"></div></div>
           <div class="now-extra" id="nowExtra"></div>
           <div class="lead-now" id="leadNow"></div>
@@ -717,7 +722,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 </main>
 
 <footer><div class="wrap">
-  <span>Student-made study supplement for first-year medical students. Not an official University of Ottawa resource. Content pending faculty review. For learning only, not for clinical decisions.</span>
+  <span>Student-made study supplement for first-year medical students. Not an official University of Ottawa or University of Ottawa Heart Institute resource. Content pending faculty review. For learning only, not for clinical decisions.</span>
   <span>Built to support lectures, never to replace them.</span>
 </div></footer>
 
@@ -727,9 +732,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
    ROUTING
    ========================================================= */
 const PAGES=["home","ecg","lectures","meds"];
+const scrollBeh=()=>(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)?"auto":"smooth";
 let lastPage=null;
 function route(){
-  if(location.hash==="#content"){ const m=document.getElementById("content"); m.setAttribute("tabindex","-1"); m.focus(); return; }
+  if(location.hash==="#content"){
+    if(!document.querySelector("section.page.active")){ const p=lastPage||"home"; lastPage=p;
+      document.querySelectorAll("section.page").forEach(s=>s.classList.toggle("active",s.id==="page-"+p));
+      document.querySelectorAll("nav.tabs a").forEach(a=>a.classList.toggle("active",a.dataset.page===p)); }
+    const m=document.getElementById("content"); m.setAttribute("tabindex","-1"); m.focus(); return; }
   let h=(location.hash||"#home").slice(1);
   let sub=null;
   const ix=h.indexOf("-"); if(ix>0){sub=h.slice(ix+1);h=h.slice(0,ix);}
@@ -739,8 +749,8 @@ function route(){
   if(h==="ecg"){ if(sub && RHYTHMS[sub]) selectRhythm(sub); resizeCanvas(); }
   const changed=h!==lastPage; lastPage=h;
   if(h==="meds" && sub && sub.startsWith("drug-") && DRUGS[sub.slice(5)]){ const did=sub.slice(5); medQuery=""; $("medSearch").value=""; medGroup="all"; buildMedChips(); toggleDrug(DRUGS[did].cls,did,false); }
-  else if(h==="meds" && sub){ medQuery=""; $("medSearch").value=""; setMedGroup("all"); const el=document.getElementById("med-"+sub); if(el){setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),50); el.style.outline="3px solid rgba(180,8,56,.4)"; setTimeout(()=>el.style.outline="",2200);} }
-  if(h==="lectures" && sub){ const el=document.getElementById("lec-"+sub); if(el){el.classList.add("open"); const hd=el.querySelector(".lec-head"); if(hd) hd.setAttribute("aria-expanded","true"); setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"start"}),50);} }
+  else if(h==="meds" && sub){ medQuery=""; $("medSearch").value=""; setMedGroup("all"); const el=document.getElementById("med-"+sub); if(el){setTimeout(()=>el.scrollIntoView({behavior:scrollBeh(),block:"start"}),50); el.style.outline="3px solid rgba(180,8,56,.4)"; setTimeout(()=>el.style.outline="",2200);} }
+  if(h==="lectures" && sub){ const el=document.getElementById("lec-"+sub); if(el){el.classList.add("open"); const hd=el.querySelector(".lec-head"); if(hd) hd.setAttribute("aria-expanded","true"); setTimeout(()=>el.scrollIntoView({behavior:scrollBeh(),block:"start"}),50);} }
   const subFound=sub && ((h==="meds"&&(document.getElementById("med-"+sub)||(sub.startsWith("drug-")&&DRUGS[sub.slice(5)])))||(h==="lectures"&&document.getElementById("lec-"+sub)));
   if(!subFound && (changed || !sub || h==="ecg")) window.scrollTo(0,0);
 }
@@ -884,7 +894,7 @@ const RHYTHMS={
     },
     meas:[["Underlying rhythm","Sinus, 75 bpm"],["PVC timing","Early (coupling interval 480 ms)"],["PVC QRS","160 ms, wide and bizarre"],["P before PVC","None"],["After the PVC","Full compensatory pause (2 × R–R)"]],
     keys:["An early, wide, bizarre QRS (well beyond the normal < 100 ms) with no P wave in front of it","ST segment and T wave point opposite to the main QRS deflection","Usually followed by a full compensatory pause (not always: some PVCs reset the sinus node, and interpolated PVCs have no pause)"],
-    mech:"An irritable focus in the ventricular muscle fires before the next sinus beat. The impulse spreads slowly from cell to cell instead of through the Purkinje system, so the QRS is wide. The next sinus P arrives while the ventricles are refractory and is not conducted.",
+    mech:"An irritable focus in the ventricular muscle fires before the next sinus beat. The impulse spreads slowly from cell to cell instead of through the Purkinje system, so the QRS is wide. The next sinus P arrives while the AV node and ventricles are still refractory and is not conducted.",
     pearl:"Isolated PVCs are common and often benign in a normal heart. Frequent PVCs warrant a look at electrolytes, ischemia and structural heart disease."},
   vt:{name:"Ventricular tachycardia (monomorphic)",short:"Ventricular tachycardia",group:"Ventricular",manual:"4.4",reg:true,
     build(){
@@ -893,7 +903,7 @@ const RHYTHMS={
       for(let q=0.2;q<D+0.6;q+=0.4) V.push(mkV(q,0.14,"ventricular",0.4));
       return {A,V,atria:"sinus"};
     },
-    meas:[["Rate","150 bpm"],["Rhythm","Regular"],["QRS","140 ms, wide, all the same shape (monomorphic)"],["P waves","Sinus P waves at 75 bpm, dissociated (mostly hidden)"],["Clues","AV dissociation, fusion or capture beats"]],
+    meas:[["Rate","150 bpm"],["Rhythm","Regular"],["QRS","140 ms, wide, all the same shape (monomorphic)"],["P waves","Sinus P waves at 75 bpm, dissociated (mostly hidden)"],["Clues to look for","AV dissociation (shown here); fusion or capture beats (not shown on this strip)"]],
     keys:["Three or more consecutive ventricular beats at > 100 bpm","Regular wide-complex tachycardia","AV dissociation: P waves at their own slower rate, often buried"],
     mech:"A re-entry circuit (often around scar from an old infarct) or an automatic focus in the ventricles drives the heart. The sinus node keeps firing, but the atria and ventricles are now independent.",
     pearl:"Treat a wide-complex tachycardia as VT until proven otherwise. Unstable with a pulse: synchronized cardioversion. Pulseless: defibrillation and ACLS."},
@@ -1083,7 +1093,7 @@ function describe(t,R){
   if(R.atria==="flutter") items.push(TXT.FL);
   if(R.atria==="af") items.push(TXT.AF);
   if(R.reentry==="av") items.push(TXT.SVT);
-  if(!items.length) items.push(R.atria==="sinus"?TXT.TP:TXT.TP);
+  if(!items.length) items.push(TXT.TP);
   return {main:items[0],extra:items.slice(1)};
 }
 
@@ -1157,11 +1167,11 @@ function selectRhythm(k){
   const ivs=intervals(R);
   if(!ivs.length){const b=document.createElement("button");b.className="chip";b.disabled=true;b.textContent="No organized waves to measure";row.appendChild(b);}
   for(const iv of ivs){
-    const b=document.createElement("button"); b.type="button"; b.className="chip"; b.textContent=iv.label;
+    const b=document.createElement("button"); b.type="button"; b.className="chip"; b.textContent=iv.label; b.setAttribute("aria-pressed","false");
     b.addEventListener("click",()=>{
-      const same=hl&&hl.k===iv.k; row.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));
-      if(same){hl=null;return;}
-      hl=iv; b.classList.add("on"); t=iv.k==="RR"?iv.a:iv.k==="PR"?(iv.a+0.1+iv.b)/2:(iv.a+iv.b)/2; setPlaying(false);
+      const same=hl&&hl.k===iv.k; row.querySelectorAll(".chip").forEach(c=>{c.classList.remove("on"); c.setAttribute("aria-pressed","false");});
+      if(same){hl=null;frame();return;}
+      hl=iv; b.classList.add("on"); b.setAttribute("aria-pressed","true"); t=iv.k==="RR"?iv.a:iv.k==="PR"?(iv.a+0.1+iv.b)/2:(iv.a+iv.b)/2; setPlaying(false);
     });
     row.appendChild(b);
   }
@@ -1201,7 +1211,7 @@ function drawBg(){
   c.strokeStyle="#EDB3C0"; c.lineWidth=1.2;
   for(let i=0;i<=cols;i+=5){const x=Math.round(i*pxMM)+0.5;c.beginPath();c.moveTo(x,0);c.lineTo(x,H);c.stroke();}
   for(let j=0;j<=rows;j+=5){const y=Math.round(j*pxMM)+0.5;c.beginPath();c.moveTo(0,y);c.lineTo(W,y);c.stroke();}
-  c.fillStyle="#C98A99"; c.font="11px Arial";
+  c.fillStyle="#9E5F70"; c.font="11px Arial";
   for(let s=1;s<D;s++) c.fillText(s+" s",X(s)+3,H-4);
   c.strokeStyle="#333A40"; c.lineWidth=1.8; c.lineJoin="round"; c.beginPath();
   for(let i=0;i<SIG.length;i++){const x=X(i/FS), y=Y(SIG[i]); i?c.lineTo(x,y):c.moveTo(x,y);}
@@ -1292,12 +1302,13 @@ function loop(ts){
   }
   requestAnimationFrame(loop);
 }
-function setPlaying(p){playing=p; $("playBtn").textContent=p?"❚❚ Pause":"▶ Play"; frame();}
+// The narration is announced to screen readers only while paused, so playback does not flood them.
+function setPlaying(p){playing=p; $("playBtn").textContent=p?"❚❚ Pause":"▶ Play"; $("nowLive").setAttribute("aria-live",p?"off":"polite"); frame();}
 $("playBtn").addEventListener("click",()=>setPlaying(!playing));
 $("backBtn").addEventListener("click",()=>{setPlaying(false);t=Math.max(0,t-0.02);frame();});
 $("fwdBtn").addEventListener("click",()=>{setPlaying(false);t=Math.min(D-0.001,t+0.02);frame();});
 document.querySelectorAll("#speedSeg button").forEach(b=>b.addEventListener("click",()=>{
-  speed=parseFloat(b.dataset.speed); document.querySelectorAll("#speedSeg button").forEach(x=>x.classList.toggle("on",x===b)); frame();
+  speed=parseFloat(b.dataset.speed); document.querySelectorAll("#speedSeg button").forEach(x=>{x.classList.toggle("on",x===b); x.setAttribute("aria-pressed",x===b);}); frame();
 }));
 $("lblToggle").addEventListener("change",e=>$("labels").setAttribute("opacity",e.target.checked?1:0));
 $("anatToggle").addEventListener("change",e=>$("anatLabels").setAttribute("opacity",e.target.checked?1:0));
@@ -1308,8 +1319,10 @@ canvas.addEventListener("click",e=>{
 document.addEventListener("keydown",e=>{
   if(!$("page-ecg").classList.contains("active")) return;
   if(e.altKey||e.ctrlKey||e.metaKey) return;
-  if(["INPUT","TEXTAREA","SELECT","BUTTON","A"].includes(document.activeElement.tagName)) return;
-  if(e.code==="Space"){e.preventDefault();setPlaying(!playing);}
+  const tag=document.activeElement?document.activeElement.tagName:"";
+  if(["INPUT","TEXTAREA","SELECT"].includes(tag)) return;
+  // Space on a focused button or link keeps its normal meaning; the arrow keys always step the strip.
+  if(e.code==="Space"){ if(tag==="BUTTON"||tag==="A") return; e.preventDefault();setPlaying(!playing);}
   if(e.code==="ArrowLeft"){e.preventDefault();setPlaying(false);t=Math.max(0,t-0.02);frame();}
   if(e.code==="ArrowRight"){e.preventDefault();setPlaying(false);t=Math.min(D-0.001,t+0.02);frame();}
 });
@@ -1326,16 +1339,16 @@ const LEAD_INFO={
   aVR:["right arm","−150°","cavities (it looks in from the right shoulder)",null],
   aVL:["left arm","−30°","high lateral wall","lateral"],
   aVF:["left leg (foot)","+90°","inferior wall","inferior"],
-  V1:["4th intercostal space, right of the sternum",null,"septum","septal"],
-  V2:["4th intercostal space, left of the sternum",null,"septum","septal"],
-  V3:["between V2 and V4",null,"anterior wall","anterior"],
-  V4:["5th intercostal space, midclavicular line",null,"anterior wall and apex","anterior"],
-  V5:["anterior axillary line, level with V4",null,"lateral wall","lateral"],
-  V6:["midaxillary line, level with V4",null,"lateral wall","lateral"],
+  V1:["in the 4th intercostal space, just right of the sternum",null,"septum","septal"],
+  V2:["in the 4th intercostal space, just left of the sternum",null,"septum","septal"],
+  V3:["midway between V2 and V4",null,"anterior wall","anterior"],
+  V4:["in the 5th intercostal space at the midclavicular line",null,"anterior wall and apex","anterior"],
+  V5:["at the anterior axillary line, level with V4",null,"lateral wall","lateral"],
+  V6:["at the midaxillary line, level with V4",null,"lateral wall","lateral"],
 };
 const TERR_F={inferior:"M120,376 C150,410 200,450 244,460 C262,460 282,452 298,442",lateral:"M346,240 C362,264 368,302 362,338 C358,358 352,374 344,388"};
 const TERR_A={septal:"M204,272 C210,244 228,222 262,208",anterior:"M300,192 C324,196 344,214 356,240",lateral:"M358,238 C366,266 360,296 342,316"};
-const FC=[215,282], AC=[254,242], VK=70;
+const FC=[215,282], AC=[246,242], VK=70;
 const SVGNS="http://www.w3.org/2000/svg";
 function setLine(id,x1,y1,x2,y2){const e=$(id); e.setAttribute("x1",x1.toFixed(1)); e.setAttribute("y1",y1.toFixed(1)); e.setAttribute("x2",x2.toFixed(1)); e.setAttribute("y2",y2.toFixed(1));}
 function eyeMarkup(lbl){return `<path d="M-15,0 C-8,-10 8,-10 15,0 C8,10 -8,10 -15,0 Z" fill="#fff" stroke="#1E2328" stroke-width="1.6"/><circle r="5" fill="#B40838"/><circle r="2" fill="#1E2328"/><text y="-15" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#1E2328" paint-order="stroke" stroke="#FBF8F3" stroke-width="4">${lbl}</text>`;}
@@ -1365,7 +1378,7 @@ function setLead(n){
   $("anatToggleWrap").style.display=chest?"none":""; $("lblToggleWrap").style.display=chest?"none":"";
   const info=LEAD_INFO[n];
   $("leadCaption").innerHTML=chest
-    ? `<b>Lead ${n}</b> sits at the ${info[0]} and looks at the <b>${info[2]}</b>. Chest leads view the heart in this horizontal plane.`
+    ? `<b>Lead ${n}</b> sits ${info[0]}. It looks at the <b>${info[2]}</b>. Chest leads view the heart in this horizontal plane.`
     : `<b>Lead ${n}</b> looks at the heart from the ${info[0]} (${info[1]} in the frontal plane), facing the <b>${info[2]}</b>.`;
   // electrodes / eye
   document.querySelectorAll("#ax-electrodes [data-el]").forEach(e=>{const on=e.dataset.el===n;
@@ -1442,7 +1455,7 @@ function updateAxial(s){
    ========================================================= */
 const LECTURES=[
  {id:"contraction",title:"Myocardial contraction: cellular and molecular mechanisms",
-  who:"Dr. Wenbin Liang · January 7, 2026, 10:30",
+  who:"Dr. Wenbin Liang · based on the January 2026 lecture",
   obj:["List the components of the sarcomere and describe their function","Explain the concept of excitation–contraction (E-C) coupling","Outline the roles of ATP (adenosine triphosphate) and calcium in cardiac muscle contraction","Recall that myocardial relaxation is an energy-requiring process","Compare and contrast cardiac muscle cells with skeletal muscle cells"],
   preview:"The heart is a four-chamber muscular pump. Each cycle lasts about 0.8 seconds: roughly 0.5 s of diastole and 0.3 s of systole. The work is done by cardiac myocytes: rod-shaped (some branched) cells about 25 × 100 µm, with a cell membrane (sarcolemma), T tubules that carry the action potential inward, and a sarcoplasmic reticulum (SR) that stores calcium. Their striped look comes from rows of sarcomeres. This lecture follows one heartbeat inside a single cell: the electrical signal arrives, calcium rises, the filaments slide, and calcium is pumped away again.",
   hy:["Calcium is the switch: Ca²⁺ binding to troponin C uncovers the myosin-binding sites on actin.","Relaxation costs energy: ATP is needed by SERCA (and the sarcolemmal Ca²⁺ pump) to clear calcium, not just by myosin to contract.","Unlike skeletal muscle, cardiac muscle needs extracellular Ca²⁺ entry (via L-type channels) to trigger SR calcium release."],
@@ -1464,7 +1477,7 @@ const LECTURES=[
   read:[["Klabunde RE, Cardiovascular Physiology Concepts (2nd ed.)","Chapter 3: Cellular Structure and Function"],["Opie LH, Heart Physiology: From Cell to Circulation (4th ed.)","Source of the lecture's images"],["cvphysiology.com","Free companion website recommended in lecture"]],
   rel:[["meds-bb","Beta blockers (block β1)"],["meds-ndhp","Verapamil/diltiazem (block L-type Ca²⁺ channels)"],["meds-digoxin","Digoxin (Na⁺/K⁺-ATPase)"]]},
  {id:"ventricular",title:"Ventricular function",
-  who:"Dr. Wenbin Liang · January 7, 2026, 11:30",
+  who:"Dr. Wenbin Liang · based on the January 2026 lecture",
   obj:["Describe the concepts of preload and afterload as they apply to ventricular function","Define contractility and discuss how it is measured clinically","List the determinants of end-diastolic volume (EDV)","Draw and explain the Frank–Starling curve for normal ventricular function","Draw and label a pressure–volume (P-V) loop for normal ventricular function","Define compliance and apply the concept to ventricular (diastolic) function"],
   preview:"The heart's job is to pump blood into the circulation to maintain blood pressure and tissue perfusion. Its output per minute is cardiac output (CO) = stroke volume × heart rate. Heart rate is set by the pacemaker cells; stroke volume depends on three things: preload (raises it), afterload (lowers it) and contractility (raises it). The pressure–volume loop ties all three together on one picture.",
   hy:["CO = SV × HR. Preload ↑ SV, afterload ↓ SV, contractility ↑ SV.","Normal LV: EDV about 120 mL, ESV about 50 mL, SV about 70 mL, EF 55–65%.","The slope of the ESPVR is an index of contractility; the slope of the EDPVR is stiffness (the inverse of compliance)."],
@@ -1498,11 +1511,11 @@ function buildLectures(){
       ${chev}
     </button>
     <div class="lec-body">
-      <div class="subtabs" role="tablist">
-        <button type="button" role="tab" aria-selected="true" class="on" data-p="pre">Preview (before lecture)</button>
-        <button type="button" role="tab" aria-selected="false" data-p="fol">Follow along (during)</button>
-        <button type="button" role="tab" aria-selected="false" data-p="obj">Objectives</button>
-        <button type="button" role="tab" aria-selected="false" data-p="read">Readings</button>
+      <div class="subtabs" role="group" aria-label="Lecture sections">
+        <button type="button" aria-pressed="true" class="on" data-p="pre">Preview (before lecture)</button>
+        <button type="button" aria-pressed="false" data-p="fol">Follow along (during)</button>
+        <button type="button" aria-pressed="false" data-p="obj">Objectives</button>
+        <button type="button" aria-pressed="false" data-p="read">Readings</button>
       </div>
       <div class="lec-panel on" data-p="pre"><p>${L.preview}</p>${L.hy.map(h=>`<div class="hy"><b>High-yield:</b> ${h}</div>`).join("")}</div>
       <div class="lec-panel" data-p="fol">${L.sections.map(([h,items])=>`<h3 style="margin:16px 0 4px">${h}</h3><ul>${items.map(x=>`<li>${x}</li>`).join("")}</ul>`).join("")}
@@ -1530,7 +1543,7 @@ function buildLectures(){
     const head=el.querySelector(".lec-head");
     head.addEventListener("click",()=>{el.classList.toggle("open");head.setAttribute("aria-expanded",el.classList.contains("open"));});
     el.querySelectorAll(".subtabs button").forEach(b=>b.addEventListener("click",()=>{
-      el.querySelectorAll(".subtabs button").forEach(x=>{x.classList.toggle("on",x===b); x.setAttribute("aria-selected",x===b);});
+      el.querySelectorAll(".subtabs button").forEach(x=>{x.classList.toggle("on",x===b); x.setAttribute("aria-pressed",x===b);});
       el.querySelectorAll(".lec-panel").forEach(p=>p.classList.toggle("on",p.dataset.p===b.dataset.p));
     }));
   });
@@ -1552,7 +1565,7 @@ const MEDS=[
  {id:"ndhp",group:["arr","angina","bp"],name:"Non-dihydropyridine calcium channel blockers",tag:"Vaughan Williams class IV",
   ex:"Verapamil, diltiazem",
   moa:"Block L-type calcium channels in the heart, especially the SA and AV nodes: slower heart rate, slower AV conduction, reduced contractility.",
-  ind:"Canadian guidelines: rate control in AF and flutter when LVEF > 40% (CCS/CHRS 2020); regular SVT after vagal manoeuvres and adenosine (Heart & Stroke ACLS 2025); angina, especially vasospastic, when a beta blocker is unsuitable (CCS 2014). Avoid in HFrEF.",
+  ind:"Canadian guidelines: rate control in AF and flutter when LVEF > 40% (CCS/CHRS 2020); regular SVT after vagal manoeuvres and adenosine (Heart & Stroke ACLS 2025); angina when a beta blocker is unsuitable (CCS 2014); calcium channel blockers are also the usual first-line drug for vasospastic angina. Avoid in HFrEF.",
   where:"ED (IV diltiazem for fast AF), cardiology and EP clinics.",
   se:"Bradycardia, AV block, hypotension, worsening heart failure, constipation (verapamil), peripheral edema.",
   ci:"HFrEF, AV block or sick sinus syndrome without a pacemaker, hypotension, pre-excited AF (WPW).",
@@ -1706,7 +1719,7 @@ const GUIDES={
  stemi:{l:"CCS/CAIC STEMI 2019",u:"https://doi.org/10.1016/j.cjca.2018.11.031",full:"2019 CCS/CAIC Guidelines on the Acute Management of STEMI: Focused Update on Regionalization and Reperfusion"},
  sihd:{l:"CCS Stable IHD 2014",u:"https://pubmed.ncbi.nlm.nih.gov/?term=Canadian+Cardiovascular+Society+guidelines+diagnosis+management+stable+ischemic+heart+disease+2014",full:"CCS Guidelines for the Diagnosis and Management of Stable Ischemic Heart Disease (Can J Cardiol 2014)"},
  acls:{l:"Heart & Stroke ACLS 2025",u:"https://cpr.heartandstroke.ca/resource/GuidelinesHighlightsEN2025",full:"Heart & Stroke Foundation of Canada edition of the 2025 Guidelines for CPR and Emergency Cardiovascular Care"},
- caep:{l:"CAEP AF/AFL checklist",u:"https://caep.ca/",full:"CAEP Acute Atrial Fibrillation and Flutter Best Practices Checklist (Canadian emergency medicine)"},
+ caep:{l:"CAEP AF/AFL checklist 2021",u:"https://doi.org/10.1007/s43678-021-00167-y",full:"2021 CAEP Acute Atrial Fibrillation/Flutter Best Practices Checklist (CJEM 2021)"},
  vte:{l:"Thrombosis Canada",u:"https://thrombosiscanada.ca/hcp/practice/clinical_guides",full:"Thrombosis Canada clinical guides (VTE treatment, anticoagulant guides)"},
  dm:{l:"Diabetes Canada",u:"https://guidelines.diabetes.ca/",full:"Diabetes Canada Clinical Practice Guidelines (pharmacologic glycemic management updates)"},
  pad:{l:"CCS PAD 2022",u:"https://pubmed.ncbi.nlm.nih.gov/?term=2022+Canadian+Cardiovascular+Society+guidelines+peripheral+arterial+disease",full:"Canadian Cardiovascular Society 2022 Guidelines for Peripheral Arterial Disease"},
@@ -1756,7 +1769,7 @@ propranolol:{name:"Propranolol",cls:"bb",
 
 /* ===== Non-DHP CCBs ===== */
 verapamil:{name:"Verapamil",cls:"ndhp",
- cdn:[["af","Rate control for AF and flutter when LVEF > 40% (an alternative to a beta blocker)."],["acls","Regular narrow-complex SVT that does not respond to vagal manoeuvres and adenosine (a beta blocker or CCB is the next step)."],["sihd","Angina, especially vasospastic angina, when beta blockers are not suitable."]],
+ cdn:[["af","Rate control for AF and flutter when LVEF > 40% (an alternative to a beta blocker)."],["acls","Regular narrow-complex SVT that does not respond to vagal manoeuvres and adenosine (a beta blocker or CCB is the next step)."],["sihd","Angina when a beta blocker is not suitable. (Calcium channel blockers are also the usual first-line drug for vasospastic angina.)"]],
  where:"ED and EP/cardiology clinics; also idiopathic fascicular VT (\"verapamil-sensitive VT\"), a specialist use.",
  trials:[
   ["DAVIT II",1990,"1,775 patients after MI; verapamil started in the second week vs placebo.","Fewer major events in patients without heart failure; no benefit in those with heart failure.","Origin of the rule: non-DHP CCBs are fine without HF but avoided in HFrEF."],
@@ -1782,7 +1795,7 @@ lidocaine:{name:"Lidocaine",cls:"antiarr",
   ["ALPS",2016,"3,026 out-of-hospital arrests with shock-refractory VF/pulseless VT; amiodarone vs lidocaine vs placebo.","No significant difference in survival to discharge overall; both drugs improved survival to hospital admission, with a possible benefit in witnessed arrests.","Lidocaine and amiodarone are treated as equivalent options in ACLS."],
   ["Prophylactic lidocaine in MI (meta-analysis)",1988,"Pooled randomized trials of routine lidocaine in acute MI (MacMahon et al., JAMA).","Fewer episodes of VF but a trend toward higher mortality.","Routine prophylactic lidocaine after MI was abandoned."]]},
 mexiletine:{name:"Mexiletine",cls:"antiarr",
- cdn:[["af","Not an AF drug. Specialist use for recurrent ventricular arrhythmias (often added to amiodarone in patients with an ICD) and long QT type 3."]],
+ cdn:[["ev","Not an AF drug. Specialist use for recurrent ventricular arrhythmias (often added to amiodarone in patients with an ICD) and long QT type 3."]],
  where:"EP clinic only; access in Canada can be limited.",
  trials:[
   ["No large outcome trial",null,"Evidence comes from small studies and case series, mainly as an add-on to reduce ICD shocks.","Can reduce VT episodes in selected patients.","Used to control symptoms and shocks, not to prolong life."],
@@ -1807,7 +1820,7 @@ amiodarone:{name:"Amiodarone",cls:"antiarr",
   ["SCD-HeFT",2005,"2,521 patients with HFrEF (LVEF ≤ 35%); ICD vs amiodarone vs placebo.","The ICD lowered mortality by 23%; amiodarone was no better than placebo.","For primary prevention of sudden death, the answer is an ICD, not amiodarone."],
   ["ARREST and ALPS",2016,"ARREST (1999): 504 out-of-hospital refractory VF arrests. ALPS (2016): 3,026 arrests, amiodarone vs lidocaine vs placebo.","More patients survived to hospital admission with amiodarone; no clear improvement in survival to discharge.","Amiodarone stays in ACLS for shock-refractory VF/VT."]]},
 sotalol:{name:"Sotalol",cls:"antiarr",
- cdn:[["af","Rhythm control option (beta blocker plus class III). Use with caution: avoid in significant LVH, HF, kidney impairment or long QT, because of torsades."],["af","Ventricular arrhythmias in patients with ICDs (specialist use)."]],
+ cdn:[["af","Rhythm control option (beta blocker plus class III). Use with caution: avoid in significant LVH, HF, kidney impairment or long QT, because of torsades."],["ev","Ventricular arrhythmias in patients with ICDs (specialist use)."]],
  where:"EP clinic; often started in hospital with ECG and QT monitoring, with kidney-adjusted dosing.",
  trials:[
   ["SAFE-T",2005,"665 patients with persistent AF; amiodarone vs sotalol vs placebo.","Amiodarone kept sinus rhythm longest; sotalol was similar to amiodarone in patients with ischemic heart disease.","Sotalol is a reasonable choice in coronary disease when amiodarone is not wanted."],
@@ -1991,7 +2004,7 @@ metolazone:{name:"Metolazone",cls:"thiazide",
 
 /* ===== DHP CCBs ===== */
 amlodipine:{name:"Amlodipine",cls:"dhp",
- cdn:[["htn","First-line class (long-acting DHP CCB) in a low-dose two-drug combination; part of the triple combination at step 2."],["sihd","Angina, with or instead of a beta blocker."]],
+ cdn:[["htn","First-line class (long-acting DHP CCB) in a low-dose two-drug combination; in the suggested treatment algorithm it is added as the third drug at step 3."],["sihd","Angina, with or instead of a beta blocker."]],
  where:"Family medicine and cardiology clinics.",
  trials:[
   ["ASCOT-BPLA",2005,"19,257 patients with hypertension; amlodipine ± perindopril vs atenolol ± thiazide.","Fewer CV events and lower mortality with the amlodipine regimen.","Amlodipine-based combinations are a modern standard."],
@@ -2163,9 +2176,11 @@ const CLASS_DRUGS={bb:["metoprolol","bisoprolol","atenolol","carvedilol","propra
 
 const MED_FIELDS=[["moa","Mechanism of action"],["ind","Indications (Canadian guidelines)"],["where","Where it is used"],["se","Key side effects"],["ci","Contraindications"]];
 let openDrug={};
+// Drug pages opened automatically by the search: class -> [drug opened, drug that was open before].
+let autoOpened=new Map(), userTouched=new Set();
 let medGroup="all", medQuery="", compareSet=new Set();
 function buildMedChips(){
-  $("medChips").innerHTML=MED_GROUPS.map(([k,l])=>`<button type="button" class="chip${k===medGroup?" on":""}" data-g="${k}">${l}</button>`).join("");
+  $("medChips").innerHTML=MED_GROUPS.map(([k,l])=>`<button type="button" class="chip${k===medGroup?" on":""}" aria-pressed="${k===medGroup}" data-g="${k}">${l}</button>`).join("");
   $("medChips").querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>setMedGroup(b.dataset.g)));
 }
 function setMedGroup(g){medGroup=g; buildMedChips(); renderMeds(); updateCmpBar();}
@@ -2195,7 +2210,13 @@ function drugPanel(cls,id){
 function renderMeds(){
   const q=medQuery.trim().toLowerCase();
   const list=MEDS.filter(m=>(medGroup==="all"||m.group.includes(medGroup)) && (!q || [m.name,m.tag,m.ex,m.moa,m.ind,m.where,m.se,m.ci,m.pearl,...(CLASS_DRUGS[m.id]||[]).map(drugText)].join(" ").toLowerCase().includes(q)));
-  if(q.length>=3) list.forEach(m=>{ const hit=(CLASS_DRUGS[m.id]||[]).find(id=>DRUGS[id].name.toLowerCase().includes(q)||DRUGS[id].trials.some(t=>t[0].toLowerCase().includes(q))); if(hit) openDrug[m.id]=hit; });
+  // Undo the previous search's automatic openings, so partial words (e.g. "ami") do not leave unrelated drug pages open,
+  // then open the best match in each class: a drug-name match first, otherwise a trial-name match.
+  for(const [c,[hit,prev]] of autoOpened){ if(openDrug[c]===hit){ if(prev) openDrug[c]=prev; else delete openDrug[c]; } }
+  autoOpened.clear();
+  if(q.length>=3) list.forEach(m=>{ if(userTouched.has(m.id)) return; const ids=CLASS_DRUGS[m.id]||[];
+    const hit=ids.find(id=>DRUGS[id].name.toLowerCase().includes(q))||ids.find(id=>DRUGS[id].trials.some(t=>t[0].toLowerCase().includes(q)));
+    if(hit && openDrug[m.id]!==hit){ autoOpened.set(m.id,[hit,openDrug[m.id]]); openDrug[m.id]=hit; } });
   $("medGrid").innerHTML= list.length ? list.map(m=>{
     const ids=CLASS_DRUGS[m.id]||[]; const od=openDrug[m.id];
     return `<article class="med${od?" expanded":""}" id="med-${m.id}">
@@ -2204,7 +2225,7 @@ function renderMeds(){
       <h3>${m.name}</h3>
       <div class="ex"><b>Examples:</b> ${m.ex}</div>
       <div class="dlbl">Tap a drug for Canadian indications and landmark trials:</div>
-      <div class="dchips">${ids.map(id=>`<button type="button" class="dchip" data-cls="${m.id}" data-drug="${id}" aria-expanded="${od===id}" aria-controls="dp-${m.id}">${DRUGS[id].name}</button>`).join("")}</div>
+      <div class="dchips">${ids.map(id=>`<button type="button" class="dchip" data-cls="${m.id}" data-drug="${id}" aria-expanded="${od===id}"${od===id?` aria-controls="dp-${m.id}"`:""}>${DRUGS[id].name}</button>`).join("")}</div>
       ${od?drugPanel(m.id,od):""}
       <dl>${MED_FIELDS.map(([k,l])=>`<dt>${l}</dt><dd>${m[k]}</dd>`).join("")}</dl>
       <div class="pearl"><b>Pearl:</b> ${m.pearl}</div>
@@ -2222,10 +2243,11 @@ function renderMeds(){
   updateCmpBar();
 }
 function toggleDrug(cls,id,focus){
+  userTouched.add(cls); autoOpened.delete(cls);
   if(id) openDrug[cls]=id; else delete openDrug[cls];
   renderMeds();
   const card=document.getElementById("med-"+cls); if(!card) return;
-  if(id){ setTimeout(()=>{card.scrollIntoView({behavior:"smooth",block:"start"}); if(focus){const b=card.querySelector(`.dchip[data-drug="${id}"]`); if(b) b.focus({preventScroll:true});}},30);
+  if(id){ setTimeout(()=>{card.scrollIntoView({behavior:scrollBeh(),block:"start"}); if(focus){const b=card.querySelector(`.dchip[data-drug="${id}"]`); if(b) b.focus({preventScroll:true});}},30);
     if(history.replaceState) history.replaceState(null,"","#meds-drug-"+id); }
   else { if(focus){const b=card.querySelector(".dchip"); if(b) b.focus({preventScroll:true});} if(history.replaceState && location.hash.startsWith("#meds-drug-")) history.replaceState(null,"","#meds-"+cls); }
 }
@@ -2238,16 +2260,20 @@ function updateCmpBar(){
   $("cmpCount").textContent=compareSet.size+" selected"+(compareSet.size<2?" (pick at least 2)":"");
   $("cmpGo").disabled=compareSet.size<2;
   if(compareSet.size<2) $("cmpWrap").classList.remove("show");
+  else if($("cmpWrap").classList.contains("show")) buildCompare();
 }
-function showCompare(){
+function buildCompare(){
   const ms=[...compareSet].map(id=>MEDS.find(m=>m.id===id));
   $("cmpWrap").innerHTML=`<table class="cmp-table"><thead><tr><th></th>${ms.map(m=>`<th>${m.name}</th>`).join("")}</tr></thead><tbody>
     <tr><th>Examples</th>${ms.map(m=>`<td>${m.ex}</td>`).join("")}</tr>
     ${MED_FIELDS.map(([k,l])=>`<tr><th>${l}</th>${ms.map(m=>`<td>${m[k]}</td>`).join("")}</tr>`).join("")}
     <tr><th>Pearl</th>${ms.map(m=>`<td>${m.pearl}</td>`).join("")}</tr></tbody></table>`;
-  $("cmpWrap").classList.add("show"); $("cmpWrap").scrollIntoView({behavior:"smooth",block:"start"});
 }
-$("medSearch").addEventListener("input",e=>{medQuery=e.target.value;renderMeds();});
+function showCompare(){
+  buildCompare();
+  $("cmpWrap").classList.add("show"); $("cmpWrap").scrollIntoView({behavior:scrollBeh(),block:"start"});
+}
+$("medSearch").addEventListener("input",e=>{medQuery=e.target.value; userTouched.clear(); renderMeds();});
 $("cmpGo").addEventListener("click",showCompare);
 $("cmpClear").addEventListener("click",()=>{compareSet.clear();renderMeds();updateCmpBar();$("cmpWrap").classList.remove("show");});
 
