@@ -139,8 +139,12 @@ table.cmp-table{width:100%;border-collapse:collapse;background:#fff;border-radiu
 .rhythm-nav button:hover{background:var(--soft)}
 .rhythm-nav button.on{background:var(--crimson);color:#fff;font-weight:700}
 @media(max-width:980px){.rhythm-nav .grp{display:flex;flex-wrap:wrap;gap:6px}.rhythm-nav button{width:auto;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13.5px}}
-.viz{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.viz{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+@media(min-width:1000px){.viz{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 .heart-card svg{max-width:620px;margin:0 auto}
+.viz .strip-card{margin-top:0}
+.now-below{margin-top:16px}
+.strip-head{flex-direction:column;align-items:flex-start;gap:2px}
 @media(max-width:760px){.viz{grid-template-columns:1fr}}
 .heart-card{padding:12px;background:radial-gradient(ellipse at 50% 42%,#FFFDF9 0%,#FBF8F3 70%,#F5F0E8 100%)}
 .lead-bar{margin-bottom:16px;padding:14px 16px}
@@ -152,7 +156,7 @@ table.cmp-table{width:100%;border-collapse:collapse;background:#fff;border-radiu
 .lead-seg{flex-wrap:wrap;border-radius:12px}.lead-seg button{min-width:44px;min-height:36px}
 .lead-cap{margin:10px 0 0;font-size:14.5px}
 .lead-now{margin-top:12px;padding:10px 12px;background:var(--soft);border-radius:10px;font-size:14px;min-height:44px}
-.swipe-hint{display:none;margin:0 0 6px}@media(max-width:700px){.swipe-hint{display:block}}@media(hover:none){.kbd-hint{display:none!important}}
+.swipe-hint{margin:0 0 6px}@media(hover:none){.kbd-hint{display:none!important}}
 .heart-tools{display:flex;gap:16px;flex-wrap:wrap;padding:2px 8px 4px}
 @media(max-width:600px){#heart #labels text,#heart #anatLabels text{font-size:14px}}
 .heart-note{font-size:12.5px;color:var(--muted);margin:6px 8px 4px;line-height:1.45}
@@ -172,7 +176,7 @@ table.cmp-table{width:100%;border-collapse:collapse;background:#fff;border-radiu
 .strip-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:8px}
 .strip-head h3{margin:0}
 .strip-scroll{overflow-x:auto;border-radius:8px;border:1px solid #F0C9D2}
-#ecg{display:block;width:100%;min-width:640px;cursor:crosshair;background:#FFF7F8}
+#ecg{display:block;cursor:crosshair;background:#FFF7F8}
 .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
 .ctl{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;cursor:pointer;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
 .ctl:hover{background:var(--soft)}
@@ -303,13 +307,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <!-- ECG LEARNER -->
 <section class="page" id="page-ecg">
   <h1>Visual ECG Learner</h1>
-  <p class="lede" style="margin:0 0 18px">Pick any of the 12 leads to see its strip (25 mm/s, 10 mm/mV) and the heart as that lead sees it. As the cursor sweeps across, the heart lights up to show which part is depolarizing or repolarizing, and the arrow shows why the trace goes up or down. Click anywhere on the strip, or use "Jump to" below it, to freeze that moment.</p>
-  <div class="card strip-card strip-top">
+  <p class="lede" style="margin:0 0 18px">Pick a lead and press play: the heart lights up in step with the strip. Click the strip, or use "Jump to", to freeze any moment.</p>
+  <div class="ecg-layout" style="margin-top:18px">
+    <aside class="rhythm-nav" id="rhythmNav" aria-label="Rhythms"></aside>
+
+    <div>
+      <div class="card lead-bar">
+        <div class="lead-row"><span class="lead-lbl">Lead</span><div class="seg lead-seg" id="leadSeg" role="group" aria-label="Choose ECG lead"></div></div>
+        <p class="lead-cap" id="leadCaption"></p>
+        <p class="small muted" style="margin:6px 0 0">The 12 leads and the vector arrow come from a simplified teaching model, not real recordings or a clinically validated simulator. Shapes are textbook-typical; compare with real tracings in class.</p>
+      </div>
+
+      <div class="viz">
+        <div class="card strip-card">
         <div class="strip-head">
           <h3 id="stripTitle">Normal sinus rhythm</h3>
           <span class="small muted" id="stripMeta">Lead II · 25 mm/s · 10 mm/mV · 6-second strip · small box = 40 ms / 0.1 mV</span>
         </div>
-        <p class="small muted swipe-hint">Swipe the strip sideways to see all 6 seconds.</p>
+        <p class="small muted swipe-hint">The strip follows the cursor. Scroll or swipe it sideways to see the rest of the 6 seconds.</p>
         <div class="strip-scroll"><canvas id="ecg" aria-label="ECG rhythm strip. Click to freeze the animation at that moment."></canvas></div>
         <div class="controls">
           <button class="ctl play" id="playBtn" type="button">❚❚ Pause</button>
@@ -326,17 +341,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
         <div class="chiprow" id="waveChips"><span class="lbl">Jump to:</span></div>
       </div>
 
-  <div class="card lead-bar lead-top">
-        <div class="lead-row"><span class="lead-lbl">Lead</span><div class="seg lead-seg" id="leadSeg" role="group" aria-label="Choose ECG lead"></div></div>
-        <p class="lead-cap" id="leadCaption"></p>
-        <p class="small muted" style="margin:6px 0 0">The 12 leads and the vector arrow come from a simplified teaching model, not real recordings or a clinically validated simulator. Shapes are textbook-typical; compare with real tracings in class.</p>
-      </div>
-
-  <div class="ecg-layout" style="margin-top:18px">
-    <aside class="rhythm-nav" id="rhythmNav" aria-label="Rhythms"></aside>
-
-    <div>
-      <div class="viz">
         <div class="card heart-card">
           <svg id="heart" viewBox="-60 -10 540 506" role="img" aria-labelledby="heartTitle heartDesc">
             <title id="heartTitle">Anatomical cutaway of the heart with the conduction system</title>
@@ -612,10 +616,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <label class="toggle" id="anatToggleWrap"><input type="checkbox" id="anatToggle"> Anatomy labels</label>
           </div>
           <p class="heart-note" id="noteAxial" style="display:none">Horizontal slice at the level of the ventricles, viewed from the feet like a CT scan: anterior at the top, patient's left on your right. The atria (and the SA and AV nodes) lie above this slice, so only ventricular activity is shown. Colours show electrical activity only. Teaching illustration, not to scale.</p>
-          <p class="heart-note" id="noteFrontal">Colours show <b>electrical</b> activity only, not blood flow or squeezing (mechanical contraction follows a few tens of milliseconds later). Vessel colours follow the textbook convention: blue for deoxygenated, red for oxygenated blood. Teaching illustration, not to scale; wavefronts are simplified. The heart is drawn upright for clarity; in the chest its long axis points down and to the left, so the electrical arrow during the QRS points toward the lower left side of the drawing rather than straight at the apex.</p>
+          <p class="heart-note" id="noteFrontal">Colours show <b>electrical</b> activity only, not blood flow or squeezing (mechanical contraction follows a few tens of milliseconds later). Vessel colours follow the textbook convention: blue for deoxygenated, red for oxygenated blood. Teaching illustration, not to scale; wavefronts are simplified. The heart is drawn upright for clarity; in the chest its long axis points down and to the left, so the electrical arrow during the QRS points toward the lower right of the drawing (the patient's left) rather than straight at the apex.</p>
         </div>
 
-        <div class="card now">
+      </div>
+      <div class="card now now-below">
           <span class="now-label">What's happening now</span>
           <div aria-live="polite" aria-atomic="true"><div class="now-title" id="nowTitle">—</div>
           <div class="now-text" id="nowText"></div></div>
@@ -623,7 +628,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
           <div class="lead-now" id="leadNow"></div>
           <div class="time-readout" id="timeReadout"></div>
         </div>
-      </div>
 
       <div class="card approach">
         <h3>The ECG Manual approach</h3>
@@ -1136,7 +1140,7 @@ function selectRhythm(k){
 }
 
 function resizeCanvas(){
-  const wrap=canvas.parentElement; const cssW=Math.max(640,wrap.clientWidth-2);
+  const wrap=canvas.parentElement; const cssW=Math.max(900,wrap.clientWidth-2); canvas.style.width=cssW+"px";
   pxS=cssW/D; pxMM=pxS/25; H=Math.round(pxMM*hMM); W=cssW;
   const dpr=window.devicePixelRatio||1;
   canvas.style.height=H+"px";
@@ -1186,7 +1190,9 @@ function frame(force){
   const i0=Math.max(0,iEnd-Math.round(0.6*FS));
   for(let i=i0;i<=iEnd;i++){const x=X(i/FS),y=Y(SIG[i]); i===i0?ctx.moveTo(x,y):ctx.lineTo(x,y);}
   ctx.stroke();
-  const px=X(t); ctx.strokeStyle="rgba(180,8,56,.55)"; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(px,0); ctx.lineTo(px,H); ctx.stroke();
+  const px=X(t);
+  { const sc=canvas.parentElement, vw=sc.clientWidth; if(vw && (playing || px<sc.scrollLeft+12 || px>sc.scrollLeft+vw-12)) sc.scrollLeft=Math.max(0,px-vw*0.35); }
+  ctx.strokeStyle="rgba(180,8,56,.55)"; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(px,0); ctx.lineTo(px,H); ctx.stroke();
   ctx.fillStyle="#B40838"; ctx.beginPath(); ctx.arc(px,Y(SIG[iEnd]),4.5,0,7); ctx.fill();
   updateHeart();
 }
