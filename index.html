@@ -144,6 +144,7 @@ table.cmp-table{width:100%;border-collapse:collapse;background:#fff;border-radiu
 @media(max-width:760px){.viz{grid-template-columns:1fr}}
 .heart-card{padding:12px;background:radial-gradient(ellipse at 50% 42%,#FFFDF9 0%,#FBF8F3 70%,#F5F0E8 100%)}
 .lead-bar{margin-bottom:16px;padding:14px 16px}
+.strip-top{margin:0 0 16px}
 .lead-top{margin:0 0 18px}
 @media(max-width:600px){.seg.lead-seg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:100%}.seg.lead-seg button{min-width:0;padding:8px 0}.lead-row{gap:6px}}
 .lead-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -301,13 +302,35 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 <!-- ECG LEARNER -->
 <section class="page" id="page-ecg">
+  <h1 style="margin-bottom:16px">Visual ECG Learner</h1>
+  <div class="card strip-card strip-top">
+        <div class="strip-head">
+          <h3 id="stripTitle">Normal sinus rhythm</h3>
+          <span class="small muted" id="stripMeta">Lead II · 25 mm/s · 10 mm/mV · 6-second strip · small box = 40 ms / 0.1 mV</span>
+        </div>
+        <p class="small muted swipe-hint">Swipe the strip sideways to see all 6 seconds.</p>
+        <div class="strip-scroll"><canvas id="ecg" aria-label="ECG rhythm strip. Click to freeze the animation at that moment."></canvas></div>
+        <div class="controls">
+          <button class="ctl play" id="playBtn" type="button">❚❚ Pause</button>
+          <button class="ctl" id="backBtn" type="button" title="Step back 20 ms (←)">◀ 20 ms</button>
+          <button class="ctl" id="fwdBtn" type="button" title="Step forward 20 ms (→)">20 ms ▶</button>
+          <div class="seg" id="speedSeg" role="group" aria-label="Playback speed">
+            <button type="button" data-speed="0.1">0.1×</button>
+            <button type="button" data-speed="0.25" class="on">¼×</button>
+            <button type="button" data-speed="0.5">½×</button>
+            <button type="button" data-speed="1">Real time</button>
+          </div>
+                    <span class="small muted kbd-hint" style="margin-left:auto"><kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
+        </div>
+        <div class="chiprow" id="waveChips"><span class="lbl">Jump to:</span></div>
+      </div>
+
   <div class="card lead-bar lead-top">
         <div class="lead-row"><span class="lead-lbl">Lead</span><div class="seg lead-seg" id="leadSeg" role="group" aria-label="Choose ECG lead"></div></div>
         <p class="lead-cap" id="leadCaption"></p>
         <p class="small muted" style="margin:6px 0 0">The 12 leads and the vector arrow come from a simplified teaching model, not real recordings or a clinically validated simulator. Shapes are textbook-typical; compare with real tracings in class.</p>
       </div>
-  <h1>Visual ECG Learner</h1>
-  <p class="lede">Pick any of the 12 leads to see its strip (25 mm/s, 10 mm/mV) and the heart as that lead sees it. As the cursor sweeps across, the heart lights up to show which part is depolarizing or repolarizing, and the arrow shows why the trace goes up or down. Click anywhere on the strip, or pick a wave below, to freeze that moment.</p>
+  <p class="lede">Pick any of the 12 leads to see its strip (25 mm/s, 10 mm/mV) and the heart as that lead sees it. As the cursor sweeps across, the heart lights up to show which part is depolarizing or repolarizing, and the arrow shows why the trace goes up or down. Click anywhere on the strip, or use "Jump to" above it, to freeze that moment.</p>
 
   <div class="ecg-layout" style="margin-top:18px">
     <aside class="rhythm-nav" id="rhythmNav" aria-label="Rhythms"></aside>
@@ -600,28 +623,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
           <div class="lead-now" id="leadNow"></div>
           <div class="time-readout" id="timeReadout"></div>
         </div>
-      </div>
-
-      <div class="card strip-card">
-        <div class="strip-head">
-          <h3 id="stripTitle">Normal sinus rhythm</h3>
-          <span class="small muted" id="stripMeta">Lead II · 25 mm/s · 10 mm/mV · 6-second strip · small box = 40 ms / 0.1 mV</span>
-        </div>
-        <p class="small muted swipe-hint">Swipe the strip sideways to see all 6 seconds.</p>
-        <div class="strip-scroll"><canvas id="ecg" aria-label="ECG rhythm strip. Click to freeze the animation at that moment."></canvas></div>
-        <div class="controls">
-          <button class="ctl play" id="playBtn" type="button">❚❚ Pause</button>
-          <button class="ctl" id="backBtn" type="button" title="Step back 20 ms (←)">◀ 20 ms</button>
-          <button class="ctl" id="fwdBtn" type="button" title="Step forward 20 ms (→)">20 ms ▶</button>
-          <div class="seg" id="speedSeg" role="group" aria-label="Playback speed">
-            <button type="button" data-speed="0.1">0.1×</button>
-            <button type="button" data-speed="0.25" class="on">¼×</button>
-            <button type="button" data-speed="0.5">½×</button>
-            <button type="button" data-speed="1">Real time</button>
-          </div>
-                    <span class="small muted kbd-hint" style="margin-left:auto"><kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
-        </div>
-        <div class="chiprow" id="waveChips"><span class="lbl">Jump to:</span></div>
       </div>
 
       <div class="card approach">
