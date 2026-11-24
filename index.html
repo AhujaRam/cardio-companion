@@ -114,8 +114,10 @@ kbd{font-family:inherit;font-size:12px;border:1px solid var(--line);border-radiu
 .med dl{margin:0}
 .med dt{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--crimson);margin-top:10px}
 .med dd{margin:2px 0 0;font-size:14.5px}
-.med .pearl{margin-top:12px;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
-.med-grid{align-items:start}
+.med .pearl{margin-top:auto;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
+.med dl{margin-bottom:12px}
+/* Cards in a row share one height (pearl pinned to the bottom); "dense" backfills holes left beside a full-width open card. */
+.med-grid{align-items:stretch;grid-auto-flow:row dense}
 .med.expanded{grid-column:1/-1}
 .dlbl{font-size:12.5px;font-weight:700;color:var(--muted);margin:12px 0 6px}
 .dchips{display:flex;flex-wrap:wrap;gap:6px}
@@ -432,8 +434,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <g stroke-linejoin="round">
                 <path d="M300,40 C318,48 328,66 326,92 L326,120 L302,120 L302,96 C304,78 300,66 290,60 Z" fill="#8A2C40" opacity=".9"/>
                 <path d="M244,92 C220,88 196,88 150,96 L150,116 C196,108 222,108 246,112 Z" fill="url(#hv-blueV)" stroke="#2F5873" stroke-width="1.5"/>
-                <path d="M92,234 L128,234 C132,300 140,380 150,466 L114,466 C106,380 98,300 92,234 Z" fill="url(#hv-blue)" stroke="#2F5873" stroke-width="1.5"/>
-                <ellipse cx="132" cy="466" rx="18" ry="5" fill="#26465C"/>
+                <!-- inferior vena cava: short stub leaving the inferior right atrium at the lower right heart border, cut at the diaphragm -->
+                <path d="M58,214 L96,214 C90,240 80,260 78,292 L42,292 C44,262 52,238 58,214 Z" fill="url(#hv-blue)" stroke="#2F5873" stroke-width="1.5"/>
+                <ellipse cx="60" cy="292" rx="18" ry="5" fill="#26465C"/>
                 <path d="M356,136 C372,132 388,130 410,130 L410,148 C390,148 374,150 357,154 Z M356,176 C374,174 392,176 412,180 L410,198 C390,194 374,192 354,194 Z" fill="url(#hv-redV)" stroke="#8A2C40" stroke-width="1.5"/>
                 <ellipse cx="410" cy="139" rx="4" ry="9" fill="#6B2033"/><ellipse cx="411" cy="189" rx="4" ry="9" fill="#6B2033"/>
                 <!-- ascending aorta and arch -->
@@ -560,8 +563,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <text x="-56" y="432">Purkinje fibres</text>
             </g>
             <g id="anatLabels" font-family="Arial, sans-serif" font-size="12" fill="#5E6A73" pointer-events="none" opacity="0">
-              <g fill="none" stroke="#8B97A1" stroke-width=".9" stroke-dasharray="2 2"><path d="M-28,26 L96,26"/><path d="M-28,452 L118,452"/><path d="M30,262 L112,250"/><path d="M34,352 L104,334 L150,334"/><path d="M440,30 L320,40"/><path d="M376,82 L332,76"/><path d="M379,112 L398,130"/><path d="M405,206 L206,172"/><path d="M409,282 L308,256"/><path d="M379,376 L320,340"/><path d="M343,420 L222,384"/></g>
-              <text x="-56" y="30">SVC</text><text x="-56" y="456">IVC</text><text x="-56" y="266">Tricuspid valve</text><text x="-56" y="356">Moderator band</text>
+              <g fill="none" stroke="#8B97A1" stroke-width=".9" stroke-dasharray="2 2"><path d="M-28,26 L96,26"/><path d="M-28,302 L44,298"/><path d="M30,262 L112,250"/><path d="M34,352 L104,334 L150,334"/><path d="M440,30 L320,40"/><path d="M376,82 L332,76"/><path d="M379,112 L398,130"/><path d="M405,206 L206,172"/><path d="M409,282 L308,256"/><path d="M379,376 L320,340"/><path d="M343,420 L222,384"/></g>
+              <text x="-56" y="30">SVC</text><text x="-56" y="306">IVC</text><text x="-56" y="266">Tricuspid valve</text><text x="-56" y="356">Moderator band</text>
               <g text-anchor="end"><text x="476" y="34">Aorta</text><text x="476" y="86">Pulmonary artery</text><text x="476" y="116">Pulmonary veins</text><text x="476" y="210">Fossa ovalis</text><text x="476" y="286">Mitral valve</text><text x="476" y="380">Papillary muscle</text><text x="476" y="424">Interventricular septum</text></g>
             </g>
           </svg>
@@ -747,6 +750,7 @@ function route(){
   document.querySelectorAll("section.page").forEach(s=>s.classList.toggle("active",s.id==="page-"+h));
   document.querySelectorAll("nav.tabs a").forEach(a=>a.classList.toggle("active",a.dataset.page===h));
   if(h==="ecg"){ if(sub && RHYTHMS[sub]) selectRhythm(sub); resizeCanvas(); }
+  if(h==="meds") fillLastRow();
   const changed=h!==lastPage; lastPage=h;
   if(h==="meds" && sub && sub.startsWith("drug-") && DRUGS[sub.slice(5)]){ const did=sub.slice(5); medQuery=""; $("medSearch").value=""; medGroup="all"; buildMedChips(); toggleDrug(DRUGS[did].cls,did,false); }
   else if(h==="meds" && sub){ medQuery=""; $("medSearch").value=""; setMedGroup("all"); const el=document.getElementById("med-"+sub); if(el){setTimeout(()=>el.scrollIntoView({behavior:scrollBeh(),block:"start"}),50); el.style.outline="3px solid rgba(180,8,56,.4)"; setTimeout(()=>el.style.outline="",2200);} }
@@ -1326,7 +1330,7 @@ document.addEventListener("keydown",e=>{
   if(e.code==="ArrowLeft"){e.preventDefault();setPlaying(false);t=Math.max(0,t-0.02);frame();}
   if(e.code==="ArrowRight"){e.preventDefault();setPlaying(false);t=Math.min(D-0.001,t+0.02);frame();}
 });
-window.addEventListener("resize",()=>{if($("page-ecg").classList.contains("active"))resizeCanvas();});
+window.addEventListener("resize",()=>{if($("page-ecg").classList.contains("active"))resizeCanvas(); if($("page-meds").classList.contains("active"))fillLastRow();});
 
 /* =========================================================
    LEAD SELECTION AND "VIEW FROM THE LEAD"
@@ -2241,6 +2245,17 @@ function renderMeds(){
   }));
   $("medGrid").querySelectorAll(".dp-close").forEach(b=>b.addEventListener("click",()=>toggleDrug(b.dataset.cls,null,true)));
   updateCmpBar();
+  fillLastRow();
+}
+// Stretch the last card across any empty cells left at the end of the final row, so the grid has no gaps.
+function fillLastRow(){
+  const g=$("medGrid"); const cards=[...g.querySelectorAll(".med:not(.expanded)")]; cards.forEach(c=>c.style.gridColumn="");
+  if(!cards.length||!g.offsetParent) return;
+  const cols=getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length; if(cols<2) return;
+  const last=cards[cards.length-1], gr=g.getBoundingClientRect(), lr=last.getBoundingClientRect();
+  const colW=(gr.width-(cols-1)*parseFloat(getComputedStyle(g).columnGap))/cols;
+  const idx=Math.round((lr.left-gr.left)/(colW+parseFloat(getComputedStyle(g).columnGap)));
+  const span=cols-idx; if(span>1) last.style.gridColumn="span "+span;
 }
 function toggleDrug(cls,id,focus){
   userTouched.add(cls); autoOpened.delete(cls);
