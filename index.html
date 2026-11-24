@@ -384,7 +384,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
         <div class="card heart-card">
           <svg id="heart" viewBox="-60 -10 540 506" role="img" aria-labelledby="heartTitle heartDesc">
             <title id="heartTitle">Anatomical cutaway of the heart with the conduction system</title>
-            <desc id="heartDesc">Frontal four-chamber section viewed from the front, so the patient's right side is on the viewer's left. Thin-walled right and left atria sit above the right and left ventricles; the left ventricular wall and septum are about three times thicker than the right ventricular wall. Tricuspid and mitral valves with chordae and papillary muscles, the moderator band, superior and inferior venae cavae, aorta, pulmonary trunk and pulmonary veins are shown. Coloured overlays show electrical activation only, synchronized with the ECG strip.</desc>
+            <desc id="heartDesc">Frontal four-chamber section viewed from the front, so the patient's right side is on the viewer's left. Thin-walled right and left atria sit above the right and left ventricles; the left ventricular wall and septum are about three times thicker than the right ventricular wall. The fibrous ring that electrically separates atria from ventricles, the papillary muscles, the moderator band (which carries the right bundle branch), superior and inferior venae cavae, aorta, pulmonary trunk and pulmonary veins are shown. Coloured overlays show electrical activation only, synchronized with the ECG strip.</desc>
             <defs>
               <linearGradient id="hv-muscle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E08A88"/><stop offset=".45" stop-color="#C55F68"/><stop offset="1" stop-color="#93364B"/></linearGradient>
               <linearGradient id="hv-atrium" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9A3A0"/><stop offset="1" stop-color="#B9566A"/></linearGradient>
@@ -393,7 +393,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <linearGradient id="hv-blueV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2F5873"/><stop offset=".4" stop-color="#7FA9C4"/><stop offset=".65" stop-color="#5D8BAA"/><stop offset="1" stop-color="#2F5873"/></linearGradient>
               <linearGradient id="hv-red" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9E3548"/><stop offset=".38" stop-color="#E58C8C"/><stop offset=".62" stop-color="#C9606B"/><stop offset="1" stop-color="#8A2C40"/></linearGradient>
               <linearGradient id="hv-redV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A2C40"/><stop offset=".4" stop-color="#E58C8C"/><stop offset=".65" stop-color="#C9606B"/><stop offset="1" stop-color="#8A2C40"/></linearGradient>
-              <linearGradient id="hv-leaflet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBE9DE"/><stop offset="1" stop-color="#E8C2B4"/></linearGradient>
               <radialGradient id="hv-shade" cx=".35" cy=".3" r=".85"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#3A0F1C" stop-opacity=".35"/></radialGradient>
               <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
               <filter id="hv-soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="6"/></filter>
@@ -506,21 +505,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <!-- atrioventricular groove fat with right coronary and circumflex arteries -->
               <path d="M80,236 C86,231 96,232 101,238 C97,245 87,247 80,243 Z M341,233 C348,229 357,231 361,236 C357,243 348,244 342,240 Z" fill="#EFCF86" stroke="#C9A24E" stroke-width=".8"/>
               <circle cx="90" cy="239" r="3.2" fill="#B5364A" stroke="#7E2638" stroke-width=".8"/><circle cx="351" cy="236.5" r="3.2" fill="#B5364A" stroke="#7E2638" stroke-width=".8"/>
-              <!-- fibrous skeleton: tricuspid and mitral annuli -->
+              <!-- fibrous skeleton: insulates atria from ventricles, so the AV node and His bundle are the only electrical connection -->
               <path d="M98,240 L192,240 M206,236 L336,234" stroke="#F4E2D6" stroke-width="4" stroke-linecap="round"/>
               <circle cx="199" cy="238" r="5" fill="#F4E2D6"/>
-              <!-- chordae tendineae -->
-              <g stroke="#F6E4DA" stroke-width="1" opacity=".9">
-                <path d="M126,276 L120,322 M134,278 L128,321 M168,274 L136,326 M176,272 L178,330"/>
-                <path d="M238,276 L236,348 M246,274 L242,347 M300,270 L310,322 M310,268 L318,322 M226,274 L230,350"/>
-              </g>
-              <!-- AV valve leaflets (open, diastolic position) -->
-              <g fill="url(#hv-leaflet)" stroke="#C99484" stroke-width=".9" stroke-linejoin="round">
-                <path d="M102,241 C106,250 114,262 124,276 C126,279 130,281 131,277 C130,266 131,253 136,242 Z"/>
-                <path d="M190,241 C186,252 181,262 175,272 C173,276 169,276 168,272 C167,262 167,251 170,242 Z"/>
-                <path d="M209,237 C216,250 228,264 240,276 C243,279 248,280 248,275 C246,262 246,249 249,238 Z"/>
-                <path d="M334,235 C329,246 321,257 312,268 C310,271 305,271 305,267 C304,256 305,245 308,236 Z"/>
-              </g>
             </g>
             <!-- ===== CONDUCTION SYSTEM ===== -->
             <g fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -544,7 +531,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <!-- ===== LEAD VIEW: lead axis, territory it faces, and the heart's electrical vector ===== -->
             <g id="leadOverlay" pointer-events="none">
               <path id="lo-territory" fill="none" stroke="#1E2328" stroke-width="3.5" stroke-dasharray="7 5" stroke-linecap="round"/>
-              <line id="lo-axis" stroke="#1E2328" stroke-width="1.3" stroke-dasharray="5 5" opacity=".7"/>
+              <!-- lead axis: light halo underneath so the dashed line reads clearly over the heart -->
+              <line id="lo-axisHalo" stroke="#FBF8F3" stroke-width="7" stroke-linecap="round" opacity=".85"/>
+              <line id="lo-axis" stroke="#1E2328" stroke-width="2.6" stroke-dasharray="9 6" stroke-linecap="round"/>
               <text id="lo-neg" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#1E2328" text-anchor="middle" paint-order="stroke" stroke="#FBF8F3" stroke-width="5">−</text>
               <line id="lo-proj" stroke="#B40838" stroke-width="8" stroke-linecap="round" opacity=".9"/>
               <line id="lo-vecHalo" stroke="#fff" stroke-width="6.5" stroke-linecap="round"/>
@@ -563,9 +552,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <text x="-56" y="432">Purkinje fibres</text>
             </g>
             <g id="anatLabels" font-family="Arial, sans-serif" font-size="12" fill="#5E6A73" pointer-events="none" opacity="0">
-              <g fill="none" stroke="#8B97A1" stroke-width=".9" stroke-dasharray="2 2"><path d="M-28,26 L96,26"/><path d="M-28,302 L44,298"/><path d="M30,262 L112,250"/><path d="M34,352 L104,334 L150,334"/><path d="M440,30 L320,40"/><path d="M376,82 L332,76"/><path d="M379,112 L398,130"/><path d="M405,206 L206,172"/><path d="M409,282 L308,256"/><path d="M379,376 L320,340"/><path d="M343,420 L222,384"/></g>
-              <text x="-56" y="30">SVC</text><text x="-56" y="306">IVC</text><text x="-56" y="266">Tricuspid valve</text><text x="-56" y="356">Moderator band</text>
-              <g text-anchor="end"><text x="476" y="34">Aorta</text><text x="476" y="86">Pulmonary artery</text><text x="476" y="116">Pulmonary veins</text><text x="476" y="210">Fossa ovalis</text><text x="476" y="286">Mitral valve</text><text x="476" y="380">Papillary muscle</text><text x="476" y="424">Interventricular septum</text></g>
+              <g fill="none" stroke="#8B97A1" stroke-width=".9" stroke-dasharray="2 2"><path d="M-28,26 L96,26"/><path d="M-28,302 L44,298"/><path d="M30,262 L112,241"/><path d="M34,352 L104,334 L150,334"/><path d="M440,30 L320,40"/><path d="M376,82 L332,76"/><path d="M379,112 L398,130"/><path d="M405,206 L206,172"/><path d="M379,376 L320,340"/><path d="M343,420 L222,384"/></g>
+              <text x="-56" y="30">SVC</text><text x="-56" y="306">IVC</text><text x="-56" y="266">Fibrous AV ring</text><text x="-56" y="356">Moderator band</text>
+              <g text-anchor="end"><text x="476" y="34">Aorta</text><text x="476" y="86">Pulmonary artery</text><text x="476" y="116">Pulmonary veins</text><text x="476" y="210">Fossa ovalis</text><text x="476" y="380">Papillary muscle</text><text x="476" y="424">Interventricular septum</text></g>
             </g>
           </svg>
           <svg id="heartAxial" viewBox="-60 -10 540 486" role="img" aria-labelledby="axTitle axDesc" style="display:none">
@@ -636,7 +625,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <g id="ax-electrodes" font-family="Arial, sans-serif" font-size="12" font-weight="700"></g>
             <g id="ax-lead" pointer-events="none">
               <path id="ax-territory" fill="none" stroke="#1E2328" stroke-width="3.5" stroke-dasharray="7 5" stroke-linecap="round"/>
-              <line id="ax-axis" stroke="#1E2328" stroke-width="1.3" stroke-dasharray="5 5" opacity=".7"/>
+              <line id="ax-axisHalo" stroke="#FBF8F3" stroke-width="7" stroke-linecap="round" opacity=".85"/>
+              <line id="ax-axis" stroke="#1E2328" stroke-width="2.6" stroke-dasharray="9 6" stroke-linecap="round"/>
               <line id="ax-proj" stroke="#B40838" stroke-width="8" stroke-linecap="round" opacity=".9"/>
               <line id="ax-vecHalo" stroke="#fff" stroke-width="6.5" stroke-linecap="round"/>
               <line id="ax-vec" stroke="#1E2328" stroke-width="3" stroke-linecap="round" marker-end="url(#ax-arrow)"/>
@@ -1390,11 +1380,11 @@ function setLead(n){
     e.querySelector("text").setAttribute("fill",on?"#B40838":"#5E6A73"); e.querySelector("text").setAttribute("font-size",on?"15":"12");});
   if(chest){
     const [ex,ey]=chestPoint(LEADS.find(l=>l[0]===n)[1]);
-    setLine("ax-axis",AC[0]-(ex-AC[0])*0.55,AC[1]-(ey-AC[1])*0.55,ex,ey);
+    ["ax-axisHalo","ax-axis"].forEach(id=>setLine(id,AC[0]-(ex-AC[0])*0.55,AC[1]-(ey-AC[1])*0.55,ex,ey));
     $("ax-territory").setAttribute("d",TERR_A[info[3]]||"");
   }else{
     const a=LEADS.find(l=>l[0]===n)[1]*Math.PI/180, ux=Math.cos(a), uy=Math.sin(a), r=uy>0.4?205:225;
-    setLine("lo-axis",FC[0]-ux*r,FC[1]-uy*r,FC[0]+ux*(r-18),FC[1]+uy*(r-18));
+    ["lo-axisHalo","lo-axis"].forEach(id=>setLine(id,FC[0]-ux*r,FC[1]-uy*r,FC[0]+ux*(r-18),FC[1]+uy*(r-18)));
     $("lo-eye").setAttribute("transform",`translate(${(FC[0]+ux*r).toFixed(1)} ${(FC[1]+uy*r).toFixed(1)})`);
     $("lo-eye").innerHTML=eyeMarkup(n+" +");
     const nx=FC[0]-ux*(r+4), ny=FC[1]-uy*(r+4); $("lo-neg").setAttribute("x",nx.toFixed(1)); $("lo-neg").setAttribute("y",(ny+5).toFixed(1));

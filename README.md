@@ -37,5 +37,6 @@ Not an official University of Ottawa or University of Ottawa Heart Institute res
 | 2026-11-24 | Full code and content review: every rhythm in every lead, deep links, search and compare, mobile widths (320–1440 px), no-JavaScript and reduced-motion modes; guideline statements, trial figures and links checked against sources | Fixes applied: amlodipine algorithm step, vasospastic angina wording, guideline tags for mexiletine and sotalol, CAEP link, V3 caption, keyboard shortcuts, screen-reader states, search leaving drug pages open |
 | 2026-11-24 | Anatomy: IVC redrawn as a short stub entering the inferior right atrium (no longer runs alongside the right ventricle); label moved | Applied |
 | 2026-11-24 | Medications page: cards in each row share one height and the last row is filled, so the grid has no empty gaps | Applied |
+| 2026-11-24 | Heart illustration: lead axis made bolder with a light outline in both views; valve leaflets and chordae removed to focus on the conduction pathway; fibrous AV ring labelled | Applied |
 | Pending | Comparison of simulated waveforms with reference 12-lead ECGs | Not yet done. Einthoven relationships (II = I + III; aVR + aVL + aVF = 0) verified numerically |
 | Pending | Cardiology faculty review of final text and illustrations, with reviewer name, version and sign-off | Not yet done |
