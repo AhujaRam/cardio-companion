@@ -139,10 +139,13 @@ table.cmp-table{width:100%;border-collapse:collapse;background:#fff;border-radiu
 .rhythm-nav button:hover{background:var(--soft)}
 .rhythm-nav button.on{background:var(--crimson);color:#fff;font-weight:700}
 @media(max-width:980px){.rhythm-nav .grp{display:flex;flex-wrap:wrap;gap:6px}.rhythm-nav button{width:auto;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13.5px}}
-.viz{display:grid;grid-template-columns:minmax(300px,540px) minmax(0,1fr);gap:20px}
+.viz{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.heart-card svg{max-width:620px;margin:0 auto}
 @media(max-width:760px){.viz{grid-template-columns:1fr}}
 .heart-card{padding:12px;background:radial-gradient(ellipse at 50% 42%,#FFFDF9 0%,#FBF8F3 70%,#F5F0E8 100%)}
 .lead-bar{margin-bottom:16px;padding:14px 16px}
+.lead-top{margin:0 0 18px}
+@media(max-width:600px){.seg.lead-seg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));width:100%}.seg.lead-seg button{min-width:0;padding:8px 0}.lead-row{gap:6px}}
 .lead-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .lead-lbl{font-weight:700;font-size:14px;color:var(--muted)}
 .lead-seg{flex-wrap:wrap;border-radius:12px}.lead-seg button{min-width:44px;min-height:36px}
@@ -298,6 +301,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
 <!-- ECG LEARNER -->
 <section class="page" id="page-ecg">
+  <div class="card lead-bar lead-top">
+        <div class="lead-row"><span class="lead-lbl">Lead</span><div class="seg lead-seg" id="leadSeg" role="group" aria-label="Choose ECG lead"></div></div>
+        <p class="lead-cap" id="leadCaption"></p>
+        <p class="small muted" style="margin:6px 0 0">The 12 leads and the vector arrow come from a simplified teaching model, not real recordings or a clinically validated simulator. Shapes are textbook-typical; compare with real tracings in class.</p>
+      </div>
   <h1>Visual ECG Learner</h1>
   <p class="lede">Pick any of the 12 leads to see its strip (25 mm/s, 10 mm/mV) and the heart as that lead sees it. As the cursor sweeps across, the heart lights up to show which part is depolarizing or repolarizing, and the arrow shows why the trace goes up or down. Click anywhere on the strip, or pick a wave below, to freeze that moment.</p>
 
@@ -305,11 +313,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <aside class="rhythm-nav" id="rhythmNav" aria-label="Rhythms"></aside>
 
     <div>
-      <div class="card lead-bar">
-        <div class="lead-row"><span class="lead-lbl">Lead</span><div class="seg lead-seg" id="leadSeg" role="group" aria-label="Choose ECG lead"></div></div>
-        <p class="lead-cap" id="leadCaption"></p>
-        <p class="small muted" style="margin:6px 0 0">The 12 leads and the vector arrow come from a simplified teaching model, not real recordings or a clinically validated simulator. Shapes are textbook-typical; compare with real tracings in class.</p>
-      </div>
       <div class="viz">
         <div class="card heart-card">
           <svg id="heart" viewBox="-60 -10 540 506" role="img" aria-labelledby="heartTitle heartDesc">
