@@ -114,7 +114,7 @@ kbd{font-family:inherit;font-size:12px;border:1px solid var(--line);border-radiu
 .med dl{margin:0}
 .med dt{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--crimson);margin-top:10px}
 .med dd{margin:2px 0 0;font-size:14.5px}
-.med .pearl{margin-top:auto;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
+.med .pearl{margin-top:12px;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
 .med dl{margin-bottom:12px}
 /* Cards in a row share one height (pearl pinned to the bottom); "dense" backfills holes left beside a full-width open card. */
 .med-grid{align-items:stretch;grid-auto-flow:row dense}
@@ -251,7 +251,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <noscript><style>#page-home{display:block}</style></noscript>
 </head>
 <body>
-<a class="skip" href="#content">Skip to content</a>
+<a class="skip" href="#content" id="skipLink">Skip to content</a>
 
 <div class="topbar"><div class="wrap">
   <span>Student-made supplement for the uOttawa first-year cardiology block</span>
@@ -288,15 +288,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
         <a class="btn ghost" href="#lectures">Browse lectures</a>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <svg viewBox="0 0 520 220" width="100%">
+    <div class="hero-visual">
+      <svg viewBox="0 0 520 220" width="100%" aria-hidden="true" focusable="false">
         <defs>
           <pattern id="hg-s" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" stroke="#F6D5DC" stroke-width="1"/></pattern>
           <pattern id="hg" width="50" height="50" patternUnits="userSpaceOnUse"><rect width="50" height="50" fill="url(#hg-s)"/><path d="M50 0H0V50" fill="none" stroke="#EDB3C0" stroke-width="1.2"/></pattern>
         </defs>
         <rect width="520" height="220" fill="#FFF7F8"/><rect width="520" height="220" fill="url(#hg)"/>
         <path class="hero-line" d="M0 140 H40 q12 -16 24 0 H92 l5 6 l9 -96 l9 110 l6 -20 H160 q22 -34 44 0 H260 q12 -16 24 0 H312 l5 6 l9 -96 l9 110 l6 -20 H380 q22 -34 44 0 H520"
-          fill="none" stroke="#B40838" stroke-width="3" stroke-linejoin="round" stroke-dasharray="1200" stroke-dashoffset="1200" style="animation:draw 3.2s linear 3 forwards"/>
+          fill="none" stroke="#B40838" stroke-width="3" stroke-linejoin="round" stroke-dasharray="1200" stroke-dashoffset="1200" style="animation:draw 3.2s linear 1 forwards"/>
         <g font-family="Arial" font-size="13" font-weight="700" fill="#333A40">
           <text x="38" y="118">P</text><text x="100" y="40">QRS</text><text x="172" y="96">T</text>
         </g>
@@ -310,11 +310,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <div class="card feature">
       <h3><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M2 13h4l2-5 3 10 3-13 2 8h6" fill="none" stroke="#B40838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visual ECG Learner</h3>
       <p>Normal sinus rhythm first, then the brady- and tachyarrhythmias. Click any wave to freeze the heart at that moment.</p>
-      <a href="#ecg">Start with normal sinus rhythm →</a>
+      <a href="#ecg-nsr">Start with normal sinus rhythm →</a>
     </div>
     <div class="card feature">
       <h3><span class="ico"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z M8 10h8 M8 14h8 M8 18h5" fill="none" stroke="#B40838" stroke-width="2" stroke-linejoin="round"/></svg></span>Lecture Companion</h3>
-      <p>Myocardial Contraction and Ventricular Function are ready, plus the ECG session objectives. More lectures pending.</p>
+      <p>Summaries of Myocardial Contraction and Ventricular Function, plus the ECG session objectives. More lectures pending.</p>
       <a href="#lectures">See the lectures →</a>
     </div>
     <div class="card feature">
@@ -355,17 +355,17 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       <div class="card lead-bar">
         <div class="lead-row"><span class="lead-lbl">Lead</span><div class="seg lead-seg" id="leadSeg" role="group" aria-label="Choose ECG lead"></div></div>
         <p class="lead-cap" id="leadCaption"></p>
-        <p class="small muted" style="margin:6px 0 0">The 12 leads and the vector arrow come from a simplified teaching model, not real recordings or a clinically validated simulator. Shapes are textbook-typical; compare with real tracings in class.</p>
+        <p class="small muted" style="margin:6px 0 0">The 12 leads and the vector arrow come from a simplified teaching model, not real recordings or a clinically validated simulator. Limb leads follow the Einthoven and Goldberger equations; chest-lead shapes come from a simple dipole (not a torso model), so their amplitudes are illustrative only. Compare with real tracings in class.</p>
       </div>
 
       <div class="viz">
         <div class="card strip-card">
         <div class="strip-head">
           <h3 id="stripTitle">Normal sinus rhythm</h3>
-          <span class="small muted" id="stripMeta">Lead II · 25 mm/s · 10 mm/mV · 6-second strip · small box = 40 ms / 0.1 mV</span>
+          <span class="small muted" id="stripMeta">Lead II · drawn like standard ECG paper (25 mm/s, 10 mm/mV; screen pixels are not true millimetres) · 6-second strip · small box = 40 ms / 0.1 mV</span>
         </div>
         <p class="small muted swipe-hint">The strip follows the cursor. Scroll or swipe it sideways to see the rest of the 6 seconds.</p>
-        <div class="strip-scroll"><canvas id="ecg" role="img" aria-label="ECG rhythm strip. Click to freeze the animation at that moment; the Jump to buttons and the step buttons do the same from the keyboard."></canvas></div>
+        <div class="strip-scroll"><canvas id="ecg" tabindex="0" role="img" aria-label="ECG rhythm strip. Click to freeze the animation at that moment. When focused, Space plays or pauses and the arrow keys step 20 ms; the time slider, Jump to buttons and step buttons do the same."></canvas></div>
         <div class="controls">
           <button class="ctl play" id="playBtn" type="button">❚❚ Pause</button>
           <button class="ctl" id="backBtn" type="button" title="Step back 20 ms (←)">◀ 20 ms</button>
@@ -376,9 +376,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <button type="button" data-speed="0.5" aria-pressed="false">½×</button>
             <button type="button" data-speed="1" aria-pressed="false">Real time</button>
           </div>
-                    <span class="small muted kbd-hint" style="margin-left:auto"><kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
+                    <label class="small muted" style="display:flex;align-items:center;gap:6px">Time <input type="range" id="timeRange" min="0" max="5999" step="10" value="0" aria-label="Position in the 6-second strip, in milliseconds"></label>
+          <span class="small muted kbd-hint" style="margin-left:auto">With the strip focused: <kbd>Space</kbd> play/pause · <kbd>←</kbd><kbd>→</kbd> step</span>
         </div>
         <div class="chiprow" id="waveChips"><span class="lbl">Jump to:</span></div>
+        <p class="small muted" style="margin:6px 0 0">Interval values are the model's built-in timings, not measurements read off the drawn trace: the smooth simulated waves begin slightly before and end slightly after the highlighted boundaries. They are not patient normal ranges. The strip loops: the jump back to the start at 6 s is not a pause or an extra beat.</p>
       </div>
 
         <div class="card heart-card">
@@ -692,15 +694,15 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <!-- LECTURES -->
 <section class="page" id="page-lectures">
   <h1>Lecture Companion</h1>
-  <p class="lede">One page per lecture. Read the preview before class, keep "Follow along" open during class, and use the readings to go deeper.</p>
-  <div class="notice"><b>Lectures 1–2 and the ECG sessions are ready.</b> The remaining lectures are pending and will be added as they are delivered. Summaries are written for this site from the lecture content; they do not reproduce the slides.</div>
+  <p class="lede">One section per lecture. Read the preview before class, keep "Follow along" open during class, and use the readings to go deeper.</p>
+  <div class="notice"><b>What is available:</b> summaries of lectures 1–2 (January 2026), and the ECG session objectives with matching rhythm practice in the ECG Learner. The 12-lead modules for ECG sessions 2–3 (axis, enlargement, hypertrophy, ST changes, Q waves) and the remaining lectures are pending; this page does not yet cover every course objective. Summaries are written for this site from the lecture content; they do not reproduce the slides.</div>
   <div class="lec-list" id="lecList"></div>
 </section>
 
 <!-- MEDS -->
 <section class="page" id="page-meds">
   <h1>Medications</h1>
-  <p class="lede">Drug classes relevant to the cardiology block, built for quick reference (the final list will be confirmed with faculty). Indications follow current Canadian guidelines. Tap any drug name for where it is used and the landmark trials behind it. Tick "Compare" on up to three classes to see them side by side.</p>
+  <p class="lede">Drug classes relevant to the cardiology block, built for quick reference (the final list will be confirmed with faculty). Clinical uses are summarized from current guidelines (a guideline recommendation is not the same as a Health Canada product indication or drug-plan coverage). Selected classes and examples, not an exhaustive list. Tap any drug name for where it is used and the landmark trials behind it. Tick "Compare" on up to three classes to see them side by side.</p>
   <div class="notice">Educational summary for first-year learning. Not a prescribing reference: always check the product monograph and current Canadian guidelines.</div>
   <div class="med-tools">
     <input class="search" id="medSearch" type="search" placeholder="Search a drug, class or trial (e.g. amiodarone, cough, PARADIGM-HF)" aria-label="Search medications">
@@ -709,14 +711,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <div class="cmp-table-wrap" id="cmpWrap"></div>
   <div class="med-grid" id="medGrid"></div>
   <div class="guide-list card" id="guideList"></div>
-  <div class="cmp-bar" id="cmpBar"><span id="cmpCount">0 selected</span><span style="display:flex;gap:8px"><button class="btn ghost" id="cmpClear" type="button">Clear</button><button class="btn primary" id="cmpGo" type="button">Compare</button></span></div>
+  <div class="cmp-bar" id="cmpBar"><span id="cmpCount" role="status" aria-live="polite">0 selected</span><span style="display:flex;gap:8px"><button class="btn ghost" id="cmpClear" type="button">Clear</button><button class="btn primary" id="cmpGo" type="button">Compare</button></span></div>
 </section>
 
 </main>
 
 <footer><div class="wrap">
   <span>Student-made study supplement for first-year medical students. Not an official University of Ottawa or University of Ottawa Heart Institute resource. Content pending faculty review. For learning only, not for clinical decisions.</span>
-  <span>Built to support lectures, never to replace them.</span>
+  <span>Built to support lectures, never to replace them. Draft version 2026-11-24 · not yet faculty reviewed · <a href="https://github.com/AhujaRam/cardio-companion/issues" target="_blank" rel="noopener">report an error</a></span>
 </div></footer>
 
 <script>
@@ -725,6 +727,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
    ROUTING
    ========================================================= */
 const PAGES=["home","ecg","lectures","meds"];
+const PAGE_TITLES={home:"Cardio Companion",ecg:"Visual ECG Learner · Cardio Companion",lectures:"Lecture Companion · Cardio Companion",meds:"Medications · Cardio Companion"};
 const scrollBeh=()=>(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)?"auto":"smooth";
 let lastPage=null;
 function route(){
@@ -738,8 +741,11 @@ function route(){
   const ix=h.indexOf("-"); if(ix>0){sub=h.slice(ix+1);h=h.slice(0,ix);}
   if(!PAGES.includes(h)) h="home";
   document.querySelectorAll("section.page").forEach(s=>s.classList.toggle("active",s.id==="page-"+h));
-  document.querySelectorAll("nav.tabs a").forEach(a=>a.classList.toggle("active",a.dataset.page===h));
-  if(h==="ecg"){ if(sub && RHYTHMS[sub]) selectRhythm(sub); resizeCanvas(); }
+  document.querySelectorAll("nav.tabs a").forEach(a=>{const on=a.dataset.page===h; a.classList.toggle("active",on); on?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current");});
+  document.title=(h==="ecg"&&sub&&RHYTHMS[sub]?(RHYTHMS[sub].short||RHYTHMS[sub].name)+" · ":"")+PAGE_TITLES[h];
+  // page-level navigation moves focus to the new page heading (not on the first load, and not for sub-routes)
+  if(lastPage!==null && h!==lastPage && !sub){ const h1=document.querySelector("#page-"+h+" h1"); if(h1){h1.setAttribute("tabindex","-1"); h1.focus({preventScroll:true});} }
+  if(h==="ecg"){ if(sub && RHYTHMS[sub]) selectRhythm(sub); resizeCanvas(); startLoop(); }
   if(h==="meds") fillLastRow();
   const changed=h!==lastPage; lastPage=h;
   if(h==="meds" && sub && sub.startsWith("drug-") && DRUGS[sub.slice(5)]){ const did=sub.slice(5); medQuery=""; $("medSearch").value=""; medGroup="all"; buildMedChips(); toggleDrug(DRUGS[did].cls,did,false); }
@@ -749,6 +755,8 @@ function route(){
   if(!subFound && (changed || !sub || h==="ecg")) window.scrollTo(0,0);
 }
 window.addEventListener("hashchange",route);
+// Skip link: move focus to the current page without replacing a meaningful hash (plain #content still works without JS)
+document.getElementById("skipLink").addEventListener("click",e=>{ e.preventDefault(); const pg=document.querySelector("section.page.active")||document.getElementById("content"); const h=pg.querySelector("h1")||pg; h.setAttribute("tabindex","-1"); h.focus(); });
 
 /* =========================================================
    ECG MODEL
@@ -786,7 +794,7 @@ function seeded(seed){return()=>{seed=(seed*1664525+1013904223)%4294967296;retur
 const RHYTHMS={
   nsr:{name:"Normal sinus rhythm",group:"Start here",reg:true,
     build(){return Object.assign(sinusSeq(0.8,[0.16]),{atria:"sinus"});},
-    meas:[["Rate","75 bpm (normal 60–100)"],["Rhythm","Regular, sinus"],["Axis","About +35°: QRS positive in leads I and aVF (normal −30° to +90°)"],["P wave","Upright in lead II, one before every QRS"],["PR interval","160 ms (normal 120–200 ms)"],["QRS duration","90 ms (normal < 100 ms)"],["QT / QTc","QT 367 ms, QTc ≈ 410 ms (normal; ECG Manual range 300–440/450 ms, upper limits about 450 ms men / 460 ms women)"]],
+    meas:[["Rate","75 bpm (normal 60–100)"],["Rhythm","Regular, sinus"],["Axis","About +35°: QRS positive in leads I and aVF (normal −30° to +90°)"],["P wave","Upright in lead II, one before every QRS"],["PR interval","160 ms (normal 120–200 ms)"],["QRS duration","90 ms (normal < 100 ms)"],["QT / QTc","QT 367 ms, QTc ≈ 410 ms (normal; ECG Manual range 300–440/450 ms, upper limits about 450 ms men / 460 ms women). Model note: this simulator sets QT = 0.41 × √RR, a Bazett-style teaching rule; Bazett QTc = QT ÷ √RR (RR in seconds) over- or under-corrects at fast and slow rates."]],
     keys:["Rate 60–100 bpm and regular","Upright P wave in lead II before every QRS (the impulse starts at the SA node)","Every P is followed by a QRS, with a constant PR interval of 120–200 ms","Normal QRS duration (< 100 ms)"],
     mech:"The SA node is the fastest natural pacemaker, so it sets the rate. Its impulse spreads through the atria, is delayed in the AV node, then races down the His–Purkinje system so both ventricles depolarize almost together.",
     pearl:"Learn this one first. Every other rhythm is a change to one step of this sequence: where the impulse starts, how fast it fires, or where it gets blocked."},
@@ -795,31 +803,31 @@ const RHYTHMS={
     meas:[["Rate","48 bpm (< 60)"],["Rhythm","Regular"],["P waves","Normal, one before every QRS"],["PR interval","160 ms"],["QRS","90 ms"]],
     keys:["Looks exactly like normal sinus rhythm, only slower (< 60 bpm)","Normal P before every QRS, constant normal PR","Longer gap between T wave and next P wave (long TP segment)"],
     mech:"The SA node fires more slowly than usual: higher vagal tone, drugs that slow the SA node, or disease of the node itself.",
-    pearl:"Common and often normal (athletes, sleep). Other causes: beta blockers, non-dihydropyridine calcium channel blockers, hypothyroidism, inferior MI, sick sinus syndrome. Treat only if the slow rate causes symptoms or hemodynamic compromise; atropine is then the first-line drug."},
+    pearl:"Common and often normal (athletes, sleep). Other causes: beta blockers, non-dihydropyridine calcium channel blockers, hypothyroidism, inferior MI, sick sinus syndrome. Act when the slow rate is actually causing symptoms or poor perfusion: look for reversible causes (drugs, ischemia, electrolytes). Atropine is the usual first drug for symptomatic bradycardia, but it often fails when the block is below the AV node (Mobitz II, complete block with a wide escape); pacing or other ACLS measures are then needed."},
   tachy:{name:"Sinus tachycardia",group:"Sinus rhythms",manual:"1.4",reg:true,
     build(){return Object.assign(sinusSeq(0.5,[0.14]),{atria:"sinus"});},
     meas:[["Rate","120 bpm (> 100)"],["Rhythm","Regular"],["P waves","Normal, one before every QRS"],["PR interval","140 ms"],["QRS","90 ms"]],
-    keys:["Sinus P waves at > 100 bpm","Gradual onset and offset (not abrupt like re-entrant SVT)","Short TP segment: the next P comes soon after the T wave"],
+    keys:["Sinus P waves at > 100 bpm","Gradual onset and offset, unlike the abrupt start of re-entrant SVT (a clue from monitoring or history; this 6-second strip cannot show it)","Short TP segment: the next P comes soon after the T wave"],
     mech:"The SA node fires faster, usually because of sympathetic stimulation that steepens phase 4 depolarization of nodal cells.",
     pearl:"Sinus tachycardia is a response, not a disease: look for the cause (pain, fever, hypovolemia, anemia, anxiety, hyperthyroidism, pulmonary embolism, sepsis) and treat that."},
   avb1:{name:"First-degree AV block",group:"AV blocks",reg:true,
     build(){return Object.assign(sinusSeq(0.857,[0.28]),{atria:"sinus"});},
     meas:[["Rate","70 bpm"],["Rhythm","Regular"],["P waves","Normal, every P conducted"],["PR interval","280 ms (> 200 ms), constant"],["QRS","90 ms"]],
     keys:["PR interval > 200 ms (more than one big box)","PR is the same every beat","Every P wave is followed by a QRS: no dropped beats"],
-    mech:"Conduction through the AV node is slowed but never fails, so the AV delay (PR segment) is longer than normal.",
+    mech:"Conduction is slowed but never fails, so the PR interval is longer than normal. In this example the delay is in the AV node (the usual site), but it can also sit in the atria or the His–Purkinje system.",
     pearl:"Strictly a delay, not a true block. Usually benign. Causes include high vagal tone and AV-nodal blocking drugs (beta blockers, non-DHP calcium channel blockers, digoxin)."},
   mob1:{name:"Second-degree AV block, Mobitz I (Wenckebach)",short:"Mobitz I (Wenckebach)",group:"AV blocks",
     build(){return Object.assign(sinusSeq(0.75,[0.16,0.26,0.32,null],{drop:"av"}),{atria:"sinus"});},
     meas:[["Atrial rate","80 bpm, regular P–P"],["Ventricular rate","Lower than atrial rate, irregular"],["P waves","Normal; every 4th P not conducted (4:3)"],["PR interval","160 → 260 → 320 ms, then dropped"],["QRS","90 ms"]],
     keys:["PR gets progressively longer until one P wave is not followed by a QRS","The PR after the dropped beat is the shortest","Group beating; R–R intervals shorten before the pause"],
     mech:"Decremental conduction in the AV node: each successive impulse arrives when the node has had less time to recover, so it conducts more slowly (longer PR) until one fails completely. The pause lets the node recover and the cycle restarts. (\"Fatigue\" is a common shorthand for this.)",
-    pearl:"The block is usually in the AV node itself, so it is often benign (high vagal tone, inferior MI, AV-nodal blocking drugs) and rarely progresses to complete heart block."},
+    pearl:"The block is usually in the AV node itself, so it is often benign (high vagal tone, inferior MI, AV-nodal blocking drugs) and rarely progresses to complete heart block. Not always benign: symptoms, or a block below the AV node, change management. The classic R–R shortening and group beating are not seen in every case."},
   mob2:{name:"Second-degree AV block, Mobitz II",short:"Mobitz II",group:"AV blocks",
     build(){return Object.assign(sinusSeq(0.75,[0.18,0.18,0.18,null],{drop:"his"}),{atria:"sinus"});},
     meas:[["Atrial rate","80 bpm, regular P–P"],["Ventricular rate","Lower than atrial rate"],["P waves","Normal; every 4th P not conducted (4:3)"],["PR interval","180 ms, constant in conducted beats"],["QRS","90 ms here (often wide in practice)"]],
     keys:["PR interval stays constant","Then a P wave suddenly fails to conduct, with no warning PR prolongation","The pause equals two P–P intervals"],
     mech:"The block is usually below the AV node, in the bundle of His or bundle branches. Those tissues tend to conduct all-or-none, so the PR does not lengthen before a beat drops.",
-    pearl:"More dangerous than Mobitz I: it can progress suddenly to complete heart block. It is frequently associated with a wide QRS (bundle branch disease) and a permanent pacemaker is recommended for acquired Mobitz II that is not due to a reversible cause, even if the patient has no symptoms."},
+    pearl:"More dangerous than Mobitz I: it can progress suddenly to complete heart block. It is frequently associated with a wide QRS (bundle branch disease) and a permanent pacemaker is recommended for acquired Mobitz II that is not due to a reversible cause, even if the patient has no symptoms. Caution: with 2:1 block there is only one conducted PR per dropped P, so Mobitz I and II cannot be told apart from the PR pattern alone."},
   avb3:{name:"Third-degree (complete) AV block",short:"Third-degree AV block",group:"AV blocks",reg:true,
     build(){
       const A=[],V=[];
@@ -830,7 +838,7 @@ const RHYTHMS={
     meas:[["Atrial rate","80 bpm, regular P–P"],["Ventricular rate","45 bpm, regular R–R (junctional escape)"],["P waves","Normal, but unrelated to the QRS complexes"],["PR interval","Varies: no relationship (AV dissociation)"],["QRS","90 ms (narrow escape from the AV junction)"]],
     keys:["P waves march through at their own regular rate","QRS complexes march at their own slower regular rate","No consistent PR interval: some P waves fall on QRS or T waves","Some P–QRS pairs will look \"conducted\" by coincidence: march out the P waves with calipers or paper to prove they are independent"],
     mech:"No atrial impulses reach the ventricles. A backup pacemaker below the block takes over: a junctional escape (narrow QRS, 40–60 bpm) or a ventricular escape (wide QRS, 20–40 bpm).",
-    pearl:"Atria and ventricles beat independently (AV dissociation). Usually needs a permanent pacemaker; temporary pacing if unstable."},
+    pearl:"Atria and ventricles beat independently (AV dissociation) with the atrial rate faster than the ventricular rate and no conducted beats. AV dissociation alone does not prove complete block (it also happens when a faster lower pacemaker takes over). Exclude reversible causes (drugs, ischemia, hyperkalemia, Lyme disease); persistent acquired complete block usually needs a permanent pacemaker, with temporary pacing if unstable."},
   af:{name:"Atrial fibrillation",group:"Supraventricular tachycardias",manual:"4.3",
     build(){
       const r=seeded(7); const V=[]; let q=0.25, prev=0.7;
@@ -839,7 +847,7 @@ const RHYTHMS={
     },
     meas:[["Atrial rate","Disorganized (> 350/min); no measurable rate"],["Ventricular rate","Varies beat to beat (use the 6-second count below)"],["Rhythm","Irregularly irregular"],["P waves","Absent; wavy fibrillatory baseline"],["QRS","90 ms (normal < 100 ms)"]],
     keys:["Irregularly irregular R–R intervals with no repeating pattern","No P waves","Fine or coarse wavy baseline (fibrillatory waves)"],
-    mech:"Many chaotic wavelets circulate in the atria, often triggered from the pulmonary veins. The atria quiver instead of contracting. The AV node lets impulses through at random, so the ventricular rhythm is irregular.",
+    mech:"Many chaotic wavelets circulate in the atria, often triggered from the pulmonary veins. The atria quiver instead of contracting. Bombarded with impulses, the AV node conducts only those that arrive when it has recovered (refractoriness and concealed conduction), so the ventricular rhythm is irregularly irregular. Fine AF can look almost flat.",
     pearl:"The most common sustained arrhythmia. Key issues: stroke prevention (Canadian guidelines use the CHADS-65 approach to decide on anticoagulation) and rate or rhythm control."},
   afl:{name:"Atrial flutter (2:1)",short:"Atrial flutter (2:1)",manual:"4.2",reg:true,group:"Supraventricular tachycardias",
     build(){
@@ -850,7 +858,7 @@ const RHYTHMS={
     meas:[["Atrial (flutter) rate","300/min"],["Ventricular rate","150 bpm (2:1 conduction)"],["Rhythm","Regular"],["P waves","Replaced by sawtooth flutter (F) waves"],["QRS","90 ms (normal < 100 ms)"]],
     keys:["Regular narrow-complex tachycardia at about 150 bpm","Sawtooth flutter waves, best seen in II, III and aVF; at 2:1 every second F wave hides in the QRS or T wave","Atrial rate about 300/min"],
     mech:"A single large re-entry circuit spins around the right atrium (typical flutter uses the cavotricuspid isthmus, near the tricuspid annulus). The AV node cannot conduct every impulse, so only every 2nd, 3rd or 4th one reaches the ventricles.",
-    pearl:"2:1 is the most common conduction ratio, and the flutter waves are easy to miss. Adenosine briefly blocks the AV node: the QRS complexes pause and the flutter waves are unmasked, but the flutter itself continues. Compare with the 4:1 version, where the sawtooth is easier to see."},
+    pearl:"2:1 is the most common conduction ratio, and the flutter waves are easy to miss. In a stable, monitored patient with a regular rhythm, adenosine briefly blocks the AV node: the QRS complexes pause and the flutter waves are unmasked, but the flutter itself continues (adenosine does not terminate typical flutter). An unstable patient needs urgent cardioversion. Compare with the 4:1 version, where the sawtooth is easier to see."},
   afl4:{name:"Atrial flutter (4:1)",short:"Atrial flutter (4:1)",group:"Supraventricular tachycardias",
     reg:true,
     build(){
@@ -859,7 +867,7 @@ const RHYTHMS={
       return {A:[],V,atria:"flutter",f0};
     },
     meas:[["Atrial (flutter) rate","300/min"],["Ventricular rate","75 bpm (4:1 conduction)"],["Rhythm","Regular here (can be variable)"],["P waves","Replaced by sawtooth flutter (F) waves"],["QRS","90 ms (normal < 100 ms)"]],
-    keys:["Sawtooth flutter waves, best seen in II, III and aVF","Atrial rate about 300/min","Fixed ratio of F waves to QRS (2:1 is most common, giving a ventricular rate near 150)"],
+    keys:["Sawtooth flutter waves, best seen in II, III and aVF (negative in typical counterclockwise flutter; not every flutter looks like a classic sawtooth)","Atrial rate about 300/min","Fixed ratio of F waves to QRS: here 4:1, so the ventricular rate is 75. A rate of 75 does not mean sinus rhythm; look for the F waves (2:1, rate near 150, is most common)"],
     mech:"A single large re-entry circuit spins around the right atrium (typical flutter uses the cavotricuspid isthmus, near the tricuspid annulus). The AV node cannot conduct every impulse, so only every 2nd, 3rd or 4th one reaches the ventricles.",
     pearl:"A regular narrow-complex tachycardia at about 150 bpm should make you think of flutter with 2:1 block. Stroke risk is managed like AF; ablation of the cavotricuspid isthmus is very effective."},
   svt:{name:"AVNRT (AV nodal re-entry, the most common SVT)",short:"AVNRT (a type of SVT)",group:"Supraventricular tachycardias",manual:"4.1",manualNote:"(a regular narrow-complex tachycardia; the case does not say which SVT mechanism)",reg:true,
@@ -869,9 +877,9 @@ const RHYTHMS={
       return {A,V,atria:"retro",reentry:"av"};
     },
     meas:[["Rate","180 bpm"],["Rhythm","Regular"],["P waves","Not visible (hidden in or just after the QRS)"],["PR interval","Not measurable"],["QRS","90 ms (normal < 100 ms)"]],
-    keys:["Regular narrow-complex tachycardia, usually 150–250 bpm","No visible P waves before the QRS","Abrupt onset and offset"],
+    keys:["Regular narrow-complex tachycardia, usually 150–250 bpm","No visible P waves before the QRS (in this idealized example the retrograde P is left out entirely, as if hidden in the QRS; real tracings may show a small pseudo-r′ in V1)","Abrupt onset and offset (a typical clue, not universal; this fixed strip cannot show the onset)","SVT is not always narrow: aberrant conduction or an accessory pathway can make it wide"],
     mech:"Two pathways in and around the AV node (slow and fast) form a re-entry loop. Each loop sends an impulse down to the ventricles and back up to the atria at almost the same moment, so the P wave hides inside the QRS. SVT is the umbrella term for narrow-complex tachycardias arising at or above the AV node; AVNRT is its most common re-entrant form, alongside AVRT (accessory pathway) and atrial tachycardia.",
-    pearl:"Vagal manoeuvres (such as the modified Valsalva) first, then adenosine, which briefly blocks the AV node and breaks the circuit."},
+    pearl:"First check the pulse and stability. Unstable (hypotension, shock, altered consciousness, ischemic chest pain, acute HF): urgent synchronized cardioversion by the resuscitation team. Stable and regular: vagal manoeuvres (such as the modified Valsalva), then adenosine on a cardiac monitor, which briefly blocks the AV node and breaks the circuit."},
   pvc:{name:"Premature ventricular complex (PVC)",short:"PVC",group:"Ventricular",manual:"2.1",
     build(){
       const A=[],V=[]; const pp=0.8, start=0.3;
@@ -886,26 +894,28 @@ const RHYTHMS={
       }
       V.sort((a,b)=>a.q0-b.q0); return {A,V,atria:"sinus"};
     },
-    meas:[["Underlying rhythm","Sinus, 75 bpm"],["PVC timing","Early (coupling interval 480 ms)"],["PVC QRS","160 ms, wide and bizarre"],["P before PVC","None"],["After the PVC","Full compensatory pause (2 × R–R)"]],
+    meas:[["Underlying rhythm","Sinus, 75 bpm"],["PVC timing","Early (coupling interval 480 ms)"],["PVC QRS","160 ms, wide and bizarre"],["P before PVC","None"],["Coupling interval","480 ms from the preceding sinus QRS to the PVC"],["After the PVC","1,120 ms to the next sinus QRS: a full compensatory pause, since the sinus QRS before and after the PVC are 1,600 ms apart (2 × 800 ms)"]],
     keys:["An early, wide, bizarre QRS (well beyond the normal < 100 ms) with no P wave in front of it","ST segment and T wave point opposite to the main QRS deflection","Usually followed by a full compensatory pause (not always: some PVCs reset the sinus node, and interpolated PVCs have no pause)"],
-    mech:"An irritable focus in the ventricular muscle fires before the next sinus beat. The impulse spreads slowly from cell to cell instead of through the Purkinje system, so the QRS is wide. The next sinus P arrives while the AV node and ventricles are still refractory and is not conducted.",
+    mech:"An irritable focus in the ventricular muscle fires before the next sinus beat. The impulse spreads slowly from cell to cell instead of through the Purkinje system, so the QRS is wide. The next sinus P arrives while the AV node and ventricles are still refractory (and may be blocked by concealed retrograde conduction), so it is not conducted. A sinus P can land near a PVC by coincidence; it does not cause it.",
     pearl:"Isolated PVCs are common and often benign in a normal heart. Frequent PVCs warrant a look at electrolytes, ischemia and structural heart disease."},
   vt:{name:"Ventricular tachycardia (monomorphic)",short:"Ventricular tachycardia",group:"Ventricular",manual:"4.4",reg:true,
     build(){
       const A=[],V=[];
-      for(let p=0.4;p<D+0.6;p+=0.8) A.push({p0:p,dur:0.1,kind:"sinus",conducted:false,blockAt:"dissoc"});
+      // Sinus P–P 0.73 s (≈ 82/min) vs VT R–R 0.40 s (150/min): the ratio is not a simple fraction, so each
+      // P wave lands at a different point of the VT cycle (dissociation is visible, not phase-locked).
+      for(let p=0.33;p<D+0.6;p+=0.73) A.push({p0:p,dur:0.1,kind:"sinus",conducted:false,blockAt:"dissoc"});
       for(let q=0.2;q<D+0.6;q+=0.4) V.push(mkV(q,0.14,"ventricular",0.4));
-      return {A,V,atria:"sinus"};
+      return {A,V,atria:"sinus",pp:0.73};
     },
-    meas:[["Rate","150 bpm"],["Rhythm","Regular"],["QRS","140 ms, wide, all the same shape (monomorphic)"],["P waves","Sinus P waves at 75 bpm, dissociated (mostly hidden)"],["Clues to look for","AV dissociation (shown here); fusion or capture beats (not shown on this strip)"]],
-    keys:["Three or more consecutive ventricular beats at > 100 bpm","Regular wide-complex tachycardia","AV dissociation: P waves at their own slower rate, often buried"],
+    meas:[["Rate","150 bpm"],["Rhythm","Regular"],["QRS","140 ms, wide, all the same shape (monomorphic)"],["P waves","Sinus P waves at about 82 bpm, dissociated: each lands at a different point of the VT cycle (most are buried in QRS or T; a few show just before a QRS). Use the P–P chip to march them out."],["Clues to look for","AV dissociation (shown here); fusion or capture beats (not shown on this strip)"]],
+    keys:["Three or more consecutive ventricular beats at > 100 bpm","Regular wide-complex tachycardia","AV dissociation: P waves at their own slower rate, with a changing relationship to the QRS; often buried","AV dissociation supports VT, but it is absent when the ventricles conduct back to the atria (retrograde 1:1), so its absence does not rule VT out"],
     mech:"A re-entry circuit (often around scar from an old infarct) or an automatic focus in the ventricles drives the heart. The sinus node keeps firing, but the atria and ventricles are now independent.",
-    pearl:"Treat a wide-complex tachycardia as VT until proven otherwise. Unstable with a pulse: synchronized cardioversion. Pulseless: defibrillation and ACLS."},
+    pearl:"First check for a pulse and signs of instability. Treat a wide-complex tachycardia as VT until proven otherwise. Pulseless: CPR, defibrillation and ACLS. Unstable with a pulse: urgent synchronized cardioversion by the resuscitation team. Stable: expert-guided drug therapy (see procainamide and amiodarone); never give verapamil or diltiazem for an undifferentiated wide-complex tachycardia."},
   vf:{name:"Ventricular fibrillation",group:"Ventricular",
     build(){return {A:[],V:[],atria:"none",vf:true};},
     meas:[["Rate","Not measurable"],["Rhythm","Chaotic"],["P waves","None identifiable"],["QRS","None identifiable"],["Output","None: cardiac arrest"]],
     keys:["Chaotic, irregular deflections of varying shape and amplitude","No identifiable P waves, QRS complexes or T waves","Patient is pulseless"],
-    mech:"Countless disorganized wavelets in the ventricular muscle. No coordinated depolarization means no contraction and no cardiac output.",
+    mech:"Countless disorganized wavelets in the ventricular muscle. The many competing wavefronts produce a constantly changing net vector rather than one orderly pathway. Without coordinated depolarization there is no coordinated, effective ventricular contraction and no cardiac output.",
     pearl:"Cardiac arrest. Immediate high-quality CPR and defibrillation. Always check the patient and the leads: artifact can mimic VF."},
 };
 const GROUP_ORDER=["Start here","Sinus rhythms","AV blocks","Supraventricular tachycardias","Ventricular"];
@@ -963,8 +973,13 @@ function synth3(R){
   }
   return {x:X3,y:Y3,z:Z3};
 }
+/* Voltage gain per lead. The axes above are unit vectors (geometry only). Goldberger augmented
+   leads measure √3/2 of a unit-axis projection: aVR = −(I+II)/2, aVL = I − II/2, aVF = (II+III)/2.
+   Chest leads use an arbitrary illustrative gain; precordial amplitudes are not quantitatively validated. */
+const AUG_GAIN=Math.sqrt(3)/2;
+function leadGain(name){return isChest(name)?PRECORDIAL_GAIN:(name[0]==="a"?AUG_GAIN:1);}
 function project(V3,name){
-  const ax=leadAxis(name), gn=isChest(name)?PRECORDIAL_GAIN:1, N=V3.x.length, y=new Float32Array(N);
+  const ax=leadAxis(name), gn=leadGain(name), N=V3.x.length, y=new Float32Array(N);
   for(let i=0;i<N;i++) y[i]=gn*(V3.x[i]*ax[0]+V3.y[i]*ax[1]+V3.z[i]*ax[2]);
   return y;
 }
@@ -1038,8 +1053,8 @@ function heartState(t,R){
     s.vC=vent?FOCUS:SEPT;
     if(dt<v.w){s.vRed=0.85; s.vk=dt/v.w; s.vNormal=!vent; s.vR=vent?10+340*dt/v.w:0;}
     else if(t<v.Tstart){s.vRed=0.55;s.vR=500;s.vk=1;}
-    else if(t<v.Tend){const k=(t-v.Tstart)/(v.Tend-v.Tstart); s.vRed=0.55*Math.pow(1-k,3); s.vR=500; s.vk=1; s.vBlue=Math.min(1,k*1.6);}
-    else if(t<v.Tend+0.12){s.vBlue=1-(t-v.Tend)/0.12;}
+    // blue = repolarizing; it rises through the T wave and is back to zero at T end (ventricles at rest)
+    else if(t<v.Tend){const k=(t-v.Tstart)/(v.Tend-v.Tstart); s.vRed=0.55*Math.pow(1-k,3); s.vR=500; s.vk=1; s.vBlue=Math.min(1,k*2)*Math.min(1,(1-k)*5);}
   }
   if(R.vf){s.vRed=0.25+0.1*Math.sin(t*41)*Math.sin(t*17); s.vR=500; s.vk=1; s.wl="v";}
   return s;
@@ -1059,7 +1074,7 @@ const TXT={
   FL:["Flutter waves: re-entry in the right atrium","A single circuit spins around the right atrium about 300 times a minute, producing the sawtooth baseline. The AV node cannot keep up, so only some impulses reach the ventricles (every 2nd at 2:1, every 4th at 4:1)."],
   AF:["Fibrillatory baseline: chaotic atria","Many wavelets circulate at random in the atria, so there is no organized atrial depolarization and no P wave. The AV node passes impulses through irregularly."],
   SVT:["AV nodal re-entry","A loop through the slow and fast pathways in the AV node fires the ventricles (narrow QRS) and the atria backwards at almost the same time. The retrograde P wave is hidden in the QRS."],
-  VF:["Ventricular fibrillation","Chaotic wavelets in the ventricles. No organized depolarization, no contraction and no cardiac output. This is cardiac arrest: start CPR and defibrillate. (Atrial activity is not shown.)"],
+  VF:["Ventricular fibrillation","Chaotic wavelets in the ventricles. No organized depolarization, no coordinated effective contraction and no cardiac output. This is cardiac arrest: start CPR and defibrillate. (Atrial activity is not shown.)"],
 };
 const BLOCKTXT={
   av:"This P wave is not followed by a QRS: the impulse dies in the AV node.",
@@ -1091,27 +1106,83 @@ function describe(t,R){
   return {main:items[0],extra:items.slice(1)};
 }
 
-/* ---- chips (intervals) ---- */
+/* ---- chips (intervals) ----
+   All values are the model's scheduled timings (its fiducial points), not measurements read off
+   the drawn Gaussian waves. Each rhythm also gets chips for the event that defines it. */
 function intervals(R){
   const out=[];
   if(R.vf) return out;
+  const ms=x=>Math.round(x*1000)+" ms";
+  const inS=x=>x>0.15&&x<D-0.05;
   const conducted=R.V.find(v=>v.p0!=null && v.p0>0.15 && v.kind==="normal");
   const v=conducted||R.V.find(x=>x.q0>0.15);
   if(!v) return out;
-  const ms=x=>Math.round(x*1000)+" ms";
+  const key=R.key, sinA=R.A.filter(a=>a.kind==="sinus");
+  const prJump=(a,b)=>(a+0.1+b)/2;
   if(conducted){
     out.push({k:"P",label:"P wave",a:v.p0,b:v.p0+0.1,val:"100 ms"});
-    out.push({k:"PR",label:"PR interval",a:v.p0,b:v.q0,val:ms(v.q0-v.p0)});
-  }else if(R.A.some(a=>a.kind==="sinus")){
-    const a=R.A.find(x=>x.kind==="sinus"&&x.p0>0.15);
+    if(key!=="mob1") out.push({k:"PR",label:"PR interval",a:v.p0,b:v.q0,val:ms(v.q0-v.p0),jump:prJump(v.p0,v.q0)});
+  }else if(sinA.length){
+    const a=sinA.find(x=>x.p0>0.15);
     if(a) out.push({k:"P",label:"P wave",a:a.p0,b:a.p0+0.1,val:"100 ms"});
   }
-  out.push({k:"QRS",label:"QRS complex",a:v.q0,b:v.q0+v.w,val:ms(v.w)});
+  const qrsLbl=key==="pvc"?"QRS (sinus beat)":"QRS complex";
+  out.push({k:"QRS",label:qrsLbl,a:v.q0,b:v.q0+v.w,val:ms(v.w)});
   if(v.kind!=="ventricular") out.push({k:"ST",label:"ST segment",a:v.q0+v.w,b:v.Tstart,val:ms(v.Tstart-v.q0-v.w)});
   out.push({k:"T",label:"T wave",a:v.Tstart,b:v.Tend,val:ms(v.Tend-v.Tstart)});
   out.push({k:"QT",label:"QT interval",a:v.q0,b:v.Tend,val:ms(v.qt)});
   const nxt=R.V[R.V.indexOf(v)+1];
-  if(nxt && nxt.q0<D) out.push({k:"RR",label:"R–R interval",a:v.q0+0.038,b:nxt.q0+0.038,val:ms(nxt.q0-v.q0)});
+  if(nxt && nxt.q0<D && key!=="af" && key!=="pvc") out.push({k:"RR",label:"R–R (QRS onset to onset)",a:v.q0,b:nxt.q0,val:ms(nxt.q0-v.q0),jump:v.q0});
+
+  // ---- diagnosis-defining events ----
+  if(key==="mob1"||key==="mob2"){
+    const d=sinA.findIndex((a,i)=>i>0 && !a.conducted && inS(a.p0));
+    if(d>0){
+      let i0=d-1; while(i0>0 && sinA[i0-1].conducted) i0--;
+      if(key==="mob1") sinA.slice(i0,d).forEach((a,n)=>out.push({k:"PR"+n,label:`PR, beat ${n+1}${n===0?" (shortest)":""}`,a:a.p0,b:a.q0,val:ms(a.q0-a.p0),jump:prJump(a.p0,a.q0)}));
+      else { const a=sinA[d-1]; out.push({k:"PRpre",label:"PR just before the drop",a:a.p0,b:a.q0,val:ms(a.q0-a.p0)+" (unchanged)",jump:prJump(a.p0,a.q0)}); }
+      const dp=sinA[d]; out.push({k:"DROP",label:"Dropped P wave",a:dp.p0,b:dp.p0+0.1,val:"no QRS follows"});
+      out.push({k:"PP",label:"P–P interval",a:sinA[d-1].p0,b:dp.p0,val:ms(dp.p0-sinA[d-1].p0)+" (regular)"});
+    }
+  }
+  if(key==="avb3"){
+    const a=sinA.find(x=>x.p0>0.15), b=a&&sinA[sinA.indexOf(a)+1];
+    if(b) out.push({k:"PP",label:"P–P (atrial rate)",a:a.p0,b:b.p0,val:ms(b.p0-a.p0)+" ≈ "+Math.round(60/(b.p0-a.p0))+"/min"});
+    if(nxt) out[out.findIndex(o=>o.k==="RR")].label="R–R (ventricular rate)";
+  }
+  if(key==="afl"||key==="afl4"){
+    const m=Math.ceil((v.Tend-R.f0)/0.2); const fa=R.f0+0.2*m;
+    out.push({k:"FF",label:"F–F (flutter wave to flutter wave)",a:fa,b:fa+0.2,val:"200 ms = 300/min",jump:fa+0.05});
+    if(nxt) out.push({k:"RATIO",label:"F waves per QRS",a:v.q0,b:nxt.q0,val:Math.round((nxt.q0-v.q0)/0.2)+":1",jump:v.q0+0.05});
+  }
+  if(key==="af"){
+    const vs=R.V.filter(x=>inS(x.q0)); const rr=[];
+    for(let i=0;i+1<vs.length;i++) if(vs[i+1].q0<D) rr.push([vs[i],vs[i+1]]);
+    if(rr.length>1){
+      const by=rr.slice().sort((p,q)=>(p[1].q0-p[0].q0)-(q[1].q0-q[0].q0));
+      const sh=by[0], lo=by[by.length-1];
+      out.push({k:"RRs",label:"Shortest R–R",a:sh[0].q0,b:sh[1].q0,val:ms(sh[1].q0-sh[0].q0),jump:sh[0].q0});
+      out.push({k:"RRl",label:"Longest R–R",a:lo[0].q0,b:lo[1].q0,val:ms(lo[1].q0-lo[0].q0),jump:lo[0].q0});
+    }
+  }
+  if(key==="pvc"){
+    const pv=R.V.find(x=>x.pvc), i=R.V.indexOf(pv), pre=R.V[i-1], post=R.V[i+1];
+    if(pv&&pre&&post){
+      out.push({k:"PVCQRS",label:"PVC QRS",a:pv.q0,b:pv.q0+pv.w,val:ms(pv.w)});
+      out.push({k:"COUP",label:"Coupling interval",a:pre.q0,b:pv.q0,val:ms(pv.q0-pre.q0),jump:pv.q0});
+      out.push({k:"PAUSE",label:"Pause after the PVC",a:pv.q0,b:post.q0,val:ms(post.q0-pv.q0),jump:post.q0-0.3});
+      out.push({k:"COMP",label:"Sinus QRS to sinus QRS around the PVC",a:pre.q0,b:post.q0,val:ms(post.q0-pre.q0)+" = 2 × R–R",jump:pv.q0});
+      const bp=sinA.find(a=>!a.conducted); if(bp) out.push({k:"BLKP",label:"Non-conducted sinus P",a:bp.p0,b:bp.p0+0.1,val:"buried in the PVC's ST–T"});
+    }
+  }
+  if(key==="vt"){
+    const a=sinA.find(x=>x.p0>0.15), b=a&&sinA[sinA.indexOf(a)+1];
+    if(b) out.push({k:"PP",label:"P–P (dissociated sinus P waves)",a:a.p0,b:b.p0,val:ms(b.p0-a.p0)+" ≈ "+Math.round(60/(b.p0-a.p0))+"/min"});
+    // a P wave that falls in the short baseline before a QRS, where it can actually be seen
+    // a P wave whose peak falls in the short baseline between a T wave and the next QRS, where it can be seen
+    const vis=sinA.find(x=>inS(x.p0) && R.V.every(q=>x.p0+0.05<=q.q0-0.005 || x.p0+0.05>=q.Tend));
+    if(vis) out.push({k:"VISP",label:"A visible P wave (not conducted)",a:vis.p0,b:vis.p0+0.1,val:"its timing differs every cycle",jump:vis.p0+0.05});
+  }
   return out;
 }
 
@@ -1139,7 +1210,7 @@ function buildNav(){
   }
 }
 function selectRhythm(k){
-  cur=k; const r=RHYTHMS[k]; R=r.build(); V3D=synth3(R); SIG=project(V3D,lead); t=0; hl=null;
+  cur=k; const r=RHYTHMS[k]; R=r.build(); R.key=k; V3D=synth3(R); SIG=project(V3D,lead); t=0; hl=null;
   document.querySelectorAll("#rhythmNav button").forEach(b=>{b.classList.toggle("on",b.dataset.k===k); b.setAttribute("aria-pressed",b.dataset.k===k);});
   $("stripTitle").textContent=r.name+" · lead "+lead;
   $("measTable").innerHTML=r.meas.map(([a,b])=>`<tr><th>${a}</th><td>${b}</td></tr>`).join("");
@@ -1157,15 +1228,15 @@ function selectRhythm(k){
   if(r.manual) rateTxt+=`<br><span class="pill" style="margin-top:8px">Practice: ECG Manual case ${r.manual}</span>`+(r.manualNote?` <span class="small muted">${r.manualNote}</span>`:"");
   $("sixSec").innerHTML=rateTxt;
   // chips
-  const row=$("waveChips"); row.querySelectorAll("button").forEach(b=>b.remove());
+  const row=$("waveChips"); row.querySelectorAll("button,[data-vfnote]").forEach(b=>b.remove());
   const ivs=intervals(R);
-  if(!ivs.length){const b=document.createElement("button");b.className="chip";b.disabled=true;b.textContent="No organized waves to measure";row.appendChild(b);}
+  if(!ivs.length){const sp=document.createElement("span");sp.className="small muted";sp.dataset.vfnote="1";sp.textContent="VF has no organized P waves, QRS complexes or T waves, so there are no intervals or rate to measure.";row.appendChild(sp);}
   for(const iv of ivs){
     const b=document.createElement("button"); b.type="button"; b.className="chip"; b.textContent=iv.label; b.setAttribute("aria-pressed","false");
     b.addEventListener("click",()=>{
       const same=hl&&hl.k===iv.k; row.querySelectorAll(".chip").forEach(c=>{c.classList.remove("on"); c.setAttribute("aria-pressed","false");});
       if(same){hl=null;frame();return;}
-      hl=iv; b.classList.add("on"); b.setAttribute("aria-pressed","true"); t=iv.k==="RR"?iv.a:iv.k==="PR"?(iv.a+0.1+iv.b)/2:(iv.a+iv.b)/2; setPlaying(false);
+      hl=iv; b.classList.add("on"); b.setAttribute("aria-pressed","true"); t=Math.min(D-0.001,iv.jump??(iv.a+iv.b)/2); setPlaying(false);
     });
     row.appendChild(b);
   }
@@ -1233,6 +1304,7 @@ function frame(force){
   { const sc=canvas.parentElement, vw=sc.clientWidth; if(vw && (playing || px<sc.scrollLeft+12 || px>sc.scrollLeft+vw-12)) sc.scrollLeft=Math.max(0,px-vw*0.35); }
   ctx.strokeStyle="rgba(180,8,56,.55)"; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(px,0); ctx.lineTo(px,H); ctx.stroke();
   ctx.fillStyle="#B40838"; ctx.beginPath(); ctx.arc(px,Y(SIG[iEnd]),4.5,0,7); ctx.fill();
+  const tr=$("timeRange"); if(tr && document.activeElement!==tr){ tr.value=Math.round(t*1000); tr.setAttribute("aria-valuetext",Math.round(t*1000)+" ms of 6000"); }
   updateHeart();
 }
 function roundRect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
@@ -1249,10 +1321,9 @@ let heartBroken=false;
 function updateHeart(){
   updateNarration();
   if(heartBroken) return;
-  try{ updateHeartInner(); const hs=heartState(t,R); updateAxial(hs); updateLeadView(); }catch(err){ heartBroken=true; console.warn("Heart animation disabled:",err); const n=$("noteFrontal"); if(n) n.insertAdjacentHTML("afterbegin","<b>The heart animation could not load; the ECG strip and explanations still work.</b> "); }
+  try{ const hs=heartState(t,R); updateHeartInner(hs); updateAxial(hs); updateLeadView(); }catch(err){ heartBroken=true; console.warn("Heart animation disabled:",err); ["noteFrontal","noteAxial"].forEach(id=>{const n=$(id); if(n) n.insertAdjacentHTML("afterbegin","<b role=\"status\">The heart animation stopped because of an error; reload the page to retry. The ECG strip and explanations still work.</b> ");}); }
 }
-function updateHeartInner(){
-  const s=heartState(t,R);
+function updateHeartInner(s){
   $("clipAc").setAttribute("cx",s.aC[0]); $("clipAc").setAttribute("cy",s.aC[1]); $("clipAc").setAttribute("r",s.aR);
   $("atriaRed").setAttribute("opacity",s.aRed.toFixed(3)); $("atriaBlue").setAttribute("opacity",s.aBlue.toFixed(3));
   seqCircles(s,SEQ_F,FOCUS).forEach((c,i)=>{const e=$(i?"clipVc"+(i+1):"clipVc"); e.setAttribute("cx",c[0]); e.setAttribute("cy",c[1]); e.setAttribute("r",c[2].toFixed(1));});
@@ -1287,20 +1358,25 @@ function updateNarration(){
   $("timeReadout").textContent=`t = ${(t*1000).toFixed(0)} ms of 6000 · ${playing?"playing":"paused"} at ${speed===1?"real time":speed+"×"}`;
 }
 
-let lastTs=null;
+let lastTs=null, rafId=null;
+const ecgActive=()=>document.getElementById("page-ecg").classList.contains("active");
 function loop(ts){
+  if(!playing || !ecgActive() || document.hidden){ rafId=null; lastTs=null; return; }
   if(lastTs==null) lastTs=ts;
   const dt=Math.min(0.05,(ts-lastTs)/1000); lastTs=ts;
-  if(playing && document.getElementById("page-ecg").classList.contains("active")){
-    t+=dt*speed; if(t>=D) t=0; frame();
-  }
-  requestAnimationFrame(loop);
+  t+=dt*speed; if(t>=D) t=0; frame();
+  rafId=requestAnimationFrame(loop);
 }
+function startLoop(){ if(rafId==null && playing && ecgActive() && !document.hidden){ lastTs=null; rafId=requestAnimationFrame(loop); } }
+document.addEventListener("visibilitychange",startLoop);
 // The narration is announced to screen readers only while paused, so playback does not flood them.
-function setPlaying(p){playing=p; $("playBtn").textContent=p?"❚❚ Pause":"▶ Play"; $("nowLive").setAttribute("aria-live",p?"off":"polite"); frame();}
+function clearHL(){hl=null; document.querySelectorAll("#waveChips .chip").forEach(c=>{c.classList.remove("on"); c.setAttribute("aria-pressed","false");});}
+// keep a highlight only while the cursor stays inside it
+function checkHL(){ if(hl && (t<hl.a-0.01 || t>hl.b+0.01)) clearHL(); }
+function setPlaying(p){ if(p && hl) clearHL(); playing=p; $("playBtn").textContent=p?"❚❚ Pause":"▶ Play"; $("nowLive").setAttribute("aria-live",p?"off":"polite"); frame(); startLoop();}
 $("playBtn").addEventListener("click",()=>setPlaying(!playing));
-$("backBtn").addEventListener("click",()=>{setPlaying(false);t=Math.max(0,t-0.02);frame();});
-$("fwdBtn").addEventListener("click",()=>{setPlaying(false);t=Math.min(D-0.001,t+0.02);frame();});
+$("backBtn").addEventListener("click",()=>{setPlaying(false);t=Math.max(0,t-0.02);checkHL();frame();});
+$("fwdBtn").addEventListener("click",()=>{setPlaying(false);t=Math.min(D-0.001,t+0.02);checkHL();frame();});
 document.querySelectorAll("#speedSeg button").forEach(b=>b.addEventListener("click",()=>{
   speed=parseFloat(b.dataset.speed); document.querySelectorAll("#speedSeg button").forEach(x=>{x.classList.toggle("on",x===b); x.setAttribute("aria-pressed",x===b);}); frame();
 }));
@@ -1308,18 +1384,16 @@ $("lblToggle").addEventListener("change",e=>$("labels").setAttribute("opacity",e
 $("anatToggle").addEventListener("change",e=>$("anatLabels").setAttribute("opacity",e.target.checked?1:0));
 canvas.addEventListener("click",e=>{
   const r=canvas.getBoundingClientRect(); t=Math.max(0,Math.min(D-0.001,(e.clientX-r.left)/r.width*D));
-  setPlaying(false);
+  checkHL(); setPlaying(false);
 });
-document.addEventListener("keydown",e=>{
-  if(!$("page-ecg").classList.contains("active")) return;
+// Shortcuts apply only when the strip (or its scroll area) has focus, so arrows keep their normal meaning elsewhere.
+canvas.addEventListener("keydown",e=>{
   if(e.altKey||e.ctrlKey||e.metaKey) return;
-  const tag=document.activeElement?document.activeElement.tagName:"";
-  if(["INPUT","TEXTAREA","SELECT"].includes(tag)) return;
-  // Space on a focused button or link keeps its normal meaning; the arrow keys always step the strip.
-  if(e.code==="Space"){ if(tag==="BUTTON"||tag==="A") return; e.preventDefault();setPlaying(!playing);}
-  if(e.code==="ArrowLeft"){e.preventDefault();setPlaying(false);t=Math.max(0,t-0.02);frame();}
-  if(e.code==="ArrowRight"){e.preventDefault();setPlaying(false);t=Math.min(D-0.001,t+0.02);frame();}
+  if(e.code==="Space"){e.preventDefault();setPlaying(!playing);}
+  if(e.code==="ArrowLeft"){e.preventDefault();setPlaying(false);t=Math.max(0,t-0.02);checkHL();frame();}
+  if(e.code==="ArrowRight"){e.preventDefault();setPlaying(false);t=Math.min(D-0.001,t+0.02);checkHL();frame();}
 });
+$("timeRange").addEventListener("input",e=>{t=Math.min(D-0.001,parseInt(e.target.value,10)/1000); checkHL(); setPlaying(false);});
 window.addEventListener("resize",()=>{if($("page-ecg").classList.contains("active"))resizeCanvas(); if($("page-meds").classList.contains("active"))fillLastRow();});
 
 /* =========================================================
@@ -1330,7 +1404,7 @@ const LEAD_INFO={
   I:["left arm","0°","high lateral wall","lateral"],
   II:["left leg","+60°","inferior wall","inferior"],
   III:["left leg","+120°","inferior wall","inferior"],
-  aVR:["right arm","−150°","cavities (it looks in from the right shoulder)",null],
+  aVR:["right arm","−150°","right upper side of the heart (a rightward, superior view; most normal forces point away from it, so it is mostly negative)",null],
   aVL:["left arm","−30°","high lateral wall","lateral"],
   aVF:["left leg (foot)","+90°","inferior wall","inferior"],
   V1:["in the 4th intercostal space, just right of the sternum",null,"septum","septal"],
@@ -1372,8 +1446,8 @@ function setLead(n){
   $("anatToggleWrap").style.display=chest?"none":""; $("lblToggleWrap").style.display=chest?"none":"";
   const info=LEAD_INFO[n];
   $("leadCaption").innerHTML=chest
-    ? `<b>Lead ${n}</b> sits ${info[0]}. It looks at the <b>${info[2]}</b>. Chest leads view the heart in this horizontal plane.`
-    : `<b>Lead ${n}</b> looks at the heart from the ${info[0]} (${info[1]} in the frontal plane), facing the <b>${info[2]}</b>.`;
+    ? `<b>Lead ${n}</b> sits ${info[0]}. It mainly faces the <b>${info[2]}</b> (a conventional, approximate grouping: no lead records only one wall). Chest leads view the heart in this horizontal plane, drawn here as one simplified slice.`
+    : `<b>Lead ${n}</b> looks at the heart from the ${info[0]} (${info[1]} in the frontal plane), mainly facing the <b>${info[2]}</b>.`;
   // electrodes / eye
   document.querySelectorAll("#ax-electrodes [data-el]").forEach(e=>{const on=e.dataset.el===n;
     e.querySelector("circle").setAttribute("fill",on?"#B40838":"#fff"); e.querySelector("circle").setAttribute("stroke",on?"#7E0628":"#5E6A73");
@@ -1390,7 +1464,7 @@ function setLead(n){
     const nx=FC[0]-ux*(r+4), ny=FC[1]-uy*(r+4); $("lo-neg").setAttribute("x",nx.toFixed(1)); $("lo-neg").setAttribute("y",(ny+5).toFixed(1));
     $("lo-territory").setAttribute("d",info[3]?TERR_F[info[3]]:"");
   }
-  $("stripMeta").textContent=`Lead ${n} · 25 mm/s · 10 mm/mV · 6-second strip · small box = 40 ms / 0.1 mV`;
+  $("stripMeta").textContent=`Lead ${n} · drawn like standard ECG paper (25 mm/s, 10 mm/mV; screen pixels are not true millimetres) · 6-second strip · small box = 40 ms / 0.1 mV`;
   $("stripTitle").textContent=RHYTHMS[cur].name+" · lead "+n;
   if(V3D){SIG=project(V3D,n); layoutStrip(); resizeCanvas();}
   lastLeadMsg="";
@@ -1398,10 +1472,10 @@ function setLead(n){
 let lastLeadMsg="";
 function updateLeadView(){
   if(!V3D) return;
-  const i=Math.min(V3D.x.length-1,Math.max(0,Math.round(t*FS)));
+  const i=Math.min(V3D.x.length-1,Math.max(0,Math.floor(t*FS))); // same sample as the strip cursor dot
   const x=V3D.x[i], y=V3D.y[i], z=V3D.z[i];
   const chest=isChest(lead), ax=leadAxis(lead);
-  const pr=(x*ax[0]+y*ax[1]+z*ax[2])*(chest?PRECORDIAL_GAIN:1);
+  const pr=SIG?SIG[i]:(x*ax[0]+y*ax[1]+z*ax[2])*leadGain(lead);
   const vis=showVec?1:0;
   if(chest){
     const phi=LEADS.find(l=>l[0]===lead)[1]*Math.PI/180, ux=Math.cos(phi), uy=-Math.sin(phi);
@@ -1422,10 +1496,10 @@ function updateLeadView(){
   }
   const mag=Math.hypot(x,y,z);
   let msg;
-  if(mag<0.03) msg=`Almost no net electrical activity right now, so lead ${lead} records a flat line.`;
-  else if(Math.abs(pr)<0.06) msg=`The heart's electrical vector is roughly at right angles to lead ${lead}, so lead ${lead} records almost nothing at this instant.`;
-  else if(pr>0) msg=`The heart's electrical vector points <b>toward</b> lead ${lead}'s positive electrode, so the trace goes <b>up</b>.`;
-  else msg=`The heart's electrical vector points <b>away from</b> lead ${lead}'s positive electrode, so the trace goes <b>down</b>.`;
+  if(mag<0.03) msg=`Little net projected surface signal right now (the heart may still be electrically active, but the forces cancel or are uniform), so lead ${lead} sits near baseline.`;
+  else if(Math.abs(pr)<0.06) msg=`The net electrical vector is roughly at right angles to lead ${lead}, so lead ${lead} records almost nothing at this instant.`;
+  else if(pr>0) msg=`The net electrical vector points <b>toward</b> lead ${lead}'s positive pole, so the trace is <b>above baseline</b> (a positive deflection) at this instant.`;
+  else msg=`The net electrical vector points <b>away from</b> lead ${lead}'s positive pole, so the trace is <b>below baseline</b> (a negative deflection) at this instant.`;
   if(msg!==lastLeadMsg){lastLeadMsg=msg; $("leadNow").innerHTML=msg;}
 }
 function updateAxial(s){
@@ -1491,7 +1565,7 @@ const LECTURES=[
 const ECG_SESSIONS=[
  ["Session 1",["Apply a logical approach to the interpretation of ECGs","Calculate rate by means of the count-off method","Recall the definition of normal sinus rhythm","Calculate the QRS axis on an ECG","State the normal values for the 3 intervals on ECG: PR, QRS and QT"],[["ecg-nsr","Normal sinus rhythm"],["ecg-tachy","Sinus tachycardia (case 1.4)"],["ecg-brady","Sinus bradycardia (case 1.5)"]]],
  ["Session 2",["Apply a logical approach to the interpretation of the ECG","List 3 conditions that can account for a wide-complex QRS","State the criteria for right atrial and left atrial enlargement","Apply criteria for left ventricular hypertrophy (Sokolow-Lyon) and list several conditions that can cause LVH","Identify right ventricular hypertrophy on a 12-lead ECG"],[["ecg-pvc","PVC (case 2.1)"]]],
- ["Session 3",["Apply a logical approach to the interpretation of the ECG","Identify and interpret ST segment depression on ECG","Identify and interpret ST segment elevation on ECG","Identify and interpret Q waves on ECG","Recognize the ECG manifestations of reperfusion after STEMI"],[["ecg-vt","Very rapid VT degenerating toward VF (case 3.4, after an inferior STEMI)"],["ecg-vf","Ventricular fibrillation"]]],
+ ["Session 3",["Apply a logical approach to the interpretation of the ECG","Identify and interpret ST segment depression on ECG","Identify and interpret ST segment elevation on ECG","Identify and interpret Q waves on ECG","Recognize the ECG manifestations of reperfusion after STEMI"],[["ecg-vt","Related rhythm practice: monomorphic VT (not the case 3.4 tracing, which shows very rapid VT degenerating toward VF after an inferior STEMI)"],["ecg-vf","Ventricular fibrillation"]]],
  ["Session 4",["Apply a logical approach to the interpretation of the ECG","Define sinus tachycardia","Distinguish between sinus node and AV node causes of bradycardia","Distinguish between the several types of AV block","Demonstrate a logical approach to the ECG interpretation of tachycardia","Recognize atrial flutter and atrial fibrillation","List factors that distinguish ventricular tachycardia (VT) from supraventricular tachycardia (SVT) with aberrancy"],[["ecg-tachy","Sinus tachycardia"],["ecg-brady","Sinus bradycardia"],["ecg-avb1","First-degree AV block"],["ecg-mob1","Mobitz I"],["ecg-mob2","Mobitz II"],["ecg-avb3","Third-degree AV block"],["ecg-svt","SVT (case 4.1)"],["ecg-afl","Flutter (case 4.2)"],["ecg-af","AF (case 4.3)"],["ecg-vt","VT (case 4.4)"]]],
 ];
 function buildLectures(){
@@ -1499,12 +1573,12 @@ function buildLectures(){
   const chev=`<svg class="chev" width="20" height="20" viewBox="0 0 20 20"><path d="M5 7l5 6 5-6" fill="none" stroke="#5E6A73" stroke-width="2" stroke-linecap="round"/></svg>`;
   const lec=LECTURES.map((L,i)=>`
   <article class="lec" id="lec-${L.id}">
-    <button class="lec-head" type="button" aria-expanded="false">
+    <button class="lec-head" type="button" aria-expanded="false" aria-controls="lecbody-${L.id}">
       <span class="lec-num">${i+1}</span>
       <span><span class="lec-title">${L.title}</span><br><span class="lec-meta">${L.who} · ${L.obj.length} objectives</span></span>
       ${chev}
     </button>
-    <div class="lec-body">
+    <div class="lec-body" id="lecbody-${L.id}">
       <div class="subtabs" role="group" aria-label="Lecture sections">
         <button type="button" aria-pressed="true" class="on" data-p="pre">Preview (before lecture)</button>
         <button type="button" aria-pressed="false" data-p="fol">Follow along (during)</button>
@@ -1521,15 +1595,15 @@ function buildLectures(){
   </article>`).join("");
   const ecg=`
   <article class="lec" id="lec-ecg">
-    <button class="lec-head" type="button" aria-expanded="false">
+    <button class="lec-head" type="button" aria-expanded="false" aria-controls="lecbody-ecg">
       <span class="lec-num">ECG</span>
       <span><span class="lec-title">ECG sessions 1–4 (ECG Manual)</span><br><span class="lec-meta">Small-group case sessions · objectives and matching rhythms in the ECG Learner</span></span>
       ${chev}
     </button>
-    <div class="lec-body">
+    <div class="lec-body" id="lecbody-ecg">
       <p style="margin-top:16px">Each case in the manual is worked through the same way: <b>Rate</b> (count-off method) → <b>Rhythm</b> → <b>Axis</b> (−30° to +90°) → <b>Alphabet</b>: P, PR (120–200 ms), Q, QRS (&lt; 100 ms), ST, T, QT (QTc 300–440/450 ms per the manual; upper limits are usually quoted as about 450 ms in men and 460 ms in women, and a very short QTc, under about 340 ms, is also abnormal).</p>
       ${ECG_SESSIONS.map(([s,obj,links])=>`<h3 style="margin:16px 0 4px">${s}</h3><ul>${obj.map(x=>`<li>${x}</li>`).join("")}</ul><div class="related" style="margin-top:6px">${links.map(([h,l])=>`<a href="#${h}">${l} →</a>`).join("")}</div>`).join("")}
-      <p class="small muted" style="margin-top:14px">Sessions 2 and 3 focus on 12-lead findings (axis, atrial enlargement, LVH/RVH, ST changes, Q waves). The ECG Learner currently covers rhythms; 12-lead modules are pending.</p>
+      <p class="small muted" style="margin-top:14px">Sessions 2 and 3 focus on 12-lead findings (axis, atrial enlargement, LVH/RVH, ST changes, Q waves). The ECG Learner currently covers rhythms only, so those sessions are incomplete here; 12-lead modules are pending. Values marked "per the manual" are the course convention; where usual adult clinical conventions differ (for example QRS &lt; 100 ms in the manual vs the ≥ 120 ms cut-off usually used for a broad complex) both are shown rather than merged.</p>
     </div>
   </article>`;
   list.innerHTML=lec+ecg+`<div class="card" style="text-align:center;color:var(--muted)"><b style="color:var(--ink)">More lectures pending.</b><br>Lectures will be added here as they are delivered.</div>`;
@@ -1551,7 +1625,7 @@ const MEDS=[
  {id:"bb",group:["arr","hf","angina","bp"],name:"Beta blockers",tag:"Vaughan Williams class II",
   ex:"Metoprolol, bisoprolol, atenolol (β1-selective); carvedilol (non-selective + α1); propranolol (non-selective)",
   moa:"Block β-adrenergic receptors. β1 blockade lowers heart rate (SA node), contractility and AV nodal conduction, and reduces renin release.",
-  ind:"Canadian guidelines: one of the four foundational HFrEF drugs, using bisoprolol, carvedilol or metoprolol succinate (CCS/CHFS 2021); first-line rate control in AF and flutter (CCS/CHRS 2020); first-line antianginal (CCS 2014). After MI they are recommended when LVEF is reduced; routine use when LVEF is preserved is now debated. Not a first-line antihypertensive (Hypertension Canada 2025).",
+  ind:"One of the four foundational HFrEF drugs, using bisoprolol, carvedilol or metoprolol succinate (CCS/CHFS 2021); first-line rate control in AF and flutter (CCS/CHRS 2020); first-line antianginal (CCS 2014). After MI they are recommended when LVEF is reduced; routine use when LVEF is preserved is now debated. Not a first-line antihypertensive (Hypertension Canada 2025).",
   where:"Everywhere: ED (IV for fast AF), CCU and wards after MI, HF and family medicine clinics.",
   se:"Bradycardia, AV block, fatigue, bronchospasm (especially non-selective agents), may mask symptoms of hypoglycemia, cold extremities, erectile dysfunction.",
   ci:"Symptomatic bradycardia or high-grade AV block without a pacemaker, cardiogenic shock or decompensated HF with hypoperfusion (do not start then), severe asthma (non-selective agents).",
@@ -1559,23 +1633,23 @@ const MEDS=[
  {id:"ndhp",group:["arr","angina","bp"],name:"Non-dihydropyridine calcium channel blockers",tag:"Vaughan Williams class IV",
   ex:"Verapamil, diltiazem",
   moa:"Block L-type calcium channels in the heart, especially the SA and AV nodes: slower heart rate, slower AV conduction, reduced contractility.",
-  ind:"Canadian guidelines: rate control in AF and flutter when LVEF > 40% (CCS/CHRS 2020); regular SVT after vagal manoeuvres and adenosine (Heart & Stroke ACLS 2025); angina when a beta blocker is unsuitable (CCS 2014); calcium channel blockers are also the usual first-line drug for vasospastic angina. Avoid in HFrEF.",
+  ind:"Rate control in AF and flutter when LVEF > 40% (CCS/CHRS 2020); stable, regular narrow-complex SVT after vagal manoeuvres and adenosine (Heart & Stroke ACLS 2025); angina when a beta blocker is unsuitable (CCS 2014); calcium channel blockers are also the usual first-line drug for vasospastic angina. Avoid when LVEF is significantly reduced (≤ 40%).",
   where:"ED (IV diltiazem for fast AF), cardiology and EP clinics.",
   se:"Bradycardia, AV block, hypotension, worsening heart failure, constipation (verapamil), peripheral edema.",
-  ci:"HFrEF, AV block or sick sinus syndrome without a pacemaker, hypotension, pre-excited AF (WPW).",
-  pearl:"Verapamil and diltiazem inhibit CYP3A4, so watch for drug interactions."},
+  ci:"Significantly reduced LVEF (HFrEF), AV block or sick sinus syndrome without a pacemaker, hypotension, pre-excited AF (WPW), undifferentiated wide-complex tachycardia.",
+  pearl:"Verapamil and diltiazem inhibit CYP3A4, so watch for drug interactions. Combined with a beta blocker they add up: more bradycardia, AV block and hypotension. Never give them for a wide-complex tachycardia of uncertain origin."},
  {id:"antiarr",group:["arr"],name:"Antiarrhythmics: sodium and potassium channel blockers",tag:"Vaughan Williams classes I and III",
   ex:"Ia: procainamide · Ib: lidocaine, mexiletine · Ic: flecainide, propafenone · III: amiodarone, sotalol, dronedarone",
   moa:"Class I blocks Na⁺ channels, slowing phase 0 and conduction (Ia: moderate, also prolongs repolarization; Ib: weak, acts mainly on ischemic tissue; Ic: strong, widens the QRS). Class III blocks K⁺ channels, prolonging repolarization and the QT interval. Amiodarone is multichannel: besides K⁺ block it blocks Na⁺ and Ca²⁺ channels and β receptors (effects of classes I–IV).",
-  ind:"Canadian guidelines: AF rhythm control (CCS/CHRS 2020): flecainide or propafenone if the heart is structurally normal (including pill-in-the-pocket), sotalol or dronedarone in selected patients, amiodarone with LV dysfunction or HF. Pre-excited AF: procainamide or ibutilide, or cardioversion. Resuscitation (Heart & Stroke ACLS 2025): amiodarone or lidocaine for shock-refractory VF/pulseless VT; procainamide or amiodarone for stable wide-complex tachycardia.",
-  where:"ED (including IV procainamide cardioversion of recent-onset AF, an Ottawa approach), CCU, cardiac arrest, EP clinic.",
+  ind:"AF rhythm control (CCS/CHRS 2020): flecainide or propafenone if the heart is structurally normal (pill-in-the-pocket only for selected patients after a first monitored dose), sotalol or dronedarone in selected patients, amiodarone with LV dysfunction or HF. Pre-excited AF: procainamide or ibutilide, or cardioversion. Resuscitation (Heart & Stroke ACLS 2025): amiodarone or lidocaine for shock-refractory VF/pulseless VT; procainamide or amiodarone for stable wide-complex tachycardia.",
+  where:"ED (including IV procainamide cardioversion of selected recent-onset AF, an Ottawa approach, after onset time, stroke risk and anticoagulation are assessed), CCU, cardiac arrest, EP clinic.",
   se:"All can be proarrhythmic. QT prolongation and torsades de pointes (Ia, III). Lidocaine: CNS toxicity. Flecainide: can turn AF into flutter with 1:1 conduction. Amiodarone: thyroid dysfunction, pulmonary fibrosis, liver injury, corneal deposits, photosensitivity, bradycardia.",
   ci:"Class Ic: structural heart disease, coronary artery disease or prior MI. QT-prolonging agents: long QT. Dronedarone: permanent AF, severe or recently decompensated HF. Pre-excited AF (WPW): do not give IV amiodarone.",
   pearl:"Pre-excited AF (AF with an accessory pathway, WPW) is managed differently from ordinary AF: IV amiodarone and AV-nodal blockers (adenosine, digoxin, verapamil/diltiazem, beta blockers) can speed conduction down the pathway and cause ventricular fibrillation. Unstable: synchronized cardioversion; stable: procainamide (or ibutilide) or elective cardioversion. Also: give flecainide or propafenone with an AV-nodal blocker in ordinary AF/flutter; amiodarone raises warfarin and digoxin levels."},
  {id:"adenosine",group:["arr"],name:"Adenosine",tag:"Unclassified antiarrhythmic",
   ex:"Adenosine (rapid IV push followed by a saline flush)",
   moa:"Activates A1 receptors in the AV node, increasing K⁺ efflux and causing a brief, high-grade AV block. Half-life is under 10 seconds.",
-  ind:"Canadian guidelines (Heart & Stroke ACLS 2025): first drug for regular narrow-complex SVT after vagal manoeuvres (AVNRT, orthodromic AVRT); can be considered for regular monomorphic wide-complex tachycardia; also a diagnostic aid to unmask flutter waves.",
+  ind:"Heart & Stroke ACLS 2025: for a stable patient on a cardiac monitor, the first drug for regular narrow-complex SVT after vagal manoeuvres (it terminates AV-node-dependent re-entry such as AVNRT and orthodromic AVRT); can be considered for stable, regular, monomorphic wide-complex tachycardia when the mechanism is unclear; also a diagnostic aid that briefly blocks the AV node to unmask flutter waves (it does not treat AF or flutter). An unstable patient needs urgent synchronized cardioversion instead.",
   where:"ED and monitored beds, with a defibrillator and a running rhythm strip.",
   se:"Flushing, chest discomfort, dyspnea, a sense of impending doom, transient pause or asystole.",
   ci:"Second- or third-degree AV block or sick sinus without a pacemaker, pre-excited AF (WPW), irregular or polymorphic wide-complex tachycardia; caution in severe asthma or bronchospasm. Use it for regular narrow-complex (or regular, monomorphic wide-complex) tachycardias.",
@@ -1583,7 +1657,7 @@ const MEDS=[
  {id:"digoxin",group:["arr","hf"],name:"Digoxin",tag:"Cardiac glycoside",
   ex:"Digoxin",
   moa:"Inhibits Na⁺/K⁺-ATPase → more intracellular Na⁺ → less Ca²⁺ removed by the Na⁺/Ca²⁺ exchanger → more contractility. Also increases vagal tone, slowing AV nodal conduction.",
-  ind:"Canadian guidelines: AF rate control added to a beta blocker or CCB, or when they cannot be used, for example with HF or hypotension (CCS/CHRS 2020); HFrEF with persistent symptoms despite optimal therapy, to reduce hospitalizations (CCS HF 2017).",
+  ind:"AF rate control added to a beta blocker or CCB, or when they cannot be used, for example with HF or hypotension (CCS/CHRS 2020); HFrEF with persistent symptoms despite optimal therapy, to reduce hospitalizations; it does not improve survival (CCS HF 2017). Its rate control works mainly at rest.",
   where:"Wards, HF and family medicine clinics, ED (IV loading).",
   se:"Narrow therapeutic window. Toxicity: nausea, vomiting, confusion, visual changes (yellow-green tint), arrhythmias (PVCs, atrial tachycardia with block, bidirectional VT), hyperkalemia in acute overdose.",
   ci:"Second- or third-degree AV block without a pacemaker, pre-excited AF (WPW), ventricular fibrillation.",
@@ -1591,7 +1665,7 @@ const MEDS=[
  {id:"acei",group:["hf","bp"],name:"ACE inhibitors",tag:"RAAS blockade",
   ex:"Ramipril, perindopril, enalapril, lisinopril",
   moa:"Block angiotensin-converting enzyme → less angiotensin II and aldosterone (vasodilation, less sodium retention). Also reduce bradykinin breakdown.",
-  ind:"Canadian guidelines: one of three first-line antihypertensive classes, started as a low-dose two-drug combination, ideally in one pill (Hypertension Canada 2025); HFrEF when sacubitril/valsartan is not used (CCS/CHFS 2021); after MI with LV dysfunction; vascular protection in coronary disease (CCS 2014); diabetes or CKD with albuminuria (Diabetes Canada).",
+  ind:"One of three first-line antihypertensive classes, started as a low-dose two-drug combination, ideally in one pill (Hypertension Canada 2025); HFrEF when sacubitril/valsartan is not used (CCS/CHFS 2021); after MI with LV dysfunction; vascular protection in coronary disease (CCS 2014); diabetes or CKD with albuminuria (Diabetes Canada).",
   where:"Family medicine and cardiology clinics; started in hospital after MI.",
   se:"Dry cough (bradykinin), hyperkalemia, rise in creatinine, hypotension, angioedema.",
   ci:"Pregnancy, history of angioedema, bilateral renal artery stenosis, within 36 hours of sacubitril/valsartan.",
@@ -1599,7 +1673,7 @@ const MEDS=[
  {id:"arb",group:["hf","bp"],name:"Angiotensin receptor blockers (ARBs)",tag:"RAAS blockade",
   ex:"Candesartan, valsartan, losartan, irbesartan, telmisartan",
   moa:"Block the angiotensin II type 1 (AT1) receptor, preventing vasoconstriction and aldosterone release.",
-  ind:"Canadian guidelines: first-line antihypertensive class, ideally in a single-pill combination (Hypertension Canada 2025; irbesartan/HCTZ is named as the preferred starting combination in its implementation tools); HFrEF when an ACE inhibitor or ARNI is not tolerated (CCS/CHFS 2021); diabetes or CKD with albuminuria.",
+  ind:"First-line antihypertensive class, ideally in a single-pill combination (Hypertension Canada 2025; its implementation tools give irbesartan/HCTZ as one example starting combination, while the guideline itself supports any two complementary first-line classes); HFrEF as the alternative when neither an ACE inhibitor nor an ARNI can be used (CCS/CHFS 2021); diabetes or CKD with albuminuria.",
   where:"Family medicine and HF clinics.",
   se:"Hyperkalemia, rise in creatinine, hypotension, dizziness; cough and angioedema much less common than with ACE inhibitors.",
   ci:"Pregnancy, bilateral renal artery stenosis; do not combine with an ACE inhibitor.",
@@ -1607,23 +1681,23 @@ const MEDS=[
  {id:"arni",group:["hf"],name:"ARNI (angiotensin receptor–neprilysin inhibitor)",tag:"HFrEF foundation",
   ex:"Sacubitril/valsartan",
   moa:"Sacubitril inhibits neprilysin, raising natriuretic peptides (vasodilation, natriuresis); valsartan blocks the AT1 receptor.",
-  ind:"Canadian guidelines: HFrEF, recommended in place of an ACE inhibitor or ARB and can be started first-line, including in hospitalized patients once stable (CCS/CHFS 2021); can be considered with LVEF > 40% (CCS/CHFS 2025).",
+  ind:"HFrEF, recommended in place of an ACE inhibitor or ARB and can be started first-line, including in hospitalized patients once stable (CCS/CHFS 2021); can be considered with LVEF > 40% (CCS/CHFS 2025).",
   where:"HF clinics and inpatient HF wards.",
   se:"Hypotension, hyperkalemia, rise in creatinine, angioedema.",
-  ci:"Within 36 hours of the last ACE inhibitor dose, history of angioedema, pregnancy.",
-  pearl:"BNP rises on sacubitril (neprilysin breaks it down); NT-proBNP remains useful for monitoring."},
+  ci:"Never with an ACE inhibitor (allow 36 hours between the two when switching in either direction) or with a second ARB; history of angioedema; pregnancy.",
+  pearl:"BNP can rise early on sacubitril, because neprilysin normally breaks BNP down; NT-proBNP is not a neprilysin substrate, so it is easier to interpret. Read either in clinical context."},
  {id:"mra",group:["hf","bp"],name:"Mineralocorticoid receptor antagonists (MRAs)",tag:"HFrEF foundation · K⁺-sparing",
-  ex:"Spironolactone, eplerenone",
+  ex:"Spironolactone, eplerenone (steroidal); finerenone (non-steroidal)",
   moa:"Block aldosterone receptors in the collecting duct (less Na⁺ reabsorption, less K⁺ loss) and reduce aldosterone-driven fibrosis.",
-  ind:"Canadian guidelines: one of the four foundational HFrEF drugs (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025); spironolactone is the fourth drug for BP above target on triple therapy (Hypertension Canada 2025); LV dysfunction after MI; primary aldosteronism.",
+  ind:"One of the four foundational HFrEF drugs (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025; the guideline defines this group as LVEF > 40%, while the finerenone trial and Health Canada label use ≥ 40%); spironolactone is the fourth drug for BP above target on triple therapy (Hypertension Canada 2025); LV dysfunction after MI; primary aldosteronism.",
   where:"HF and family medicine clinics, wards.",
   se:"Hyperkalemia, rise in creatinine, gynecomastia and menstrual changes (spironolactone, not eplerenone).",
-  ci:"In HFrEF, start only if eGFR is above 30 mL/min/1.73 m² and K⁺ is below 5.0 mmol/L. Recheck K⁺ and creatinine within the first week, again at about 4 weeks, then periodically; reduce or hold if K⁺ rises above 5.5 mmol/L.",
+  ci:"For spironolactone and eplerenone in HFrEF: start only if eGFR is above 30 mL/min/1.73 m² and K⁺ is below 5.0 mmol/L; recheck K⁺ and creatinine within the first week, again at about 4 weeks, then periodically; reduce or hold if K⁺ rises above 5.5 mmol/L. Finerenone has its own kidney and potassium thresholds in its monograph; do not carry these numbers across drugs.",
   pearl:"Hyperkalemia risk is highest when combined with ACE inhibitors or ARBs in older patients with CKD."},
  {id:"sglt2",group:["hf"],name:"SGLT2 inhibitors",tag:"HFrEF foundation",
   ex:"Dapagliflozin, empagliflozin",
   moa:"Block sodium–glucose cotransporter 2 in the proximal tubule → glucosuria and natriuresis; cardiac and renal benefits go beyond glucose lowering.",
-  ind:"Canadian guidelines: one of the four foundational HFrEF drugs, with or without diabetes (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025); type 2 diabetes with ASCVD, HF or CKD (Diabetes Canada); CKD.",
+  ind:"One of the four foundational HFrEF drugs, with or without diabetes (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025); type 2 diabetes with ASCVD, HF or CKD (Diabetes Canada); CKD.",
   where:"HF, nephrology, endocrinology and family medicine clinics; often started in hospital.",
   se:"Genital fungal infections, volume depletion, urinary tract infection, and euglycemic diabetic ketoacidosis: ketoacidosis with near-normal glucose, so it is easily missed. Risk rises with acute illness, fasting, surgery, low carbohydrate intake or insulin dose reduction.",
   ci:"Not indicated in type 1 diabetes (higher DKA risk). Hold during acute illness or fasting (\"sick day\" rules) and before elective surgery, timed to the drug: per product labelling, at least 3 days before for canagliflozin, dapagliflozin and empagliflozin, and 4 days for ertugliflozin.",
@@ -1631,15 +1705,15 @@ const MEDS=[
  {id:"loop",group:["hf","bp"],name:"Loop diuretics",tag:"Diuretic",
   ex:"Furosemide, bumetanide, torsemide; ethacrynic acid (non-sulfonamide)",
   moa:"Inhibit the Na⁺-K⁺-2Cl⁻ cotransporter (NKCC2) in the thick ascending limb of the loop of Henle: the most potent diuretics.",
-  ind:"Canadian guidelines (CCS HF 2017): relief of congestion in HF at the lowest dose that keeps the patient euvolemic; also edema from kidney or liver disease. They improve symptoms, not survival.",
+  ind:"CCS HF 2017: relief of congestion in HF at the lowest dose that keeps the patient euvolemic; also edema from kidney or liver disease. They relieve symptoms; no disease-modifying mortality benefit has been established. Not routine hypertension drugs.",
   where:"ED and wards (IV), HF clinics (oral).",
   se:"Hypokalemia, hypomagnesemia, volume depletion, rise in creatinine, metabolic alkalosis, hyperuricemia, ototoxicity at high IV doses.",
   ci:"Anuria, severe volume depletion.",
-  pearl:"They relieve congestion but do not reduce mortality in HF. Loops lose calcium; thiazides retain it."},
+  pearl:"They relieve congestion but have no established mortality benefit in HF. Loops lose calcium; thiazides retain it."},
  {id:"thiazide",group:["bp"],name:"Thiazide and thiazide-like diuretics",tag:"First-line antihypertensive",
   ex:"Hydrochlorothiazide; chlorthalidone, indapamide (thiazide-like); metolazone",
   moa:"Inhibit the Na⁺-Cl⁻ cotransporter in the distal convoluted tubule.",
-  ind:"Canadian guidelines (Hypertension Canada 2025): one of three first-line antihypertensive classes in a low-dose two-drug combination; with separate pills, a long-acting thiazide-like diuretic (chlorthalidone, indapamide) is preferred over HCTZ. Metolazone: add-on for loop-diuretic resistance in HF.",
+  ind:"Hypertension Canada 2025: one of three first-line antihypertensive classes in a low-dose two-drug combination; with separate pills, a long-acting thiazide-like diuretic (chlorthalidone, indapamide) is preferred over HCTZ. Metolazone: specialist add-on for loop-diuretic resistance in HF (sequential nephron blockade, with close electrolyte and volume monitoring); not a routine antihypertensive.",
   where:"Family medicine clinics (usually inside a combination pill); metolazone on HF wards.",
   se:"Hypokalemia, hyponatremia, hypercalcemia, hyperuricemia and gout, hyperglycemia, raised lipids.",
   ci:"Anuria; use caution in gout and hyponatremia.",
@@ -1647,23 +1721,23 @@ const MEDS=[
  {id:"dhp",group:["bp","angina"],name:"Dihydropyridine calcium channel blockers",tag:"First-line antihypertensive",
   ex:"Amlodipine, felodipine, long-acting nifedipine",
   moa:"Block L-type calcium channels mainly in vascular smooth muscle → arteriolar vasodilation, with little effect on the SA or AV node.",
-  ind:"Canadian guidelines: one of three first-line antihypertensive classes, long-acting agents only (Hypertension Canada 2025); stable angina (CCS 2014); long-acting nifedipine for hypertension in pregnancy (SOGC 2022). Raynaud's phenomenon.",
+  ind:"One of three first-line antihypertensive classes, long-acting agents only (Hypertension Canada 2025); stable angina (CCS 2014); long-acting nifedipine for hypertension in pregnancy (SOGC 2022). Raynaud's phenomenon.",
   where:"Family medicine and cardiology clinics, obstetrics.",
   se:"Peripheral (ankle) edema, flushing, headache, reflex tachycardia, gingival hyperplasia.",
-  ci:"Short-acting nifedipine in ACS; caution in severe aortic stenosis.",
+  ci:"Short-acting (immediate-release) nifedipine in ACS and for routine outpatient BP (it has a separate, supervised obstetric use); caution in severe aortic stenosis.",
   pearl:"The ankle edema is from arteriolar dilation, not fluid overload, so diuretics help little."},
  {id:"nitrates",group:["angina"],name:"Nitrates",tag:"Antianginal",
   ex:"Nitroglycerin (sublingual, spray, patch, IV), isosorbide mononitrate, isosorbide dinitrate",
   moa:"Release nitric oxide → increased cGMP → smooth muscle relaxation. Venodilation lowers preload (main effect); also dilates coronary arteries.",
-  ind:"Canadian guidelines: sublingual nitroglycerin for every patient with angina, long-acting nitrates as add-on antianginals (CCS 2014); ischemic chest pain in ACS (Heart & Stroke ACLS 2025); IV for acute pulmonary edema; isosorbide dinitrate with hydralazine in selected HFrEF (CCS HF 2017). They relieve symptoms but do not improve survival.",
+  ind:"Sublingual nitroglycerin for patients with angina unless contraindicated, and long-acting nitrates as add-on antianginals (CCS 2014); ischemic chest pain in ACS when blood pressure allows and there is no contraindication (Heart & Stroke ACLS 2025); IV for acute pulmonary edema with adequate blood pressure. Nitrates alone relieve angina but have not shown a survival benefit (for example, in routine use after MI). Isosorbide dinitrate combined with hydralazine is a separate, evidence-based HFrEF regimen for selected patients (CCS HF 2017; see hydralazine).",
   where:"Patients' pockets (spray or tablets), ED and CCU (IV), clinics (patches, oral).",
   se:"Headache, hypotension, flushing, reflex tachycardia, tolerance with continuous use.",
-  ci:"PDE-5 inhibitor use (sildenafil or vardenafil within 24 hours, tadalafil within 48 hours), hypotension, right ventricular infarction; caution in severe aortic stenosis and hypertrophic obstructive cardiomyopathy.",
+  ci:"Recent PDE-5 inhibitor use (commonly quoted: sildenafil or vardenafil within 24 hours, tadalafil within 48 hours; check the monograph) or riociguat, hypotension, right ventricular infarction (preload-dependent); caution in severe aortic stenosis and hypertrophic obstructive cardiomyopathy.",
   pearl:"Prevent tolerance with a daily nitrate-free interval (for example, patch off overnight)."},
  {id:"antiplatelet",group:["thromb","angina"],name:"Antiplatelets",tag:"Antithrombotic",
   ex:"ASA; P2Y12 inhibitors: clopidogrel, prasugrel, ticagrelor",
   moa:"ASA irreversibly inhibits COX-1 → less thromboxane A2. P2Y12 inhibitors block ADP-mediated platelet activation (clopidogrel and prasugrel irreversibly; ticagrelor reversibly).",
-  ind:"Canadian guidelines (CCS/CAIC 2023): lifelong ASA for established atherosclerotic disease; DAPT after ACS (ticagrelor or prasugrel generally preferred over clopidogrel with PCI) and after elective PCI (clopidogrel), with duration individualized to bleeding and ischemic risk (commonly 6–12 months, shorter if bleeding risk is high), then usually a single antiplatelet. ASA is not routinely recommended for primary prevention. With AF after PCI: oral anticoagulant plus clopidogrel, stopping ASA early (CCS/CHRS 2020).",
+  ind:"CCS/CAIC 2023: antiplatelet therapy is commonly used for secondary prevention in established atherosclerotic disease, usually ASA, with the agent and duration set by the disease, any PCI, whether an oral anticoagulant is also needed, and bleeding risk. DAPT after ACS (ticagrelor or prasugrel generally preferred over clopidogrel with PCI) and after elective PCI (clopidogrel), with duration individualized to bleeding and ischemic risk (commonly 6–12 months, shorter if bleeding risk is high), then usually a single antiplatelet. ASA is not routinely recommended for primary prevention. With AF after PCI: oral anticoagulant plus clopidogrel, with ASA usually stopped early; a short course of triple therapy may be chosen when ischemic risk is high (CCS/CHRS 2020).",
   where:"Paramedics and ED (chewed ASA), cath lab, CCU, cardiology and family medicine clinics.",
   se:"Bleeding, GI ulceration (ASA), dyspnea and bradyarrhythmias (ticagrelor).",
   ci:"Active bleeding. Prasugrel: prior stroke or TIA. Ticagrelor: prior intracranial hemorrhage.",
@@ -1671,15 +1745,15 @@ const MEDS=[
  {id:"anticoag",group:["thromb"],name:"Anticoagulants",tag:"Antithrombotic",
   ex:"Unfractionated heparin; LMWH (enoxaparin, dalteparin); warfarin; DOACs: apixaban, rivaroxaban, edoxaban (factor Xa), dabigatran (thrombin)",
   moa:"Heparin enhances antithrombin (inactivates thrombin and Xa); LMWH acts mainly on Xa. Warfarin blocks vitamin K epoxide reductase → less factors II, VII, IX, X and proteins C and S. DOACs directly inhibit Xa or thrombin.",
-  ind:"Canadian guidelines: AF stroke prevention when the CCS algorithm indicates it (age ≥ 65 or any of prior stroke/TIA, hypertension, HF, diabetes), with DOACs preferred over warfarin; warfarin only for mechanical valves and moderate to severe mitral stenosis (CCS/CHRS 2020). DVT and PE: DOACs first-line for most patients; LMWH in pregnancy; LMWH or selected DOACs for cancer-associated VTE (Thrombosis Canada). ACS and PCI: heparins (CCS/CAIC 2019).",
+  ind:"AF stroke prevention by the CCS \"CHADS-65\" approach: oral anticoagulation if age ≥ 65 or any CHADS2 risk factor (prior stroke/TIA, hypertension, HF, diabetes). Under 65 with none of these, no antithrombotic is needed for the AF itself (coronary or arterial disease may still need an antiplatelet for that disease). DOACs are generally preferred for eligible patients; a vitamin K antagonist (warfarin) is required with mechanical valves and AF with moderate to severe mitral stenosis, and remains appropriate in other selected situations (CCS/CHRS 2020). Short device-detected AF episodes are a separate, still-evolving decision (ARTESiA, NOAH-AFNET 6). DVT and PE: DOACs first-line for most patients; LMWH in pregnancy; LMWH or selected DOACs for cancer-associated VTE (Thrombosis Canada). ACS and PCI: heparins (CCS/CAIC 2019).",
   where:"ED, wards, cath lab, thrombosis and anticoagulation clinics, family medicine.",
   se:"Bleeding. Heparin: heparin-induced thrombocytopenia (less with LMWH). Warfarin: many drug and food interactions, skin necrosis, teratogenic.",
-  ci:"Active bleeding. DOACs: mechanical heart valves, moderate to severe mitral stenosis. Warfarin: pregnancy. Heparin: history of HIT.",
-  pearl:"Monitoring and reversal: heparin (aPTT, protamine), warfarin (INR, vitamin K plus prothrombin complex concentrate), dabigatran (idarucizumab), Xa inhibitors (andexanet alfa or prothrombin complex concentrate, depending on availability)."},
+  ci:"Active bleeding. DOACs: mechanical heart valves, moderate to severe mitral stenosis, high-risk antiphospholipid syndrome; kidney thresholds differ by drug. Warfarin: generally avoided in pregnancy (pregnancy with a mechanical valve needs individualized specialist care). Heparin: history of HIT.",
+  pearl:"Monitoring: unfractionated heparin (aPTT or anti-Xa level); LMWH is not monitored routinely, and when it is, by anti-Xa level, not aPTT; warfarin (INR); DOACs (kidney function and drug interactions, no routine INR). Reversal depends on the drug, how severe and urgent the bleed is, and what is locally available: heparin (protamine; only partial for LMWH), warfarin (vitamin K plus prothrombin complex concentrate), dabigatran (idarucizumab), factor Xa inhibitors (prothrombin complex concentrate, or andexanet alfa where available and indicated)."},
  {id:"statins",group:["lipid"],name:"Statins",tag:"Lipid-lowering",
   ex:"Atorvastatin, rosuvastatin, simvastatin, pravastatin",
   moa:"Inhibit HMG-CoA reductase, the rate-limiting enzyme of hepatic cholesterol synthesis → more hepatic LDL receptors → lower LDL-C.",
-  ind:"Canadian guidelines (CCS 2021): statin for clinical ASCVD, AAA, most diabetes, CKD and LDL-C ≥ 5 mmol/L; high-intensity after ACS; primary prevention guided by Framingham risk and lipid levels. In secondary prevention, add ezetimibe and/or a PCSK9 inhibitor when LDL-C stays ≥ 1.8 mmol/L (or non-HDL-C ≥ 2.4, apoB ≥ 0.7) on the maximally tolerated statin.",
+  ind:"CCS 2021: statin for clinical ASCVD, AAA, most diabetes, CKD and LDL-C ≥ 5 mmol/L; high-intensity after ACS; primary prevention guided by Framingham risk and lipid levels. In secondary prevention, add ezetimibe and/or a PCSK9 inhibitor when LDL-C stays ≥ 1.8 mmol/L (or non-HDL-C ≥ 2.4, apoB ≥ 0.7) on the maximally tolerated statin.",
   where:"Started in hospital after ACS; family medicine and cardiology clinics.",
   se:"Muscle aches, myopathy, rarely rhabdomyolysis, raised liver enzymes, small increase in diabetes risk.",
   ci:"Pregnancy and breastfeeding, active liver disease.",
@@ -1687,15 +1761,15 @@ const MEDS=[
  {id:"ivabradine",group:["hf"],name:"Ivabradine",tag:"Heart rate lowering",
   ex:"Ivabradine",
   moa:"Blocks the funny current (If) in the SA node, slowing phase 4 depolarization and heart rate without affecting contractility.",
-  ind:"Canadian guidelines (CCS/CHFS 2021): symptomatic HFrEF with LVEF ≤ 35%, sinus rhythm, resting HR ≥ 70 bpm despite a maximally tolerated beta blocker, and a recent HF hospitalization.",
+  ind:"Three different sets of criteria, kept separate on purpose. Guideline (CCS/CHFS 2021): symptomatic HFrEF despite optimized standard therapy, in sinus rhythm with resting HR ≥ 70 bpm on a maximally tolerated beta blocker. Landmark trial (SHIFT): LVEF ≤ 35%, HR ≥ 70 bpm and an HF hospitalization in the prior year. Health Canada label (Lancora): LVEF ≤ 35%, NYHA II–III, sinus rhythm, resting HR ≥ 77 bpm. Public drug plans add their own coverage criteria.",
   where:"HF clinics.",
   se:"Bradycardia, luminous visual phenomena (phosphenes), atrial fibrillation.",
-  ci:"Atrial fibrillation or any non-sinus rhythm (it acts only on the SA node), acute decompensated HF, hypotension, severe bradycardia, pregnancy.",
+  ci:"Not useful in AF or any non-sinus rhythm (it acts only on the SA node); acute decompensated HF, hypotension, severe bradycardia, pregnancy.",
   pearl:"A clean link to physiology: it targets phase 4 of the nodal action potential."},
  {id:"hydralazine",group:["hf","bp"],name:"Hydralazine",tag:"Direct arteriolar vasodilator",
   ex:"Hydralazine (often combined with isosorbide dinitrate)",
   moa:"Relaxes arteriolar smooth muscle, lowering afterload.",
-  ind:"Canadian guidelines: with isosorbide dinitrate in HFrEF for Black patients on standard therapy, or when ACE inhibitors, ARBs and ARNI cannot be used (CCS HF 2017); severe hypertension in pregnancy (SOGC 2022).",
+  ind:"Combined with isosorbide dinitrate in HFrEF for self-identified Black patients with persistent symptoms despite optimal standard therapy, or when ACE inhibitors, ARBs and ARNI cannot be used (CCS HF 2017); hydralazine alone is not a proven mortality therapy. IV use for severe hypertension in pregnancy is supervised obstetric care (SOGC 2022).",
   where:"HF clinics and wards; labour and delivery.",
   se:"Reflex tachycardia, headache, fluid retention, drug-induced lupus.",
   ci:"Caution in coronary artery disease (reflex tachycardia can provoke angina).",
@@ -1717,6 +1791,8 @@ const GUIDES={
  vte:{l:"Thrombosis Canada",u:"https://thrombosiscanada.ca/hcp/practice/clinical_guides",full:"Thrombosis Canada clinical guides (VTE treatment, anticoagulant guides)"},
  dm:{l:"Diabetes Canada",u:"https://guidelines.diabetes.ca/",full:"Diabetes Canada Clinical Practice Guidelines (pharmacologic glycemic management updates)"},
  pad:{l:"CCS PAD 2022",u:"https://pubmed.ncbi.nlm.nih.gov/?term=2022+Canadian+Cardiovascular+Society+guidelines+peripheral+arterial+disease",full:"Canadian Cardiovascular Society 2022 Guidelines for Peripheral Arterial Disease"},
+ hcLancora:{l:"Health Canada label",u:"https://dhpp.hpfb-dgpsa.ca/review-documents/resource/SBD00348",full:"Health Canada Summary Basis of Decision for Lancora (ivabradine): authorized indication"},
+ hcKerendia:{l:"Health Canada label",u:"https://dhpp.hpfb-dgpsa.ca/documents-d-examen/ressource/RDS1773939928773",full:"Health Canada Regulatory Decision Summary for Kerendia (finerenone): heart failure with LVEF ≥ 40%"},
  ev:{l:"Trial evidence",u:"",full:"Statement based directly on trial evidence rather than a specific Canadian guideline recommendation"},
  sogc:{l:"SOGC 2022",u:"https://pubmed.ncbi.nlm.nih.gov/?term=Magee+2022+SOGC+hypertensive+disorders+of+pregnancy+guideline",full:"SOGC Guideline: Hypertensive Disorders of Pregnancy: Diagnosis, Prediction, Prevention, and Management (2022)"}
 };
@@ -1728,14 +1804,14 @@ const GUIDES={
 const DRUGS={
 /* ===== Beta blockers ===== */
 metoprolol:{name:"Metoprolol",cls:"bb",
- cdn:[["hfr","Metoprolol succinate (CR/XL) is one of the three beta blockers with proven HFrEF benefit. Metoprolol tartrate (the short-acting form) is not."],["af","Rate control for AF and flutter (first-line with a non-DHP CCB when LVEF > 40%; the preferred AV-nodal blocker when LVEF ≤ 40%)."],["sihd","First-line antianginal in stable angina, and after MI."]],
+ cdn:[["hfr","Metoprolol succinate (CR/XL) is one of the three beta blockers with proven HFrEF benefit; metoprolol tartrate (the short-acting form) is not. Canadian note: not every long-acting metoprolol sold in Canada is the succinate CR/XL formulation studied in MERIT-HF; check which products are currently marketed (Health Canada Drug Product Database)."],["af","Rate control for AF and flutter (first-line with a non-DHP CCB when LVEF > 40%; the preferred AV-nodal blocker when LVEF ≤ 40%)."],["sihd","First-line antianginal in stable angina. After MI the benefit is clearest when LVEF is reduced; routine long-term use when LVEF is preserved is now debated."]],
  where:"ED (IV metoprolol for AF with a fast ventricular rate), CCU and wards after MI, HF and family medicine clinics.",
  trials:[
   ["MERIT-HF",1999,"3,991 patients with NYHA II–IV HF and LVEF ≤ 40%; metoprolol CR/XL vs placebo.","All-cause mortality fell by about a third (34%); the trial stopped early for benefit.","Made metoprolol succinate one of the evidence-based HFrEF beta blockers."],
   ["COMET",2003,"3,029 HF patients; carvedilol vs metoprolol tartrate.","Carvedilol had lower mortality than short-acting metoprolol tartrate.","The agent and formulation matter: use the drugs and doses tested in the HF trials."],
   ["COMMIT/CCS-2",2005,"45,852 patients with acute MI in China; early IV then oral metoprolol vs placebo.","No overall mortality benefit: fewer reinfarctions and less VF, but more cardiogenic shock, mostly in the first day.","Avoid early IV beta blockers in patients at risk of shock (heart failure, hypotension, tachycardia)."]]},
 bisoprolol:{name:"Bisoprolol",cls:"bb",
- cdn:[["hfr","One of the three HFrEF beta blockers (bisoprolol, carvedilol, metoprolol succinate)."],["af","Rate control for AF and flutter."],["sihd","Angina and secondary prevention after MI."]],
+ cdn:[["hfr","One of the three HFrEF beta blockers (bisoprolol, carvedilol, metoprolol succinate)."],["af","Rate control for AF and flutter."],["sihd","Angina. After MI, used particularly when LVEF is reduced; routine use when LVEF is preserved is debated."]],
  where:"HF clinics, family medicine and cardiology clinics; once daily and β1-selective.",
  trials:[
   ["CIBIS-II",1999,"2,647 patients with NYHA III–IV HF and LVEF ≤ 35%; bisoprolol vs placebo.","All-cause mortality fell by 34%; stopped early for benefit.","Established bisoprolol as an HFrEF beta blocker."],
@@ -1777,11 +1853,11 @@ diltiazem:{name:"Diltiazem",cls:"ndhp",
 
 /* ===== Class I and III antiarrhythmics ===== */
 procainamide:{name:"Procainamide",cls:"antiarr",
- cdn:[["acls","Stable monomorphic wide-complex tachycardia: procainamide or amiodarone."],["af","Pre-excited AF (WPW): procainamide (or ibutilide), or electrical cardioversion. Avoid AV-nodal blockers and IV amiodarone."],["caep","Pharmacological cardioversion of recent-onset AF or flutter in the ED (an Ottawa-developed approach)."]],
- where:"ED and CCU. Canadian EDs, especially in Ottawa, use IV procainamide to convert recent-onset AF and send patients home.",
+ cdn:[["acls","Stable monomorphic wide-complex tachycardia: procainamide or amiodarone."],["af","Pre-excited AF (WPW): procainamide (or ibutilide), or electrical cardioversion. Avoid AV-nodal blockers and IV amiodarone."],["caep","Pharmacological cardioversion of selected recent-onset AF or flutter in the ED (an Ottawa-developed approach), after onset time, stroke risk and the anticoagulation plan have been assessed."]],
+ where:"ED and CCU. Canadian EDs, especially in Ottawa, use IV procainamide to convert selected recent-onset AF; many of these patients go home after assessment.",
  trials:[
-  ["PROCAMIO",2017,"74 patients with stable wide-complex tachycardia; IV procainamide vs IV amiodarone.","Fewer major cardiac adverse events at 40 minutes (9% vs 41%) and more tachycardias stopped (67% vs 38%) with procainamide.","Supports procainamide as a first choice for stable monomorphic VT."],
-  ["RAFF2 (Ottawa)",2020,"396 patients with acute AF at 11 Canadian EDs (led by Dr. Ian Stiell); procainamide then shock vs placebo then shock.","Sinus rhythm in 96% vs 92% (not significantly different); procainamide alone converted 52%.","Both strategies are fast and safe; most patients go home from the ED."]]},
+  ["PROCAMIO",2017,"74 patients randomized with stable, well-tolerated wide-complex tachycardia (62 analyzed: 33 procainamide, 29 amiodarone); IV procainamide vs IV amiodarone.","Among analyzed patients: fewer major cardiac adverse events within 40 minutes (9% vs 41%) and more tachycardias terminated (67% vs 38%) with procainamide.","A small trial; supports procainamide as a reasonable first choice for stable, well-tolerated monomorphic wide-complex tachycardia, not for all VT."],
+  ["RAFF2 (Ottawa)",2020,"396 patients with acute AF at 11 Canadian EDs (led by Dr. Ian Stiell); procainamide then shock vs placebo then shock.","Sinus rhythm in 96% vs 92% (no statistically significant difference); procainamide alone converted 52%.","Both strategies converted most selected patients quickly. The trial did not formally test equivalence, and its results apply to stable patients with recent-onset AF chosen for cardioversion."]]},
 lidocaine:{name:"Lidocaine",cls:"antiarr",
  cdn:[["acls","Shock-refractory VF or pulseless VT: lidocaine or amiodarone."],["acls","Recurrent VT, especially in ischemia; not used as prophylaxis in MI."]],
  where:"Cardiac arrest (code) and CCU. Also everywhere as a local anesthetic.",
@@ -1829,7 +1905,7 @@ dronedarone:{name:"Dronedarone",cls:"antiarr",
 
 /* ===== Adenosine ===== */
 adenosine:{name:"Adenosine",cls:"adenosine",
- cdn:[["acls","First drug for regular narrow-complex SVT after vagal manoeuvres: 6 mg rapid IV push with a flush, then 12 mg if needed. Can be considered for regular, monomorphic wide-complex tachycardia."]],
+ cdn:[["acls","Stable, regular narrow-complex SVT after vagal manoeuvres, given as a rapid IV push with a flush on a cardiac monitor (doses are in the ACLS algorithm; this site is not a dosing reference). Can be considered for stable, regular, monomorphic wide-complex tachycardia. Not for unstable patients (cardioversion), irregular or polymorphic wide-complex tachycardia, or pre-excited AF."]],
  where:"ED and monitored settings, with a defibrillator and continuous ECG recording (the rhythm strip during the pause is diagnostic).",
  trials:[
   ["DiMarco et al.",1990,"Multicentre randomized trials of adenosine vs placebo and vs verapamil for PSVT.","A 12 mg dose ended about 90% of episodes, similar to verapamil, with side effects lasting seconds.","Made adenosine the first-line drug for SVT."],
@@ -1894,7 +1970,7 @@ losartan:{name:"Losartan",cls:"arb",
   ["RENAAL",2001,"1,513 patients with type 2 diabetes and nephropathy; losartan vs placebo.","16% fewer doubling of creatinine, kidney failure or death; 28% less kidney failure.","Kidney protection with ARBs in diabetes."],
   ["HEAAL",2009,"3,846 patients with HF; losartan 150 mg vs 50 mg.","Fewer deaths or HF admissions with the higher dose.","Dose matters."]]},
 irbesartan:{name:"Irbesartan",cls:"arb",
- cdn:[["htn","First-line class; Hypertension Canada's implementation tools name irbesartan/hydrochlorothiazide as the preferred initial single-pill combination, mainly for cost and coverage."],["dm","Diabetes with nephropathy."]],
+ cdn:[["htn","First-line class; Hypertension Canada's implementation tools use irbesartan/hydrochlorothiazide as an example initial single-pill combination, mainly for cost and coverage. It is one option, not the only approved start."],["dm","Diabetes with nephropathy."]],
  where:"Family medicine clinics.",
  trials:[
   ["IDNT",2001,"1,715 patients with type 2 diabetes, hypertension and nephropathy; irbesartan vs amlodipine vs placebo.","20% lower kidney composite outcome vs placebo and 23% vs amlodipine.","Kidney benefit is beyond BP lowering."],
@@ -1928,8 +2004,13 @@ eplerenone:{name:"Eplerenone",cls:"mra",
  where:"HF and cardiology clinics, post-MI wards.",
  trials:[
   ["EPHESUS",2003,"6,632 patients after MI with LVEF ≤ 40% and HF or diabetes.","Mortality fell by 15%.","Supports starting an MRA after MI with LV dysfunction."],
-  ["EMPHASIS-HF",2011,"2,737 patients with NYHA II HF and LVEF ≤ 35%.","37% fewer CV deaths or HF hospitalizations; stopped early.","Extended MRAs to mildly symptomatic HFrEF."],
-  ["FINEARTS-HF (finerenone)",2024,"6,001 patients with HF and LVEF ≥ 40%; finerenone, a non-steroidal MRA, vs placebo.","Fewer worsening HF events or CV deaths.","Strengthened the role of MRAs above LVEF 40%."]]},
+  ["EMPHASIS-HF",2011,"2,737 patients with NYHA II HF and LVEF ≤ 35%.","37% fewer CV deaths or HF hospitalizations; stopped early.","Extended MRAs to mildly symptomatic HFrEF."]]},
+finerenone:{name:"Finerenone",cls:"mra",
+ cdn:[["hfnr","An MRA option in symptomatic HF with LVEF > 40% (the 2025 guideline recommends MRAs as a class in this group; check its 2026 corrections)."],["hcKerendia","Health Canada label (heart-failure indication added in 2026): adjunct to standard therapy in adults with HF and LVEF ≥ 40%, to reduce CV death, HF hospitalization and urgent HF visits. Also approved for CKD with type 2 diabetes."]],
+ where:"HF, nephrology and diabetes clinics.",
+ trials:[
+  ["FINEARTS-HF",2024,"6,001 patients with HF and LVEF ≥ 40%; finerenone, a non-steroidal MRA, vs placebo, median follow-up about 32 months.","Total worsening HF events plus CV death: rate ratio 0.84 (95% CI 0.74–0.95). CV death alone was not significantly reduced.","The first large positive MRA trial above LVEF 40%; the benefit is mainly fewer HF events, not a proven mortality benefit."],
+  ["FIDELIO-DKD",2020,"About 5,700 patients with CKD and type 2 diabetes; finerenone vs placebo.","About 18% fewer kidney composite events (kidney failure, sustained eGFR decline or renal death).","The basis of finerenone's kidney indication; a different population from heart failure."]]},
 
 /* ===== SGLT2 inhibitors ===== */
 dapagliflozin:{name:"Dapagliflozin",cls:"sglt2",
@@ -1965,7 +2046,7 @@ torsemide:{name:"Torsemide",cls:"loop",
  trials:[
   ["TRANSFORM-HF",2023,"2,859 patients hospitalized with HF; torsemide vs furosemide.","No difference in all-cause mortality over 12 months.","Ended the idea that torsemide saves lives compared with furosemide."]]},
 ethacrynic:{name:"Ethacrynic acid",cls:"loop",
- cdn:[["hf17","Rarely used; the only non-sulfonamide loop diuretic, reserved for true severe sulfonamide allergy."]],
+ cdn:[["hf17","Rarely used; the only non-sulfonamide loop diuretic. Cross-reactivity between sulfonamide antibiotics and loop diuretics is generally low, so a sulfa antibiotic allergy alone does not usually require it."]],
  where:"Rare inpatient use.",
  trials:[
   ["No landmark outcome trial",null,"Used based on pharmacology.","More ototoxic than other loops.","Most patients with a sulfa antibiotic allergy can safely take furosemide."]]},
@@ -2020,26 +2101,26 @@ nifedipine:{name:"Nifedipine (long-acting)",cls:"dhp",
 
 /* ===== Nitrates ===== */
 ntg:{name:"Nitroglycerin",cls:"nitrates",
- cdn:[["sihd","Sublingual nitroglycerin for every patient with angina (relief and before exertion)."],["acls","Ischemic chest pain in ACS, if SBP is adequate, there is no RV infarction and no recent PDE-5 inhibitor."],["hf17","IV nitroglycerin for acute pulmonary edema with high BP."]],
+ cdn:[["sihd","Sublingual nitroglycerin for patients with angina unless contraindicated (relief, and before exertion)."],["acls","Ischemic chest pain in ACS, if SBP is adequate, there is no RV infarction and no recent PDE-5 inhibitor."],["hf17","IV nitroglycerin for acute pulmonary edema with high BP."]],
  where:"Everywhere: in patients' pockets (spray or tablets), ED and CCU (IV infusion), patches in clinics.",
  trials:[
   ["GISSI-3",1994,"19,394 patients with acute MI; transdermal nitroglycerin vs none (factorial with lisinopril).","No mortality benefit from nitrates.","Nitrates treat symptoms; they do not improve survival after MI."],
-  ["No symptom-relief outcome trial",null,"Sublingual nitroglycerin is used based on rapid physiological effect and decades of practice.","Relieves angina within minutes.","Its role is symptom control and diagnosis (relief supports an ischemic cause, but is not specific)."]]},
+  ["No symptom-relief outcome trial",null,"Sublingual nitroglycerin is used based on rapid physiological effect and decades of practice.","Relieves angina within minutes.","Its role is symptom control. Relief does not prove the pain is cardiac (esophageal spasm can respond too), and no relief does not rule out ACS."]]},
 ismn:{name:"Isosorbide mononitrate",cls:"nitrates",
  cdn:[["sihd","Add-on long-acting antianginal when symptoms persist on a beta blocker or CCB."]],
  where:"Cardiology and family medicine clinics; dosed with a nitrate-free interval.",
  trials:[
   ["ISIS-4",1995,"58,050 patients with suspected MI; oral controlled-release isosorbide mononitrate vs placebo (factorial).","No mortality benefit.","Confirms long-acting nitrates are for symptoms only."]]},
 isdn:{name:"Isosorbide dinitrate",cls:"nitrates",
- cdn:[["hf17","With hydralazine in HFrEF: for Black patients with persistent symptoms on standard therapy, and for patients who cannot take an ACE inhibitor, ARB or ARNI (for example kidney dysfunction or hyperkalemia)."],["sihd","Antianginal (less used than mononitrate)."]],
+ cdn:[["hf17","With hydralazine in HFrEF: for self-identified Black patients with persistent symptoms despite optimal standard therapy (the A-HeFT population), and for patients who cannot take an ACE inhibitor, ARB or ARNI (for example kidney dysfunction or hyperkalemia)."],["sihd","Antianginal (less used than mononitrate)."]],
  where:"HF clinics and wards.",
  trials:[
-  ["A-HeFT",2004,"1,050 self-identified Black patients with NYHA III–IV HF on standard therapy; fixed-dose isosorbide dinitrate + hydralazine vs placebo.","Mortality fell by 43%; stopped early.","Basis for H-ISDN in Black patients with HFrEF."],
+  ["A-HeFT",2004,"1,050 self-identified Black patients with NYHA III–IV HF on standard therapy; fixed-dose isosorbide dinitrate + hydralazine vs placebo.","Mortality fell by 43%; stopped early.","Basis for H-ISDN in self-identified Black patients with symptomatic HFrEF despite standard therapy. The intervention was the combination, not the nitrate alone."],
   ["V-HeFT I",1986,"642 men with HF; hydralazine-ISDN vs prazosin vs placebo.","Lower mortality with hydralazine-ISDN.","The first vasodilator therapy shown to help survival in HF."]]},
 
 /* ===== Antiplatelets ===== */
 asa:{name:"ASA (acetylsalicylic acid)",cls:"antiplatelet",
- cdn:[["apt","Lifelong low-dose ASA for established atherosclerotic disease (coronary, cerebrovascular, peripheral). Not routinely recommended for primary prevention; may be considered after shared decision-making in selected people at high CV risk and low bleeding risk."],["stemi","Loading dose (chewed) as soon as ACS is suspected, then daily."]],
+ cdn:[["apt","Low-dose ASA is the usual long-term antiplatelet for established atherosclerotic disease (coronary, cerebrovascular, peripheral), unless another antiplatelet or an oral anticoagulant is used instead, or bleeding risk outweighs benefit. Not routinely recommended for primary prevention; may be considered after shared decision-making in selected people at high CV risk and low bleeding risk."],["stemi","Loading dose (chewed) once ACS is suspected by paramedics or the treating team, unless contraindicated, then daily."]],
  where:"Paramedics and ED (chewed for chest pain), cath lab, CCU, family medicine. In Canada it is usually called ASA, because Aspirin is a brand name here.",
  trials:[
   ["ISIS-2",1988,"17,187 patients with suspected MI; ASA, streptokinase, both, or neither.","ASA reduced 5-week vascular death by 23%; with streptokinase, by about 42%.","Made ASA a standard first treatment for MI."],
@@ -2051,7 +2132,7 @@ clopidogrel:{name:"Clopidogrel",cls:"antiplatelet",
  trials:[
   ["CURE",2001,"12,562 patients with NSTE-ACS; clopidogrel + ASA vs ASA alone.","20% fewer CV deaths, MIs or strokes, with more major bleeding.","Established dual antiplatelet therapy after ACS."],
   ["CAPRIE",1996,"19,185 patients with recent MI, stroke or PAD; clopidogrel vs ASA.","A small (about 9%) relative reduction in events.","Clopidogrel is a reasonable ASA alternative."],
-  ["AUGUSTUS",2019,"4,614 patients with AF and ACS or PCI; apixaban vs warfarin and ASA vs placebo, all with a P2Y12 inhibitor (mostly clopidogrel).","Less bleeding with apixaban and without ASA, with no clear increase in ischemic events.","Supports OAC + clopidogrel without long-term ASA."]]},
+  ["AUGUSTUS",2019,"4,614 patients with AF and ACS or PCI; apixaban vs warfarin and ASA vs placebo, all with a P2Y12 inhibitor (mostly clopidogrel).","Less bleeding with apixaban and without ASA. The trial was not designed to prove equal protection from ischemic events (stent thrombosis was numerically higher without ASA), and patients were randomized after the initial ACS or PCI, when they had already received ASA.","Supports an oral anticoagulant plus clopidogrel with ASA stopped early in most patients; ischemic risk still guides how long ASA continues."]]},
 prasugrel:{name:"Prasugrel",cls:"antiplatelet",
  cdn:[["apt","A potent P2Y12 option for ACS treated with PCI. Avoid with prior stroke or TIA; generally avoided at age ≥ 75 or weight < 60 kg (lower dose if used)."]],
  where:"Cath lab and CCU.",
@@ -2087,7 +2168,7 @@ dalteparin:{name:"Dalteparin",cls:"anticoag",
   ["PROTECT (Canadian-led)",2011,"3,746 ICU patients; dalteparin vs UFH prophylaxis.","No difference in DVT; fewer PEs and less heparin-induced thrombocytopenia.","Supports LMWH prophylaxis in critical care."],
   ["Caravaggio",2020,"1,170 patients with cancer VTE; apixaban vs dalteparin.","Apixaban was non-inferior without more major bleeding.","Oral options are now acceptable for many cancer patients."]]},
 warfarin:{name:"Warfarin",cls:"anticoag",
- cdn:[["af","The anticoagulant for mechanical heart valves and for AF with moderate to severe (usually rheumatic) mitral stenosis. For other AF, DOACs are preferred."],["vte","VTE when a DOAC is unsuitable (for example severe kidney impairment or high-risk antiphospholipid syndrome)."]],
+ cdn:[["af","Required for mechanical heart valves and for AF with moderate to severe (usually rheumatic) mitral stenosis. For other AF, DOACs are generally preferred in eligible patients."],["vte","VTE when a DOAC is unsuitable (for example severe kidney impairment or high-risk antiphospholipid syndrome)."]],
  where:"Anticoagulation clinics and family medicine (INR checks), cardiac surgery follow-up.",
  trials:[
   ["Early AF trials (incl. CAFA, Canadian)",2007,"Meta-analysis of AFASAK, SPAF, BAATAF, CAFA and others (Hart et al.).","Warfarin reduced stroke by about 64%; antiplatelets by about 22%.","Established oral anticoagulation for stroke prevention in AF."],
@@ -2152,23 +2233,23 @@ pravastatin:{name:"Pravastatin",cls:"statins",
 
 /* ===== Ivabradine ===== */
 ivabradine:{name:"Ivabradine",cls:"ivabradine",
- cdn:[["hfr","HFrEF with LVEF ≤ 35%, sinus rhythm, resting HR ≥ 70 bpm on the maximally tolerated beta blocker, and a recent HF hospitalization, to reduce CV death or HF hospitalization."]],
+ cdn:[["hfr","Guideline: symptomatic HFrEF despite optimized standard therapy, sinus rhythm, resting HR ≥ 70 bpm on the maximally tolerated beta blocker."],["hcLancora","Health Canada product label: LVEF ≤ 35%, NYHA II–III, sinus rhythm, resting HR ≥ 77 bpm, with standard HF therapy (a different HR threshold from the guideline and the trial)."]],
  where:"HF clinics.",
  trials:[
-  ["SHIFT",2010,"6,558 patients with HFrEF, sinus rhythm and HR ≥ 70; ivabradine vs placebo.","18% fewer CV deaths or HF hospitalizations, driven by fewer admissions.","Heart rate is a treatment target in HFrEF."],
+  ["SHIFT",2010,"6,558 patients with HFrEF (LVEF ≤ 35%), sinus rhythm, HR ≥ 70 and an HF hospitalization in the prior year; ivabradine vs placebo.","18% fewer CV deaths or HF hospitalizations, driven by fewer admissions.","Heart rate is a treatment target in HFrEF."],
   ["SIGNIFY",2014,"19,102 patients with stable CAD without HF.","No benefit; possible harm in those with angina.","Ivabradine is an HF drug, not a general antianginal for outcomes."]]},
 
 /* ===== Hydralazine ===== */
 hydralazine:{name:"Hydralazine",cls:"hydralazine",
- cdn:[["hf17","With isosorbide dinitrate in HFrEF: Black patients on standard therapy, or patients who cannot take an ACE inhibitor, ARB or ARNI."],["sogc","Severe hypertension in pregnancy (IV hydralazine, IV labetalol or oral nifedipine)."]],
+ cdn:[["hf17","With isosorbide dinitrate in HFrEF: self-identified Black patients with persistent symptoms despite optimal standard therapy, or patients who cannot take an ACE inhibitor, ARB or ARNI. Hydralazine alone is not a proven mortality therapy."],["sogc","Severe hypertension in pregnancy, as supervised obstetric care (IV hydralazine, IV labetalol or oral nifedipine); not part of the general hypertension algorithm."]],
  where:"HF clinics and wards; labour and delivery.",
  trials:[
-  ["A-HeFT",2004,"1,050 Black patients with advanced HF; fixed-dose hydralazine + isosorbide dinitrate vs placebo.","Mortality fell by 43%.","Basis of H-ISDN in Black patients with HFrEF."],
+  ["A-HeFT",2004,"1,050 self-identified Black patients with NYHA III–IV HF despite standard therapy; fixed-dose hydralazine + isosorbide dinitrate vs placebo.","Mortality fell by 43%; stopped early.","Basis for H-ISDN in self-identified Black patients with symptomatic HFrEF. The finding reflects the trial population, not a genetic or biological claim about race."],
   ["V-HeFT I and II",1991,"V-HeFT I (1986): H-ISDN vs placebo. V-HeFT II (1991): H-ISDN vs enalapril.","H-ISDN improved survival vs placebo but was beaten by enalapril.","H-ISDN is an add-on or an alternative, not a first choice."]]}
 };
-const CLASS_DRUGS={bb:["metoprolol","bisoprolol","atenolol","carvedilol","propranolol"],ndhp:["verapamil","diltiazem"],antiarr:["procainamide","lidocaine","mexiletine","flecainide","propafenone","amiodarone","sotalol","dronedarone"],adenosine:["adenosine"],digoxin:["digoxin"],acei:["ramipril","perindopril","enalapril","lisinopril"],arb:["candesartan","valsartan","losartan","irbesartan","telmisartan"],arni:["sacval"],mra:["spironolactone","eplerenone"],sglt2:["dapagliflozin","empagliflozin"],loop:["furosemide","bumetanide","torsemide","ethacrynic"],thiazide:["hctz","chlorthalidone","indapamide","metolazone"],dhp:["amlodipine","felodipine","nifedipine"],nitrates:["ntg","ismn","isdn"],antiplatelet:["asa","clopidogrel","prasugrel","ticagrelor"],anticoag:["ufh","enoxaparin","dalteparin","warfarin","apixaban","rivaroxaban","edoxaban","dabigatran"],statins:["atorvastatin","rosuvastatin","simvastatin","pravastatin"],ivabradine:["ivabradine"],hydralazine:["hydralazine","isdn"]};
+const CLASS_DRUGS={bb:["metoprolol","bisoprolol","atenolol","carvedilol","propranolol"],ndhp:["verapamil","diltiazem"],antiarr:["procainamide","lidocaine","mexiletine","flecainide","propafenone","amiodarone","sotalol","dronedarone"],adenosine:["adenosine"],digoxin:["digoxin"],acei:["ramipril","perindopril","enalapril","lisinopril"],arb:["candesartan","valsartan","losartan","irbesartan","telmisartan"],arni:["sacval"],mra:["spironolactone","eplerenone","finerenone"],sglt2:["dapagliflozin","empagliflozin"],loop:["furosemide","bumetanide","torsemide","ethacrynic"],thiazide:["hctz","chlorthalidone","indapamide","metolazone"],dhp:["amlodipine","felodipine","nifedipine"],nitrates:["ntg","ismn","isdn"],antiplatelet:["asa","clopidogrel","prasugrel","ticagrelor"],anticoag:["ufh","enoxaparin","dalteparin","warfarin","apixaban","rivaroxaban","edoxaban","dabigatran"],statins:["atorvastatin","rosuvastatin","simvastatin","pravastatin"],ivabradine:["ivabradine"],hydralazine:["hydralazine","isdn"]};
 
-const MED_FIELDS=[["moa","Mechanism of action"],["ind","Indications (Canadian guidelines)"],["where","Where it is used"],["se","Key side effects"],["ci","Contraindications"]];
+const MED_FIELDS=[["moa","Mechanism of action"],["ind","Clinical uses"],["where","Where it is used"],["se","Key side effects"],["ci","Contraindications"]];
 let openDrug={};
 // Drug pages opened automatically by the search: class -> [drug opened, drug that was open before].
 let autoOpened=new Map(), userTouched=new Set();
@@ -2177,7 +2258,7 @@ function buildMedChips(){
   $("medChips").innerHTML=MED_GROUPS.map(([k,l])=>`<button type="button" class="chip${k===medGroup?" on":""}" aria-pressed="${k===medGroup}" data-g="${k}">${l}</button>`).join("");
   $("medChips").querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>setMedGroup(b.dataset.g)));
 }
-function setMedGroup(g){medGroup=g; buildMedChips(); renderMeds(); updateCmpBar();}
+function setMedGroup(g){const hadFocus=document.activeElement&&document.activeElement.closest&&document.activeElement.closest("#medChips"); medGroup=g; buildMedChips(); renderMeds(); updateCmpBar(); if(hadFocus){const b=$("medChips").querySelector(`[data-g="${g}"]`); if(b) b.focus();}}
 function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function drugText(id){const d=DRUGS[id]; return [d.name,d.where,...d.cdn.map(c=>c[1]),...d.trials.flat().map(String)].join(" ");}
 function guidePill(g){const G=GUIDES[g]; return G.u?`<a class="gpill" href="${G.u}" target="_blank" rel="noopener" title="${esc(G.full)}">${G.l}</a>`:`<span class="gpill ev" title="${esc(G.full)}">${G.l}</span>`;}
@@ -2187,7 +2268,7 @@ function drugPanel(cls,id){
     <div class="dp-head"><h4>${d.name}</h4><button type="button" class="dp-close" data-cls="${cls}">Close</button></div>
     <div class="dp-cols">
       <div>
-        <div class="dp-lbl">Indications in Canada</div>
+        <div class="dp-lbl">Clinical uses</div>
         <ul class="dp-ind">${d.cdn.map(([g,t])=>`<li>${guidePill(g)}${t}</li>`).join("")}</ul>
         <div class="dp-lbl">Where it is used</div>
         <p class="dp-where">${d.where}</p>
@@ -2198,7 +2279,7 @@ function drugPanel(cls,id){
           <dl><dt>Who and what</dt><dd>${who}</dd><dt>What it found</dt><dd>${res}</dd><dt>Why it matters</dt><dd class="why">${why}</dd></dl></div>`).join("")}</div>
       </div>
     </div>
-    <div class="dp-note">Trial summaries are simplified for first-year learning. Relative risk reductions are approximate; check the original papers for details.</div>
+    <div class="dp-note">Trial summaries are simplified for first-year learning and are pending a line-by-line check against each primary paper. Relative effects are approximate; a non-significant result means "no statistically significant difference", not "equal". A guideline recommendation is not the same as a Health Canada product indication or drug-plan coverage.</div>
   </div>`;
 }
 function renderMeds(){
@@ -2215,10 +2296,10 @@ function renderMeds(){
     const ids=CLASS_DRUGS[m.id]||[]; const od=openDrug[m.id];
     return `<article class="med${od?" expanded":""}" id="med-${m.id}">
       <div class="med-top"><span class="pill">${m.tag}</span>
-        <label class="cmp"><input type="checkbox" data-id="${m.id}" ${compareSet.has(m.id)?"checked":""}> Compare</label></div>
+        <label class="cmp"><input type="checkbox" data-id="${m.id}" aria-label="Compare ${m.name}" ${compareSet.has(m.id)?"checked":""}> Compare</label></div>
       <h3>${m.name}</h3>
       <div class="ex"><b>Examples:</b> ${m.ex}</div>
-      <div class="dlbl">Tap a drug for Canadian indications and landmark trials:</div>
+      <div class="dlbl">Tap a drug for its clinical uses and landmark trials:</div>
       <div class="dchips">${ids.map(id=>`<button type="button" class="dchip" data-cls="${m.id}" data-drug="${id}" aria-expanded="${od===id}"${od===id?` aria-controls="dp-${m.id}"`:""}>${DRUGS[id].name}</button>`).join("")}</div>
       ${od?drugPanel(m.id,od):""}
       <dl>${MED_FIELDS.map(([k,l])=>`<dt>${l}</dt><dd>${m[k]}</dd>`).join("")}</dl>
@@ -2249,38 +2330,40 @@ function fillLastRow(){
 }
 function toggleDrug(cls,id,focus){
   userTouched.add(cls); autoOpened.delete(cls);
+  const prevId=openDrug[cls];
   if(id) openDrug[cls]=id; else delete openDrug[cls];
   renderMeds();
   const card=document.getElementById("med-"+cls); if(!card) return;
   if(id){ setTimeout(()=>{card.scrollIntoView({behavior:scrollBeh(),block:"start"}); if(focus){const b=card.querySelector(`.dchip[data-drug="${id}"]`); if(b) b.focus({preventScroll:true});}},30);
     if(history.replaceState) history.replaceState(null,"","#meds-drug-"+id); }
-  else { if(focus){const b=card.querySelector(".dchip"); if(b) b.focus({preventScroll:true});} if(history.replaceState && location.hash.startsWith("#meds-drug-")) history.replaceState(null,"","#meds-"+cls); }
+  else { if(focus){const b=card.querySelector(`.dchip[data-drug="${prevId}"]`)||card.querySelector(".dchip"); if(b) b.focus({preventScroll:true});} if(history.replaceState && prevId && location.hash==="#meds-drug-"+prevId) history.replaceState(null,"","#meds-"+cls); }
 }
 function buildGuideList(){
-  $("guideList").innerHTML=`<h3 style="margin-top:0">Canadian guidelines used for indications</h3><ul>${Object.values(GUIDES).filter(g=>g.u).map(g=>`<li><a href="${g.u}" target="_blank" rel="noopener">${g.full}</a></li>`).join("")}</ul>
+  $("guideList").innerHTML=`<h3 style="margin-top:0">Sources used on the drug pages</h3><ul>${Object.values(GUIDES).filter(g=>g.u).map(g=>`<li><a href="${g.u}" target="_blank" rel="noopener">${g.full}</a></li>`).join("")}</ul>
   <p class="dp-note">Where a statement rests on trial evidence rather than a specific Canadian recommendation, it is tagged "Trial evidence". Guidelines change: always check the current version.</p>`;
 }
 function updateCmpBar(){
   $("cmpBar").classList.toggle("show",compareSet.size>0);
-  $("cmpCount").textContent=compareSet.size+" selected"+(compareSet.size<2?" (pick at least 2)":"");
+  const names=[...compareSet].map(id=>MEDS.find(m=>m.id===id).name);
+  $("cmpCount").textContent=compareSet.size+" of 3 selected"+(names.length?": "+names.join(", "):"")+(compareSet.size<2?" (pick at least 2)":"");
   $("cmpGo").disabled=compareSet.size<2;
   if(compareSet.size<2) $("cmpWrap").classList.remove("show");
   else if($("cmpWrap").classList.contains("show")) buildCompare();
 }
 function buildCompare(){
   const ms=[...compareSet].map(id=>MEDS.find(m=>m.id===id));
-  $("cmpWrap").innerHTML=`<table class="cmp-table"><thead><tr><th></th>${ms.map(m=>`<th>${m.name}</th>`).join("")}</tr></thead><tbody>
-    <tr><th>Examples</th>${ms.map(m=>`<td>${m.ex}</td>`).join("")}</tr>
-    ${MED_FIELDS.map(([k,l])=>`<tr><th>${l}</th>${ms.map(m=>`<td>${m[k]}</td>`).join("")}</tr>`).join("")}
-    <tr><th>Pearl</th>${ms.map(m=>`<td>${m.pearl}</td>`).join("")}</tr></tbody></table>`;
+  $("cmpWrap").innerHTML=`<table class="cmp-table"><caption id="cmpCap" tabindex="-1" style="text-align:left;font-weight:700;padding:8px 0">Comparing ${ms.map(m=>m.name).join(", ")}</caption><thead><tr><th scope="col"><span class="small muted">Feature</span></th>${ms.map(m=>`<th scope="col">${m.name}</th>`).join("")}</tr></thead><tbody>
+    <tr><th scope="row">Examples</th>${ms.map(m=>`<td>${m.ex}</td>`).join("")}</tr>
+    ${MED_FIELDS.map(([k,l])=>`<tr><th scope="row">${l}</th>${ms.map(m=>`<td>${m[k]}</td>`).join("")}</tr>`).join("")}
+    <tr><th scope="row">Pearl</th>${ms.map(m=>`<td>${m.pearl}</td>`).join("")}</tr></tbody></table>`;
 }
 function showCompare(){
   buildCompare();
-  $("cmpWrap").classList.add("show"); $("cmpWrap").scrollIntoView({behavior:scrollBeh(),block:"start"});
+  $("cmpWrap").classList.add("show"); $("cmpWrap").scrollIntoView({behavior:scrollBeh(),block:"start"}); const cap=$("cmpCap"); if(cap) cap.focus({preventScroll:true});
 }
 $("medSearch").addEventListener("input",e=>{medQuery=e.target.value; userTouched.clear(); renderMeds();});
 $("cmpGo").addEventListener("click",showCompare);
-$("cmpClear").addEventListener("click",()=>{compareSet.clear();renderMeds();updateCmpBar();$("cmpWrap").classList.remove("show");});
+$("cmpClear").addEventListener("click",()=>{compareSet.clear();renderMeds();updateCmpBar();$("cmpWrap").classList.remove("show"); $("medSearch").focus();});
 
 /* =========================================================
    INIT
@@ -2290,7 +2373,7 @@ if(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches){
 if(window.innerWidth<600){$("lblToggle").checked=false; $("labels").setAttribute("opacity",0);}
 buildLeadUI(); resizeCanvas(); selectRhythm("nsr"); setLead("II"); setPlaying(playing);
 route();
-requestAnimationFrame(loop);
+startLoop();
 </script>
 </body>
 </html>
