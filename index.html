@@ -112,10 +112,14 @@ kbd{font-family:inherit;font-size:12px;border:1px solid var(--line);border-radiu
 .med h3{margin:4px 0 4px}
 .med .ex{font-size:14px;color:var(--muted);margin-bottom:8px}
 .med dl{margin:0}
-.med dt{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--crimson);margin-top:10px}
-.med dd{margin:2px 0 0;font-size:14.5px}
-.med .pearl{margin-top:12px;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
-.med dl{margin-bottom:12px}
+.med dt{font-weight:700;font-size:14px;color:var(--ink);margin-top:14px;display:flex;align-items:center;gap:8px}
+.med dt::before{content:"";flex:none;width:4px;height:16px;border-radius:2px;background:var(--crimson)}
+.med dd{margin:4px 0 0 12px;font-size:15px;line-height:1.55}
+.med dd ul{margin:2px 0 0;padding-left:18px}.med dd li{margin:3px 0}
+.med .warn{background:#FFF6F7;border:1px solid #F3C9D2;border-radius:10px;padding:10px 12px;margin-top:14px}
+.med .warn dt{margin-top:0;color:var(--crimson)}
+.med .pearl{margin-top:14px;background:#FFF9E6;border:1px solid #F1DFA6;border-radius:10px;padding:11px 14px;font-size:14.5px;line-height:1.55}
+.med dl{margin-bottom:0}
 /* Cards in a row share one height (pearl pinned to the bottom); "dense" backfills holes left beside a full-width open card. */
 .med-grid{align-items:stretch;grid-auto-flow:row dense}
 .med.expanded{grid-column:1/-1}
@@ -1625,7 +1629,7 @@ const MEDS=[
  {id:"bb",group:["arr","hf","angina","bp"],name:"Beta blockers",tag:"Vaughan Williams class II",
   ex:"Metoprolol, bisoprolol, atenolol (β1-selective); carvedilol (non-selective + α1); propranolol (non-selective)",
   moa:"Block β-adrenergic receptors. β1 blockade lowers heart rate (SA node), contractility and AV nodal conduction, and reduces renin release.",
-  ind:"One of the four foundational HFrEF drugs, using bisoprolol, carvedilol or metoprolol succinate (CCS/CHFS 2021); first-line rate control in AF and flutter (CCS/CHRS 2020); first-line antianginal (CCS 2014). After MI they are recommended when LVEF is reduced; routine use when LVEF is preserved is now debated. Not a first-line antihypertensive (Hypertension Canada 2025).",
+  ind:"One of the four foundational HFrEF drugs, using bisoprolol, carvedilol or metoprolol succinate (CCS/CHFS 2021); first-line rate control in AF and flutter (CCS/CHRS 2020); first-line antianginal (CCS 2014). After MI they are recommended when LVEF is reduced, while routine use when LVEF is preserved is now debated. Not a first-line antihypertensive (Hypertension Canada 2025).",
   where:"Everywhere: ED (IV for fast AF), CCU and wards after MI, HF and family medicine clinics.",
   se:"Bradycardia, AV block, fatigue, bronchospasm (especially non-selective agents), may mask symptoms of hypoglycemia, cold extremities, erectile dysfunction.",
   ci:"Symptomatic bradycardia or high-grade AV block without a pacemaker, cardiogenic shock or decompensated HF with hypoperfusion (do not start then), severe asthma (non-selective agents).",
@@ -1657,7 +1661,7 @@ const MEDS=[
  {id:"digoxin",group:["arr","hf"],name:"Digoxin",tag:"Cardiac glycoside",
   ex:"Digoxin",
   moa:"Inhibits Na⁺/K⁺-ATPase → more intracellular Na⁺ → less Ca²⁺ removed by the Na⁺/Ca²⁺ exchanger → more contractility. Also increases vagal tone, slowing AV nodal conduction.",
-  ind:"AF rate control added to a beta blocker or CCB, or when they cannot be used, for example with HF or hypotension (CCS/CHRS 2020); HFrEF with persistent symptoms despite optimal therapy, to reduce hospitalizations; it does not improve survival (CCS HF 2017). Its rate control works mainly at rest.",
+  ind:"AF rate control added to a beta blocker or CCB, or when they cannot be used, for example with HF or hypotension (CCS/CHRS 2020); HFrEF with persistent symptoms despite optimal therapy, to reduce hospitalizations, but it does not improve survival (CCS HF 2017). Its rate control works mainly at rest.",
   where:"Wards, HF and family medicine clinics, ED (IV loading).",
   se:"Narrow therapeutic window. Toxicity: nausea, vomiting, confusion, visual changes (yellow-green tint), arrhythmias (PVCs, atrial tachycardia with block, bidirectional VT), hyperkalemia in acute overdose.",
   ci:"Second- or third-degree AV block without a pacemaker, pre-excited AF (WPW), ventricular fibrillation.",
@@ -1692,20 +1696,20 @@ const MEDS=[
   ind:"One of the four foundational HFrEF drugs (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025; the guideline defines this group as LVEF > 40%, while the finerenone trial and Health Canada label use ≥ 40%); spironolactone is the fourth drug for BP above target on triple therapy (Hypertension Canada 2025); LV dysfunction after MI; primary aldosteronism.",
   where:"HF and family medicine clinics, wards.",
   se:"Hyperkalemia, rise in creatinine, gynecomastia and menstrual changes (spironolactone, not eplerenone).",
-  ci:"For spironolactone and eplerenone in HFrEF: start only if eGFR is above 30 mL/min/1.73 m² and K⁺ is below 5.0 mmol/L; recheck K⁺ and creatinine within the first week, again at about 4 weeks, then periodically; reduce or hold if K⁺ rises above 5.5 mmol/L. Finerenone has its own kidney and potassium thresholds in its monograph; do not carry these numbers across drugs.",
+  ci:"For spironolactone and eplerenone in HFrEF: start only if eGFR is above 30 mL/min/1.73 m² and K⁺ is below 5.0 mmol/L. Recheck K⁺ and creatinine within the first week, again at about 4 weeks, then periodically. Reduce or hold if K⁺ rises above 5.5 mmol/L. Finerenone has its own kidney and potassium thresholds in its monograph, so do not carry these numbers across drugs.",
   pearl:"Hyperkalemia risk is highest when combined with ACE inhibitors or ARBs in older patients with CKD."},
  {id:"sglt2",group:["hf"],name:"SGLT2 inhibitors",tag:"HFrEF foundation",
   ex:"Dapagliflozin, empagliflozin",
   moa:"Block sodium–glucose cotransporter 2 in the proximal tubule → glucosuria and natriuresis; cardiac and renal benefits go beyond glucose lowering.",
   ind:"One of the four foundational HFrEF drugs, with or without diabetes (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025); type 2 diabetes with ASCVD, HF or CKD (Diabetes Canada); CKD.",
   where:"HF, nephrology, endocrinology and family medicine clinics; often started in hospital.",
-  se:"Genital fungal infections, volume depletion, urinary tract infection, and euglycemic diabetic ketoacidosis: ketoacidosis with near-normal glucose, so it is easily missed. Risk rises with acute illness, fasting, surgery, low carbohydrate intake or insulin dose reduction.",
+  se:"Genital fungal infections, volume depletion, urinary tract infection. Euglycemic diabetic ketoacidosis: ketoacidosis with near-normal glucose, so it is easily missed (risk rises with acute illness, fasting, surgery, low carbohydrate intake or insulin dose reduction).",
   ci:"Not indicated in type 1 diabetes (higher DKA risk). Hold during acute illness or fasting (\"sick day\" rules) and before elective surgery, timed to the drug: per product labelling, at least 3 days before for canagliflozin, dapagliflozin and empagliflozin, and 4 days for ertugliflozin.",
   pearl:"Benefit in HF is seen in patients with and without diabetes."},
  {id:"loop",group:["hf","bp"],name:"Loop diuretics",tag:"Diuretic",
   ex:"Furosemide, bumetanide, torsemide; ethacrynic acid (non-sulfonamide)",
   moa:"Inhibit the Na⁺-K⁺-2Cl⁻ cotransporter (NKCC2) in the thick ascending limb of the loop of Henle: the most potent diuretics.",
-  ind:"CCS HF 2017: relief of congestion in HF at the lowest dose that keeps the patient euvolemic; also edema from kidney or liver disease. They relieve symptoms; no disease-modifying mortality benefit has been established. Not routine hypertension drugs.",
+  ind:"CCS HF 2017: relief of congestion in HF at the lowest dose that keeps the patient euvolemic; also edema from kidney or liver disease. They relieve symptoms, but no disease-modifying mortality benefit has been established. Not routine hypertension drugs.",
   where:"ED and wards (IV), HF clinics (oral).",
   se:"Hypokalemia, hypomagnesemia, volume depletion, rise in creatinine, metabolic alkalosis, hyperuricemia, ototoxicity at high IV doses.",
   ci:"Anuria, severe volume depletion.",
@@ -1713,7 +1717,7 @@ const MEDS=[
  {id:"thiazide",group:["bp"],name:"Thiazide and thiazide-like diuretics",tag:"First-line antihypertensive",
   ex:"Hydrochlorothiazide; chlorthalidone, indapamide (thiazide-like); metolazone",
   moa:"Inhibit the Na⁺-Cl⁻ cotransporter in the distal convoluted tubule.",
-  ind:"Hypertension Canada 2025: one of three first-line antihypertensive classes in a low-dose two-drug combination; with separate pills, a long-acting thiazide-like diuretic (chlorthalidone, indapamide) is preferred over HCTZ. Metolazone: specialist add-on for loop-diuretic resistance in HF (sequential nephron blockade, with close electrolyte and volume monitoring); not a routine antihypertensive.",
+  ind:"Hypertension Canada 2025: one of three first-line antihypertensive classes in a low-dose two-drug combination; with separate pills, a long-acting thiazide-like diuretic (chlorthalidone, indapamide) is preferred over HCTZ. Metolazone: specialist add-on for loop-diuretic resistance in HF (sequential nephron blockade, with close electrolyte and volume monitoring), not a routine antihypertensive.",
   where:"Family medicine clinics (usually inside a combination pill); metolazone on HF wards.",
   se:"Hypokalemia, hyponatremia, hypercalcemia, hyperuricemia and gout, hyperglycemia, raised lipids.",
   ci:"Anuria; use caution in gout and hyponatremia.",
@@ -1737,7 +1741,7 @@ const MEDS=[
  {id:"antiplatelet",group:["thromb","angina"],name:"Antiplatelets",tag:"Antithrombotic",
   ex:"ASA; P2Y12 inhibitors: clopidogrel, prasugrel, ticagrelor",
   moa:"ASA irreversibly inhibits COX-1 → less thromboxane A2. P2Y12 inhibitors block ADP-mediated platelet activation (clopidogrel and prasugrel irreversibly; ticagrelor reversibly).",
-  ind:"CCS/CAIC 2023: antiplatelet therapy is commonly used for secondary prevention in established atherosclerotic disease, usually ASA, with the agent and duration set by the disease, any PCI, whether an oral anticoagulant is also needed, and bleeding risk. DAPT after ACS (ticagrelor or prasugrel generally preferred over clopidogrel with PCI) and after elective PCI (clopidogrel), with duration individualized to bleeding and ischemic risk (commonly 6–12 months, shorter if bleeding risk is high), then usually a single antiplatelet. ASA is not routinely recommended for primary prevention. With AF after PCI: oral anticoagulant plus clopidogrel, with ASA usually stopped early; a short course of triple therapy may be chosen when ischemic risk is high (CCS/CHRS 2020).",
+  ind:"CCS/CAIC 2023: antiplatelet therapy is commonly used for secondary prevention in established atherosclerotic disease, usually ASA, with the agent and duration set by the disease, any PCI, whether an oral anticoagulant is also needed, and bleeding risk. DAPT after ACS (ticagrelor or prasugrel generally preferred over clopidogrel with PCI) and after elective PCI (clopidogrel), with duration individualized to bleeding and ischemic risk (commonly 6–12 months, shorter if bleeding risk is high), then usually a single antiplatelet. ASA is not routinely recommended for primary prevention. With AF after PCI: oral anticoagulant plus clopidogrel, with ASA usually stopped early, and a short course of triple therapy may be chosen when ischemic risk is high (CCS/CHRS 2020).",
   where:"Paramedics and ED (chewed ASA), cath lab, CCU, cardiology and family medicine clinics.",
   se:"Bleeding, GI ulceration (ASA), dyspnea and bradyarrhythmias (ticagrelor).",
   ci:"Active bleeding. Prasugrel: prior stroke or TIA. Ticagrelor: prior intracranial hemorrhage.",
@@ -1745,10 +1749,10 @@ const MEDS=[
  {id:"anticoag",group:["thromb"],name:"Anticoagulants",tag:"Antithrombotic",
   ex:"Unfractionated heparin; LMWH (enoxaparin, dalteparin); warfarin; DOACs: apixaban, rivaroxaban, edoxaban (factor Xa), dabigatran (thrombin)",
   moa:"Heparin enhances antithrombin (inactivates thrombin and Xa); LMWH acts mainly on Xa. Warfarin blocks vitamin K epoxide reductase → less factors II, VII, IX, X and proteins C and S. DOACs directly inhibit Xa or thrombin.",
-  ind:"AF stroke prevention by the CCS \"CHADS-65\" approach: oral anticoagulation if age ≥ 65 or any CHADS2 risk factor (prior stroke/TIA, hypertension, HF, diabetes). Under 65 with none of these, no antithrombotic is needed for the AF itself (coronary or arterial disease may still need an antiplatelet for that disease). DOACs are generally preferred for eligible patients; a vitamin K antagonist (warfarin) is required with mechanical valves and AF with moderate to severe mitral stenosis, and remains appropriate in other selected situations (CCS/CHRS 2020). Short device-detected AF episodes are a separate, still-evolving decision (ARTESiA, NOAH-AFNET 6). DVT and PE: DOACs first-line for most patients; LMWH in pregnancy; LMWH or selected DOACs for cancer-associated VTE (Thrombosis Canada). ACS and PCI: heparins (CCS/CAIC 2019).",
+  ind:"AF stroke prevention by the CCS \"CHADS-65\" approach: oral anticoagulation if age ≥ 65 or any CHADS2 risk factor (prior stroke/TIA, hypertension, HF, diabetes). Under 65 with none of these, no antithrombotic is needed for the AF itself (coronary or arterial disease may still need an antiplatelet for that disease). DOACs are generally preferred for eligible patients; a vitamin K antagonist (warfarin) is required with mechanical valves and AF with moderate to severe mitral stenosis, and remains appropriate in other selected situations (CCS/CHRS 2020). Short device-detected AF episodes are a separate, still-evolving decision (ARTESiA, NOAH-AFNET 6). DVT and PE: DOACs first-line for most patients, LMWH in pregnancy, LMWH or selected DOACs for cancer-associated VTE (Thrombosis Canada). ACS and PCI: heparins (CCS/CAIC 2019).",
   where:"ED, wards, cath lab, thrombosis and anticoagulation clinics, family medicine.",
   se:"Bleeding. Heparin: heparin-induced thrombocytopenia (less with LMWH). Warfarin: many drug and food interactions, skin necrosis, teratogenic.",
-  ci:"Active bleeding. DOACs: mechanical heart valves, moderate to severe mitral stenosis, high-risk antiphospholipid syndrome; kidney thresholds differ by drug. Warfarin: generally avoided in pregnancy (pregnancy with a mechanical valve needs individualized specialist care). Heparin: history of HIT.",
+  ci:"Active bleeding. DOACs: mechanical heart valves, moderate to severe mitral stenosis, high-risk antiphospholipid syndrome, and kidney function below each drug's threshold. Warfarin: generally avoided in pregnancy (pregnancy with a mechanical valve needs individualized specialist care). Heparin: history of HIT.",
   pearl:"Monitoring: unfractionated heparin (aPTT or anti-Xa level); LMWH is not monitored routinely, and when it is, by anti-Xa level, not aPTT; warfarin (INR); DOACs (kidney function and drug interactions, no routine INR). Reversal depends on the drug, how severe and urgent the bleed is, and what is locally available: heparin (protamine; only partial for LMWH), warfarin (vitamin K plus prothrombin complex concentrate), dabigatran (idarucizumab), factor Xa inhibitors (prothrombin complex concentrate, or andexanet alfa where available and indicated)."},
  {id:"statins",group:["lipid"],name:"Statins",tag:"Lipid-lowering",
   ex:"Atorvastatin, rosuvastatin, simvastatin, pravastatin",
@@ -2282,6 +2286,18 @@ function drugPanel(cls,id){
     <div class="dp-note">Trial summaries are simplified for first-year learning and are pending a line-by-line check against each primary paper. Relative effects are approximate; a non-significant result means "no statistically significant difference", not "equal". A guideline recommendation is not the same as a Health Canada product indication or drug-plan coverage.</div>
   </div>`;
 }
+/* Card text → short bullet list. Splits at top-level (outside brackets) semicolons and sentence ends;
+   side effects and contraindications also split short comma lists, unless the item is "Label: a, b, c". */
+function topSplit(str,sepRe){const out=[];let depth=0,buf="";for(let i=0;i<str.length;i++){const c=str[i];if(c==="("||c==="[")depth++;else if((c===")"||c==="]")&&depth)depth--;
+  if(!depth){const m=str.slice(i).match(sepRe);if(m&&m.index===0){out.push(buf);buf="";i+=m[0].length-1;continue;}}buf+=c;}out.push(buf);return out.map(x=>x.trim()).filter(Boolean);}
+function listify(text,field){
+  if(!["ind","se","ci"].includes(field)) return text;
+  let items=topSplit(text,/^(;\s|\.\s(?=[A-Z]))/).map(x=>x.replace(/\.$/,""));
+  if(field!=="ind") items=items.flatMap(it=>{ if(/^[^(]*:/.test(it)) return [it]; const parts=topSplit(it,/^,\s/);
+    return parts.length>1 && parts.every(x=>x.replace(/\([^)]*\)/g,"").length<=70 && !/^(or|and|then|so|but|at|while|with|again)\b/i.test(x)) ? parts : [it]; });
+  items=items.map(x=>x.charAt(0).toUpperCase()+x.slice(1));
+  return items.length>1 ? `<ul>${items.map(x=>`<li>${x}</li>`).join("")}</ul>` : text;
+}
 function renderMeds(){
   const q=medQuery.trim().toLowerCase();
   const list=MEDS.filter(m=>(medGroup==="all"||m.group.includes(medGroup)) && (!q || [m.name,m.tag,m.ex,m.moa,m.ind,m.where,m.se,m.ci,m.pearl,...(CLASS_DRUGS[m.id]||[]).map(drugText)].join(" ").toLowerCase().includes(q)));
@@ -2302,7 +2318,8 @@ function renderMeds(){
       <div class="dlbl">Tap a drug for its clinical uses and landmark trials:</div>
       <div class="dchips">${ids.map(id=>`<button type="button" class="dchip" data-cls="${m.id}" data-drug="${id}" aria-expanded="${od===id}"${od===id?` aria-controls="dp-${m.id}"`:""}>${DRUGS[id].name}</button>`).join("")}</div>
       ${od?drugPanel(m.id,od):""}
-      <dl>${MED_FIELDS.map(([k,l])=>`<dt>${l}</dt><dd>${m[k]}</dd>`).join("")}</dl>
+      <dl>${MED_FIELDS.filter(([k])=>k!=="ci").map(([k,l])=>`<dt>${l}</dt><dd>${listify(m[k],k)}</dd>`).join("")}</dl>
+      <div class="warn"><dl><dt>Contraindications</dt><dd>${listify(m.ci,"ci")}</dd></dl></div>
       <div class="pearl"><b>Pearl:</b> ${m.pearl}</div>
     </article>`;}).join("") : `<div class="empty card">No drug classes match "${esc(medQuery)}".</div>`;
   $("medGrid").querySelectorAll(".cmp input").forEach(cb=>cb.addEventListener("change",()=>{
