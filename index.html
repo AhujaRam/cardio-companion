@@ -437,18 +437,18 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <g id="anatomy">
               <!-- vessels behind the cut plane (their roots are hidden behind the heart: outflow tracts lie outside this section) -->
               <g stroke-linejoin="round">
-                <path d="M300,40 C318,48 328,66 326,92 L326,120 L302,120 L302,96 C304,78 300,66 290,60 Z" fill="#8A2C40" opacity=".9"/>
-                <path d="M244,92 C220,88 196,88 150,96 L150,116 C196,108 222,108 246,112 Z" fill="url(#hv-blueV)" stroke="#2F5873" stroke-width="1.5"/>
+                <path d="M266,92 C230,88 196,88 150,96 L150,116 C196,108 230,108 266,112 Z" fill="url(#hv-blueV)" stroke="#2F5873" stroke-width="1.5"/>
                 <!-- inferior vena cava: short stub leaving the inferior right atrium at the lower right heart border, cut at the diaphragm -->
                 <path d="M69,213 L104,206 C98,238 84,262 78,296 L42,296 C48,262 58,234 69,213 Z" fill="url(#hv-blue)" stroke="#2F5873" stroke-width="1.5"/>
                 <ellipse cx="60" cy="296" rx="18" ry="5" fill="#26465C"/>
                 <path d="M356,136 C372,132 388,130 410,130 L410,148 C390,148 374,150 357,154 Z M356,176 C374,174 392,176 412,180 L410,198 C390,194 374,192 354,194 Z" fill="url(#hv-redV)" stroke="#8A2C40" stroke-width="1.5"/>
                 <ellipse cx="410" cy="139" rx="4" ry="9" fill="#6B2033"/><ellipse cx="411" cy="189" rx="4" ry="9" fill="#6B2033"/>
-                <!-- ascending aorta and arch -->
-                <path d="M168,128 C164,96 164,64 172,44 C184,16 212,2 246,2 C282,2 308,18 318,44 C324,60 324,78 320,96 L296,96 C300,80 300,66 294,56 C286,40 268,28 248,28 C228,28 210,38 200,56 C194,72 196,102 202,128 Z" fill="url(#hv-red)" stroke="#7E2638" stroke-width="2"/>
-                <g stroke-linecap="round"><path d="M206,14 L198,-8 M246,3 L248,-9 M280,8 L294,-8" stroke="#7E2638" stroke-width="15"/><path d="M206,14 L198,-8 M246,3 L248,-9 M280,8 L294,-8" stroke="#D97B80" stroke-width="10"/></g>
-                <!-- pulmonary trunk, bifurcating under the arch -->
-                <path d="M212,130 C210,112 212,96 220,84 C228,74 242,70 256,72 C278,74 300,72 330,64 L338,84 C312,92 290,94 268,94 C262,100 260,114 262,130 Z" fill="url(#hv-blueV)" stroke="#2F5873" stroke-width="2"/>
+                <!-- ascending aorta and arch: rises from behind the left atrium (the aortic root, at the LV outflow tract, sits just in front of the LA, outside this section) -->
+                <path d="M222,128 C219,98 220,66 228,46 C238,18 258,4 280,4 C296,4 309,11 318,22 L300,42 C294,35 287,30 277,30 C266,30 258,40 254,58 C250,74 251,102 255,128 Z" fill="url(#hv-red)" stroke="#7E2638" stroke-width="2"/>
+                <ellipse cx="309" cy="32" rx="13.5" ry="4.5" fill="#6B2033" transform="rotate(-48 309 32)"/>
+                <g stroke-linecap="round"><path d="M248,16 L240,-8 M272,5 L272,-9 M296,9 L304,-8" stroke="#7E2638" stroke-width="13"/><path d="M248,16 L240,-8 M272,5 L272,-9 M296,9 L304,-8" stroke="#D97B80" stroke-width="8.5"/></g>
+                <!-- pulmonary trunk, anterior and to the patient's left of the aorta, bifurcating under the arch -->
+                <path d="M260,130 C258,112 260,98 266,90 C272,82 282,80 292,80 C306,78 318,74 330,64 L338,84 C326,92 312,96 298,98 C292,104 290,116 290,130 Z" fill="url(#hv-blueV)" stroke="#2F5873" stroke-width="2"/>
                 <ellipse cx="335" cy="74" rx="5" ry="10" fill="#26465C" transform="rotate(-16 335 74)"/>
               </g>
 
@@ -558,7 +558,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <text x="-56" y="432">Purkinje fibres</text>
             </g>
             <g id="anatLabels" font-family="Arial, sans-serif" font-size="12" fill="#5E6A73" pointer-events="none" opacity="0">
-              <g fill="none" stroke="#8B97A1" stroke-width=".9" stroke-dasharray="2 2"><path d="M-28,26 L96,26"/><path d="M-28,302 L44,298"/><path d="M30,262 L112,241"/><path d="M34,352 L104,334 L150,334"/><path d="M440,30 L320,40"/><path d="M376,82 L332,76"/><path d="M379,112 L398,130"/><path d="M405,206 L206,172"/><path d="M379,376 L320,340"/><path d="M343,420 L222,384"/></g>
+              <g fill="none" stroke="#8B97A1" stroke-width=".9" stroke-dasharray="2 2"><path d="M-28,26 L96,26"/><path d="M-28,302 L44,298"/><path d="M30,262 L112,241"/><path d="M34,352 L104,334 L150,334"/><path d="M440,30 L312,24"/><path d="M376,82 L332,76"/><path d="M379,112 L398,130"/><path d="M405,206 L206,172"/><path d="M379,376 L320,340"/><path d="M343,420 L222,384"/></g>
               <text x="-56" y="30">SVC</text><text x="-56" y="306">IVC</text><text x="-56" y="266">Fibrous AV ring</text><text x="-56" y="356">Moderator band</text>
               <g text-anchor="end"><text x="476" y="34">Aorta</text><text x="476" y="86">Pulmonary artery</text><text x="476" y="116">Pulmonary veins</text><text x="476" y="210">Fossa ovalis</text><text x="476" y="380">Papillary muscle</text><text x="476" y="424">Interventricular septum</text></g>
             </g>
@@ -570,8 +570,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
               <radialGradient id="ax-cav" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#7E2B40"/><stop offset="1" stop-color="#4A1526"/></radialGradient>
               <linearGradient id="ax-muscle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E08A88"/><stop offset=".5" stop-color="#C55F68"/><stop offset="1" stop-color="#93364B"/></linearGradient>
               <clipPath id="ax-clip"><circle id="ax-clipC" r="0"/><circle id="ax-clipC2" r="0"/><circle id="ax-clipC3" r="0"/><circle id="ax-clipC4" r="0"/><circle id="ax-clipC5" r="0"/></clipPath>
-              <path id="ax-rvOut" d="M306,212 C288,195 260,187 226,188 C176,190 132,212 116,250 C104,280 116,308 142,318 C164,326 188,318 202,302 C204,270 244,230 306,212 Z"/>
-              <path id="ax-rvCav" d="M294,212 C278,201 254,197 226,199 C182,201 145,220 130,254 C120,280 130,301 149,308 C168,314 186,307 195,294 C198,266 238,232 294,212 Z"/>
+              <path id="ax-rvOut" d="M319.6,233.9 C310,206 268,186 226,188 C176,190 132,212 116,250 C104,280 116,312 146,324 C174,334 202,336 220.4,333 A76,66 0 0 1 319.6,233.9 Z"/>
+              <path id="ax-rvCav" d="M311.7,229.7 C300,207 264,198 226,199 C182,201 145,220 130,254 C120,282 130,306 154,314 C178,322 198,326 213.8,325.9 A76,66 0 0 1 311.7,229.7 Z"/>
               <ellipse id="ax-lvOut" cx="276" cy="288" rx="76" ry="66"/>
               <ellipse id="ax-lvCav" cx="282" cy="292" rx="42" ry="36"/>
               <mask id="ax-mV" maskUnits="userSpaceOnUse" x="-60" y="-10" width="540" height="486">
@@ -598,7 +598,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
             <use href="#ax-rvCav" fill="url(#ax-cav)"/>
             <use href="#ax-lvOut" fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="2"/>
             <use href="#ax-lvCav" fill="url(#ax-cav)" stroke="#F0B3A8" stroke-width="1"/>
-            <path d="M294,212 C278,201 254,197 226,199 C182,201 145,220 130,254 C120,280 130,301 149,308 C168,314 186,307 195,294" fill="none" stroke="#F0B3A8" stroke-width="1"/>
+            <path d="M311.7,229.7 C300,207 264,198 226,199 C182,201 145,220 130,254 C120,282 130,306 154,314 C178,322 198,326 213.8,325.9" fill="none" stroke="#F0B3A8" stroke-width="1"/>
             <g fill="url(#ax-muscle)" stroke="#7E2B40" stroke-width="1"><circle cx="318" cy="276" r="8"/><circle cx="290" cy="322" r="8"/></g>
             <!-- electrical overlays -->
             <g opacity=".88" mask="url(#ax-mV)">
