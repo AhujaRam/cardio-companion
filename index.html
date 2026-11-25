@@ -114,7 +114,7 @@ kbd{font-family:inherit;font-size:12px;border:1px solid var(--line);border-radiu
 .med dl{margin:0}
 .med dt{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--crimson);margin-top:10px}
 .med dd{margin:2px 0 0;font-size:14.5px}
-.med .pearl{margin-top:auto;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
+.med .pearl{margin-top:12px;background:var(--soft);border-radius:10px;padding:10px 12px;font-size:14px}
 .med dl{margin-bottom:12px}
 /* Cards in a row share one height (pearl pinned to the bottom); "dense" backfills holes left beside a full-width open card. */
 .med-grid{align-items:stretch;grid-auto-flow:row dense}
@@ -702,7 +702,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <!-- MEDS -->
 <section class="page" id="page-meds">
   <h1>Medications</h1>
-  <p class="lede">Drug classes relevant to the cardiology block, built for quick reference (the final list will be confirmed with faculty). Clinical uses are summarized from current Canadian guidelines (a guideline recommendation is not the same as a Health Canada product indication or drug-plan coverage). Selected classes and examples, not an exhaustive list. Tap any drug name for where it is used and the landmark trials behind it. Tick "Compare" on up to three classes to see them side by side.</p>
+  <p class="lede">Drug classes relevant to the cardiology block, built for quick reference (the final list will be confirmed with faculty). Clinical uses are summarized from current guidelines (a guideline recommendation is not the same as a Health Canada product indication or drug-plan coverage). Selected classes and examples, not an exhaustive list. Tap any drug name for where it is used and the landmark trials behind it. Tick "Compare" on up to three classes to see them side by side.</p>
   <div class="notice">Educational summary for first-year learning. Not a prescribing reference: always check the product monograph and current Canadian guidelines.</div>
   <div class="med-tools">
     <input class="search" id="medSearch" type="search" placeholder="Search a drug, class or trial (e.g. amiodarone, cough, PARADIGM-HF)" aria-label="Search medications">
@@ -1625,7 +1625,7 @@ const MEDS=[
  {id:"bb",group:["arr","hf","angina","bp"],name:"Beta blockers",tag:"Vaughan Williams class II",
   ex:"Metoprolol, bisoprolol, atenolol (β1-selective); carvedilol (non-selective + α1); propranolol (non-selective)",
   moa:"Block β-adrenergic receptors. β1 blockade lowers heart rate (SA node), contractility and AV nodal conduction, and reduces renin release.",
-  ind:"Canadian guidelines: one of the four foundational HFrEF drugs, using bisoprolol, carvedilol or metoprolol succinate (CCS/CHFS 2021); first-line rate control in AF and flutter (CCS/CHRS 2020); first-line antianginal (CCS 2014). After MI they are recommended when LVEF is reduced; routine use when LVEF is preserved is now debated. Not a first-line antihypertensive (Hypertension Canada 2025).",
+  ind:"One of the four foundational HFrEF drugs, using bisoprolol, carvedilol or metoprolol succinate (CCS/CHFS 2021); first-line rate control in AF and flutter (CCS/CHRS 2020); first-line antianginal (CCS 2014). After MI they are recommended when LVEF is reduced; routine use when LVEF is preserved is now debated. Not a first-line antihypertensive (Hypertension Canada 2025).",
   where:"Everywhere: ED (IV for fast AF), CCU and wards after MI, HF and family medicine clinics.",
   se:"Bradycardia, AV block, fatigue, bronchospasm (especially non-selective agents), may mask symptoms of hypoglycemia, cold extremities, erectile dysfunction.",
   ci:"Symptomatic bradycardia or high-grade AV block without a pacemaker, cardiogenic shock or decompensated HF with hypoperfusion (do not start then), severe asthma (non-selective agents).",
@@ -1633,7 +1633,7 @@ const MEDS=[
  {id:"ndhp",group:["arr","angina","bp"],name:"Non-dihydropyridine calcium channel blockers",tag:"Vaughan Williams class IV",
   ex:"Verapamil, diltiazem",
   moa:"Block L-type calcium channels in the heart, especially the SA and AV nodes: slower heart rate, slower AV conduction, reduced contractility.",
-  ind:"Canadian guidelines: rate control in AF and flutter when LVEF > 40% (CCS/CHRS 2020); stable, regular narrow-complex SVT after vagal manoeuvres and adenosine (Heart & Stroke ACLS 2025); angina when a beta blocker is unsuitable (CCS 2014); calcium channel blockers are also the usual first-line drug for vasospastic angina. Avoid when LVEF is significantly reduced (≤ 40%).",
+  ind:"Rate control in AF and flutter when LVEF > 40% (CCS/CHRS 2020); stable, regular narrow-complex SVT after vagal manoeuvres and adenosine (Heart & Stroke ACLS 2025); angina when a beta blocker is unsuitable (CCS 2014); calcium channel blockers are also the usual first-line drug for vasospastic angina. Avoid when LVEF is significantly reduced (≤ 40%).",
   where:"ED (IV diltiazem for fast AF), cardiology and EP clinics.",
   se:"Bradycardia, AV block, hypotension, worsening heart failure, constipation (verapamil), peripheral edema.",
   ci:"Significantly reduced LVEF (HFrEF), AV block or sick sinus syndrome without a pacemaker, hypotension, pre-excited AF (WPW), undifferentiated wide-complex tachycardia.",
@@ -1641,7 +1641,7 @@ const MEDS=[
  {id:"antiarr",group:["arr"],name:"Antiarrhythmics: sodium and potassium channel blockers",tag:"Vaughan Williams classes I and III",
   ex:"Ia: procainamide · Ib: lidocaine, mexiletine · Ic: flecainide, propafenone · III: amiodarone, sotalol, dronedarone",
   moa:"Class I blocks Na⁺ channels, slowing phase 0 and conduction (Ia: moderate, also prolongs repolarization; Ib: weak, acts mainly on ischemic tissue; Ic: strong, widens the QRS). Class III blocks K⁺ channels, prolonging repolarization and the QT interval. Amiodarone is multichannel: besides K⁺ block it blocks Na⁺ and Ca²⁺ channels and β receptors (effects of classes I–IV).",
-  ind:"Canadian guidelines: AF rhythm control (CCS/CHRS 2020): flecainide or propafenone if the heart is structurally normal (pill-in-the-pocket only for selected patients after a first monitored dose), sotalol or dronedarone in selected patients, amiodarone with LV dysfunction or HF. Pre-excited AF: procainamide or ibutilide, or cardioversion. Resuscitation (Heart & Stroke ACLS 2025): amiodarone or lidocaine for shock-refractory VF/pulseless VT; procainamide or amiodarone for stable wide-complex tachycardia.",
+  ind:"AF rhythm control (CCS/CHRS 2020): flecainide or propafenone if the heart is structurally normal (pill-in-the-pocket only for selected patients after a first monitored dose), sotalol or dronedarone in selected patients, amiodarone with LV dysfunction or HF. Pre-excited AF: procainamide or ibutilide, or cardioversion. Resuscitation (Heart & Stroke ACLS 2025): amiodarone or lidocaine for shock-refractory VF/pulseless VT; procainamide or amiodarone for stable wide-complex tachycardia.",
   where:"ED (including IV procainamide cardioversion of selected recent-onset AF, an Ottawa approach, after onset time, stroke risk and anticoagulation are assessed), CCU, cardiac arrest, EP clinic.",
   se:"All can be proarrhythmic. QT prolongation and torsades de pointes (Ia, III). Lidocaine: CNS toxicity. Flecainide: can turn AF into flutter with 1:1 conduction. Amiodarone: thyroid dysfunction, pulmonary fibrosis, liver injury, corneal deposits, photosensitivity, bradycardia.",
   ci:"Class Ic: structural heart disease, coronary artery disease or prior MI. QT-prolonging agents: long QT. Dronedarone: permanent AF, severe or recently decompensated HF. Pre-excited AF (WPW): do not give IV amiodarone.",
@@ -1649,7 +1649,7 @@ const MEDS=[
  {id:"adenosine",group:["arr"],name:"Adenosine",tag:"Unclassified antiarrhythmic",
   ex:"Adenosine (rapid IV push followed by a saline flush)",
   moa:"Activates A1 receptors in the AV node, increasing K⁺ efflux and causing a brief, high-grade AV block. Half-life is under 10 seconds.",
-  ind:"Canadian guidelines (Heart & Stroke ACLS 2025): for a stable patient on a cardiac monitor, the first drug for regular narrow-complex SVT after vagal manoeuvres (it terminates AV-node-dependent re-entry such as AVNRT and orthodromic AVRT); can be considered for stable, regular, monomorphic wide-complex tachycardia when the mechanism is unclear; also a diagnostic aid that briefly blocks the AV node to unmask flutter waves (it does not treat AF or flutter). An unstable patient needs urgent synchronized cardioversion instead.",
+  ind:"Heart & Stroke ACLS 2025: for a stable patient on a cardiac monitor, the first drug for regular narrow-complex SVT after vagal manoeuvres (it terminates AV-node-dependent re-entry such as AVNRT and orthodromic AVRT); can be considered for stable, regular, monomorphic wide-complex tachycardia when the mechanism is unclear; also a diagnostic aid that briefly blocks the AV node to unmask flutter waves (it does not treat AF or flutter). An unstable patient needs urgent synchronized cardioversion instead.",
   where:"ED and monitored beds, with a defibrillator and a running rhythm strip.",
   se:"Flushing, chest discomfort, dyspnea, a sense of impending doom, transient pause or asystole.",
   ci:"Second- or third-degree AV block or sick sinus without a pacemaker, pre-excited AF (WPW), irregular or polymorphic wide-complex tachycardia; caution in severe asthma or bronchospasm. Use it for regular narrow-complex (or regular, monomorphic wide-complex) tachycardias.",
@@ -1657,7 +1657,7 @@ const MEDS=[
  {id:"digoxin",group:["arr","hf"],name:"Digoxin",tag:"Cardiac glycoside",
   ex:"Digoxin",
   moa:"Inhibits Na⁺/K⁺-ATPase → more intracellular Na⁺ → less Ca²⁺ removed by the Na⁺/Ca²⁺ exchanger → more contractility. Also increases vagal tone, slowing AV nodal conduction.",
-  ind:"Canadian guidelines: AF rate control added to a beta blocker or CCB, or when they cannot be used, for example with HF or hypotension (CCS/CHRS 2020); HFrEF with persistent symptoms despite optimal therapy, to reduce hospitalizations; it does not improve survival (CCS HF 2017). Its rate control works mainly at rest.",
+  ind:"AF rate control added to a beta blocker or CCB, or when they cannot be used, for example with HF or hypotension (CCS/CHRS 2020); HFrEF with persistent symptoms despite optimal therapy, to reduce hospitalizations; it does not improve survival (CCS HF 2017). Its rate control works mainly at rest.",
   where:"Wards, HF and family medicine clinics, ED (IV loading).",
   se:"Narrow therapeutic window. Toxicity: nausea, vomiting, confusion, visual changes (yellow-green tint), arrhythmias (PVCs, atrial tachycardia with block, bidirectional VT), hyperkalemia in acute overdose.",
   ci:"Second- or third-degree AV block without a pacemaker, pre-excited AF (WPW), ventricular fibrillation.",
@@ -1665,7 +1665,7 @@ const MEDS=[
  {id:"acei",group:["hf","bp"],name:"ACE inhibitors",tag:"RAAS blockade",
   ex:"Ramipril, perindopril, enalapril, lisinopril",
   moa:"Block angiotensin-converting enzyme → less angiotensin II and aldosterone (vasodilation, less sodium retention). Also reduce bradykinin breakdown.",
-  ind:"Canadian guidelines: one of three first-line antihypertensive classes, started as a low-dose two-drug combination, ideally in one pill (Hypertension Canada 2025); HFrEF when sacubitril/valsartan is not used (CCS/CHFS 2021); after MI with LV dysfunction; vascular protection in coronary disease (CCS 2014); diabetes or CKD with albuminuria (Diabetes Canada).",
+  ind:"One of three first-line antihypertensive classes, started as a low-dose two-drug combination, ideally in one pill (Hypertension Canada 2025); HFrEF when sacubitril/valsartan is not used (CCS/CHFS 2021); after MI with LV dysfunction; vascular protection in coronary disease (CCS 2014); diabetes or CKD with albuminuria (Diabetes Canada).",
   where:"Family medicine and cardiology clinics; started in hospital after MI.",
   se:"Dry cough (bradykinin), hyperkalemia, rise in creatinine, hypotension, angioedema.",
   ci:"Pregnancy, history of angioedema, bilateral renal artery stenosis, within 36 hours of sacubitril/valsartan.",
@@ -1673,7 +1673,7 @@ const MEDS=[
  {id:"arb",group:["hf","bp"],name:"Angiotensin receptor blockers (ARBs)",tag:"RAAS blockade",
   ex:"Candesartan, valsartan, losartan, irbesartan, telmisartan",
   moa:"Block the angiotensin II type 1 (AT1) receptor, preventing vasoconstriction and aldosterone release.",
-  ind:"Canadian guidelines: first-line antihypertensive class, ideally in a single-pill combination (Hypertension Canada 2025; its implementation tools give irbesartan/HCTZ as one example starting combination, while the guideline itself supports any two complementary first-line classes); HFrEF as the alternative when neither an ACE inhibitor nor an ARNI can be used (CCS/CHFS 2021); diabetes or CKD with albuminuria.",
+  ind:"First-line antihypertensive class, ideally in a single-pill combination (Hypertension Canada 2025; its implementation tools give irbesartan/HCTZ as one example starting combination, while the guideline itself supports any two complementary first-line classes); HFrEF as the alternative when neither an ACE inhibitor nor an ARNI can be used (CCS/CHFS 2021); diabetes or CKD with albuminuria.",
   where:"Family medicine and HF clinics.",
   se:"Hyperkalemia, rise in creatinine, hypotension, dizziness; cough and angioedema much less common than with ACE inhibitors.",
   ci:"Pregnancy, bilateral renal artery stenosis; do not combine with an ACE inhibitor.",
@@ -1681,7 +1681,7 @@ const MEDS=[
  {id:"arni",group:["hf"],name:"ARNI (angiotensin receptor–neprilysin inhibitor)",tag:"HFrEF foundation",
   ex:"Sacubitril/valsartan",
   moa:"Sacubitril inhibits neprilysin, raising natriuretic peptides (vasodilation, natriuresis); valsartan blocks the AT1 receptor.",
-  ind:"Canadian guidelines: HFrEF, recommended in place of an ACE inhibitor or ARB and can be started first-line, including in hospitalized patients once stable (CCS/CHFS 2021); can be considered with LVEF > 40% (CCS/CHFS 2025).",
+  ind:"HFrEF, recommended in place of an ACE inhibitor or ARB and can be started first-line, including in hospitalized patients once stable (CCS/CHFS 2021); can be considered with LVEF > 40% (CCS/CHFS 2025).",
   where:"HF clinics and inpatient HF wards.",
   se:"Hypotension, hyperkalemia, rise in creatinine, angioedema.",
   ci:"Never with an ACE inhibitor (allow 36 hours between the two when switching in either direction) or with a second ARB; history of angioedema; pregnancy.",
@@ -1689,7 +1689,7 @@ const MEDS=[
  {id:"mra",group:["hf","bp"],name:"Mineralocorticoid receptor antagonists (MRAs)",tag:"HFrEF foundation · K⁺-sparing",
   ex:"Spironolactone, eplerenone (steroidal); finerenone (non-steroidal)",
   moa:"Block aldosterone receptors in the collecting duct (less Na⁺ reabsorption, less K⁺ loss) and reduce aldosterone-driven fibrosis.",
-  ind:"Canadian guidelines: one of the four foundational HFrEF drugs (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025; the guideline defines this group as LVEF > 40%, while the finerenone trial and Health Canada label use ≥ 40%); spironolactone is the fourth drug for BP above target on triple therapy (Hypertension Canada 2025); LV dysfunction after MI; primary aldosteronism.",
+  ind:"One of the four foundational HFrEF drugs (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025; the guideline defines this group as LVEF > 40%, while the finerenone trial and Health Canada label use ≥ 40%); spironolactone is the fourth drug for BP above target on triple therapy (Hypertension Canada 2025); LV dysfunction after MI; primary aldosteronism.",
   where:"HF and family medicine clinics, wards.",
   se:"Hyperkalemia, rise in creatinine, gynecomastia and menstrual changes (spironolactone, not eplerenone).",
   ci:"For spironolactone and eplerenone in HFrEF: start only if eGFR is above 30 mL/min/1.73 m² and K⁺ is below 5.0 mmol/L; recheck K⁺ and creatinine within the first week, again at about 4 weeks, then periodically; reduce or hold if K⁺ rises above 5.5 mmol/L. Finerenone has its own kidney and potassium thresholds in its monograph; do not carry these numbers across drugs.",
@@ -1697,7 +1697,7 @@ const MEDS=[
  {id:"sglt2",group:["hf"],name:"SGLT2 inhibitors",tag:"HFrEF foundation",
   ex:"Dapagliflozin, empagliflozin",
   moa:"Block sodium–glucose cotransporter 2 in the proximal tubule → glucosuria and natriuresis; cardiac and renal benefits go beyond glucose lowering.",
-  ind:"Canadian guidelines: one of the four foundational HFrEF drugs, with or without diabetes (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025); type 2 diabetes with ASCVD, HF or CKD (Diabetes Canada); CKD.",
+  ind:"One of the four foundational HFrEF drugs, with or without diabetes (CCS/CHFS 2021); recommended in symptomatic HF with LVEF > 40% (CCS/CHFS 2025); type 2 diabetes with ASCVD, HF or CKD (Diabetes Canada); CKD.",
   where:"HF, nephrology, endocrinology and family medicine clinics; often started in hospital.",
   se:"Genital fungal infections, volume depletion, urinary tract infection, and euglycemic diabetic ketoacidosis: ketoacidosis with near-normal glucose, so it is easily missed. Risk rises with acute illness, fasting, surgery, low carbohydrate intake or insulin dose reduction.",
   ci:"Not indicated in type 1 diabetes (higher DKA risk). Hold during acute illness or fasting (\"sick day\" rules) and before elective surgery, timed to the drug: per product labelling, at least 3 days before for canagliflozin, dapagliflozin and empagliflozin, and 4 days for ertugliflozin.",
@@ -1705,7 +1705,7 @@ const MEDS=[
  {id:"loop",group:["hf","bp"],name:"Loop diuretics",tag:"Diuretic",
   ex:"Furosemide, bumetanide, torsemide; ethacrynic acid (non-sulfonamide)",
   moa:"Inhibit the Na⁺-K⁺-2Cl⁻ cotransporter (NKCC2) in the thick ascending limb of the loop of Henle: the most potent diuretics.",
-  ind:"Canadian guidelines (CCS HF 2017): relief of congestion in HF at the lowest dose that keeps the patient euvolemic; also edema from kidney or liver disease. They relieve symptoms; no disease-modifying mortality benefit has been established. Not routine hypertension drugs.",
+  ind:"CCS HF 2017: relief of congestion in HF at the lowest dose that keeps the patient euvolemic; also edema from kidney or liver disease. They relieve symptoms; no disease-modifying mortality benefit has been established. Not routine hypertension drugs.",
   where:"ED and wards (IV), HF clinics (oral).",
   se:"Hypokalemia, hypomagnesemia, volume depletion, rise in creatinine, metabolic alkalosis, hyperuricemia, ototoxicity at high IV doses.",
   ci:"Anuria, severe volume depletion.",
@@ -1713,7 +1713,7 @@ const MEDS=[
  {id:"thiazide",group:["bp"],name:"Thiazide and thiazide-like diuretics",tag:"First-line antihypertensive",
   ex:"Hydrochlorothiazide; chlorthalidone, indapamide (thiazide-like); metolazone",
   moa:"Inhibit the Na⁺-Cl⁻ cotransporter in the distal convoluted tubule.",
-  ind:"Canadian guidelines (Hypertension Canada 2025): one of three first-line antihypertensive classes in a low-dose two-drug combination; with separate pills, a long-acting thiazide-like diuretic (chlorthalidone, indapamide) is preferred over HCTZ. Metolazone: specialist add-on for loop-diuretic resistance in HF (sequential nephron blockade, with close electrolyte and volume monitoring); not a routine antihypertensive.",
+  ind:"Hypertension Canada 2025: one of three first-line antihypertensive classes in a low-dose two-drug combination; with separate pills, a long-acting thiazide-like diuretic (chlorthalidone, indapamide) is preferred over HCTZ. Metolazone: specialist add-on for loop-diuretic resistance in HF (sequential nephron blockade, with close electrolyte and volume monitoring); not a routine antihypertensive.",
   where:"Family medicine clinics (usually inside a combination pill); metolazone on HF wards.",
   se:"Hypokalemia, hyponatremia, hypercalcemia, hyperuricemia and gout, hyperglycemia, raised lipids.",
   ci:"Anuria; use caution in gout and hyponatremia.",
@@ -1721,7 +1721,7 @@ const MEDS=[
  {id:"dhp",group:["bp","angina"],name:"Dihydropyridine calcium channel blockers",tag:"First-line antihypertensive",
   ex:"Amlodipine, felodipine, long-acting nifedipine",
   moa:"Block L-type calcium channels mainly in vascular smooth muscle → arteriolar vasodilation, with little effect on the SA or AV node.",
-  ind:"Canadian guidelines: one of three first-line antihypertensive classes, long-acting agents only (Hypertension Canada 2025); stable angina (CCS 2014); long-acting nifedipine for hypertension in pregnancy (SOGC 2022). Raynaud's phenomenon.",
+  ind:"One of three first-line antihypertensive classes, long-acting agents only (Hypertension Canada 2025); stable angina (CCS 2014); long-acting nifedipine for hypertension in pregnancy (SOGC 2022). Raynaud's phenomenon.",
   where:"Family medicine and cardiology clinics, obstetrics.",
   se:"Peripheral (ankle) edema, flushing, headache, reflex tachycardia, gingival hyperplasia.",
   ci:"Short-acting (immediate-release) nifedipine in ACS and for routine outpatient BP (it has a separate, supervised obstetric use); caution in severe aortic stenosis.",
@@ -1729,7 +1729,7 @@ const MEDS=[
  {id:"nitrates",group:["angina"],name:"Nitrates",tag:"Antianginal",
   ex:"Nitroglycerin (sublingual, spray, patch, IV), isosorbide mononitrate, isosorbide dinitrate",
   moa:"Release nitric oxide → increased cGMP → smooth muscle relaxation. Venodilation lowers preload (main effect); also dilates coronary arteries.",
-  ind:"Canadian guidelines: sublingual nitroglycerin for patients with angina unless contraindicated, and long-acting nitrates as add-on antianginals (CCS 2014); ischemic chest pain in ACS when blood pressure allows and there is no contraindication (Heart & Stroke ACLS 2025); IV for acute pulmonary edema with adequate blood pressure. Nitrates alone relieve angina but have not shown a survival benefit (for example, in routine use after MI). Isosorbide dinitrate combined with hydralazine is a separate, evidence-based HFrEF regimen for selected patients (CCS HF 2017; see hydralazine).",
+  ind:"Sublingual nitroglycerin for patients with angina unless contraindicated, and long-acting nitrates as add-on antianginals (CCS 2014); ischemic chest pain in ACS when blood pressure allows and there is no contraindication (Heart & Stroke ACLS 2025); IV for acute pulmonary edema with adequate blood pressure. Nitrates alone relieve angina but have not shown a survival benefit (for example, in routine use after MI). Isosorbide dinitrate combined with hydralazine is a separate, evidence-based HFrEF regimen for selected patients (CCS HF 2017; see hydralazine).",
   where:"Patients' pockets (spray or tablets), ED and CCU (IV), clinics (patches, oral).",
   se:"Headache, hypotension, flushing, reflex tachycardia, tolerance with continuous use.",
   ci:"Recent PDE-5 inhibitor use (commonly quoted: sildenafil or vardenafil within 24 hours, tadalafil within 48 hours; check the monograph) or riociguat, hypotension, right ventricular infarction (preload-dependent); caution in severe aortic stenosis and hypertrophic obstructive cardiomyopathy.",
@@ -1737,7 +1737,7 @@ const MEDS=[
  {id:"antiplatelet",group:["thromb","angina"],name:"Antiplatelets",tag:"Antithrombotic",
   ex:"ASA; P2Y12 inhibitors: clopidogrel, prasugrel, ticagrelor",
   moa:"ASA irreversibly inhibits COX-1 → less thromboxane A2. P2Y12 inhibitors block ADP-mediated platelet activation (clopidogrel and prasugrel irreversibly; ticagrelor reversibly).",
-  ind:"Canadian guidelines (CCS/CAIC 2023): antiplatelet therapy is commonly used for secondary prevention in established atherosclerotic disease, usually ASA, with the agent and duration set by the disease, any PCI, whether an oral anticoagulant is also needed, and bleeding risk. DAPT after ACS (ticagrelor or prasugrel generally preferred over clopidogrel with PCI) and after elective PCI (clopidogrel), with duration individualized to bleeding and ischemic risk (commonly 6–12 months, shorter if bleeding risk is high), then usually a single antiplatelet. ASA is not routinely recommended for primary prevention. With AF after PCI: oral anticoagulant plus clopidogrel, with ASA usually stopped early; a short course of triple therapy may be chosen when ischemic risk is high (CCS/CHRS 2020).",
+  ind:"CCS/CAIC 2023: antiplatelet therapy is commonly used for secondary prevention in established atherosclerotic disease, usually ASA, with the agent and duration set by the disease, any PCI, whether an oral anticoagulant is also needed, and bleeding risk. DAPT after ACS (ticagrelor or prasugrel generally preferred over clopidogrel with PCI) and after elective PCI (clopidogrel), with duration individualized to bleeding and ischemic risk (commonly 6–12 months, shorter if bleeding risk is high), then usually a single antiplatelet. ASA is not routinely recommended for primary prevention. With AF after PCI: oral anticoagulant plus clopidogrel, with ASA usually stopped early; a short course of triple therapy may be chosen when ischemic risk is high (CCS/CHRS 2020).",
   where:"Paramedics and ED (chewed ASA), cath lab, CCU, cardiology and family medicine clinics.",
   se:"Bleeding, GI ulceration (ASA), dyspnea and bradyarrhythmias (ticagrelor).",
   ci:"Active bleeding. Prasugrel: prior stroke or TIA. Ticagrelor: prior intracranial hemorrhage.",
@@ -1745,7 +1745,7 @@ const MEDS=[
  {id:"anticoag",group:["thromb"],name:"Anticoagulants",tag:"Antithrombotic",
   ex:"Unfractionated heparin; LMWH (enoxaparin, dalteparin); warfarin; DOACs: apixaban, rivaroxaban, edoxaban (factor Xa), dabigatran (thrombin)",
   moa:"Heparin enhances antithrombin (inactivates thrombin and Xa); LMWH acts mainly on Xa. Warfarin blocks vitamin K epoxide reductase → less factors II, VII, IX, X and proteins C and S. DOACs directly inhibit Xa or thrombin.",
-  ind:"Canadian guidelines: AF stroke prevention by the CCS \"CHADS-65\" approach: oral anticoagulation if age ≥ 65 or any CHADS2 risk factor (prior stroke/TIA, hypertension, HF, diabetes). Under 65 with none of these, no antithrombotic is needed for the AF itself (coronary or arterial disease may still need an antiplatelet for that disease). DOACs are generally preferred for eligible patients; a vitamin K antagonist (warfarin) is required with mechanical valves and AF with moderate to severe mitral stenosis, and remains appropriate in other selected situations (CCS/CHRS 2020). Short device-detected AF episodes are a separate, still-evolving decision (ARTESiA, NOAH-AFNET 6). DVT and PE: DOACs first-line for most patients; LMWH in pregnancy; LMWH or selected DOACs for cancer-associated VTE (Thrombosis Canada). ACS and PCI: heparins (CCS/CAIC 2019).",
+  ind:"AF stroke prevention by the CCS \"CHADS-65\" approach: oral anticoagulation if age ≥ 65 or any CHADS2 risk factor (prior stroke/TIA, hypertension, HF, diabetes). Under 65 with none of these, no antithrombotic is needed for the AF itself (coronary or arterial disease may still need an antiplatelet for that disease). DOACs are generally preferred for eligible patients; a vitamin K antagonist (warfarin) is required with mechanical valves and AF with moderate to severe mitral stenosis, and remains appropriate in other selected situations (CCS/CHRS 2020). Short device-detected AF episodes are a separate, still-evolving decision (ARTESiA, NOAH-AFNET 6). DVT and PE: DOACs first-line for most patients; LMWH in pregnancy; LMWH or selected DOACs for cancer-associated VTE (Thrombosis Canada). ACS and PCI: heparins (CCS/CAIC 2019).",
   where:"ED, wards, cath lab, thrombosis and anticoagulation clinics, family medicine.",
   se:"Bleeding. Heparin: heparin-induced thrombocytopenia (less with LMWH). Warfarin: many drug and food interactions, skin necrosis, teratogenic.",
   ci:"Active bleeding. DOACs: mechanical heart valves, moderate to severe mitral stenosis, high-risk antiphospholipid syndrome; kidney thresholds differ by drug. Warfarin: generally avoided in pregnancy (pregnancy with a mechanical valve needs individualized specialist care). Heparin: history of HIT.",
@@ -1753,7 +1753,7 @@ const MEDS=[
  {id:"statins",group:["lipid"],name:"Statins",tag:"Lipid-lowering",
   ex:"Atorvastatin, rosuvastatin, simvastatin, pravastatin",
   moa:"Inhibit HMG-CoA reductase, the rate-limiting enzyme of hepatic cholesterol synthesis → more hepatic LDL receptors → lower LDL-C.",
-  ind:"Canadian guidelines (CCS 2021): statin for clinical ASCVD, AAA, most diabetes, CKD and LDL-C ≥ 5 mmol/L; high-intensity after ACS; primary prevention guided by Framingham risk and lipid levels. In secondary prevention, add ezetimibe and/or a PCSK9 inhibitor when LDL-C stays ≥ 1.8 mmol/L (or non-HDL-C ≥ 2.4, apoB ≥ 0.7) on the maximally tolerated statin.",
+  ind:"CCS 2021: statin for clinical ASCVD, AAA, most diabetes, CKD and LDL-C ≥ 5 mmol/L; high-intensity after ACS; primary prevention guided by Framingham risk and lipid levels. In secondary prevention, add ezetimibe and/or a PCSK9 inhibitor when LDL-C stays ≥ 1.8 mmol/L (or non-HDL-C ≥ 2.4, apoB ≥ 0.7) on the maximally tolerated statin.",
   where:"Started in hospital after ACS; family medicine and cardiology clinics.",
   se:"Muscle aches, myopathy, rarely rhabdomyolysis, raised liver enzymes, small increase in diabetes risk.",
   ci:"Pregnancy and breastfeeding, active liver disease.",
@@ -1769,7 +1769,7 @@ const MEDS=[
  {id:"hydralazine",group:["hf","bp"],name:"Hydralazine",tag:"Direct arteriolar vasodilator",
   ex:"Hydralazine (often combined with isosorbide dinitrate)",
   moa:"Relaxes arteriolar smooth muscle, lowering afterload.",
-  ind:"Canadian guidelines: combined with isosorbide dinitrate in HFrEF for self-identified Black patients with persistent symptoms despite optimal standard therapy, or when ACE inhibitors, ARBs and ARNI cannot be used (CCS HF 2017); hydralazine alone is not a proven mortality therapy. IV use for severe hypertension in pregnancy is supervised obstetric care (SOGC 2022).",
+  ind:"Combined with isosorbide dinitrate in HFrEF for self-identified Black patients with persistent symptoms despite optimal standard therapy, or when ACE inhibitors, ARBs and ARNI cannot be used (CCS HF 2017); hydralazine alone is not a proven mortality therapy. IV use for severe hypertension in pregnancy is supervised obstetric care (SOGC 2022).",
   where:"HF clinics and wards; labour and delivery.",
   se:"Reflex tachycardia, headache, fluid retention, drug-induced lupus.",
   ci:"Caution in coronary artery disease (reflex tachycardia can provoke angina).",
@@ -2249,7 +2249,7 @@ hydralazine:{name:"Hydralazine",cls:"hydralazine",
 };
 const CLASS_DRUGS={bb:["metoprolol","bisoprolol","atenolol","carvedilol","propranolol"],ndhp:["verapamil","diltiazem"],antiarr:["procainamide","lidocaine","mexiletine","flecainide","propafenone","amiodarone","sotalol","dronedarone"],adenosine:["adenosine"],digoxin:["digoxin"],acei:["ramipril","perindopril","enalapril","lisinopril"],arb:["candesartan","valsartan","losartan","irbesartan","telmisartan"],arni:["sacval"],mra:["spironolactone","eplerenone","finerenone"],sglt2:["dapagliflozin","empagliflozin"],loop:["furosemide","bumetanide","torsemide","ethacrynic"],thiazide:["hctz","chlorthalidone","indapamide","metolazone"],dhp:["amlodipine","felodipine","nifedipine"],nitrates:["ntg","ismn","isdn"],antiplatelet:["asa","clopidogrel","prasugrel","ticagrelor"],anticoag:["ufh","enoxaparin","dalteparin","warfarin","apixaban","rivaroxaban","edoxaban","dabigatran"],statins:["atorvastatin","rosuvastatin","simvastatin","pravastatin"],ivabradine:["ivabradine"],hydralazine:["hydralazine","isdn"]};
 
-const MED_FIELDS=[["moa","Mechanism of action"],["ind","Clinical uses (Canadian guideline context)"],["where","Where it is used"],["se","Key side effects"],["ci","Contraindications"]];
+const MED_FIELDS=[["moa","Mechanism of action"],["ind","Clinical uses"],["where","Where it is used"],["se","Key side effects"],["ci","Contraindications"]];
 let openDrug={};
 // Drug pages opened automatically by the search: class -> [drug opened, drug that was open before].
 let autoOpened=new Map(), userTouched=new Set();
@@ -2268,7 +2268,7 @@ function drugPanel(cls,id){
     <div class="dp-head"><h4>${d.name}</h4><button type="button" class="dp-close" data-cls="${cls}">Close</button></div>
     <div class="dp-cols">
       <div>
-        <div class="dp-lbl">Clinical uses and Canadian guideline context</div>
+        <div class="dp-lbl">Clinical uses</div>
         <ul class="dp-ind">${d.cdn.map(([g,t])=>`<li>${guidePill(g)}${t}</li>`).join("")}</ul>
         <div class="dp-lbl">Where it is used</div>
         <p class="dp-where">${d.where}</p>
@@ -2299,7 +2299,7 @@ function renderMeds(){
         <label class="cmp"><input type="checkbox" data-id="${m.id}" aria-label="Compare ${m.name}" ${compareSet.has(m.id)?"checked":""}> Compare</label></div>
       <h3>${m.name}</h3>
       <div class="ex"><b>Examples:</b> ${m.ex}</div>
-      <div class="dlbl">Tap a drug for Canadian indications and landmark trials:</div>
+      <div class="dlbl">Tap a drug for its clinical uses and landmark trials:</div>
       <div class="dchips">${ids.map(id=>`<button type="button" class="dchip" data-cls="${m.id}" data-drug="${id}" aria-expanded="${od===id}"${od===id?` aria-controls="dp-${m.id}"`:""}>${DRUGS[id].name}</button>`).join("")}</div>
       ${od?drugPanel(m.id,od):""}
       <dl>${MED_FIELDS.map(([k,l])=>`<dt>${l}</dt><dd>${m[k]}</dd>`).join("")}</dl>
@@ -2339,7 +2339,7 @@ function toggleDrug(cls,id,focus){
   else { if(focus){const b=card.querySelector(`.dchip[data-drug="${prevId}"]`)||card.querySelector(".dchip"); if(b) b.focus({preventScroll:true});} if(history.replaceState && prevId && location.hash==="#meds-drug-"+prevId) history.replaceState(null,"","#meds-"+cls); }
 }
 function buildGuideList(){
-  $("guideList").innerHTML=`<h3 style="margin-top:0">Canadian guidelines and Health Canada sources used on the drug pages</h3><ul>${Object.values(GUIDES).filter(g=>g.u).map(g=>`<li><a href="${g.u}" target="_blank" rel="noopener">${g.full}</a></li>`).join("")}</ul>
+  $("guideList").innerHTML=`<h3 style="margin-top:0">Sources used on the drug pages</h3><ul>${Object.values(GUIDES).filter(g=>g.u).map(g=>`<li><a href="${g.u}" target="_blank" rel="noopener">${g.full}</a></li>`).join("")}</ul>
   <p class="dp-note">Where a statement rests on trial evidence rather than a specific Canadian recommendation, it is tagged "Trial evidence". Guidelines change: always check the current version.</p>`;
 }
 function updateCmpBar(){

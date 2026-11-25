@@ -52,7 +52,7 @@ with sync_playwright() as p:
         # meds deep link, close, compare
         pg.goto(url+"#meds-drug-finerenone"); pg.wait_for_timeout(400)
         ok(pg.locator("#dp-mra h4").inner_text()=="Finerenone","finerenone deep link opens")
-        ok("Clinical uses and Canadian guideline context" in pg.locator("#dp-mra").text_content(),"new drug-panel heading")
+        ok("Clinical uses" in pg.locator("#dp-mra").text_content(),"drug-panel heading")
         pg.click('.dchip[data-drug="spironolactone"]'); pg.wait_for_timeout(100)
         ok(pg.evaluate("location.hash")=="#meds-drug-spironolactone","hash follows open drug")
         pg.click("#dp-mra .dp-close"); pg.wait_for_timeout(100)
